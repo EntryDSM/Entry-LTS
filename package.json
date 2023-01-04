@@ -1,0 +1,60 @@
+{
+  "name": "entry-lts",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EntryDSM/Entry-LTS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EntryDSM/Entry-LTS/issues"
+  },
+  "homepage": "https://github.com/EntryDSM/Entry-LTS#readme",
+  "dependencies": {
+    "axios": "^1.2.2",
+    "react": "^18.3.0-next-de7d1c907-20221223",
+    "react-dom": "^18.3.0-next-de7d1c907-20221223",
+    "react-query": "^3.39.2",
+    "react-router-dom": "^6.6.1",
+    "styled-components": "^5.3.6",
+    "zustand": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@svgr/webpack": "^6.5.1",
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "babel-loader": "^9.1.0",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.2",
+    "prettier": "^2.8.1",
+    "react-refresh": "^0.14.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.75.0",
+    "webpack-bundle-analyzer": "^4.7.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1",
+    "webpack-merge": "^5.8.0"
+  }
+}
