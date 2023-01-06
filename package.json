@@ -7,18 +7,14 @@
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode development"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EntryDSM/Entry-LTS.git"
-  },
-  "author": "",
+  "repository": "git+https://github.com/EntryDSM/Entry-LTS.git",
+  "author": "jikwan <jikwan0327@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/EntryDSM/Entry-LTS/issues"
   },
   "homepage": "https://github.com/EntryDSM/Entry-LTS#readme",
   "dependencies": {
-    "@types/styled-components": "^5.1.26",
     "axios": "^1.2.2",
     "react": "^18.3.0-next-de7d1c907-20221223",
     "react-dom": "^18.3.0-next-de7d1c907-20221223",
@@ -52,6 +48,7 @@
     "react-refresh": "^0.14.0",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
     "webpack": "^5.75.0",
     "webpack-bundle-analyzer": "^4.7.0",
     "webpack-cli": "^5.0.1",
