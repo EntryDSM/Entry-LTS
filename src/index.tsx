@@ -6,14 +6,15 @@ import { baseTheme } from './style/globalTheme.style';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
+import { StyledProvider } from '@team-entry/design_system';
 
 const root = CreateDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <>
-    <ThemeProvider theme={baseTheme}>
+    <StyledProvider>
       <GlobalStyle />
       <App />
-    </ThemeProvider>
+    </StyledProvider>
   </>,
 );
