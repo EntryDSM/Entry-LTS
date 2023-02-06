@@ -35,38 +35,22 @@ const MainFunction = () => {
     {
       id: 0,
       icon: <img src={Navigation} alt="Navigation" style={{ marginBottom: '8px' }} />,
-      title: (
-        <Text color="black800" size="title2">
-          입학설명회 참석 예약
-        </Text>
-      ),
+      title: '입학설명회 참석 예약',
     },
     {
       id: 1,
       icon: <img src={Calculator} alt="Calculator" style={{ marginBottom: '8px' }} />,
-      title: (
-        <Text color="black800" size="title2">
-          성적 산출
-        </Text>
-      ),
+      title: '성적 산출',
     },
     {
       id: 2,
       icon: <img src={BookOpen} alt="BookOpen" style={{ marginBottom: '8px' }} />,
-      title: (
-        <Text color="black800" size="title2">
-          학교 소개
-        </Text>
-      ),
+      title: '학교 소개 ',
     },
     {
       id: 3,
       icon: <img src={User} alt="User" style={{ marginBottom: '8px' }} />,
-      title: (
-        <Text color="black800" size="title2">
-          Entry 개발자 소개
-        </Text>
-      ),
+      title: 'Entry 개발자 소개',
     },
   ];
   return (
@@ -109,10 +93,13 @@ const MainFunction = () => {
           {shortcut.map((item) => (
             <_ShorcutButton key={item.id}>
               {item.icon}
-              {item.title}
+              <Text color="black800" size="title2">
+                {item.title}
+              </Text>
             </_ShorcutButton>
           ))}
         </_Shortcut>
+
         <BoardsAtMain />
       </_Discription>
     </_Wrapper>
