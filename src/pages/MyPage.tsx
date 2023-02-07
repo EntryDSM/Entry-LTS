@@ -85,14 +85,12 @@ const _User = styled.div`
 const _UserInfo = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 4.1rem;
+  gap: 0.5rem;
 `;
 
 const _UserButtons = styled.div`
   display: flex;
-  justify-content: space-between;
-  width: 15rem;
+  gap: 0.5rem;
 `;
 
 const _Wrapper = styled.div`
@@ -119,8 +117,7 @@ const _Line = styled.div`
 const _ApplyButtons = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 28rem;
+  gap: 0.5rem;
   height: 4rem;
 `;
 

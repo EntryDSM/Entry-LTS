@@ -1368,10 +1368,10 @@
   dependencies:
     react-outside-click-handler "^1.3.0"
 
-"@team-entry/design_system@^1.0.22":
-  version "1.0.22"
-  resolved "https://registry.yarnpkg.com/@team-entry/design_system/-/design_system-1.0.22.tgz#cfabd244a6e74acb75f2e957bda85f371fd6a946"
-  integrity sha512-B6e9cRgrBMsG7iUbuwDJ0I1hzbPS+NFPanyydkeHPp2x4AYfMXmbPFwWYz0sXPZwfUjRDwCgJ3DoXA4UXcEbPA==
+"@team-entry/design_system@^1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/@team-entry/design_system/-/design_system-1.0.23.tgz#f5353762a095f3809852d935818d076d05d73112"
+  integrity sha512-/59pSDq+GLbH9Iub5b7dO09K0IapBIpfJskg+S+uT8bVJRAc8puL1/5CW8o+jRofEWr0fXSyI1cY6UxfJcYmAg==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
