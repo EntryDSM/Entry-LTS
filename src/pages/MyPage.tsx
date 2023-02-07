@@ -1,43 +1,63 @@
-import BoardElement from '../components/Board/BoardElement';
-import styled from '@emotion/styled';
 import React from 'react';
+import styled from '@emotion/styled';
+import { Button, Text, theme } from '@team-entry/design_system';
+import BoardElement from '../components/Board/BoardElement';
+import BoardHeader from '../components/Board/BoardHeader';
 
 const MyPage = () => {
+  const onClick = () => {
+    console.log('clicked!!');
+  };
   return (
     <_Container>
+      <_User>
+        <_UserInfo>
+          <Text color="realBlack" size="header1">
+            김이름 지원자님
+          </Text>
+          <Text color="black500" size="body1">
+            010-1234-1234
+          </Text>
+        </_UserInfo>
+        <_UserButtons>
+          <Button onClick={onClick}>비밀번호 변경</Button>
+          <Button color="delete" kind="delete" onClick={onClick}>
+            회원 탈퇴
+          </Button>
+        </_UserButtons>
+      </_User>
       <_Wrapper>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>
-            <_Text fontSize={32} fontWeight={700}>
-              김이름 지원자님
-            </_Text>
-            <_Text fontSize={18} fontWeight={500}>
-              010-1234-1234
-            </_Text>
-          </div>
-          <div>
-            <_BasicButton>비밀번호 변경</_BasicButton>
-            <_OutlineButton>회원 탈퇴</_OutlineButton>
-          </div>
-        </div>
-        <_StateWrapper>
-          <_Text fontSize={18} fontWeight={500}>
+        <_Apply>
+          <Text color="black900" size="body1">
             지원 상태
-          </_Text>
-          <_Text fontSize={18} fontWeight={500}>
+          </Text>
+          <_Line />
+          <Text color="black900" size="body3">
             일반 전형
-          </_Text>
-          <_BasicButton>원서 다운로드</_BasicButton>
-          <_BasicButton>발표 결과 확인</_BasicButton>
-          <_OutlineButton>원서 최종제출 취소</_OutlineButton>
-          <BoardElement
-            isNumber={true}
-            isTopBorder={true}
-            isComment={true}
-            isWriteDay={true}
-            isWriter={true}
-          ></BoardElement>
-        </_StateWrapper>
+          </Text>
+          <div style={{ height: '4px' }} />
+          <Text color="black900" size="title2">
+            지원서 제출 완료
+          </Text>
+          <_ApplyButtons>
+            <Button onClick={onClick}>원서 다운로드</Button>
+            <Button onClick={onClick}>발표 결과 확인</Button>
+            <Button color="delete" kind="delete" onClick={onClick}>
+              원서 최종제출 취소
+            </Button>
+          </_ApplyButtons>
+        </_Apply>
+        <div style={{ width: '62rem' }}>
+          <_BoarderTitle>
+            <Text color="black700" size="body1">
+              내가 작성한 질문
+            </Text>
+          </_BoarderTitle>
+          <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+          <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+          <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+          <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+        </div>
       </_Wrapper>
     </_Container>
   );
@@ -47,48 +67,67 @@ export default MyPage;
 
 const _Container = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   width: 100vw;
+  margin-top: 14rem;
+`;
+
+const _User = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 62rem;
+  margin-bottom: 1.5rem;
+`;
+
+const _UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 4.1rem;
+`;
+
+const _UserButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 15rem;
 `;
 
 const _Wrapper = styled.div`
-  margin-top: 7rem;
-  width: 60rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 62rem;
   height: 30rem;
-  border: 1px solid black;
 `;
 
-const _Text = styled.div<{ fontSize: number; fontWeight: number }>`
-  color: #141414;
-  font-size: ${(props) => props.fontSize}px;
-  font-weight: ${(props) => props.fontWeight};
+const _Apply = styled.div`
+  width: 62rem;
+  height: 12rem;
+  padding: 0.5rem;
 `;
 
-const _BasicButton = styled.button`
-  padding: 12px;
-  height: 42px;
-  border: 0;
-  outline: 0;
-  border-radius: 5px;
-  background-color: #141414;
-  color: white;
+const _Line = styled.div`
+  width: 61rem;
+  height: 0rem;
+  border-bottom: 1px solid ${theme.color.black100};
+  margin: 1rem 0rem;
 `;
 
-const _OutlineButton = styled.button`
-  padding: 12px;
-  height: 42px;
-  border: 0;
-  outline: 0;
-  border: 1px solid #e84045;
-  border-radius: 5px;
-  background-color: #ffffff;
-  color: #e84045;
+const _ApplyButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 28rem;
+  height: 4rem;
 `;
 
-const _StateWrapper = styled.div`
+const _BoarderTitle = styled.div`
+  display: flex;
+  align-items: center;
   width: 60rem;
-  padding: 16px;
-  height: 10rem;
-  background-color: #fbfbfb;
-  border-radius: 4px;
+  height: 3.5rem;
+  border-bottom: 1px solid ${theme.color.black900};
 `;
