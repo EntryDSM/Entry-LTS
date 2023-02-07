@@ -49,7 +49,7 @@ const MyPage = () => {
         </_Apply>
         <div style={{ width: '62rem' }}>
           <_BoarderTitle>
-            <Text color="black700" size="body1">
+            <Text margin={['left', 16]} color="black700" size="body1">
               내가 작성한 질문
             </Text>
           </_BoarderTitle>
@@ -106,6 +106,7 @@ const _Apply = styled.div`
   height: 12rem;
   background-color: ${theme.color.black50};
   padding: 0.5rem;
+  border-radius: 4px;
 `;
 
 const _Line = styled.div`
