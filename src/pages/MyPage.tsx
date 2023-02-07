@@ -71,7 +71,7 @@ const _Container = styled.div`
   align-items: center;
   justify-content: center;
   width: 100vw;
-  margin-top: 14rem;
+  margin-top: 10rem;
 `;
 
 const _User = styled.div`
@@ -104,6 +104,7 @@ const _Wrapper = styled.div`
 const _Apply = styled.div`
   width: 62rem;
   height: 12rem;
+  background-color: ${theme.color.black50};
   padding: 0.5rem;
 `;
 
