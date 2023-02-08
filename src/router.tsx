@@ -4,6 +4,7 @@ import CustomerPage from './pages/Customer';
 import CustomerDetailPage from './pages/CustomerDetail';
 import Main from './pages/Main';
 import MyPage from './pages/MyPage';
+import NewAdmissionPage from './pages/NewAdmissionPage';
 import NoticePage from './pages/Notice';
 import WriteCustomerPage from './pages/WriteCustomerPage';
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
             <Route path=":id" element={<CustomerDetailPage />} />
           </Route>
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/admission" element={<NewAdmissionPage />} />
         </Routes>
       </BrowserRouter>
     </>
