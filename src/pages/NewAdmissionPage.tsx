@@ -48,6 +48,7 @@ const _Download = styled.div`
 `;
 
 const _Icon = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
