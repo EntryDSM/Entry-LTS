@@ -56,4 +56,5 @@ export default BoardTitle;
 const _Buttons = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 `;

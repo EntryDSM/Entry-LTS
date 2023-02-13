@@ -4,4 +4,5 @@ export interface IBoard {
   isComment?: boolean;
   isWriter?: boolean;
   isWriteDay?: boolean;
+  isOpen?: boolean;
 }
