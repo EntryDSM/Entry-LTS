@@ -69,8 +69,8 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
+            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
+            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
