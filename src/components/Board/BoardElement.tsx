@@ -40,8 +40,8 @@ const BoardElement = (props: IBoard) => {
           )}
         </Div>
       </_ElementContainer>
-      {clicked && (
-        <Div style={{ height: '14rem' }}>
+      {isOpen && clicked && (
+        <Div style={{ height: '14rem', backgroundColor: '#FBFBFB' }}>
           <_Text fontSize={16} fontColor={'#343434'} fontWeight={500} width={6}>
             답변
           </_Text>
