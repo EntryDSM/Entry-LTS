@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { IBoard } from '@/interfaces/Board';
 import styled from '@emotion/styled';
+import { Text, theme } from '@team-entry/design_system';
 
 const BoardElement = (props: IBoard) => {
   const { isNumber, isComment, isWriteDay, isWriter, isOpen = false } = props;
@@ -10,48 +11,48 @@ const BoardElement = (props: IBoard) => {
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
         <Div>
           {isNumber ? (
-            <_Text fontSize={16} fontColor={'#343434'} fontWeight={500} width={6}>
+            <Text color="black800" size="body3" width={6}>
               36
-            </_Text>
+            </Text>
           ) : (
-            <_Text fontSize={16} fontColor={'#343434'} fontWeight={500} width={6}>
+            <Text color="black800" size="body3" width={6}>
               입학 문의
-            </_Text>
+            </Text>
           )}
-          <_Text style={{ marginLeft: 20 }} fontSize={16} fontColor={'#343434'} fontWeight={500}>
+          <Text color="black800" size="body3" margin={['left', 20]}>
             성적 입력에 관하여...
-          </_Text>
+          </Text>
         </Div>
         <Div>
           {isComment && (
-            <_Text fontSize={14} fontColor={'#737373'} fontWeight={500} width={6}>
+            <Text color="black500" size="body5" width={6}>
               대기중
-            </_Text>
+            </Text>
           )}
           {isWriteDay && (
-            <_Text fontSize={14} fontColor={'#737373'} fontWeight={500} width={6}>
+            <Text color="black500" size="body5" width={6}>
               정지관
-            </_Text>
+            </Text>
           )}
           {isWriter && (
-            <_Text fontSize={14} fontColor={'#737373'} fontWeight={500} width={6}>
+            <Text color="black500" size="body5" width={6}>
               2023-01-10
-            </_Text>
+            </Text>
           )}
         </Div>
       </_ElementContainer>
       {isOpen && clicked && (
-        <Div style={{ height: '14rem', backgroundColor: '#FBFBFB' }}>
-          <_Text fontSize={16} fontColor={'#343434'} fontWeight={500} width={6}>
+        <Div style={{ height: '14rem', backgroundColor: theme.color.black50 }}>
+          <Text color="black800" size="body3" width={6}>
             답변
-          </_Text>
+          </Text>
           <_Answer>
-            <_Text fontSize={16} fontColor={'#5F5F5F'} fontWeight={400}>
+            <Text color="black600" size="body4">
               음 딱히 모르겠다 몸만 오세요
-            </_Text>
-            <_Text fontSize={14} fontColor={'#969696'} fontWeight={500}>
+            </Text>
+            <Text color="black400" size="body5">
               2022-12-21
-            </_Text>
+            </Text>
           </_Answer>
         </Div>
       )}
@@ -67,24 +68,13 @@ const _ElementContainer = styled.div`
   align-items: center;
   width: 60rem;
   height: 3rem;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
 `;
 
 const Div = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const _Text = styled.div<{ fontSize: number; fontColor?: string; fontWeight?: number; width?: number }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: ${(props) => props.fontSize}px;
-  font-weight: ${(props) => props.fontWeight};
-  width: ${(props) => props.width}rem;
-  height: 3rem;
-  color: ${(props) => props.fontColor};
 `;
 
 const _Answer = styled.div`
@@ -94,4 +84,5 @@ const _Answer = styled.div`
   justify-content: space-between;
   height: 14rem;
   margin-left: 20px;
+  padding: 20px 0px;
 `;
