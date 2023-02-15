@@ -25,17 +25,3 @@ export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColo
   font-weight: ${(props) => props.fontWeight};
   cursor: pointer;
 `;
-
-export const _Button = styled.button`
-  background-color: #ff7e36;
-  font-size: 16px;
-  color: white;
-  font-weight: 500;
-  padding: 12px;
-  width: 80px;
-  height: 42px;
-  border-radius: 100px;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-`;

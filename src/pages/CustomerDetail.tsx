@@ -1,18 +1,24 @@
 import styled from '@emotion/styled';
+import { Text, theme } from '@team-entry/design_system';
 
 const CustomerDetailPage = () => {
   return (
     <_Container>
       <_Wrapper>
-        <_Text fontWeight={500} fontSize={24}>
-          Q.성적 입력에 관하여
-        </_Text>
-        <_Text fontSize={18} fontWeight={400}>
+        <_Title>
+          <Text color="orange500" size="header2">
+            Q.
+          </Text>
+          <Text color="black900" size="title1">
+            성적 입력에 관하여...
+          </Text>
+        </_Title>
+        <Text color="black600" size="body2">
           성적 입력시에 자퇴의 경우는 어떻게 해야 될까요?
-        </_Text>
-        <_Text style={{ marginTop: 80 }} fontSize={18} fontWeight={500}>
+        </Text>
+        <Text color="black400" size="body1" margin={['top', 80]}>
           36 | 김*연 | 2022-12-21
-        </_Text>
+        </Text>
       </_Wrapper>
       <_Bottom>
         <_Answer>
@@ -38,13 +44,13 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 12rem;
-  border: 1px solid black;
 `;
 
-const _Text = styled.div<{ fontSize: number; fontWeight: number }>`
-  color: #141414;
-  font-size: ${(props) => props.fontSize}px;
-  font-weight: ${(props) => props.fontWeight};
+const _Title = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
 `;
 
 const _Bottom = styled.div`
@@ -52,7 +58,7 @@ const _Bottom = styled.div`
   justify-content: center;
   width: 100vw;
   height: 55%;
-  background-color: #fbfbfb;
+  background-color: ${theme.color.black50};
 `;
 
 const _Answer = styled.div`
@@ -62,13 +68,13 @@ const _Answer = styled.div`
   margin-top: 3rem;
   width: 60rem;
   height: 15rem;
-  background-color: #ffffff;
-  border: 1px solid #cacaca;
+  background-color: ${theme.color.realWhite};
+  border: 1px solid ${theme.color.black200};
   border-radius: 5px;
 `;
 
 const _None = styled.div`
   font-size: 22px;
   font-weight: 500;
-  color: #737373;
+  color: ${theme.color.black500};
 `;
