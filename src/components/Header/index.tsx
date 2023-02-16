@@ -2,6 +2,7 @@ import * as _ from './style';
 import Logo from '../../assets/Logo.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Button } from '@team-entry/design_system';
 
 type THeader = '고객 문의' | '공지 사항' | '성적 산출' | '신입생 전형 요강' | '';
 
@@ -19,6 +20,10 @@ const Header = () => {
     { name: '성적 산출', url: '/grade' },
     { name: '신입생 전형 요강', url: '/admission' },
   ];
+
+  const onClick = () => {
+    console.log('clicked');
+  };
 
   return (
     <>
@@ -43,7 +48,15 @@ const Header = () => {
             })}
           </_._Texts>
         </div>
-        {localStorage.getItem('access_token') ? <_._Button>확인</_._Button> : <_._Button>로그인</_._Button>}
+        {localStorage.getItem('access_token') ? (
+          <Button color="orange" kind="rounded" onClick={onClick}>
+            확인
+          </Button>
+        ) : (
+          <Button color="orange" kind="rounded" onClick={onClick}>
+            로그인
+          </Button>
+        )}
       </_._HeaderContainer>
     </>
   );
