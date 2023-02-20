@@ -4,6 +4,7 @@ import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
 import { Link } from 'react-router-dom';
+import { Text, theme } from '@team-entry/design_system';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -54,23 +55,22 @@ const CustomerPage = () => {
                 const { name } = res;
                 return (
                   <>
-                    <_Text
+                    <Text
+                      color={name === category ? `orange500` : `orange100`}
+                      size="title2"
+                      cursor="pointer"
                       onClick={() => setCategory(name)}
-                      cursor={true}
-                      fontColor={name === category ? '#FF7E36' : '#FFCDB1'}
-                      fontSize={22}
-                      fontWeight={500}
                     >
                       {name}
-                    </_Text>
+                    </Text>
                     {name !== '기타' && <_Circle />}
                   </>
                 );
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
+            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
+            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
             <BoardElement isNumber={false} isTopBorder={true} />
@@ -100,13 +100,6 @@ const _Wrapper = styled.div`
   height: 38rem;
 `;
 
-const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: string; cursor?: boolean }>`
-  color: ${(props) => props.fontColor};
-  font-size: ${(props) => props.fontSize}px;
-  font-weight: ${(props) => props.fontWeight};
-  cursor: ${(props) => (props.cursor ? 'pointer' : 'auto')};
-`;
-
 const _Categories = styled.div`
   display: flex;
   align-items: center;
@@ -118,6 +111,6 @@ const _Categories = styled.div`
 const _Circle = styled.div`
   width: 4px;
   height: 4px;
-  background-color: #ffcdb1;
+  background-color: ${theme.color.orange100};
   border-radius: 50px;
 `;

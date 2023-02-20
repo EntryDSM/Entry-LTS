@@ -1,5 +1,6 @@
 import { IBoard } from '@/interfaces/Board';
 import styled from '@emotion/styled';
+import { Text } from '@team-entry/design_system';
 
 const BoardHeader = (props: IBoard) => {
   const { isNumber, isTopBorder, isComment, isWriteDay, isWriter } = props;
@@ -7,13 +8,29 @@ const BoardHeader = (props: IBoard) => {
   return (
     <_HeaderContainer style={{ borderTop: isTopBorder && '1px solid black' }}>
       <Div>
-        <_Text width={6}>{isNumber ? '번호' : '구문'}</_Text>
-        <_Text style={{ marginLeft: 20 }}>제목</_Text>
+        <Text color="black700" size="body1" width={6}>
+          {isNumber ? '번호' : '구문'}
+        </Text>
+        <Text color="black700" size="body1" margin={['left', 20]}>
+          제목
+        </Text>
       </Div>
       <Div>
-        {isComment && <_Text width={6}>답변</_Text>}
-        {isWriter && <_Text width={6}>작성자</_Text>}
-        {isWriteDay && <_Text width={6}>작성일</_Text>}
+        {isComment && (
+          <Text color="black700" size="body1" width={6}>
+            답변
+          </Text>
+        )}
+        {isWriter && (
+          <Text color="black700" size="body1" width={6}>
+            작성자
+          </Text>
+        )}
+        {isWriteDay && (
+          <Text color="black700" size="body1" width={6}>
+            작성일
+          </Text>
+        )}
       </Div>
     </_HeaderContainer>
   );
@@ -33,15 +50,4 @@ const _HeaderContainer = styled.div`
 const Div = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const _Text = styled.div<{ width?: number }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 500;
-  width: ${(props) => props.width}rem;
-  height: 3rem;
-  color: #494949;
 `;

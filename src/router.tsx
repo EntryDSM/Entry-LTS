@@ -8,6 +8,7 @@ import Main from './pages/Main';
 import MyPage from './pages/MyPage';
 import NewAdmissionPage from './pages/NewAdmissionPage';
 import NoticePage from './pages/Notice';
+import NoticeDetailPage from './pages/NoticeDetail';
 import WriteCustomerPage from './pages/WriteCustomerPage';
 const Router = () => {
   return (
@@ -16,7 +17,10 @@ const Router = () => {
         <Header />
         <Routes>
           <Route path="*" element={<Main />} />
-          <Route path="/notice" element={<NoticePage />} />
+          <Route path="/notice">
+            <Route index element={<NoticePage />} />
+            <Route path=":id" element={<NoticeDetailPage />} />
+          </Route>
           <Route path="/customer">
             <Route index element={<CustomerPage />} />
             <Route path="write" element={<WriteCustomerPage />} />
