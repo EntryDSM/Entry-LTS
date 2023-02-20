@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import CustomerPage from './pages/Customer';
 import CustomerDetailPage from './pages/CustomerDetail';
+import GradePage from './pages/GradePage';
+import GradeProgramPage from './pages/GradeProgramPage';
 import Main from './pages/Main';
 import MyPage from './pages/MyPage';
 import NewAdmissionPage from './pages/NewAdmissionPage';
@@ -20,6 +22,8 @@ const Router = () => {
             <Route path="write" element={<WriteCustomerPage />} />
             <Route path=":id" element={<CustomerDetailPage />} />
           </Route>
+          <Route path="/grade" element={<GradePage />} />
+          <Route path="/gradeprogram" element={<GradeProgramPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/admission" element={<NewAdmissionPage />} />
         </Routes>
