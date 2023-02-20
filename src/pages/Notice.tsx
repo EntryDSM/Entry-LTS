@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
+import { Link } from 'react-router-dom';
 
 const NoticePage = () => {
   const [click, setClick] = useState(false);
@@ -19,7 +20,9 @@ const NoticePage = () => {
           button2="예비 신입생 안내"
         />
         <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
+        <Link to="/notice/1">
+          <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
+        </Link>
         <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
         <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
         <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
