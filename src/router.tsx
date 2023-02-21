@@ -27,7 +27,7 @@ const Router = () => {
             <Route path=":id" element={<CustomerDetailPage />} />
           </Route>
           <Route path="/grade" element={<GradePage />} />
-          <Route path="/gradeprogram" element={<GradeProgramPage />} />
+          <Route path="/gradeProgram" element={<GradeProgramPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/admission" element={<NewAdmissionPage />} />
         </Routes>

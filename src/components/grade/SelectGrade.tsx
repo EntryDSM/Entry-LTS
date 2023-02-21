@@ -48,14 +48,14 @@ const SelectGrade = ({
 
   return (
     <_Wrapper>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <_Texts>
         <Text color="black900" size="title1">
           {title}
         </Text>
         <Text margin={['left', 10]} color="black500" size="body3">
           {subTitle}
         </Text>
-      </div>
+      </_Texts>
       {type === 'grade' ? (
         <_Buttons>
           {arr.map((res: Grade, i) => {
@@ -115,4 +115,9 @@ const _Button = styled.div<{ isClick?: boolean }>`
   color: ${({ isClick }) => (isClick ? theme.color.realWhite : theme.color.orange500)};
   background-color: ${({ isClick }) => (isClick ? theme.color.orange500 : theme.color.realWhite)};
   cursor: pointer;
+`;
+
+const _Texts = styled.div`
+  display: flex;
+  align-items: center;
 `;

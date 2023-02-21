@@ -11,9 +11,10 @@ interface PropsType {
   setElement?: React.Dispatch<SetStateAction<IElement[][]>>;
 }
 
+const arr: Grade[] = ['A', 'B', 'C', 'D', 'E'];
+
 const AllSelect = ({ current, element, setElement }: PropsType) => {
   const [grade, setGrade] = useState<Grade>('A');
-  const arr = ['A', 'B', 'C', 'D', 'E'];
 
   useEffect(() => {
     setGrade('A');
@@ -31,8 +32,8 @@ const AllSelect = ({ current, element, setElement }: PropsType) => {
       <Text margin={['right', 8]} size="body3" color="black600">
         전체 선택
       </Text>
-      {arr.map((arr: Grade) => {
-        let isClick = arr === grade;
+      {arr.map((arr) => {
+        const isClick = arr === grade;
         return (
           <_Button onClick={() => ChangeAllGrade(arr)} backgroundColor={isClick}>
             <Text color={isClick ? 'realWhite' : 'black600'} size="body4">

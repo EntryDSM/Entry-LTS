@@ -5,18 +5,18 @@ import Graduate from '../assets/Graduate.svg';
 import BlackExam from '../assets/BlackExam.svg';
 import { Link } from 'react-router-dom';
 
-const GradePage = () => {
-  const list = [
-    {
-      img: BeforeGraduate,
-      title: '졸업예정자',
-      text: '아직 중학교를 졸업하지 않은\n졸업자를 칭합니다',
-      type: 'beforegraduate',
-    },
-    { img: Graduate, title: '졸업자', text: '이미 중학교를 졸업한 \n지원자를 칭합니다.', type: 'graduate' },
-    { img: BlackExam, title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'blackexam' },
-  ];
+const list = [
+  {
+    img: BeforeGraduate,
+    title: '졸업예정자',
+    text: '아직 중학교를 졸업하지 않은\n졸업자를 칭합니다',
+    type: 'beforegraduate',
+  },
+  { img: Graduate, title: '졸업자', text: '이미 중학교를 졸업한 \n지원자를 칭합니다.', type: 'graduate' },
+  { img: BlackExam, title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'blackexam' },
+];
 
+const GradePage = () => {
   return (
     <_Container>
       <_Wrapper>
@@ -36,7 +36,7 @@ const GradePage = () => {
                 <Text margin={['bottom', 80]} align="center" color="black600" size="body2">
                   {text}
                 </Text>
-                <Link to="/gradeprogram" state={{ type }}>
+                <Link to="/gradeProgram" state={{ type }}>
                   <Button onClick={() => console.log('hello')} color="orange" kind="rounded">
                     선택
                   </Button>

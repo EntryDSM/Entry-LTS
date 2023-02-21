@@ -1,4 +1,4 @@
-import AllSelect from '../components/grade/AllSelect';
+import AllSelect, { Grade } from '../components/grade/AllSelect';
 import { Button, Text } from '@team-entry/design_system';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -14,7 +14,7 @@ export interface IElement {
   type: 'grade' | 'input';
   placeholder?: string;
   unit?: string;
-  grade?: 'A' | 'B' | 'C' | 'D' | 'E' | 'X';
+  grade?: Grade;
   value?: string;
 }
 

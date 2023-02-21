@@ -3,13 +3,13 @@ import { Text, theme } from '@team-entry/design_system';
 
 const ProgressBar = ({ step = 1 }: { step: number }) => {
   const progess = [
-    { element: <_Circle now={1 <= step} /> },
-    { element: <_Line now={2 <= step} /> },
-    { element: <_Circle now={2 <= step} /> },
-    { element: <_Line now={3 <= step} /> },
-    { element: <_Circle now={3 <= step} /> },
-    { element: <_Line now={4 <= step} /> },
-    { element: <_Circle now={4 <= step} /> },
+    { element: <_Circle isNow={1 <= step} /> },
+    { element: <_Line isNow={2 <= step} /> },
+    { element: <_Circle isNow={2 <= step} /> },
+    { element: <_Line isNow={3 <= step} /> },
+    { element: <_Circle isNow={3 <= step} /> },
+    { element: <_Line isNow={4 <= step} /> },
+    { element: <_Circle isNow={4 <= step} /> },
   ];
 
   return (
@@ -54,18 +54,18 @@ const _Texts = styled.div`
   width: 100%;
 `;
 
-const _Circle = styled.div<{ now?: boolean }>`
+const _Circle = styled.div<{ isNow?: boolean }>`
   width: 1.3rem;
   height: 1.3rem;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.realWhite)};
+  background-color: ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.realWhite)};
   border-radius: 50px;
-  border: 4px solid ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  border: 4px solid ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.black100)};
   margin: 0 0.9rem;
 `;
 
-const _Line = styled.div<{ now?: boolean }>`
+const _Line = styled.div<{ isNow?: boolean }>`
   width: 26%;
   height: 0.15rem;
   border-radius: 5px;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  background-color: ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.black100)};
 `;
