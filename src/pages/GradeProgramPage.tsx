@@ -2,9 +2,10 @@ import AllSelect from '../components/grade/AllSelect';
 import { Button, Text } from '@team-entry/design_system';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import ProgressBar from '../components/grade/ProgressBar';
 import SelectGrade from '../components/grade/SelectGrade';
+import { subtle } from 'crypto';
 
 export interface IElement {
   id: number;
@@ -56,10 +57,10 @@ const GradeProgramPage = () => {
     ],
     [
       { id: 1, title: '1학년 봉사활동 시간', placeholder: '봉사 시간', type: 'input', unit: '시간', value: '' },
-      { id: 2, title: '1학년 봉사활동 시간', placeholder: '봉사 시간', type: 'input', unit: '시간', value: '' },
+      { id: 2, title: '2학년 봉사활동 시간', placeholder: '봉사 시간', type: 'input', unit: '시간', value: '' },
       {
         id: 3,
-        title: '1학년 봉사활동 시간',
+        title: '3학년 봉사활동 시간',
         subTitle: '(졸업예정자의 경우 9월 30일까지만)',
         placeholder: '봉사 시간',
         type: 'input',
@@ -78,16 +79,23 @@ const GradeProgramPage = () => {
     },
     { step: 3, title: '직전전 학기', element },
     { step: 3, title: '출석 점수', element },
-    { step: 3, title: '봉사 점수', element },
+    { step: 3, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
   ];
 
   return (
     <_Container>
       <_Wrapper>
         <Title>
-          <Text color="black900" size="header1">
-            {arr[current].title}
-          </Text>
+          <div>
+            <Text color="black900" size="header1">
+              {arr[current].title}
+            </Text>
+            {arr[current].subTitle && (
+              <Text color="black600" size="body1">
+                {arr[current].subTitle}
+              </Text>
+            )}
+          </div>
           {current < 3 && <AllSelect current={current} element={element} setElement={setElement} />}
         </Title>
         <ProgressBar step={arr[current].step} />
@@ -145,6 +153,11 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 const _Wrapper = styled.div`

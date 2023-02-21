@@ -1,5 +1,5 @@
 import { Button, Text, theme } from '@team-entry/design_system';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import BeforeGraduate from '../assets/BeforeGraduate.svg';
 import Graduate from '../assets/Graduate.svg';
 import BlackExam from '../assets/BlackExam.svg';

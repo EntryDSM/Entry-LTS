@@ -1,7 +1,7 @@
 import { IElement } from '@/pages/GradeProgramPage';
 import { Text, theme } from '@team-entry/design_system';
 import React, { SetStateAction, useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'X';
 

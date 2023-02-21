@@ -1,7 +1,7 @@
 import { IElement } from '@/pages/GradeProgramPage';
 import { Input, Text, theme } from '@team-entry/design_system';
 import React, { SetStateAction } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Grade } from './AllSelect';
 
 interface SelectGradeProps {
