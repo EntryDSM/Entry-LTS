@@ -23,7 +23,7 @@ const GradePage = () => {
         <Text color="black900" size="header1">
           성적 산출 유형 선택
         </Text>
-        <_Line></_Line>
+        <_Line />
         <_Cards>
           {list.map((res) => {
             const { img, text, title, type } = res;
