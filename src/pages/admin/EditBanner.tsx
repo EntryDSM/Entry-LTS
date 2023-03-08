@@ -16,7 +16,7 @@ const EditBannerPage = () => {
             메인 페이지 배너 편집
           </Text>
           <div style={{ width: '120 px' }}>
-            <Button color="green" onClick={onClick} width={114}>
+            <Button color="green" onClick={onClick}>
               새항목 추가
             </Button>
           </div>

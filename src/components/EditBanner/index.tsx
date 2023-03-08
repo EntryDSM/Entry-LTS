@@ -20,7 +20,7 @@ const EditBanner = ({ index, banner }: EditBannerProps) => {
       </Text>
       <_._Wrapper>
         <_._Img src={banner} alt="banner" />
-        <Button color="green" onClick={onClick} width={130}>
+        <Button color="green" onClick={onClick}>
           이미지 업로드
         </Button>
         <Button color="green" kind="outlined" onClick={onClick} icon={true}>
