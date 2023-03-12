@@ -17,16 +17,17 @@ interface IBoardTitle {
 
 const BoardTitle = (props: IBoardTitle) => {
   const { click, setClick, title, subTitle, button1, button2, button3, isCustomer, link } = props;
+  const isMobile = window.innerWidth > 400;
   const onClick = () => {
     console.log('clicked!');
   };
   return (
     <>
-      <Text color="black900" size="header1">
-        {title}
+      <Text color="black900" size={isMobile ? 'header1' : 'title1'}>
+        {title} {/* title1*/}
       </Text>
-      <Text margin={[0, 0, 22, 0]} color="realBlack" size="title3">
-        {subTitle}
+      <Text margin={[0, 0, 22, 0]} color="realBlack" size={isMobile ? 'title3' : 'body5'}>
+        {subTitle} {/* body5 */}
       </Text>
       <_Buttons>
         <div style={{ display: 'flex', gap: '0.5rem' }}>

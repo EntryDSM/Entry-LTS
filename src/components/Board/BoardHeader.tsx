@@ -4,30 +4,34 @@ import { Text } from '@team-entry/design_system';
 
 const BoardHeader = (props: IBoard) => {
   const { isNumber, isTopBorder, isComment, isWriteDay, isWriter } = props;
-
+  const isMobile = window.innerWidth > 400;
+  // body3으로 고치기
+  // isbumner true 동시에 ismobile이 false면 안됨
   return (
     <_HeaderContainer style={{ borderTop: isTopBorder && '1px solid black' }}>
       <Div>
-        <Text color="black700" size="body1" width={6}>
-          {isNumber ? '번호' : '구문'}
-        </Text>
-        <Text color="black700" size="body1" margin={['left', 20]}>
+        {(isMobile || !isNumber) && (
+          <Text color="black700" size={isMobile ? 'body1' : 'body3'} width={isMobile ? 6 : 5}>
+            {isNumber ? '번호' : '구분'}
+          </Text>
+        )}
+        <Text color="black700" size={isMobile ? 'body1' : 'body3'} margin={['left', 20]}>
           제목
         </Text>
       </Div>
       <Div>
         {isComment && (
-          <Text color="black700" size="body1" width={6}>
+          <Text color="black700" size={isMobile ? 'body1' : 'body3'} width={isMobile ? 6 : 5}>
             답변
           </Text>
         )}
         {isWriter && (
-          <Text color="black700" size="body1" width={6}>
+          <Text color="black700" size={isMobile ? 'body1' : 'body3'} width={isMobile ? 6 : 5}>
             작성자
           </Text>
         )}
         {isWriteDay && (
-          <Text color="black700" size="body1" width={6}>
+          <Text color="black700" size={isMobile ? 'body1' : 'body3'} width={isMobile ? 6 : 5}>
             작성일
           </Text>
         )}
@@ -45,6 +49,10 @@ const _HeaderContainer = styled.div`
   width: 60rem;
   height: 3rem;
   border-bottom: 1px solid black;
+  @media screen and (max-width: 400px) {
+    width: 22rem;
+    height: 2.5rem;
+  }
 `;
 
 const Div = styled.div`

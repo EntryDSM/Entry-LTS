@@ -16,7 +16,7 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
-
+  const isMobile = window.innerWidth > 400;
   return (
     <_Container>
       <_Wrapper>
@@ -34,19 +34,19 @@ const CustomerPage = () => {
 
         {!click ? (
           <>
-            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
             <Link to="/customer/1">
-              <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+              <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
             </Link>
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
           </>
         ) : (
           <>
@@ -57,7 +57,7 @@ const CustomerPage = () => {
                   <>
                     <Text
                       color={name === category ? `orange500` : `orange100`}
-                      size="title2"
+                      size={isMobile ? 'title2' : 'body3'}
                       cursor="pointer"
                       onClick={() => setCategory(name)}
                     >
@@ -98,6 +98,10 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 38rem;
+  @media screen and (max-width: 400px) {
+    width: 22rem;
+  }
+  // width height
 `;
 
 const _Categories = styled.div`
@@ -106,6 +110,11 @@ const _Categories = styled.div`
   margin-bottom: 20px;
   gap: 10px;
   width: 60rem;
+  @media screen and (max-width: 400px) {
+    width: 22rem;
+    gap: 5px;
+  }
+  // gap width
 `;
 
 const _Circle = styled.div`
