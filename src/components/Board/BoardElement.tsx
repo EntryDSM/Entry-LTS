@@ -23,17 +23,17 @@ const BoardElement = (props: IBoard) => {
         <Div>
           {isComment && (
             <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              대기중 {/* width 교체 */}
+              대기중
             </Text>
           )}
           {isWriter && (
             <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              정지관 {/* width 교체 */}
+              정지관
             </Text>
           )}
           {isWriteDay && (
             <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              2023-01-10 {/* width 교체 */}
+              2023-01-10
             </Text>
           )}
         </Div>

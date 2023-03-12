@@ -24,10 +24,10 @@ const BoardTitle = (props: IBoardTitle) => {
   return (
     <>
       <Text color="black900" size={isMobile ? 'header1' : 'title1'}>
-        {title} {/* title1*/}
+        {title}
       </Text>
       <Text margin={[0, 0, 22, 0]} color="realBlack" size={isMobile ? 'title3' : 'body5'}>
-        {subTitle} {/* body5 */}
+        {subTitle}
       </Text>
       <_Buttons>
         <div style={{ display: 'flex', gap: '0.5rem' }}>

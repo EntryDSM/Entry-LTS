@@ -5,8 +5,6 @@ import { Text } from '@team-entry/design_system';
 const BoardHeader = (props: IBoard) => {
   const { isNumber, isTopBorder, isComment, isWriteDay, isWriter } = props;
   const isMobile = window.innerWidth > 400;
-  // body3으로 고치기
-  // isbumner true 동시에 ismobile이 false면 안됨
   return (
     <_HeaderContainer style={{ borderTop: isTopBorder && '1px solid black' }}>
       <Div>
