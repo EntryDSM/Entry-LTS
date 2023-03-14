@@ -1,57 +1,106 @@
 import { useState } from 'react';
-import { IBoard } from '@/interfaces/Board';
 import styled from '@emotion/styled';
+import { IBoard } from '@/interfaces/Board';
 import { Text, theme } from '@team-entry/design_system';
+import { Mobile, Pc } from '../../hooks/useResponsive';
 
 const BoardElement = (props: IBoard) => {
   const { isNumber, isComment, isWriteDay, isWriter, isOpen = false } = props;
   const [clicked, setClicked] = useState(false);
-  const isMobile = window.innerWidth > 400;
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
         <Div>
-          {(isMobile || !isNumber) && (
-            <Text color="black700" size={isMobile ? 'body1' : 'body3'} width={isMobile ? 6 : 5}>
+          <Pc>
+            <Text color="black700" size="body1" width={6}>
               {isNumber ? '36' : '입학문의'}
             </Text>
-          )}
-          <Text color="black800" size={isMobile ? 'body3' : 'body5'} margin={['left', 20]}>
-            성적 입력에 관하여...
-          </Text>
+            <Text color="black800" size="body3" margin={['left', 20]}>
+              성적 입력에 관하여...
+            </Text>
+          </Pc>
+          <Mobile>
+            {!isNumber && (
+              <Text color="black700" size="body3" width={5}>
+                입학문의
+              </Text>
+            )}
+            <Text color="black800" size="body5" margin={['left', 20]}>
+              성적 입력에 관하여...
+            </Text>
+          </Mobile>
         </Div>
         <Div>
           {isComment && (
-            <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              대기중
-            </Text>
+            <>
+              <Pc>
+                <Text color="black500" size="body5" width={6}>
+                  대기중
+                </Text>
+              </Pc>
+              <Mobile>
+                <Text color="black500" size="body5" width={5}>
+                  대기중
+                </Text>
+              </Mobile>
+            </>
           )}
           {isWriter && (
-            <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              정지관
-            </Text>
+            <Pc>
+              <Text color="black500" size="body5" width={6}>
+                정지관
+              </Text>
+            </Pc>
           )}
           {isWriteDay && (
-            <Text color="black500" size="body5" width={isMobile ? 6 : 5}>
-              2023-01-10
-            </Text>
+            <>
+              <Pc>
+                <Text color="black500" size="body5" width={6}>
+                  2023-01-10
+                </Text>
+              </Pc>
+              <Mobile>
+                <Text color="black500" size="body5" width={5}>
+                  2023-01-10
+                </Text>
+              </Mobile>
+            </>
           )}
         </Div>
       </_ElementContainer>
       {isOpen && clicked && (
-        <Div style={{ height: isMobile ? '14rem' : '10rem', backgroundColor: theme.color.black50 }}>
-          <Text color="black800" size={isMobile ? 'body3' : 'body5'} width={isMobile ? 6 : 5}>
-            답변
-          </Text>
-          <_Answer>
-            <Text color="black600" size={isMobile ? 'body4' : 'body5'}>
-              음 딱히 모르겠다 몸만 오세요
-            </Text>
-            <Text color="black400" size={isMobile ? 'body5' : 'body3'}>
-              2022-12-21
-            </Text>
-          </_Answer>
-        </Div>
+        <>
+          <Pc>
+            <Div style={{ height: '14rem', backgroundColor: theme.color.black50 }}>
+              <Text color="black800" size="body3" width={6}>
+                답변
+              </Text>
+              <_Answer>
+                <Text color="black600" size="body4">
+                  음 딱히 모르겠다 몸만 오세요
+                </Text>
+                <Text color="black400" size="body5">
+                  2022-12-21
+                </Text>
+              </_Answer>
+            </Div>
+          </Pc>
+          <Mobile>
+            <Div style={{ height: '10rem', backgroundColor: theme.color.black50 }}>
+              <Text color="black800" size="body5" width={5}>
+                답변
+              </Text>
+              <_Answer>
+                <Text color="black600" size="body5">
+                  음 딱히 모르겠다 몸만 오세요
+                </Text>
+                <Text color="black400" size="body3">
+                  2022-12-21
+                </Text>
+              </_Answer>
+            </Div>
+          </Mobile>
+        </>
       )}
     </>
   );
@@ -67,8 +116,8 @@ const _ElementContainer = styled.div`
   height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
-  @media screen and (max-width: 400px) {
-    width: 22rem;
+  @media screen and (max-width: 769px) {
+    padding: 20px;
   }
 `;
 
@@ -85,7 +134,7 @@ const _Answer = styled.div`
   height: 14rem;
   margin-left: 20px;
   padding: 20px 0px;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 769px) {
     height: 10rem;
   }
 `;

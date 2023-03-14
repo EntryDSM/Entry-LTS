@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Switch, Text, Textarea } from '@team-entry/design_system';
+import { Mobile, Pc } from '../hooks/useResponsive';
 
 const WriteCustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -11,13 +12,19 @@ const WriteCustomerPage = () => {
   const onClick = () => {
     console.log('clicked!');
   };
-  const isMobile = window.innerWidth > 400;
   return (
     <_Container>
       <_Wrapper>
-        <Text color="black900" size={isMobile ? 'header1' : 'title1'}>
-          Q&A 작성
-        </Text>
+        <Pc>
+          <Text color="black900" size="header1">
+            Q&A 작성
+          </Text>
+        </Pc>
+        <Mobile>
+          <Text color="black900" size="title1">
+            Q&A 작성
+          </Text>
+        </Mobile>
         <_Line />
         <_OpenLetter>
           <Text color="realBlack" size="body1">
@@ -25,16 +32,30 @@ const WriteCustomerPage = () => {
           </Text>
           <Switch isClick={click} onClick={() => setClick(!click)} color="orange" />
         </_OpenLetter>
-        <Input type="text" label="제목" width={isMobile ? 960 : 352} placeholder="제목을 입력하세요" />
-        <Textarea
-          label="본문"
-          width={isMobile ? 60 : 22}
-          placeholder="내용을 입력하세요"
-          limit={300}
-          value={value}
-          onChange={onChange}
-          margin={['top', 20]}
-        />
+        <Pc>
+          <Input type="text" label="제목" width={960} placeholder="제목을 입력하세요" />
+          <Textarea
+            label="본문"
+            width={60}
+            placeholder="내용을 입력하세요"
+            limit={300}
+            value={value}
+            onChange={onChange}
+            margin={['top', 20]}
+          />
+        </Pc>
+        <Mobile>
+          <Input type="text" label="제목" width={352} placeholder="제목을 입력하세요" />
+          <Textarea
+            label="본문"
+            width={22}
+            placeholder="내용을 입력하세요"
+            limit={300}
+            value={value}
+            onChange={onChange}
+            margin={['top', 20]}
+          />
+        </Mobile>
         <_ButtonBox>
           <Button color="orange" onClick={onClick}>
             질문 작성
@@ -57,8 +78,8 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 38rem;
-  @media screen and (max-width: 400px) {
-    width: 22rem;
+  @media screen and (max-width: 769px) {
+    padding: 20px;
   }
 `;
 
@@ -67,7 +88,7 @@ const _Line = styled.div`
   width: 70px;
   height: 1.5px;
   background-color: #cacaca;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 769px) {
     margin-top: 15px;
   }
 `;
@@ -77,7 +98,7 @@ const _OpenLetter = styled.div`
   align-items: flex-start;
   justify-content: flex-end;
   gap: 5px;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 769px) {
     flex-direction: row-reverse;
     margin-top: 16px;
     margin-bottom: 20px;
@@ -88,7 +109,7 @@ const _ButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 50px;
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 769px) {
     margin-top: 25px;
   }
 `;

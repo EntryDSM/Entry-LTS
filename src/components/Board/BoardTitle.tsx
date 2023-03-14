@@ -1,7 +1,8 @@
-import styled from '@emotion/styled';
 import { SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 import { Button, Text } from '@team-entry/design_system';
+import { Mobile, Pc } from '../../hooks/useResponsive';
 
 interface IBoardTitle {
   click: boolean;
@@ -17,18 +18,27 @@ interface IBoardTitle {
 
 const BoardTitle = (props: IBoardTitle) => {
   const { click, setClick, title, subTitle, button1, button2, button3, isCustomer, link } = props;
-  const isMobile = window.innerWidth > 400;
   const onClick = () => {
     console.log('clicked!');
   };
   return (
     <>
-      <Text color="black900" size={isMobile ? 'header1' : 'title1'}>
-        {title}
-      </Text>
-      <Text margin={[0, 0, 22, 0]} color="realBlack" size={isMobile ? 'title3' : 'body5'}>
-        {subTitle}
-      </Text>
+      <Pc>
+        <Text color="black900" size="header1">
+          {title}
+        </Text>
+        <Text margin={[0, 0, 22, 0]} color="realBlack" size="title3">
+          {subTitle}
+        </Text>
+      </Pc>
+      <Mobile>
+        <Text color="black900" size="title1">
+          {title}
+        </Text>
+        <Text margin={[0, 0, 22, 0]} color="realBlack" size="body5">
+          {subTitle}
+        </Text>
+      </Mobile>
       <_Buttons>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <Button onClick={() => setClick(false)} color={'orange'} kind={click ? 'outlined' : 'contained'}>

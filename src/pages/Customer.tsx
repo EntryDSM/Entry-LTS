@@ -1,10 +1,11 @@
-import BoardHeader from '../components/Board/BoardHeader';
-import styled from '@emotion/styled';
-import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
-import BoardTitle from '../components/Board/BoardTitle';
 import { Link } from 'react-router-dom';
+import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
+import { Mobile, Pc } from '../hooks/useResponsive';
+import BoardHeader from '../components/Board/BoardHeader';
+import BoardElement from '../components/Board/BoardElement';
+import BoardTitle from '../components/Board/BoardTitle';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -16,7 +17,6 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
-  const isMobile = window.innerWidth > 400;
   return (
     <_Container>
       <_Wrapper>
@@ -34,19 +34,19 @@ const CustomerPage = () => {
 
         {!click ? (
           <>
-            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
             <Link to="/customer/1">
-              <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+              <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
             </Link>
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={isMobile} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
           </>
         ) : (
           <>
@@ -55,14 +55,26 @@ const CustomerPage = () => {
                 const { name } = res;
                 return (
                   <>
-                    <Text
-                      color={name === category ? `orange500` : `orange100`}
-                      size={isMobile ? 'title2' : 'body3'}
-                      cursor="pointer"
-                      onClick={() => setCategory(name)}
-                    >
-                      {name}
-                    </Text>
+                    <Pc>
+                      <Text
+                        color={name === category ? `orange500` : `orange100`}
+                        size="title2"
+                        cursor="pointer"
+                        onClick={() => setCategory(name)}
+                      >
+                        {name}
+                      </Text>
+                    </Pc>
+                    <Mobile>
+                      <Text
+                        color={name === category ? `orange500` : `orange100`}
+                        size="body3"
+                        cursor="pointer"
+                        onClick={() => setCategory(name)}
+                      >
+                        {name}
+                      </Text>
+                    </Mobile>
                     {name !== '기타' && <_Circle />}
                   </>
                 );
@@ -98,10 +110,9 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 38rem;
-  @media screen and (max-width: 400px) {
-    width: 22rem;
+  @media screen and (max-width: 769px) {
+    padding: 20px;
   }
-  // width height
 `;
 
 const _Categories = styled.div`
@@ -110,11 +121,10 @@ const _Categories = styled.div`
   margin-bottom: 20px;
   gap: 10px;
   width: 60rem;
-  @media screen and (max-width: 400px) {
-    width: 22rem;
+  @media screen and (max-width: 769px) {
+    width: 100%;
     gap: 5px;
   }
-  // gap width
 `;
 
 const _Circle = styled.div`
