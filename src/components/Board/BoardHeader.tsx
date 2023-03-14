@@ -44,7 +44,7 @@ const _HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60rem;
+  width: 100%;
   height: 3rem;
   border-bottom: 1px solid black;
   @media screen and (max-width: 400px) {

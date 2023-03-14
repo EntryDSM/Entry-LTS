@@ -63,7 +63,7 @@ const _ElementContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60rem;
+  width: 100%;
   height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
