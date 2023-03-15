@@ -32,30 +32,18 @@ const WriteCustomerPage = () => {
           </Text>
           <Switch isClick={click} onClick={() => setClick(!click)} color="orange" />
         </_OpenLetter>
-        <Pc>
-          <Input type="text" label="제목" width={960} placeholder="제목을 입력하세요" />
+        <Input type="text" label="제목" width="100%" placeholder="제목을 입력하세요" />
+        <div>
           <Textarea
             label="본문"
-            width={60}
+            width="100%"
             placeholder="내용을 입력하세요"
             limit={300}
             value={value}
             onChange={onChange}
             margin={['top', 20]}
           />
-        </Pc>
-        <Mobile>
-          <Input type="text" label="제목" width={352} placeholder="제목을 입력하세요" />
-          <Textarea
-            label="본문"
-            width={22}
-            placeholder="내용을 입력하세요"
-            limit={300}
-            value={value}
-            onChange={onChange}
-            margin={['top', 20]}
-          />
-        </Mobile>
+        </div>
         <_ButtonBox>
           <Button color="orange" onClick={onClick}>
             질문 작성
