@@ -71,7 +71,7 @@ const BoardElement = (props: IBoard) => {
       {isOpen && clicked && (
         <>
           <Pc>
-            <Div style={{ height: '14rem', backgroundColor: theme.color.black50 }}>
+            <_AnswerPart style={{ height: '14rem' }}>
               <Text color="black800" size="body3" width={6}>
                 답변
               </Text>
@@ -83,10 +83,10 @@ const BoardElement = (props: IBoard) => {
                   2022-12-21
                 </Text>
               </_Answer>
-            </Div>
+            </_AnswerPart>
           </Pc>
           <Mobile>
-            <Div style={{ height: '10rem', backgroundColor: theme.color.black50 }}>
+            <_AnswerPart style={{ height: '10rem' }}>
               <Text color="black800" size="body5" width={5}>
                 답변
               </Text>
@@ -98,7 +98,7 @@ const BoardElement = (props: IBoard) => {
                   2022-12-21
                 </Text>
               </_Answer>
-            </Div>
+            </_AnswerPart>
           </Mobile>
         </>
       )}
@@ -124,6 +124,12 @@ const _ElementContainer = styled.div`
 const Div = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const _AnswerPart = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${theme.color.black50};
 `;
 
 const _Answer = styled.div`

@@ -40,14 +40,14 @@ const BoardTitle = (props: IBoardTitle) => {
         </Text>
       </Mobile>
       <_Buttons>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
+        <_ButtonWrapper>
           <Button onClick={() => setClick(false)} color={'orange'} kind={click ? 'outlined' : 'contained'}>
             {button1}
           </Button>
           <Button onClick={() => setClick(true)} color={'orange'} kind={click ? 'contained' : 'outlined'}>
             {button2}
           </Button>
-        </div>
+        </_ButtonWrapper>
         <div>
           {isCustomer && !click && (
             <Link to={link}>
@@ -68,4 +68,9 @@ const _Buttons = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
+`;
+
+const _ButtonWrapper = styled.div`
+  display: 'flex';
+  gap: '0.5rem';
 `;
