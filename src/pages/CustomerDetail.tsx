@@ -40,15 +40,15 @@ const CustomerDetailPage = () => {
             36 | 김*연 | 2022-12-21
           </Text>
         </Mobile>
+        <_Bottom>
+          <_Answer>
+            <Text color="black500" size="title2">
+              아직 작성된 답변이 없습니다
+            </Text>
+          </_Answer>
+          <Button onClick={() => navigate(-1)}>목록으로</Button>
+        </_Bottom>
       </_Wrapper>
-      <_Bottom>
-        <_Answer>
-          <Text color="black500" size="title2">
-            아직 작성된 답변이 없습니다
-          </Text>
-        </_Answer>
-        <Button onClick={() => navigate(-1)}>목록으로</Button>
-      </_Bottom>
     </_Container>
   );
 };
@@ -69,6 +69,7 @@ const _Wrapper = styled.div`
   width: 60rem;
   height: 12rem;
   @media screen and (max-width: 769px) {
+    width: 100%;
     padding: 20px;
   }
 `;
@@ -85,7 +86,9 @@ const _Bottom = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
+  margin-top: 6rem;
   @media screen and (max-width: 769px) {
+    width: 100%;
     align-items: flex-start;
   }
 `;
@@ -100,6 +103,7 @@ const _Answer = styled.div`
   border: 1px solid ${theme.color.black200};
   border-radius: 5px;
   @media screen and (max-width: 769px) {
+    width: 100%;
     height: 10rem;
     border: none;
     padding: 20px;

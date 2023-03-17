@@ -2,57 +2,82 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import Noticeimg from '../assets/ReplaceNotice.svg';
-import Download from '../assets/Download.svg';
 import { useNavigate } from 'react-router-dom';
-
-const data = {
-  title: '2077 신입생 입학전 과제 제출 안내',
-  name: '장**',
-  image: Noticeimg,
-  content: `신입생 오리엔테이션 책자에 있는 입학전 과제입니다.
-  신학기 적응을 위한 준비이니 성실히 수행해서 제출하시기 바랍니다.
-  ■ 과제 제출 마감: 2023년 2월 22일
-  ■ 학교 홈페이지 학생 회원가입 -> 학교 담당자가 승인
-  ■ 학교 홈페이지 로그인 후 [과제제출 - 신입생 - 각 교과] 게시판에 제출
-  과제 중 자기소개 PPT는 첨부한 기본틀을 참고하거나 자신만의 방식으로 만들어도 됩니다.`,
-  file: ['2023학년도 신입생 입학전 과제.hwp', '자기소개_학번_이름.pptx'],
-};
+import File from '../components/File';
+import { Mobile, Pc } from '..//hooks/useResponsive';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
   return (
     <_Container>
       <_Wrapper>
-        <Text color="black500" size="body1">
-          입학 공지사항
-        </Text>
-        <Text color="black900" size="title1" margin={['bottom', 8]}>
-          {data.title}
-        </Text>
-        <Text color="black500" size="body1">
-          {data.name}|2022-11-18
-        </Text>
-        <_Line />
-        <img src={data.image} alt="notice" style={{ marginBottom: '20px' }} />
-        <Text color="black600" size="body2">
-          {data.content}
-        </Text>
-        <_FileTitle>
-          <Text color="black900" size="title3">
-            첨부파일
+        <Pc>
+          <Text color="black500" size="body1">
+            입학 공지사항
           </Text>
-        </_FileTitle>
+          <Text color="black900" size="title1" margin={['bottom', 8]}>
+            2077 신입생 입학전 과제 제출 안내
+          </Text>
+          <Text color="black500" size="body1">
+            장**|2022-11-18
+          </Text>
+          <_Line />
+          <img src={Noticeimg} alt="notice" style={{ marginBottom: '20px' }} />
+          <Text color="black600" size="body2">
+            신입생 오리엔테이션 책자에 있는 입학전 과제입니다. 신학기 적응을 위한 준비이니 성실히 수행해서 제출하시기
+            바랍니다.
+            <br />
+            ■ 과제 제출 마감: 2023년 2월 22일
+            <br />
+            ■ 학교 홈페이지 학생 회원가입 -&gt; 학교 담당자가 승인
+            <br />
+            ■ 학교 홈페이지 로그인 후 [과제제출 - 신입생 - 각 교과]
+            <br />
+            게시판에 제출
+            <br />
+            과제 중 자기소개 PPT는 첨부한 기본틀을 참고하거나 자신만의 방식으로 만들어도 됩니다.
+          </Text>
+          <_FileTitle>
+            <Text color="black900" size="title3">
+              첨부파일
+            </Text>
+          </_FileTitle>
+        </Pc>
+        <Mobile>
+          <Text color="black500" size="body5">
+            입학 공지사항
+          </Text>
+          <Text color="black900" size="title1" margin={['bottom', 8]}>
+            2077 신입생 입학전 과제 제출 안내
+          </Text>
+          <Text color="black500" size="body5">
+            장**|2022-11-18
+          </Text>
+          <_Line />
+          <_Img src={Noticeimg} alt="notice" style={{ marginBottom: '20px' }} />
+          <Text color="black600" size="body5" margin={['top', 4]}>
+            신입생 오리엔테이션 책자에 있는 입학전 과제입니다. 신학기 적응을 위한 준비이니 성실히 수행해서 제출하시기
+            바랍니다.
+            <br />
+            ■ 과제 제출 마감: 2023년 2월 22일
+            <br />
+            ■ 학교 홈페이지 학생 회원가입 -&gt; 학교 담당자가 승인
+            <br />
+            ■ 학교 홈페이지 로그인 후 [과제제출 - 신입생 - 각 교과]
+            <br />
+            게시판에 제출
+            <br />
+            과제 중 자기소개 PPT는 첨부한 기본틀을 참고하거나 자신만의 방식으로 만들어도 됩니다.
+          </Text>
+          <_FileTitle>
+            <Text color="black900" size="body1">
+              첨부파일
+            </Text>
+          </_FileTitle>
+        </Mobile>
         <_Files>
-          {data.file.map((file, i) => (
-            <_File key={i}>
-              <_Download>
-                <img src={Download} alt="download" />
-              </_Download>
-              <Text color="black900" size="body1">
-                {file}
-              </Text>
-            </_File>
-          ))}
+          <File />
+          <File />
         </_Files>
         <Button onClick={() => navigate(-1)} margin={['top', 28]}>
           목록으로
@@ -73,12 +98,31 @@ const _Container = styled.div`
 const _Wrapper = styled.div`
   width: 60rem;
   margin-top: 7rem;
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    margin-top: 4rem;
+    padding: 20px;
+  }
 `;
 
 const _Line = styled.div`
   width: 60rem;
   border-bottom: 1px solid ${theme.color.black100};
   margin: 20px 0px;
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    margin: 8px 0px;
+  }
+`;
+
+const _Img = styled.img`
+  width: 318px;
+  height: 234px;
+  object-fit: cover;
+  @media screen and (max-width: 769px) {
+    width: 196px;
+    height: 150px;
+  }
 `;
 
 const _FileTitle = styled.div`
@@ -86,23 +130,10 @@ const _FileTitle = styled.div`
   border-bottom: 1px solid ${theme.color.black100};
   padding: 10px 0px;
   margin-top: 20px;
-`;
-
-const _File = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-const _Download = styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  background-color: ${theme.color.orange500};
-  border-radius: 18px;
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    padding: 0px 0px 8px 0px;
+  }
 `;
 
 const _Files = styled.div`

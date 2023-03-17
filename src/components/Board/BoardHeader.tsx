@@ -19,16 +19,16 @@ const BoardHeader = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" width={5}>
-                입학문의
+              <Text color="black700" size="body3" width={4} margin={['right', 20]}>
+                구분
               </Text>
             )}
-            <Text color="black700" size="body3" margin={['left', 20]}>
+            <Text color="black700" size="body3">
               제목
             </Text>
           </Mobile>
         </>
-      </Div>
+      </Div>  
       <Div>
         {isComment && (
           <>
