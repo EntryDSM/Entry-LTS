@@ -1,8 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import BoardElement from '../components/Board/BoardElement';
-import BoardHeader from '../components/Board/BoardHeader';
 
 const MyPage = () => {
   const onClick = () => {

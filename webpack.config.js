@@ -8,6 +8,9 @@ module.exports = {
   entry: './src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: {
+      '@': path.resolve(__dirname, './src/'),
+    },
   },
   output: {
     filename: 'bundle.min.js',
