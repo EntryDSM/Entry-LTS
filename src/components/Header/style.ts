@@ -61,13 +61,13 @@ const MenuUp = keyframes`
   }
 `;
 
-export const _Menu = styled.div<{ visibility: boolean; size: number }>`
+export const _Menu = styled.div<{ visibility: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-  height: ${({ size }) => `${size * 7}vh`};
-  background-color: white;
+  max-height: 100vh;
+  background-color: ${theme.color.realWhite};
   overflow: hidden;
   animation: ${({ visibility }) => (visibility ? MenuDown : MenuUp)} 0.5s;
 `;

@@ -22,9 +22,9 @@ const headerList: IHeaderList[] = [
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '고객 문의', url: '/customer', type: 'total' },
-  { name: '공지 사항', url: '/notice', type: 'total' },
-  { name: '신입생 전형 요강', url: '/admission', type: 'total' },
+  { name: '고객 문의', url: '/customer' },
+  { name: '공지 사항', url: '/notice' },
+  { name: '신입생 전형 요강', url: '/admission' },
   { name: '로그인', url: '/login', type: 'logout' },
   { name: '마이페이지', url: '/mypage', type: 'login' },
   { name: '로그아웃', url: '/logout', type: 'login' },
@@ -36,6 +36,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
+  const isLogin = localStorage.getItem('access_token');
 
   const onClick = () => {
     console.log('clicked');
@@ -69,20 +70,12 @@ const Header = () => {
           <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
           {isOpen && (
             <_._Background onClick={closeMenu}>
-              <_._Menu
-                size={localStorage.getItem('access_token') ? 5 : 4}
-                onClick={(e) => e.stopPropagation()}
-                visibility={visibility}
-              >
+              <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
                 {menuList
-                  .filter((list) =>
-                    localStorage.getItem('access_token')
-                      ? list.type === 'total' || list.type === 'login'
-                      : list.type === 'total' || list.type === 'logout',
-                  )
-                  .map((list) => {
+                  .filter((list) => (isLogin ? list.type !== 'logout' : list.type !== 'login'))
+                  .map((list, idx) => {
                     return (
-                      <Link to={list.url}>
+                      <Link key={idx} to={list.url}>
                         <_._MenuElement
                           color={list.name === '로그아웃' ? 'red' : 'black'}
                           onClick={() => {
@@ -121,7 +114,7 @@ const Header = () => {
           </Pc>
         </div>
         <Pc>
-          {localStorage.getItem('access_token') ? (
+          {isLogin ? (
             <Button color="orange" kind="rounded" onClick={onClick}>
               확인
             </Button>
