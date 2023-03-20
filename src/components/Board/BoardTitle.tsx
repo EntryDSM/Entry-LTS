@@ -1,7 +1,7 @@
 import { SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 
 interface IBoardTitle {
@@ -35,9 +35,10 @@ const BoardTitle = (props: IBoardTitle) => {
         <Text color="black900" size="title1">
           {title}
         </Text>
-        <Text margin={[0, 0, 22, 0]} color="realBlack" size="body5">
+        <Text color="realBlack" size="body5">
           {subTitle}
         </Text>
+        <_Line />
       </Mobile>
       <_Buttons>
         <_ButtonWrapper>
@@ -71,6 +72,14 @@ const _Buttons = styled.div`
 `;
 
 const _ButtonWrapper = styled.div`
-  display: 'flex';
-  gap: '0.5rem';
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const _Line = styled.div`
+  width: 70px;
+  height: 1px;
+  background-color: ${theme.color.black300};
+  border: none;
+  margin: 15px 0px;
 `;

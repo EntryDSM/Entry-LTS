@@ -46,4 +46,8 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 38rem;
+  @media screen and (max-width: 769px) {
+    width: 100%;
+    padding: 20px;
+  }
 `;

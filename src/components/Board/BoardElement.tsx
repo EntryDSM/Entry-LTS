@@ -21,11 +21,11 @@ const BoardElement = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" width={5}>
+              <Text color="black700" size="body3" margin={['right', 20]}>
                 입학문의
               </Text>
             )}
-            <Text color="black800" size="body5" margin={['left', 20]}>
+            <Text color="black800" size="body5">
               성적 입력에 관하여...
             </Text>
           </Mobile>
