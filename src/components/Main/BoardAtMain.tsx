@@ -28,7 +28,7 @@ const boardContent = [
 
 const BoardsAtMain = () => {
   return (
-    <>
+    <Boards>
       {boardContent.map((item) => (
         <Board key={item.id}>
           <BoardTitle>
@@ -45,11 +45,22 @@ const BoardsAtMain = () => {
           ))}
         </Board>
       ))}
-    </>
+    </Boards>
   );
 };
 
 export default BoardsAtMain;
+
+const Boards = styled.div`
+  display: flex;
+  gap: 30px;
+  @media screen and (max-width: 769px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
 
 const Board = styled.div`
   display: flex;
@@ -57,7 +68,7 @@ const Board = styled.div`
   justify-content: space-between;
   width: 21rem;
   height: 14rem;
-  margin-left: 2rem;
+  margin-left: 0.5%;
 `;
 
 const BoardTitle = styled.div`
