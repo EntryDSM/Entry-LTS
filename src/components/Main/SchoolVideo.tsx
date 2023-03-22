@@ -26,7 +26,7 @@ const _Wrapper = styled.div`
   align-items: center;
   padding-top: 7rem;
   width: 99vw;
-  height: 100vh;
+  height: 961px;
 `;
 
 const _Title = styled.div`

@@ -7,6 +7,7 @@ import Calculator from '../../assets/Calculator.svg';
 import BookOpen from '../../assets/BookOpen.svg';
 import User from '../../assets/User.svg';
 import BoardsAtMain from './BoardAtMain';
+import { useNavigate } from 'react-router-dom';
 
 const progressState = [
   { id: 0, title: '원서 제출', date: '10/17~10/20' },
@@ -21,6 +22,7 @@ interface ICurrentDate {
 
 const MainFunction = () => {
   const DATE = 1;
+  const navigate = useNavigate();
   const onClick = () => console.log('clicked!');
   const progressBar = [
     { id: 0, element: <_ProgressCircle now={0 <= DATE} /> },
@@ -34,21 +36,25 @@ const MainFunction = () => {
   const shortcut = [
     {
       id: 0,
+      onClick: () => navigate('/'),
       icon: <img src={Navigation} alt="Navigation" style={{ marginBottom: '8px' }} />,
       title: '입학설명회 참석 예약',
     },
     {
       id: 1,
+      onClick: () => navigate('/grade'),
       icon: <img src={Calculator} alt="Calculator" style={{ marginBottom: '8px' }} />,
       title: '성적 산출',
     },
     {
       id: 2,
+      onClick: () => scrollTo(0, 961),
       icon: <img src={BookOpen} alt="BookOpen" style={{ marginBottom: '8px' }} />,
       title: '학교 소개 ',
     },
     {
       id: 3,
+      onClick: () => scrollTo(0, 1922),
       icon: <img src={User} alt="User" style={{ marginBottom: '8px' }} />,
       title: 'Entry 개발자 소개',
     },
@@ -91,7 +97,7 @@ const MainFunction = () => {
       <_Discription>
         <_Shortcut>
           {shortcut.map((item) => (
-            <_ShorcutButton key={item.id}>
+            <_ShorcutButton key={item.id} onClick={item.onClick}>
               {item.icon}
               <Text color="black800" size="title2">
                 {item.title}
@@ -114,7 +120,7 @@ const _Wrapper = styled.div`
   align-items: center;
   padding-top: 7rem;
   width: 99vw;
-  height: 100vh;
+  height: 961px;
 `;
 
 const _Banner = styled.img`
