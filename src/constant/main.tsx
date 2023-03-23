@@ -1,4 +1,10 @@
+import styled from '@emotion/styled';
+import { theme } from '@team-entry/design_system';
 import React from 'react';
+
+interface ICurrentDate {
+  now: boolean;
+}
 
 export const boardContent = [
   {
@@ -65,4 +71,36 @@ export const shortcut = [
     icon: 'ApproveUser',
     title: 'Entry 개발자 소개',
   },
+];
+
+export const progressState = [
+  { id: 0, title: '원서 제출', date: '10/17~10/20' },
+  { id: 1, title: '1차 발표', date: '10/24 18:00' },
+  { id: 2, title: '원서 제출', date: '10/18 9:00' },
+  { id: 3, title: '2차 발표', date: '11/03 10:00' },
+];
+
+const DATE = 1;
+
+const _ProgressStep = styled.div<ICurrentDate>`
+  width: 10.2rem;
+  height: 4px;
+  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+`;
+
+const _ProgressCircle = styled.div<ICurrentDate>`
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+`;
+
+export const progressBar = [
+  <_ProgressCircle now={0 <= DATE} />,
+  <_ProgressStep now={1 <= DATE} />,
+  <_ProgressCircle now={1 <= DATE} />,
+  <_ProgressStep now={2 <= DATE} />,
+  <_ProgressCircle now={2 <= DATE} />,
+  <_ProgressStep now={3 <= DATE} />,
+  <_ProgressCircle now={3 <= DATE} />,
 ];
