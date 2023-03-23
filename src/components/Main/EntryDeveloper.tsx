@@ -55,11 +55,13 @@ const _Wrapper = styled.div`
   padding-top: 7rem;
   width: 100%;
   height: 100vh;
+  margin: 0 auto;
   overflow: hidden;
 `;
 
 const _Title = styled.div`
-  width: 100%;
+  width: 76rem;
+  margin: 0 auto;
   padding: 0 1.5%;
 `;
 
