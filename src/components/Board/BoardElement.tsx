@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
 import { Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
+import { keyframes } from '@emotion/react';
 
 const BoardElement = (props: IBoard) => {
   const { isNumber, isComment, isWriteDay, isWriter, isOpen = false } = props;
@@ -126,10 +127,21 @@ const Div = styled.div`
   align-items: center;
 `;
 
+const fallingAnswer = keyframes`
+  from {
+    max-height: 0px;
+  }
+  to {
+    max-height: 100%;
+  }
+`;
+
 const _AnswerPart = styled.div`
   display: flex;
   align-items: center;
   background-color: ${theme.color.black50};
+  animation: ${fallingAnswer} 2s;
+  overflow: hidden;
 `;
 
 const _Answer = styled.div`
