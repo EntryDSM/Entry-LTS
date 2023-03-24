@@ -10,9 +10,7 @@ const SchoolVideo = () => {
         <Text color="orange500" size="header1">
           학교 소개 영상
         </Text>
-        <_Video>
-          <img src={Video} alt="video" />
-        </_Video>
+        <_Video alt="video" />
       </_Title>
     </_Wrapper>
   );
@@ -25,16 +23,21 @@ const _Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 7rem;
-  width: 99vw;
+  justify-content: center;
+  max-width: 76rem;
+  width: 100%;
+  margin: 0 auto;
   height: 100vh;
 `;
 
 const _Title = styled.div`
-  width: 76rem;
+  width: 100%;
+  padding: 0 1.5%;
 `;
 
-const _Video = styled.div`
-  width: 76rem;
+const _Video = styled.img`
+  width: 100%;
   height: 43rem;
   margin-top: 1rem;
+  background-color: black;
 `;

@@ -53,12 +53,16 @@ const _Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 7rem;
-  width: 99vw;
+  width: 100%;
   height: 100vh;
+  margin: 0 auto;
+  overflow: hidden;
 `;
 
 const _Title = styled.div`
   width: 76rem;
+  margin: 0 auto;
+  padding: 0 1.5%;
 `;
 
 const _DeveloperContainer = styled.div`
@@ -71,9 +75,11 @@ const _DeveloperContainer = styled.div`
 
 const _Developers = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
   grid-template-columns: repeat(4, 1fr);
   gap: 42px 60px;
+  @media screen and (max-width: 1060px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const _Developer = styled.div`
