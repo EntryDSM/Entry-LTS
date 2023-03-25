@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
+import { Button, Text } from '@team-entry/design_system';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
 import Banner from '../../assets/ReplaceBanner.svg';
@@ -8,10 +8,11 @@ import { shortcut } from '../../constant/main';
 import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
+import _ShortcutButton from './ShortcutButton';
 
 const MainFunction = () => {
   const onClick = () => console.log('clicked!');
-  
+
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
 
   return (
@@ -56,27 +57,17 @@ const MainFunction = () => {
       <_Discription>
         <Pc>
           <_Shortcut>
-          {shortcut.map((item) =>
-            item.link.includes('/') ? (
-              <Link to={item.link}>
-                <_ShorcutButton key={item.id}>
-                  <Icon icon={item.icon as IconType} color="orange500" />
-                  <Text color="black800" size="title2">
-                    {item.title}
-                  </Text>
-                </_ShorcutButton>
-              </Link>
-            ) : (
-              <a href={item.link}>
-                <_ShorcutButton key={item.id}>
-                  <Icon icon={item.icon as IconType} color="orange500" />
-                  <Text color="black800" size="title2">
-                    {item.title}
-                  </Text>
-                </_ShorcutButton>
-              </a>
-            ),
-          )}
+            {shortcut.map((item) =>
+              item.link.includes('/') ? (
+                <Link to={item.link}>
+                  <_ShortcutButton icon={item.icon} title={item.icon} />
+                </Link>
+              ) : (
+                <a href={item.link}>
+                  <_ShortcutButton icon={item.icon} title={item.icon} />
+                </a>
+              ),
+            )}
           </_Shortcut>
         </Pc>
         <BoardsAtMain />
@@ -171,18 +162,6 @@ const _Shortcut = styled.div`
     width: 100%;
     margin-bottom: 2rem;
   }
-`;
-
-const _ShorcutButton = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 6rem;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  cursor: pointer;
 `;
 
 const _Overflow = styled.div`
