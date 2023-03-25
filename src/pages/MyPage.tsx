@@ -93,13 +93,18 @@ const _Container = styled.div`
   justify-content: center;
   width: 100vw;
   margin-top: 10rem;
+  @media screen and (max-width: 769px) {
+    margin-top: 4rem;
+  }
 `;
 
 const _Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60rem;
+  width: 100%;
+  max-width: 60rem;
+  padding: 0 10px;
   @media screen and (max-width: 769px) {
     width: 100%;
     padding: 20px;
