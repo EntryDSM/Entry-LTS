@@ -66,12 +66,10 @@ const _Container = styled.div`
 
 const _Wrapper = styled.div`
   margin-top: 7rem;
-  width: 60rem;
+  width: 100%;
+  max-width: 60rem;
+  padding: 0 20px;
   height: 12rem;
-  @media screen and (max-width: 769px) {
-    width: 100%;
-    padding: 20px;
-  }
 `;
 
 const _Title = styled.div`
@@ -97,7 +95,8 @@ const _Answer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   height: 15rem;
   background-color: ${theme.color.realWhite};
   border: 1px solid ${theme.color.black200};
