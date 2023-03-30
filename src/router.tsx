@@ -1,4 +1,4 @@
-  import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import CustomerPage from './pages/Customer';
 import CustomerDetailPage from './pages/CustomerDetail';
@@ -11,6 +11,7 @@ import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
 import WriteCustomerPage from './pages/WriteCustomerPage';
 import EditBannerPage from './pages/admin/EditBanner';
+import ApplicationPage from './pages/Application';
 const Router = () => {
   return (
     <>
@@ -32,6 +33,7 @@ const Router = () => {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/admission" element={<NewAdmissionPage />} />
           <Route path="/edit" element={<EditBannerPage />} />
+          <Route path="/application" element={<ApplicationPage />} />
         </Routes>
       </BrowserRouter>
     </>
