@@ -9,6 +9,7 @@ import User from '../../assets/User.svg';
 import BoardsAtMain from './BoardAtMain';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
 
 const progressState = [
   { id: 0, title: '원서 제출', date: '10/17~10/20' },
@@ -22,6 +23,7 @@ interface ICurrentDate {
 }
 
 const MainFunction = () => {
+  const navigate = useNavigate();
   const DATE = 1;
   const onClick = () => console.log('clicked!');
   const progressBar = [
@@ -71,7 +73,7 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 상담 문의: 042-8832-1121
             </Text>
-            <Button color="orange" onClick={onClick} margin={['bottom', 20]}>
+            <Button color="orange" onClick={() => navigate('/application')} margin={['bottom', 20]}>
               원서 접수 →
             </Button>
           </Pc>
@@ -83,7 +85,7 @@ const MainFunction = () => {
               작성한 원서를 제출하세요
             </Text>
             <div>
-              <Button color="orange" onClick={onClick} margin={[20, 0, 20, 0]}>
+              <Button color="orange" onClick={() => navigate('/application')} margin={[20, 0, 20, 0]}>
                 원서 접수 →
               </Button>
             </div>
