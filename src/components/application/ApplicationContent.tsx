@@ -12,6 +12,7 @@ interface ApplicationContentProps extends ElementProps {
 const ApplicationContent = ({
   id,
   grid,
+  width,
   title,
   radio,
   input,
@@ -37,7 +38,7 @@ const ApplicationContent = ({
     setElement(copiedElement);
   };
   return (
-    <_ApplicationContent>
+    <_ApplicationContent width={width}>
       <_ApplicationGridbox grid={grid}>
         <_ApplicationTitle color={required ? 'black900' : 'black600'} size="body2">
           {title}
@@ -76,11 +77,11 @@ const ApplicationContent = ({
 
 export default ApplicationContent;
 
-const _ApplicationContent = styled.div`
+const _ApplicationContent = styled.div<{ width: number }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: ${({ width }) => (width ? `${width}rem` : '100%')};
   height: 85px;
   padding: 0px 32px 0px 16px;
   border-bottom: 1px solid ${theme.color.black100};

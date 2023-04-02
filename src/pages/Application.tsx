@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Radio, Text, theme } from '@team-entry/design_system';
+import { Text, theme } from '@team-entry/design_system';
 import ApplicationTitle from '@/components/application/ApplicationTitle';
 import ApplicationContent from '@/components/application/ApplicationContent';
 import ApplicationFooter from '@/components/application/ApplicationFooter';
@@ -21,6 +21,7 @@ interface InputProps {
 export interface ElementProps {
   id: number;
   grid: number;
+  width?: number;
   title: string;
   radio?: RadioProps[];
   input?: InputProps;
@@ -90,10 +91,11 @@ const Application = () => {
     ],
     //
     [
-      { id: 1, grid: 2, title: '이름', input: { placeholder: '이름', name: 'name', value: '' } },
+      { id: 1, grid: 2, width: 40, title: '이름', input: { placeholder: '이름', name: 'name', value: '' } },
       {
         id: 2,
         grid: 3,
+        width: 40,
         title: '성별',
         radio: [
           { label: '남자', name: 'sex', value: 'MALE' },
@@ -104,6 +106,7 @@ const Application = () => {
       {
         id: 3,
         grid: 4,
+        width: 40,
         title: '생년월일',
         radio: [
           { label: '년', name: 'birthday', value: 'year' },
@@ -115,6 +118,7 @@ const Application = () => {
       {
         id: 4,
         grid: 2,
+        width: 40,
         title: '검정고시평균',
         input: { placeholder: '검정고시 평균', unit: '점', name: 'asdf', value: '' },
       },
@@ -143,13 +147,21 @@ const Application = () => {
           <>
             <ApplicationTitle title={title[current]} />
             <_ApplicationWrapper>
+              {current === 1 && (
+                <_UserImg>
+                  <Text size="body3" color="black700">
+                    원서 사진을 등록해주세요
+                  </Text>
+                </_UserImg>
+              )}
               {element[current].map((res) => {
-                const { id, grid, title, radio, input, placeholder, valueForRadio, required } = res;
+                const { id, grid, width, title, radio, input, placeholder, valueForRadio, required } = res;
                 return (
                   <ApplicationContent
                     key={id}
                     id={id}
                     grid={grid}
+                    width={width}
                     title={title}
                     radio={radio}
                     input={input}
@@ -165,7 +177,7 @@ const Application = () => {
             </_ApplicationWrapper>
           </>
         }
-        <ApplicationFooter current={current} setCurrent={setCurrent} />
+        <ApplicationFooter element={element} current={current} setCurrent={setCurrent} />
       </_Wrapper>
     </_Container>
   );
@@ -188,10 +200,25 @@ const _Wrapper = styled.div`
 `;
 
 const _ApplicationWrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 60rem;
   border-top: 1px solid ${theme.color.black600};
   border-bottom: 1px solid ${theme.color.black600};
   margin-top: 49px;
+`;
+
+const _UserImg = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 270px;
+  height: 330px;
+  background-color: ${theme.color.black100};
+  border-radius: 5px;
+  z-index: 100;
 `;
