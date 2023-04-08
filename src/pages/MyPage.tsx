@@ -1,12 +1,28 @@
+import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardElement from '../components/Board/BoardElement';
+import BoardHeader from '../components/Board/BoardHeader';
+import { useModal } from '../hooks/useModal';
+import CancelModal from '@/components/Modal/CancelModal';
 
 const MyPage = () => {
+  const { Modal, open, close, setModalState, modalState } = useModal();
   const onClick = () => {
     console.log('clicked!!');
   };
+
+  const openCancelSubmitModal = () => {
+    setModalState('CANCEL_SUBMIT');
+    open();
+  };
+
+  const openSignOutModal = () => {
+    setModalState('SIGN_OUT');
+    open();
+  };
+
   return (
     <_Container>
       <_Wrapper>
@@ -80,6 +96,24 @@ const MyPage = () => {
         <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
         <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
       </_Wrapper>
+      <Modal>
+        {modalState === 'CANCEL_SUBMIT' && (
+          <CancelModal
+            title="최종제출 취소"
+            subTitle="정말 최종제출을 취소하시겠습니까?"
+            button={<div style={{ width: 200 }}>취소</div>}
+            onClick={close}
+          />
+        )}
+        {modalState === 'SIGN_OUT' && (
+          <CancelModal
+            title="회원 탈퇴"
+            subTitle="정말 탈퇴하시겠습니까?"
+            button={<div style={{ width: 200 }}>회원 탈퇴</div>}
+            onClick={close}
+          />
+        )}
+      </Modal>
     </_Container>
   );
 };

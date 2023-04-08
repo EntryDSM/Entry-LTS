@@ -66,9 +66,7 @@ const _Wrapper = styled.div`
   margin-top: 7rem;
   width: 60rem;
   height: 38rem;
-  @media screen and (max-width: 769px) {
-    padding: 20px;
-  }
+  padding: 0 20px;
 `;
 
 const _Line = styled.div`

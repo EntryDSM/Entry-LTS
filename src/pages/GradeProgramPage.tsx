@@ -1,11 +1,11 @@
 import AllSelect, { Grade } from '../components/grade/AllSelect';
-import { Button, Text } from '@team-entry/design_system';
-import { useState } from 'react';
+import { Button, Spinner, Text } from '@team-entry/design_system';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 import ProgressBar from '../components/grade/ProgressBar';
 import SelectGrade from '../components/grade/SelectGrade';
-import { subtle } from 'crypto';
+import { useModal } from '@/hooks/useModal';
 
 export interface IElement {
   id: number;
@@ -20,6 +20,8 @@ export interface IElement {
 
 const GradeProgramPage = () => {
   const location = useLocation();
+
+  const { Modal, modalState, setModalState, open } = useModal();
   const [element, setElement] = useState<IElement[][]>([
     [
       { id: 1, title: '사회', subTitle: '(과목이 없을 경우 X로 기입해주세요)', type: 'grade', grade: 'A' },
@@ -78,8 +80,8 @@ const GradeProgramPage = () => {
       element,
     },
     { step: 3, title: '직전전 학기', element },
-    { step: 3, title: '출석 점수', element },
-    { step: 3, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
+    { step: 4, title: '출석 점수', element },
+    { step: 4, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
   ];
 
   return (
@@ -88,7 +90,7 @@ const GradeProgramPage = () => {
         <Title>
           <div>
             <Text color="black900" size="header1">
-              {arr[current].title}
+              {arr[current]?.title}
             </Text>
             {arr[current].subTitle && (
               <Text color="black600" size="body1">
@@ -130,12 +132,23 @@ const GradeProgramPage = () => {
               다음
             </Button>
           ) : (
-            <Button color="orange" onClick={() => console.log('hello')}>
+            <Button
+              color="orange"
+              onClick={() => {
+                open();
+              }}
+            >
               완료
             </Button>
           )}
         </_Buttons>
       </_Wrapper>
+      <Modal>
+        <Text size="header2" color="black900" margin={[0, 0, 15, 0]}>
+          성적 산출 중...
+        </Text>
+        <Spinner color="orange" />
+      </Modal>
     </_Container>
   );
 };
