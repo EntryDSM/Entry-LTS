@@ -1,6 +1,6 @@
 import * as _ from './style';
 import Logo from '../../assets/Logo.svg';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
@@ -125,6 +125,7 @@ const Header = () => {
           )}
         </Pc>
       </_._HeaderContainer>
+      <Outlet />
     </>
   );
 };
