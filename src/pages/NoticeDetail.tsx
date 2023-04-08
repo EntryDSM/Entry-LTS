@@ -96,12 +96,12 @@ const _Container = styled.div`
 `;
 
 const _Wrapper = styled.div`
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   margin-top: 7rem;
+  padding: 0 20px;
   @media screen and (max-width: 769px) {
-    width: 100%;
     margin-top: 4rem;
-    padding: 20px;
   }
 `;
 
