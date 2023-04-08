@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'X';
 
-interface PropsType {
+interface IAllSelect {
   current: number;
   element?: IElement[][];
   setElement?: React.Dispatch<SetStateAction<IElement[][]>>;
@@ -13,7 +13,7 @@ interface PropsType {
 
 const arr: Grade[] = ['A', 'B', 'C', 'D', 'E'];
 
-const AllSelect = ({ current, element, setElement }: PropsType) => {
+const AllSelect = ({ current, element, setElement }: IAllSelect) => {
   const [grade, setGrade] = useState<Grade>('A');
 
   useEffect(() => {

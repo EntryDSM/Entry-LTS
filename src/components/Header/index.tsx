@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { Button, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
+import { Cookies } from 'react-cookie';
 
 type THeader = '고객 문의' | '공지 사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -36,7 +37,8 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
-  const isLogin = localStorage.getItem('access_token');
+  const cookie = new Cookies();
+  const isLogin = cookie.get('access_token');
 
   const onClick = () => {
     console.log('clicked');
@@ -92,7 +94,7 @@ const Header = () => {
           )}
         </Mobile>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link onClick={closeMenu} to="/" style={{ display: 'flex' }}>
+          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex' }}>
             <img src={Logo} alt="" style={{ marginRight: 12, cursor: 'pointer' }} />
             <Text color="realBlack" size="header1">
               EntryDSM
