@@ -4,6 +4,7 @@ import ApplicationTitle from '@/components/application/ApplicationTitle';
 import ApplicationFooter from '@/components/application/ApplicationFooter';
 import UserType from '@/components/application/UserType';
 import UserInfo from '@/components/application/UserInfo';
+import UserWrite from '@/components/application/UserWrite';
 
 export interface UserTypeValue {
   application_type: string;
@@ -21,6 +22,11 @@ export interface UserInfoValue {
   parent_name: string;
   parent_tel: string;
   telephone_number: string;
+}
+
+export interface UserWriteValue {
+  intro: string;
+  study_plan: string;
 }
 
 const Application = () => {
@@ -41,9 +47,17 @@ const Application = () => {
     parent_tel: '',
     telephone_number: '',
   });
+  const [userWrite, setUserWrite] = useState<UserWriteValue>({
+    intro: '',
+    study_plan: '',
+  });
   const element = [
     { title: '지원자 전형 구분', component: <UserType userTypeValues={userType} setUserTypeValues={setUserType} /> },
     { title: '지원자 인적사항', component: <UserInfo userInfoValues={userInfo} setUserInfoValues={setUserInfo} /> },
+    {
+      title: '자기소개서 & 학업 계획서',
+      component: <UserWrite userWriteValues={userWrite} setUserWriteValues={setUserWrite} />,
+    },
   ];
   return (
     <_Container>

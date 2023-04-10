@@ -19,11 +19,7 @@ const ApplicationFooter = ({ current, setCurrent }: ApplicationFooterProps) => {
           <_ProgressStep key={step} isStep={step === current} />
         ))}
       </_Progress>
-      <Button
-        color="black"
-        kind="outlined"
-        onClick={() => setCurrent((prev) => prev + 1)}
-      >
+      <Button color="black" kind="outlined" disabled={current == 2} onClick={() => setCurrent((prev) => prev + 1)}>
         다음
       </Button>
     </_Footer>
