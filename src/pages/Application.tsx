@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import ApplicationTitle from '@/components/application/ApplicationTitle';
 import ApplicationFooter from '@/components/application/ApplicationFooter';
 import UserType from '@/components/application/UserType';
+import UserInfo from '@/components/application/UserInfo';
 
 export interface UserTypeValue {
   application_type: string;
@@ -12,18 +13,37 @@ export interface UserTypeValue {
   application_remark: string;
 }
 
+export interface UserInfoValue {
+  name: string;
+  sex: string;
+  birthday: string;
+  blackExam: string;
+  parent_name: string;
+  parent_tel: string;
+  telephone_number: string;
+}
+
 const Application = () => {
   const [current, setCurrent] = useState<number>(0);
-  const [userType, setUserType] = useState({
+  const [userType, setUserType] = useState<UserTypeValue>({
     application_type: '',
     is_daejeon: '',
     educational_status: '',
     graduated_at: '',
     application_remark: '',
   });
+  const [userInfo, setUserInfo] = useState<UserInfoValue>({
+    name: '',
+    sex: '',
+    birthday: '',
+    blackExam: '',
+    parent_name: '',
+    parent_tel: '',
+    telephone_number: '',
+  });
   const element = [
-    { title: '지원자 전형 구분', conpnent: <UserType userTypeValues={userType} setUserTypeValues={setUserType} /> },
-    { title: '지원자 인적사항' },
+    { title: '지원자 전형 구분', component: <UserType userTypeValues={userType} setUserTypeValues={setUserType} /> },
+    { title: '지원자 인적사항', component: <UserInfo userInfoValues={userInfo} setUserInfoValues={setUserInfo} /> },
   ];
   return (
     <_Container>
@@ -31,7 +51,7 @@ const Application = () => {
         {
           <>
             <ApplicationTitle title={element[current].title} />
-            {element[current].conpnent}
+            {element[current].component}
           </>
         }
         <ApplicationFooter current={current} setCurrent={setCurrent} />

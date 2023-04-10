@@ -17,7 +17,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       [name]: value,
     });
   };
-  const userTypeRadios = [
+  const userTypeItems = [
     [
       {
         label: '일반',
@@ -116,7 +116,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
   return (
     <_ApplicationWrapper>
       <ApplicationContent grid={3} title="전형 선택">
-        {userTypeRadios[0].map((radio) => (
+        {userTypeItems[0].map((radio) => (
           <Radio
             key={radio.value}
             label={radio.label}
@@ -129,7 +129,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="지역 선택">
-        {userTypeRadios[1].map((radio) => (
+        {userTypeItems[1].map((radio) => (
           <Radio
             key={radio.value}
             label={radio.label}
@@ -142,7 +142,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       </ApplicationContent>
 
       <ApplicationContent grid={3} title="졸업 구분">
-        {userTypeRadios[2].map((radio) => (
+        {userTypeItems[2].map((radio) => (
           <Radio
             key={radio.value}
             label={radio.label}
@@ -155,7 +155,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="졸업 연월">
-        {userTypeRadios[3].map((radio) => (
+        {userTypeItems[3].map((radio) => (
           <Radio
             key={radio.value}
             label={radio.label}
@@ -173,7 +173,7 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
         required={false}
         placeholder="특기사항에 해당하시는 항목이 있으면 체크해주세요"
       >
-        {userTypeRadios[4].map((radio) => (
+        {userTypeItems[4].map((radio) => (
           <Radio
             key={radio.value}
             label={radio.label}
