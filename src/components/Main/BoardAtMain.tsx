@@ -32,7 +32,9 @@ export default BoardsAtMain;
 
 const Boards = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 20px;
+  margin-right: 6px;
+  margin-left: 20px;
   @media screen and (max-width: 769px) {
     display: flex;
     flex-direction: column;
@@ -45,20 +47,21 @@ const Board = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 21rem;
+  width: 20rem;
   height: 14rem;
   margin-left: 0.5%;
 `;
 
 const BoardTitle = styled.div`
-  width: 21rem;
+  width: 20rem;
   padding-left: 4px;
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 `;
 
-const BoardContent = styled(Text)`
-  width: 20.5rem;
+
+const BoardContent = styled.div`
+  width: 20rem;
   height: 2rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;

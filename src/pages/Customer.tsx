@@ -17,6 +17,7 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
+
   return (
     <_Container>
       <_Wrapper>
@@ -108,11 +109,10 @@ const _Container = styled.div`
 
 const _Wrapper = styled.div`
   margin-top: 7rem;
-  width: 60rem;
+  width: 100%;
+  max-width: 60rem;
+  padding: 0 20px;
   height: 38rem;
-  @media screen and (max-width: 769px) {
-    padding: 20px;
-  }
 `;
 
 const _Categories = styled.div`
@@ -120,9 +120,9 @@ const _Categories = styled.div`
   align-items: center;
   margin-bottom: 20px;
   gap: 10px;
-  width: 60rem;
+  max-width: 60rem;
+  width: 100%;
   @media screen and (max-width: 769px) {
-    width: 100%;
     gap: 5px;
   }
 `;

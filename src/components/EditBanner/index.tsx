@@ -2,12 +2,12 @@ import React from 'react';
 import { Button, Text } from '@team-entry/design_system';
 import * as _ from './style';
 
-interface EditBannerProps {
+interface IEditBanner {
   index: number;
   banner: string;
 }
 
-const EditBanner = ({ index, banner }: EditBannerProps) => {
+const EditBanner = ({ index, banner }: IEditBanner) => {
   const onClick = () => {
     console.log('clicked!');
   };
