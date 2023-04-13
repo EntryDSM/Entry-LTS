@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { ReactNode } from 'react';
 
-interface PropsType {
+interface ICancelModal {
   title: string;
   subTitle: string;
   button: ReactNode;
   onClick?: () => void;
 }
 
-const CancelModal = ({ title, subTitle, button, onClick }: PropsType) => {
+const CancelModal = ({ title, subTitle, button, onClick }: ICancelModal) => {
   return (
     <>
       <Text size="title1" color="error" margin={[0, 0, 20, 0]}>

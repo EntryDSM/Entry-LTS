@@ -5,15 +5,15 @@ import styled from '@emotion/styled';
 
 export type Grade = 'A' | 'B' | 'C' | 'D' | 'E' | 'X';
 
-interface PropsType {
+interface IAllSelect {
   current: number;
   element?: IElement[][];
   setElement?: React.Dispatch<SetStateAction<IElement[][]>>;
 }
 
-const arr: Grade[] = ['A', 'B', 'C', 'D', 'E'];
+const arr: Grade[] = ['A', 'B', 'C', 'D', 'E', 'X'];
 
-const AllSelect = ({ current, element, setElement }: PropsType) => {
+const AllSelect = ({ current, element, setElement }: IAllSelect) => {
   const [grade, setGrade] = useState<Grade>('A');
 
   useEffect(() => {

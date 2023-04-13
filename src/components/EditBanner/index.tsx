@@ -4,12 +4,12 @@ import * as _ from './style';
 import Up from '../../assets/ArrowUp.svg';
 import Down from '../../assets/ArrowDown.svg';
 
-interface EditBannerProps {
+interface IEditBanner {
   index: number;
   banner: string;
 }
 
-const EditBanner = ({ index, banner }: EditBannerProps) => {
+const EditBanner = ({ index, banner }: IEditBanner) => {
   const onClick = () => {
     console.log('clicked!');
   };

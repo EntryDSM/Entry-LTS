@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import Router from './router';
 
 function App() {
