@@ -11,7 +11,7 @@ interface IAllSelect {
   setElement?: React.Dispatch<SetStateAction<IElement[][]>>;
 }
 
-const arr: Grade[] = ['A', 'B', 'C', 'D', 'E'];
+const arr: Grade[] = ['A', 'B', 'C', 'D', 'E', 'X'];
 
 const AllSelect = ({ current, element, setElement }: IAllSelect) => {
   const [grade, setGrade] = useState<Grade>('A');
