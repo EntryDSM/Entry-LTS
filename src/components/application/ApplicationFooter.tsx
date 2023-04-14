@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import { Button, theme } from '@team-entry/design_system';
+import { UserInfoValue, UserTypeValue, UserWriteValue } from '@/pages/Application';
 
 interface ApplicationFooterProps {
+  check?: Omit<UserTypeValue, 'application_remark'> | UserInfoValue | UserWriteValue | string;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ApplicationFooter = ({ current, setCurrent }: ApplicationFooterProps) => {
+const ApplicationFooter = ({ current, setCurrent, check }: ApplicationFooterProps) => {
   const progress = [0, 1, 2, 3, 4];
+  const checkDisabled = Object.values(check).includes('');
   return (
     <_Footer>
       <Button color="black" kind="outlined" disabled={current === 0} onClick={() => setCurrent((prev) => prev - 1)}>
@@ -19,7 +22,12 @@ const ApplicationFooter = ({ current, setCurrent }: ApplicationFooterProps) => {
           <_ProgressStep key={step} isStep={step === current} />
         ))}
       </_Progress>
-      <Button color="black" kind="outlined" disabled={current == 2} onClick={() => setCurrent((prev) => prev + 1)}>
+      <Button
+        color="black"
+        kind="outlined"
+        disabled={current == 3 || checkDisabled}
+        onClick={() => setCurrent((prev) => prev + 1)}
+      >
         다음
       </Button>
     </_Footer>

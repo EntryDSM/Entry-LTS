@@ -2,7 +2,7 @@ import { UserInfoValue } from '@/pages/Application';
 import styled from '@emotion/styled';
 import React from 'react';
 import ApplicationContent from './ApplicationContent';
-import { Input, Radio, Text, theme } from '@team-entry/design_system';
+import { Dropdown, Input, Radio, Text, theme } from '@team-entry/design_system';
 
 interface UserTypeProps {
   userInfoValues: UserInfoValue;
@@ -19,99 +19,18 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
   };
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    let onlyNumber = value.replace(/[^0-9]/g, '');
     setUserInfoValues({
       ...userInfoValues,
-      [name]: onlyNumber,
+      [name]: value,
     });
   };
-  const userInfoItems = [
-    [
-      {
-        type: 'text',
-        placeholder: '이름',
-        width: 230,
-        name: 'name',
-        value: userInfoValues.name,
-        onChange: onChangeInput,
-      },
-    ],
-    [
-      { label: '남자', name: 'sex', value: 'MEN', onChange: onChangeRadio, isChecked: userInfoValues.sex === 'MEN' },
-      {
-        label: '여자',
-        name: 'sex',
-        value: 'WOMEN',
-        onChange: onChangeRadio,
-        isChecked: userInfoValues.sex === 'WOMEN',
-      },
-    ],
-    [
-      {
-        label: '년',
-        name: 'birthday',
-        value: 'year',
-        onChange: onChangeRadio,
-        isChecked: userInfoValues.birthday === 'year',
-      },
-      {
-        label: '월',
-        name: 'birthday',
-        value: 'month',
-        onChange: onChangeRadio,
-        isChecked: userInfoValues.birthday === 'month',
-      },
-      {
-        label: '일',
-        name: 'birthday',
-        value: 'day',
-        onChange: onChangeRadio,
-        isChecked: userInfoValues.birthday === 'day',
-      },
-    ],
-    [
-      {
-        type: 'text',
-        placeholder: '검정고시 평균',
-        width: 230,
-        name: 'blackExam',
-        value: userInfoValues.blackExam,
-        onChange: onChangeInput,
-        unit: '점',
-      },
-    ],
-    [
-      {
-        type: 'text',
-        placeholder: '보호자명',
-        width: 230,
-        name: 'parent_name',
-        value: userInfoValues.parent_name,
-        onChange: onChangeInput,
-      },
-    ],
-    [
-      {
-        type: 'text',
-        placeholder: '본인 연락처',
-        width: 230,
-        name: 'telephone_number',
-        value: userInfoValues.telephone_number,
-        onChange: onChangeInput,
-      },
-    ],
-    [
-      {
-        type: 'text',
-        placeholder: '보호자 연락처',
-        width: 230,
-        name: 'parent_tel',
-        value: userInfoValues.parent_tel,
-        onChange: onChangeInput,
-      },
-    ],
-  ];
-
+  const onChangeDropdown = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { value, name } = e.target;
+    setUserInfoValues({
+      ...userInfoValues,
+      [name]: value,
+    });
+  };
   return (
     <_ApplicationWrapper>
       <label>
@@ -122,90 +41,81 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
         </_ApplicationImg>
         <_ApplicationImgInput type="file" />
       </label>
+
       <ApplicationContent grid={1} title="이름" width={40}>
-        {userInfoItems[0].map((item) => (
-          <Input
-            type={item.type}
-            placeholder={item.placeholder}
-            width={item.width}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-          />
-        ))}
+        <Input
+          type="text"
+          placeholder="이름"
+          width={230}
+          name="name"
+          value={userInfoValues.name}
+          onChange={onChangeInput}
+        />
       </ApplicationContent>
+
       <ApplicationContent grid={2} title="성별" width={40}>
-        {userInfoItems[1].map((item) => (
-          <Radio
-            key={item.value}
-            label={item.label}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-            isChecked={item.isCheck}
-          />
-        ))}
+        <Radio label="남자" name="sex" value="MEN" onChange={onChangeRadio} isChecked={userInfoValues.sex === 'MEN'} />
+        <Radio
+          label="여자"
+          name="sex"
+          value="WOMEN"
+          onChange={onChangeRadio}
+          isChecked={userInfoValues.sex === 'WOMEN'}
+        />
       </ApplicationContent>
       <ApplicationContent grid={3} title="생년월일" width={40}>
-        {userInfoItems[2].map((item) => (
-          <Radio
-            key={item.value}
-            label={item.label}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-            isChecked={item.isCheck}
-          />
-        ))}
+        <Dropdown
+          name="birthday"
+          width={85}
+          onChange={onChangeDropdown}
+          options={[
+            { value: '12', label: '12' },
+            { value: '1', label: '1' },
+            { value: '2', label: '2' },
+          ]}
+          unit="월"
+        />
       </ApplicationContent>
       <ApplicationContent grid={1} title="검정고시 평균" width={40}>
-        {userInfoItems[3].map((item) => (
-          <Input
-            type={item.type}
-            placeholder={item.placeholder}
-            width={item.width}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-            unit={item.unit}
-          />
-        ))}
+        <Input
+          type="number"
+          placeholder="검정고시 평균"
+          width={230}
+          name="blackExam"
+          value={userInfoValues.blackExam}
+          onChange={onChangeInput}
+          unit="점"
+        />
       </ApplicationContent>
       <ApplicationContent grid={1} title="보호자명">
-        {userInfoItems[4].map((item) => (
-          <Input
-            type={item.type}
-            placeholder={item.placeholder}
-            width={item.width}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-          />
-        ))}
+        <Input
+          type="text"
+          placeholder="보호자명"
+          width={230}
+          name="parent_name"
+          value={userInfoValues.parent_name}
+          onChange={onChangeInput}
+        />
       </ApplicationContent>
       <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-        {userInfoItems[5].map((item) => (
-          <Input
-            type={item.type}
-            placeholder={item.placeholder}
-            width={item.width}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-          />
-        ))}
+        <Input
+          type="number"
+          placeholder="본인 연락처"
+          width={230}
+          name="telephone_number"
+          value={userInfoValues.telephone_number}
+          onChange={onChangeInput}
+        />
       </ApplicationContent>
       <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-        {userInfoItems[6].map((item) => (
-          <Input
-            type={item.type}
-            placeholder={item.placeholder}
-            width={item.width}
-            name={item.name}
-            value={item.value}
-            onChange={item.onChange}
-          />
-        ))}
+        <Input
+          type="number"
+          placeholder="보호자 연락처"
+          width={230}
+          name="parent_tel"
+          value={userInfoValues.parent_tel}
+          onChange={onChangeInput}
+        />
       </ApplicationContent>
     </_ApplicationWrapper>
   );

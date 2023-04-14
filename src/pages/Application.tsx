@@ -5,6 +5,8 @@ import ApplicationFooter from '@/components/application/ApplicationFooter';
 import UserType from '@/components/application/UserType';
 import UserInfo from '@/components/application/UserInfo';
 import UserWrite from '@/components/application/UserWrite';
+import UserPreview from '@/components/application/UserPreview';
+import GradeProgramPage from './GradeProgramPage';
 
 export interface UserTypeValue {
   application_type: string;
@@ -58,7 +60,10 @@ const Application = () => {
       title: '자기소개서 & 학업 계획서',
       component: <UserWrite userWriteValues={userWrite} setUserWriteValues={setUserWrite} />,
     },
+    { title: '지원 원서 미리보기', component: <UserPreview /> },
   ];
+  const { application_remark, ...userTypeAtFooter } = userType;
+  const footer = [userTypeAtFooter, userInfo, userWrite, '', ''];
   return (
     <_Container>
       <_Wrapper>
@@ -68,7 +73,7 @@ const Application = () => {
             {element[current].component}
           </>
         }
-        <ApplicationFooter current={current} setCurrent={setCurrent} />
+        <ApplicationFooter current={current} setCurrent={setCurrent} check={footer[current]} />
       </_Wrapper>
     </_Container>
   );
