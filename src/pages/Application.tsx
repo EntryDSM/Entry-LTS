@@ -17,6 +17,7 @@ export interface UserTypeValue {
 }
 
 export interface UserInfoValue {
+  img: any;
   name: string;
   sex: string;
   birthday: string;
@@ -41,6 +42,7 @@ const Application = () => {
     application_remark: '',
   });
   const [userInfo, setUserInfo] = useState<UserInfoValue>({
+    img: '',
     name: '',
     sex: '',
     birthday: '',

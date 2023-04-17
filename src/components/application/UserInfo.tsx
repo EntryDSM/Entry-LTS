@@ -17,6 +17,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       [name]: value,
     });
   };
+
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setUserInfoValues({
@@ -24,22 +25,36 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       [name]: value,
     });
   };
-  const onChangeDropdown = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value, name } = e.target;
-    setUserInfoValues({
-      ...userInfoValues,
-      [name]: value,
-    });
+
+  const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files, name } = e.target;
+    if (files.length === 0) {
+      return;
+    } else {
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setUserInfoValues({
+          ...userInfoValues,
+          [name]: reader.result,
+        });
+      };
+    }
   };
+
   return (
     <_ApplicationWrapper>
       <label>
         <_ApplicationImg>
-          <Text size="body3" color="black700">
-            원서 사진을 등록해주세요
-          </Text>
+          {userInfoValues.img ? (
+            <Img src={userInfoValues.img} alt="userImg" />
+          ) : (
+            <Text color="black700" size="body3">
+              원서 사진을 등록해주세요
+            </Text>
+          )}
         </_ApplicationImg>
-        <_ApplicationImgInput type="file" />
+        <_ApplicationImgInput type="file" accept=".png, .jpeg" name="img" onChange={saveImgFile} />
       </label>
 
       <ApplicationContent grid={1} title="이름" width={40}>
@@ -65,14 +80,15 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       </ApplicationContent>
       <ApplicationContent grid={3} title="생년월일" width={40}>
         <Dropdown
-          name="birthday"
+          className="birthday"
           width={85}
-          onChange={onChangeDropdown}
-          options={[
-            { value: '12', label: '12' },
-            { value: '1', label: '1' },
-            { value: '2', label: '2' },
-          ]}
+          onChange={(e) =>
+            setUserInfoValues({
+              ...userInfoValues,
+              birthday: e,
+            })
+          }
+          options={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
           unit="월"
         />
       </ApplicationContent>
@@ -120,7 +136,6 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
     </_ApplicationWrapper>
   );
 };
-
 export default UserInfo;
 
 const _ApplicationWrapper = styled.div`
@@ -145,6 +160,12 @@ const _ApplicationImg = styled.div`
   background-color: ${theme.color.black50};
   border: 1px solid ${theme.color.black100};
   border-radius: 5px;
+`;
+
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const _ApplicationImgInput = styled.input`

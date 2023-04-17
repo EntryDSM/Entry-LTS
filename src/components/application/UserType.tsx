@@ -17,13 +17,6 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       [name]: value,
     });
   };
-  const onChangeDropdown = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { value, name } = e.target;
-    setUserTypeValues({
-      ...userTypeValues,
-      [name]: value,
-    });
-  };
   return (
     <_ApplicationWrapper>
       <ApplicationContent grid={3} title="전형 선택">
@@ -44,11 +37,11 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
         <Radio
           label={
             <Dropdown
-              name="application_type"
+              className="application_type"
               width={100}
               disabled={userTypeValues.application_type !== 'SOCIAL'}
-              onChange={onChangeDropdown}
-              options={[{ value: 'SOCIAL', label: '사회통합' }]}
+              onChange={(e) => setUserTypeValues({ ...userTypeValues, application_type: e })}
+              options={['사회통합1', '사회통합2']}
               unit="년"
             />
           }
@@ -102,25 +95,17 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
 
       <ApplicationContent grid={2} title="졸업 연월">
         <Dropdown
-          name="graduated_at"
+          className="graduated_at"
           width={85}
-          onChange={onChangeDropdown}
-          options={[
-            { value: '2023', label: '2023' },
-            { value: '2024', label: '2024' },
-            { value: '2025', label: '2025' },
-          ]}
+          onChange={(e) => setUserTypeValues({ ...userTypeValues, graduated_at: e })}
+          options={['2023', '2024', '2025']}
           unit="년"
         />
         <Dropdown
-          name="graduated_at"
+          className="graduated_at"
           width={85}
-          onChange={onChangeDropdown}
-          options={[
-            { value: '12', label: '12' },
-            { value: '1', label: '1' },
-            { value: '2', label: '2' },
-          ]}
+          onChange={(e) => setUserTypeValues({ ...userTypeValues, graduated_at: e })}
+          options={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
           unit="월"
         />
       </ApplicationContent>
