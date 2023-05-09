@@ -4,17 +4,40 @@ import { Button, theme } from '@team-entry/design_system';
 import { UserInfoValue, UserTypeValue, UserWriteValue } from '@/pages/Application';
 
 interface ApplicationFooterProps {
-  check?: Omit<UserTypeValue, 'application_remark'> | UserInfoValue | UserWriteValue | string;
+  check?: Omit<UserTypeValue, 'application_remark' | 'graduated_at'> | UserInfoValue | UserWriteValue | string;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
+  gradeCurrent: number;
+  setGradeCurrent: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ApplicationFooter = ({ current, setCurrent, check }: ApplicationFooterProps) => {
+const ApplicationFooter = ({ current, setCurrent, gradeCurrent, setGradeCurrent, check }: ApplicationFooterProps) => {
   const progress = [0, 1, 2, 3, 4];
   const checkDisabled = Object.values(check).includes('');
+
+  const onClickPlus = () => {
+    if (gradeCurrent == 4) {
+      setCurrent(current + 1);
+    } else if (current == 3) {
+      setGradeCurrent(gradeCurrent + 1);
+    } else {
+      setCurrent(current + 1);
+    }
+  };
+
+  const onClickMinus = () => {
+    if (gradeCurrent == 0) {
+      setCurrent(current - 1);
+    } else if (current == 3) {
+      setGradeCurrent(gradeCurrent - 1);
+    } else {
+      setCurrent(current - 1);
+    }
+    console.log(current, gradeCurrent);
+  };
   return (
     <_Footer>
-      <Button color="black" kind="outlined" disabled={current === 0} onClick={() => setCurrent((prev) => prev - 1)}>
+      <Button color="black" kind="outlined" disabled={current === 0} onClick={onClickMinus}>
         이전
       </Button>
       <_Progress>
@@ -22,14 +45,15 @@ const ApplicationFooter = ({ current, setCurrent, check }: ApplicationFooterProp
           <_ProgressStep key={step} isStep={step === current} />
         ))}
       </_Progress>
-      <Button
-        color="black"
-        kind="outlined"
-        disabled={current == 3 || checkDisabled}
-        onClick={() => setCurrent((prev) => prev + 1)}
-      >
-        다음
-      </Button>
+      {current !== 4 ? (
+        <Button color="orange" kind="contained" disabled={checkDisabled} onClick={onClickPlus}>
+          다음
+        </Button>
+      ) : (
+        <Button color="orange" kind="contained" disabled={checkDisabled} onClick={() => console.log('asdf')}>
+          완료
+        </Button>
+      )}
     </_Footer>
   );
 };

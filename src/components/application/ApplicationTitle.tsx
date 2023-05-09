@@ -8,14 +8,16 @@ interface ApplicationTitleProps {
 
 const ApplicationTitle = ({ title }: ApplicationTitleProps) => {
   return (
-    <Wrapper>
-      <Text size="title2" color="black600">
-        대덕소프트웨어마이스터고등학교
-      </Text>
-      <Text size="header1" color="black900">
-        {title}
-      </Text>
-    </Wrapper>
+    title && (
+      <Wrapper>
+        <Text size="title2" color="black600">
+          대덕소프트웨어마이스터고등학교
+        </Text>
+        <Text size="header1" color="black900">
+          {title}
+        </Text>
+      </Wrapper>
+    )
   );
 };
 

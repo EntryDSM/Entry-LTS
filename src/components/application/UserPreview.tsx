@@ -21,7 +21,7 @@ export default UserPreview;
 
 const _Wrapper = styled.div`
   width: 60rem;
-  margin: 50px 0;
+  margin: 49px 0;
 `;
 
 const _Title = styled.div`

@@ -1,8 +1,9 @@
-import { UserInfoValue } from '@/pages/Application';
-import styled from '@emotion/styled';
 import React from 'react';
-import ApplicationContent from './ApplicationContent';
+import styled from '@emotion/styled';
 import { Dropdown, Input, Radio, Text, theme } from '@team-entry/design_system';
+import { UserInfoValue } from '@/pages/Application';
+import ApplicationContent from '@/components/Application/ApplicationContent';
+import { ArrayForDropdown } from '@/utils/ArrayForDropdown';
 
 interface UserTypeProps {
   userInfoValues: UserInfoValue;
@@ -10,8 +11,8 @@ interface UserTypeProps {
 }
 
 const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
-  const onChangeRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
+  const onClickRadio = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    const { value, name } = e.currentTarget;
     setUserInfoValues({
       ...userInfoValues,
       [name]: value,
@@ -69,12 +70,12 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="성별" width={40}>
-        <Radio label="남자" name="sex" value="MEN" onChange={onChangeRadio} isChecked={userInfoValues.sex === 'MEN'} />
+        <Radio label="남자" name="sex" value="MEN" onClick={onClickRadio} isChecked={userInfoValues.sex === 'MEN'} />
         <Radio
           label="여자"
           name="sex"
           value="WOMEN"
-          onChange={onChangeRadio}
+          onClick={onClickRadio}
           isChecked={userInfoValues.sex === 'WOMEN'}
         />
       </ApplicationContent>
@@ -88,8 +89,32 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
               birthday: e,
             })
           }
-          options={['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']}
+          options={ArrayForDropdown(2000, 2024)}
+          unit="년"
+        />
+        <Dropdown
+          className="birthday"
+          width={85}
+          onChange={(e) =>
+            setUserInfoValues({
+              ...userInfoValues,
+              birthday: e,
+            })
+          }
+          options={ArrayForDropdown(1, 12)}
           unit="월"
+        />
+        <Dropdown
+          className="birthday"
+          width={85}
+          onChange={(e) =>
+            setUserInfoValues({
+              ...userInfoValues,
+              birthday: e,
+            })
+          }
+          options={ArrayForDropdown(1, 31)}
+          unit="일"
         />
       </ApplicationContent>
       <ApplicationContent grid={1} title="검정고시 평균" width={40}>

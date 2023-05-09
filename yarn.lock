@@ -1356,10 +1356,10 @@
     "@svgr/plugin-jsx" "^6.5.1"
     "@svgr/plugin-svgo" "^6.5.1"
 
-"@team-entry/design_system@^1.0.72":
-  version "1.0.72"
-  resolved "https://registry.yarnpkg.com/@team-entry/design_system/-/design_system-1.0.72.tgz#569d11ea5440b8a8ad222c6cc5c1b396c08a16b7"
-  integrity sha512-UZII+a44LN9kKouXItvT0YCy3SZoChVdgHvz0ZZKbpsN6VhCX+GewEvlnCQVtOdKAZWz8+tGtyaVZmbYuNd6uA==
+"@team-entry/design_system@^1.0.74":
+  version "1.0.74"
+  resolved "https://registry.yarnpkg.com/@team-entry/design_system/-/design_system-1.0.74.tgz#7070b40f2658f81c73115f5aa7c9b98a60a4e28c"
+  integrity sha512-ESof6YxwjMe7CR3Td6uryeMeJ0uPtf4pBUTIMZo3AIs71aT1/BLqN0wBsUPSkPJUa0IwQuvk5eZdq26mlYKHBQ==
   dependencies:
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
