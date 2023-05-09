@@ -18,9 +18,7 @@ const BoardsAtMain = () => {
             </Link>
           </BoardTitle>
           {item.content.map((item, i) => (
-            <BoardContent key={i} color="realBlack" size="body1">
-              {item}
-            </BoardContent>
+            <BoardContent key={i}>{item}</BoardContent>
           ))}
         </Board>
       ))}
@@ -58,7 +56,6 @@ const BoardTitle = styled.div`
   padding-bottom: 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.25);
 `;
-
 
 const BoardContent = styled.div`
   width: 20rem;
