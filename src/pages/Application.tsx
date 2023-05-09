@@ -6,7 +6,7 @@ import UserType from '@/components/Application/UserType';
 import UserInfo from '@/components/Application/UserInfo';
 import UserWrite from '@/components/Application/UserWrite';
 import UserPreview from '@/components/Application/UserPreview';
-import GradeProgram from '@/components/grade/GradeProgram';
+import GradeProgram from '@/components/Grade/GradeProgram';
 import { IElement } from './GradeProgramPage';
 
 export interface UserTypeValue {

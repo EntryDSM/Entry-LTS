@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
-import GradeProgramFooter from '@/components/grade/GradeProgramFooter';
-import GradeProgram from '@/components/grade/GradeProgram';
-import AllSelect, { Grade } from '../components/grade/AllSelect';
+import GradeProgramFooter from '@/components/Grade/GradeProgramFooter';
+import GradeProgram from '@/components/Grade/GradeProgram';
+import AllSelect, { Grade } from '@/components/Grade/AllSelect';
+import { Spinner, Text } from '@team-entry/design_system';
+import { useModal } from '@/hooks/useModal';
 
 export interface IElement {
   id: number;
