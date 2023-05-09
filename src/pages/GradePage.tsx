@@ -4,6 +4,7 @@ import BeforeGraduate from '../assets/BeforeGraduate.svg';
 import Graduate from '../assets/Graduate.svg';
 import BlackExam from '../assets/BlackExam.svg';
 import { Link } from 'react-router-dom';
+import { Pc } from '@/hooks/useResponsive';
 
 const list = [
   {
@@ -19,33 +20,35 @@ const list = [
 const GradePage = () => {
   return (
     <_Container>
-      <_Wrapper>
-        <Text color="black900" size="header1">
-          성적 산출 유형 선택
-        </Text>
-        <_Line />
-        <_Cards>
-          {list.map((res) => {
-            const { img, text, title, type } = res;
-            return (
-              <_Card>
-                <img src={img}></img>
-                <Text margin={[41, 0, 15, 0]} color="black900" size="title2">
-                  {title}
-                </Text>
-                <Text margin={['bottom', 80]} align="center" color="black600" size="body2">
-                  {text}
-                </Text>
-                <Link to="/gradeProgram" state={{ type }}>
-                  <Button onClick={() => console.log('hello')} color="orange" kind="rounded">
-                    선택
-                  </Button>
-                </Link>
-              </_Card>
-            );
-          })}
-        </_Cards>
-      </_Wrapper>
+      <Pc>
+        <_Wrapper>
+          <Text color="black900" size="header1">
+            성적 산출 유형 선택
+          </Text>
+          <_Line />
+          <_Cards>
+            {list.map((res) => {
+              const { img, text, title, type } = res;
+              return (
+                <_Card>
+                  <img src={img}></img>
+                  <Text margin={[41, 0, 15, 0]} color="black900" size="title2">
+                    {title}
+                  </Text>
+                  <Text margin={['bottom', 80]} align="center" color="black600" size="body2">
+                    {text}
+                  </Text>
+                  <Link to="/gradeProgram" state={{ type }}>
+                    <Button onClick={() => console.log('hello')} color="orange" kind="rounded">
+                      선택
+                    </Button>
+                  </Link>
+                </_Card>
+              );
+            })}
+          </_Cards>
+        </_Wrapper>
+      </Pc>
     </_Container>
   );
 };
@@ -76,6 +79,8 @@ const _Line = styled.div`
 
 const _Cards = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
   gap: 2rem;
 `;
 
@@ -85,8 +90,12 @@ const _Card = styled.div`
   justify-content: center;
   align-items: center;
   width: 21rem;
-  height: 27rem;
+  height: 26rem;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+  @media screen and (max-width: 1136px) and (min-width: 769px) {
+    width: 15rem;
+    height: 22rem;
+  }
 `;

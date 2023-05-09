@@ -18,6 +18,8 @@ export interface IElement {
 
 const GradeProgramPage = () => {
   const location = useLocation();
+
+  const { Modal, modalState, setModalState, open } = useModal();
   const [element, setElement] = useState<IElement[][]>([
     [
       { id: 1, title: '사회', subTitle: '(과목이 없을 경우 X로 기입해주세요)', type: 'grade', grade: 'A' },
@@ -76,8 +78,8 @@ const GradeProgramPage = () => {
       element,
     },
     { step: 3, title: '직전전 학기', element },
-    { step: 3, title: '출석 점수', element },
-    { step: 3, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
+    { step: 4, title: '출석 점수', element },
+    { step: 4, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
   ];
   return (
     <_Container>
@@ -85,6 +87,12 @@ const GradeProgramPage = () => {
         <GradeProgram arr={arr} current={current} element={element} setElement={setElement} />
         <GradeProgramFooter arr={arr.length} current={current} setCurrent={setCurrent} />
       </_Wrapper>
+      <Modal>
+        <Text size="header2" color="black900" margin={[0, 0, 15, 0]}>
+          성적 산출 중...
+        </Text>
+        <Spinner color="orange" />
+      </Modal>
     </_Container>
   );
 };

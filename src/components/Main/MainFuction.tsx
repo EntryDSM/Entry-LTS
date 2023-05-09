@@ -145,7 +145,7 @@ const _Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   max-width: 76rem;
-  height: 100vh;
+  min-height: 100vh;
   @media screen and (max-width: 768px) {
     padding: 0;
   }
@@ -154,7 +154,7 @@ const _Wrapper = styled.div`
 const _Banner = styled.img`
   width: 100%;
   border-radius: 4px;
-  padding: 0 20px;
+  padding: 0 1.5%;
 `;
 
 const _Application = styled.div`
@@ -246,8 +246,7 @@ const _Discription = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 16rem;
-  gap: 1%;
+  height: 100%;
   padding: 0 1.5%;
   @media screen and (max-width: 1136px) and (min-width: 769px) {
     flex-direction: column;
@@ -262,7 +261,7 @@ const _Shortcut = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 15px;
+  gap: 20px;
   width: 50%;
   @media screen and (max-width: 1136px) and (min-width: 769px) {
     grid-template-columns: repeat(4, 1fr);

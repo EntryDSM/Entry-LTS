@@ -4,7 +4,7 @@ import React, { SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { Grade } from './AllSelect';
 
-interface SelectGradeProps {
+interface ISelectGrade {
   current: number;
   title: string;
   subTitle?: string;
@@ -28,7 +28,7 @@ const SelectGrade = ({
   setElement,
   current,
   index,
-}: SelectGradeProps) => {
+}: ISelectGrade) => {
   let arr = ['A', 'B', 'C', 'D', 'E', 'X'];
 
   const ChangeGrade = (grade: Grade) => {

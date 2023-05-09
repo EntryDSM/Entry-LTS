@@ -6,7 +6,6 @@ import GradePage from './pages/GradePage';
 import GradeProgramPage from './pages/GradeProgramPage';
 import Main from './pages/Main';
 import MyPage from './pages/MyPage';
-import NewAdmissionPage from './pages/NewAdmissionPage';
 import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
 import WriteCustomerPage from './pages/WriteCustomerPage';
@@ -49,10 +48,6 @@ const Router = createBrowserRouter([
       {
         path: 'mypage',
         element: <MyPage />,
-      },
-      {
-        path: 'admission',
-        element: <NewAdmissionPage />,
       },
       {
         path: 'edit',
