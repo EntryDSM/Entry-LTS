@@ -16,7 +16,6 @@ const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
       ...userTypeValues,
       [name]: value,
     });
-    console.log(userTypeValues);
   };
   return (
     <_ApplicationWrapper>

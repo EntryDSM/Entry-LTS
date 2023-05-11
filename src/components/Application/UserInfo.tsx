@@ -4,6 +4,7 @@ import { Dropdown, Input, Radio, Text, theme } from '@team-entry/design_system';
 import { UserInfoValue } from '@/pages/Application';
 import ApplicationContent from '@/components/Application/ApplicationContent';
 import { ArrayForDropdown } from '@/utils/ArrayForDropdown';
+import { useInput } from '@/hooks/useInput';
 
 interface UserTypeProps {
   userInfoValues: UserInfoValue;
@@ -19,13 +20,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
     });
   };
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setUserInfoValues({
-      ...userInfoValues,
-      [name]: value,
-    });
-  };
+  const { form, onChange } = useInput(userInfoValues);
 
   const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files, name } = e.target;
@@ -59,14 +54,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       </label>
 
       <ApplicationContent grid={1} title="이름" width={40}>
-        <Input
-          type="text"
-          placeholder="이름"
-          width={230}
-          name="name"
-          value={userInfoValues.name}
-          onChange={onChangeInput}
-        />
+        <Input type="text" placeholder="이름" width={230} name="name" value={form.name} onChange={onChange} />
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="성별" width={40}>
@@ -123,8 +111,8 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           placeholder="검정고시 평균"
           width={230}
           name="blackExam"
-          value={userInfoValues.blackExam}
-          onChange={onChangeInput}
+          value={form.blackExam}
+          onChange={onChange}
           unit="점"
         />
       </ApplicationContent>
@@ -134,8 +122,8 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           placeholder="보호자명"
           width={230}
           name="parent_name"
-          value={userInfoValues.parent_name}
-          onChange={onChangeInput}
+          value={form.parent_name}
+          onChange={onChange}
         />
       </ApplicationContent>
       <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
@@ -144,8 +132,8 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           placeholder="본인 연락처"
           width={230}
           name="telephone_number"
-          value={userInfoValues.telephone_number}
-          onChange={onChangeInput}
+          value={form.telephone_number}
+          onChange={onChange}
         />
       </ApplicationContent>
       <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
@@ -154,8 +142,8 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           placeholder="보호자 연락처"
           width={230}
           name="parent_tel"
-          value={userInfoValues.parent_tel}
-          onChange={onChangeInput}
+          value={form.parent_tel}
+          onChange={onChange}
         />
       </ApplicationContent>
     </_ApplicationWrapper>

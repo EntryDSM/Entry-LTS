@@ -33,7 +33,6 @@ const ApplicationFooter = ({ current, setCurrent, gradeCurrent, setGradeCurrent,
     } else {
       setCurrent(current - 1);
     }
-    console.log(current, gradeCurrent);
   };
   return (
     <_Footer>
