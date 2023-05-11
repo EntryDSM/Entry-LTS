@@ -60,11 +60,11 @@ const MainFunction = () => {
             {shortcut.map((item) =>
               item.link.includes('/') ? (
                 <Link to={item.link}>
-                  <_ShortcutButton icon={item.icon} title={item.icon} />
+                  <_ShortcutButton icon={item.icon} title={item.title} />
                 </Link>
               ) : (
                 <a href={item.link}>
-                  <_ShortcutButton icon={item.icon} title={item.icon} />
+                  <_ShortcutButton icon={item.icon} title={item.title} />
                 </a>
               ),
             )}
