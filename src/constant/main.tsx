@@ -21,7 +21,7 @@ export const boardContent = [
   {
     id: 1,
     title: '자주 묻는 질문',
-    link: 'custumer',
+    link: '/customer',
     content: [
       '전학 또는 편입으로 입학할 수 있나요?',
       '자기소개서는 공백을 포함하나요?',
