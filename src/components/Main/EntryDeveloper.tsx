@@ -1,25 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
-
-const developers = [
-  { id: 0, name: '이름이름', major: '분야분야' },
-  { id: 1, name: '이름이름', major: '분야분야' },
-  { id: 2, name: '이름이름', major: '분야분야' },
-  { id: 3, name: '이름이름', major: '분야분야' },
-  { id: 4, name: '이름이름', major: '분야분야' },
-  { id: 5, name: '이름이름', major: '분야분야' },
-  { id: 6, name: '이름이름', major: '분야분야' },
-  { id: 7, name: '이름이름', major: '분야분야' },
-  { id: 8, name: '이름이름', major: '분야분야' },
-  { id: 9, name: '이름이름', major: '분야분야' },
-  { id: 10, name: '이름이름', major: '분야분야' },
-  { id: 11, name: '이름이름', major: '분야분야' },
-];
+import { developers } from '@/constant/main';
 
 const EntryDeveloper = () => {
   return (
-    <_Wrapper>
+    <_Wrapper id="EntryDeveloper">
       <_Title>
         <Text color="orange500" size="header1">
           Entry 개발자 소개

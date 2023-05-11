@@ -1,8 +1,6 @@
 import React from 'react';
 import { Button, Text } from '@team-entry/design_system';
 import * as _ from './style';
-import Up from '../../assets/ArrowUp.svg';
-import Down from '../../assets/ArrowDown.svg';
 
 interface IEditBanner {
   index: number;
@@ -23,12 +21,8 @@ const EditBanner = ({ index, banner }: IEditBanner) => {
         <Button color="green" onClick={onClick}>
           이미지 업로드
         </Button>
-        <Button color="green" kind="outlined" onClick={onClick}>
-          <img src={Up} alt="arrowUp" />
-        </Button>
-        <Button color="green" kind="outlined" onClick={onClick}>
-          <img src={Down} alt="arrowDown" />
-        </Button>
+        <Button color="green" kind={['icon', 'outlined']} onClick={onClick} icon="Check" />
+        <Button color="green" kind={['icon', 'outlined']} onClick={onClick} icon="Check" />
       </_._Wrapper>
     </_._Container>
   );
