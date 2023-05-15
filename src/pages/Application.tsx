@@ -124,9 +124,14 @@ const Application = () => {
     { step: 3, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
   ];
 
+  const isBlackExam = userType.educational_status === 'QUALIFICATION_EXAM';
+
   const elements = [
     { title: '지원자 전형 구분', component: <UserType userTypeValues={userType} setUserTypeValues={setUserType} /> },
-    { title: '지원자 인적사항', component: <UserInfo userInfoValues={userInfo} setUserInfoValues={setUserInfo} /> },
+    {
+      title: '지원자 인적사항',
+      component: <UserInfo userInfoValues={userInfo} setUserInfoValues={setUserInfo} isBlackExam={isBlackExam} />,
+    },
     {
       title: '자기소개서 & 학업 계획서',
       component: <UserWrite userWriteValues={userWrite} setUserWriteValues={setUserWrite} />,
@@ -139,7 +144,11 @@ const Application = () => {
   ];
 
   const { application_remark, graduated_at, ...userTypeAtFooter } = userType;
-  const footer = [userTypeAtFooter, userInfo, userWrite, '', ''];
+  const { parent_name, parent_tel, telephone_number, ...blackExamuserInfo } = userInfo;
+  const { blackExam, ...notBlackExamuserInfo } = userInfo;
+  const userInfoAtFooter = isBlackExam ? blackExamuserInfo : notBlackExamuserInfo;
+  const footer = [userTypeAtFooter, userInfoAtFooter, userWrite, '', ''];
+
   return (
     <_Container>
       <_Wrapper>
@@ -151,6 +160,7 @@ const Application = () => {
           gradeCurrent={gradeCurrent}
           setGradeCurrent={setGradeCurrent}
           check={footer[current]}
+          isBlackExam={isBlackExam}
         />
       </_Wrapper>
     </_Container>

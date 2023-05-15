@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { UserWriteValue } from '@/pages/Application';
 import { Textarea, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
@@ -6,12 +6,12 @@ import { useInput } from '@/hooks/useInput';
 
 interface UserTypeProps {
   userWriteValues: UserWriteValue;
-  setUserWriteValues: React.Dispatch<React.SetStateAction<UserWriteValue>>;
+  setUserWriteValues: React.Dispatch<SetStateAction<UserWriteValue>>;
 }
 
 const UserWrite = ({ userWriteValues, setUserWriteValues }: UserTypeProps) => {
-  const { form, onChange } = useInput(userWriteValues);
-
+  const { form: inputValues, onChange: changeInputValues } = useInput(userWriteValues);
+  setUserWriteValues(inputValues);
   return (
     <_Wrapper>
       <Textarea
@@ -20,8 +20,8 @@ const UserWrite = ({ userWriteValues, setUserWriteValues }: UserTypeProps) => {
         limit={2000}
         width="100%"
         name="intro"
-        value={form.intro}
-        onChange={onChange}
+        value={inputValues.intro}
+        onChange={changeInputValues}
       />
       <Textarea
         placeholder="내용을 입력해주세요"
@@ -29,8 +29,8 @@ const UserWrite = ({ userWriteValues, setUserWriteValues }: UserTypeProps) => {
         limit={2000}
         width="100%"
         name="study_plan"
-        value={form.study_plan}
-        onChange={onChange}
+        value={inputValues.study_plan}
+        onChange={changeInputValues}
       />
     </_Wrapper>
   );

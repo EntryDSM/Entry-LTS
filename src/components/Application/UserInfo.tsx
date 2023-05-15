@@ -9,18 +9,12 @@ import { useInput } from '@/hooks/useInput';
 interface UserTypeProps {
   userInfoValues: UserInfoValue;
   setUserInfoValues: React.Dispatch<React.SetStateAction<UserInfoValue>>;
+  isBlackExam: boolean;
 }
 
-const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
-  const onClickRadio = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-    const { value, name } = e.currentTarget;
-    setUserInfoValues({
-      ...userInfoValues,
-      [name]: value,
-    });
-  };
-
-  const { form, onChange } = useInput(userInfoValues);
+const UserInfo = ({ userInfoValues, setUserInfoValues, isBlackExam }: UserTypeProps) => {
+  const { form: inputValues, setForm: setInputValues, onChange: changeInputValues } = useInput(userInfoValues);
+  setUserInfoValues(inputValues);
 
   const saveImgFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files, name } = e.target;
@@ -30,7 +24,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
-        setUserInfoValues({
+        setInputValues({
           ...userInfoValues,
           [name]: reader.result,
         });
@@ -54,17 +48,24 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
       </label>
 
       <ApplicationContent grid={1} title="이름" width={40}>
-        <Input type="text" placeholder="이름" width={230} name="name" value={form.name} onChange={onChange} />
+        <Input
+          type="text"
+          placeholder="이름"
+          width={230}
+          name="name"
+          onChange={changeInputValues}
+          value={inputValues.name}
+        />
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="성별" width={40}>
-        <Radio label="남자" name="sex" value="MEN" onClick={onClickRadio} isChecked={userInfoValues.sex === 'MEN'} />
+        <Radio label="남자" name="sex" value="MEN" onClick={changeInputValues} isChecked={inputValues.sex === 'MEN'} />
         <Radio
           label="여자"
           name="sex"
           value="WOMEN"
-          onClick={onClickRadio}
-          isChecked={userInfoValues.sex === 'WOMEN'}
+          onClick={changeInputValues}
+          isChecked={inputValues.sex === 'WOMEN'}
         />
       </ApplicationContent>
       <ApplicationContent grid={3} title="생년월일" width={40}>
@@ -72,7 +73,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           className="birthday"
           width={85}
           onChange={(e) =>
-            setUserInfoValues({
+            setInputValues({
               ...userInfoValues,
               birthday: e,
             })
@@ -84,7 +85,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           className="birthday"
           width={85}
           onChange={(e) =>
-            setUserInfoValues({
+            setInputValues({
               ...userInfoValues,
               birthday: e,
             })
@@ -96,7 +97,7 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           className="birthday"
           width={85}
           onChange={(e) =>
-            setUserInfoValues({
+            setInputValues({
               ...userInfoValues,
               birthday: e,
             })
@@ -105,47 +106,55 @@ const UserInfo = ({ userInfoValues, setUserInfoValues }: UserTypeProps) => {
           unit="일"
         />
       </ApplicationContent>
-      <ApplicationContent grid={1} title="검정고시 평균" width={40}>
-        <Input
-          type="number"
-          placeholder="검정고시 평균"
-          width={230}
-          name="blackExam"
-          value={form.blackExam}
-          onChange={onChange}
-          unit="점"
-        />
-      </ApplicationContent>
-      <ApplicationContent grid={1} title="보호자명">
-        <Input
-          type="text"
-          placeholder="보호자명"
-          width={230}
-          name="parent_name"
-          value={form.parent_name}
-          onChange={onChange}
-        />
-      </ApplicationContent>
-      <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-        <Input
-          type="number"
-          placeholder="본인 연락처"
-          width={230}
-          name="telephone_number"
-          value={form.telephone_number}
-          onChange={onChange}
-        />
-      </ApplicationContent>
-      <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-        <Input
-          type="number"
-          placeholder="보호자 연락처"
-          width={230}
-          name="parent_tel"
-          value={form.parent_tel}
-          onChange={onChange}
-        />
-      </ApplicationContent>
+      {isBlackExam && (
+        <ApplicationContent grid={1} title="검정고시 평균" width={40}>
+          <Input
+            type="number"
+            placeholder="검정고시 평균"
+            width={230}
+            name="blackExam"
+            value={inputValues.blackExam}
+            onChange={changeInputValues}
+            unit="점"
+          />
+        </ApplicationContent>
+      )}
+      {!isBlackExam && (
+        <ApplicationContent grid={1} title="보호자명" width={40}>
+          <Input
+            type="text"
+            placeholder="보호자명"
+            width={230}
+            name="parent_name"
+            value={inputValues.parent_name}
+            onChange={changeInputValues}
+          />
+        </ApplicationContent>
+      )}
+      {!isBlackExam && (
+        <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
+          <Input
+            type="number"
+            placeholder="본인 연락처"
+            width={230}
+            name="telephone_number"
+            value={inputValues.telephone_number}
+            onChange={changeInputValues}
+          />
+        </ApplicationContent>
+      )}
+      {!isBlackExam && (
+        <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
+          <Input
+            type="number"
+            placeholder="보호자 연락처"
+            width={230}
+            name="parent_tel"
+            value={inputValues.parent_tel}
+            onChange={changeInputValues}
+          />
+        </ApplicationContent>
+      )}
     </_ApplicationWrapper>
   );
 };
@@ -169,7 +178,7 @@ const _ApplicationImg = styled.div`
   align-items: center;
   justify-content: center;
   width: 16rem;
-  height: 325px;
+  height: 310px;
   background-color: ${theme.color.black50};
   border: 1px solid ${theme.color.black100};
   border-radius: 5px;

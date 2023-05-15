@@ -3,20 +3,34 @@ import styled from '@emotion/styled';
 import { Button, theme } from '@team-entry/design_system';
 import { UserInfoValue, UserTypeValue, UserWriteValue } from '@/pages/Application';
 
+type BlackExam = Omit<UserInfoValue, 'parent_name' | 'parent_tel' | 'telephone_number'>;
+type NotBlackExam = Omit<UserInfoValue, 'blackExam'>;
+type UserInfo = BlackExam | NotBlackExam;
+
 interface ApplicationFooterProps {
-  check?: Omit<UserTypeValue, 'application_remark' | 'graduated_at'> | UserInfoValue | UserWriteValue | string;
+  check?: Omit<UserTypeValue, 'application_remark' | 'graduated_at'> | UserInfo | UserWriteValue | string;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
   gradeCurrent: number;
   setGradeCurrent: React.Dispatch<React.SetStateAction<number>>;
+  isBlackExam: boolean;
 }
 
-const ApplicationFooter = ({ current, setCurrent, gradeCurrent, setGradeCurrent, check }: ApplicationFooterProps) => {
+const ApplicationFooter = ({
+  current,
+  setCurrent,
+  gradeCurrent,
+  setGradeCurrent,
+  check,
+  isBlackExam,
+}: ApplicationFooterProps) => {
   const progress = [0, 1, 2, 3, 4];
   const checkDisabled = Object.values(check).includes('');
 
   const onClickPlus = () => {
-    if (gradeCurrent == 4) {
+    if (current == 2 && isBlackExam) {
+      setCurrent(current + 2);
+    } else if (gradeCurrent == 4) {
       setCurrent(current + 1);
     } else if (current == 3) {
       setGradeCurrent(gradeCurrent + 1);
@@ -26,7 +40,9 @@ const ApplicationFooter = ({ current, setCurrent, gradeCurrent, setGradeCurrent,
   };
 
   const onClickMinus = () => {
-    if (gradeCurrent == 0) {
+    if (current == 4 && isBlackExam) {
+      setCurrent(current - 2);
+    } else if (gradeCurrent == 0) {
       setCurrent(current - 1);
     } else if (current == 3) {
       setGradeCurrent(gradeCurrent - 1);

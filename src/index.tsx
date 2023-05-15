@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
       staleTime: 5000,
     },
   },
-});
+}); 
 
 root.render(
   <>
