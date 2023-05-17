@@ -7,7 +7,7 @@ import { useAthority } from '@/hooks/useAuthority';
 const SchoolVideo = () => {
   const { authorityColor } = useAthority();
   return (
-    <_Wrapper>
+    <_Wrapper id="SchoolVideo">
       <_Title>
         <Text color={`${authorityColor}500`} size="header1">
           학교 소개 영상
