@@ -10,6 +10,7 @@ import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
 import WriteCustomerPage from './pages/WriteCustomerPage';
 import EditBannerPage from './pages/admin/EditBanner';
+import ApplicationPage from './pages/Application';
 import NotFound from './pages/NotFound';
 
 const Router = createBrowserRouter([
@@ -51,6 +52,10 @@ const Router = createBrowserRouter([
       {
         path: 'edit',
         element: <EditBannerPage />,
+      },
+      {
+        path: 'application',
+        element: <ApplicationPage />,
       },
     ],
     errorElement: <NotFound />,

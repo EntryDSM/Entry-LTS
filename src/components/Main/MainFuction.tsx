@@ -9,12 +9,13 @@ import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
 import _ShortcutButton from './ShortcutButton';
+import { useNavigate } from 'react-router-dom';
 
 const MainFunction = () => {
   const onClick = () => console.log('clicked!');
 
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
-
+  const navigate = useNavigate();
   return (
     <_Wrapper>
       <Pc>
@@ -29,7 +30,7 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 상담 문의: 042-8832-1121
             </Text>
-            <Button color="orange" onClick={onClick} margin={['bottom', 20]}>
+            <Button color="orange" onClick={() => navigate('/application')} margin={['bottom', 20]}>
               원서 접수 →
             </Button>
           </Pc>
@@ -41,7 +42,7 @@ const MainFunction = () => {
               작성한 원서를 제출하세요
             </Text>
             <div>
-              <Button color="orange" onClick={onClick} margin={[20, 0, 20, 0]}>
+              <Button color="orange" onClick={() => navigate('/application')} margin={[20, 0, 20, 0]}>
                 원서 접수 →
               </Button>
             </div>

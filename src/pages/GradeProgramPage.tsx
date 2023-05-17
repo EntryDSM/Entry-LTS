@@ -1,10 +1,10 @@
-import AllSelect, { Grade } from '../components/grade/AllSelect';
-import { Button, Spinner, Text } from '@team-entry/design_system';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
-import ProgressBar from '../components/grade/ProgressBar';
-import SelectGrade from '../components/grade/SelectGrade';
+import GradeProgramFooter from '@/components/Grade/GradeProgramFooter';
+import GradeProgram from '@/components/Grade/GradeProgram';
+import AllSelect, { Grade } from '@/components/Grade/AllSelect';
+import { Spinner, Text } from '@team-entry/design_system';
 import { useModal } from '@/hooks/useModal';
 
 export interface IElement {
@@ -83,65 +83,11 @@ const GradeProgramPage = () => {
     { step: 4, title: '출석 점수', element },
     { step: 4, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
   ];
-
   return (
     <_Container>
       <_Wrapper>
-        <Title>
-          <div>
-            <Text color="black900" size="header1">
-              {arr[current]?.title}
-            </Text>
-            {arr[current].subTitle && (
-              <Text color="black600" size="body1">
-                {arr[current].subTitle}
-              </Text>
-            )}
-          </div>
-          {current < 3 && <AllSelect current={current} element={element} setElement={setElement} />}
-        </Title>
-        <ProgressBar step={arr[current].step} />
-        <_Selects>
-          {arr[current]?.element[current]?.map((res, index) => {
-            const { title, subTitle, type, grade, placeholder, unit } = res;
-            return (
-              <SelectGrade
-                current={current}
-                title={title}
-                subTitle={subTitle}
-                type={type}
-                placeholder={placeholder}
-                unit={unit}
-                grade={grade}
-                element={element}
-                setElement={setElement}
-                index={index}
-              />
-            );
-          })}
-        </_Selects>
-        <_Buttons>
-          {current > 0 && (
-            <Button kind="outlined" color="orange" onClick={() => setCurrent(current - 1)}>
-              이전
-            </Button>
-          )}
-          <div />
-          {current < arr.length - 1 ? (
-            <Button color="orange" onClick={() => setCurrent(current + 1)}>
-              다음
-            </Button>
-          ) : (
-            <Button
-              color="orange"
-              onClick={() => {
-                open();
-              }}
-            >
-              완료
-            </Button>
-          )}
-        </_Buttons>
+        <GradeProgram arr={arr} current={current} element={element} setElement={setElement} />
+        <GradeProgramFooter arr={arr.length} current={current} setCurrent={setCurrent} />
       </_Wrapper>
       <Modal>
         <Text size="header2" color="black900" margin={[0, 0, 15, 0]}>
@@ -162,32 +108,10 @@ const _Container = styled.div`
   min-height: 100vh;
 `;
 
-const Title = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  > div {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-`;
-
 const _Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 60rem;
   margin-top: 7rem;
-`;
-
-const _Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-`;
-
-const _Selects = styled.div`
-  margin-top: 0.7rem;
-  margin-bottom: 1rem;
 `;
