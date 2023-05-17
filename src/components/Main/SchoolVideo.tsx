@@ -5,7 +5,7 @@ import Video from '../../assets/ReplaceVideo.svg';
 
 const SchoolVideo = () => {
   return (
-    <_Wrapper>
+    <_Wrapper id="SchoolVideo">
       <_Title>
         <Text color="orange500" size="header1">
           학교 소개 영상
