@@ -4,7 +4,6 @@ import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
 import Banner from '../../assets/ReplaceBanner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
-import Banner from '../../assets/ReplaceBanner.svg';
 import { shortcut } from '../../constant/main';
 import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
@@ -47,7 +46,13 @@ const MainFunction = () => {
                 원서 접수 →
               </Button>
             </div>
-            <Button icon="NavigationArrow" color={authorityColor} kind="outlined" onClick={onClick} margin={[0, 0, 30, 0]}>
+            <Button
+              icon="NavigationArrow"
+              color={authorityColor}
+              kind="outlined"
+              onClick={onClick}
+              margin={[0, 0, 30, 0]}
+            >
               입학 설명회 참석 예약
             </Button>
           </Mobile>
@@ -134,7 +139,7 @@ const _ApplicationDetail = styled.div`
     width: 95%;
   }
 `;
-       
+
 const _Discription = styled.div`
   display: flex;
   align-items: center;

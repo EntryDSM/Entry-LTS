@@ -1,10 +1,10 @@
-import AllSelect, { Grade } from '../components/grade/AllSelect';
+import AllSelect, { Grade } from '../components/Grade/AllSelect';
 import { Button, Spinner, Text } from '@team-entry/design_system';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
-import ProgressBar from '../components/grade/ProgressBar';
-import SelectGrade from '../components/grade/SelectGrade';
+import ProgressBar from '../components/Grade/ProgressBar';
+import SelectGrade from '../components/Grade/SelectGrade';
 import { useModal } from '@/hooks/useModal';
 
 export interface IElement {
