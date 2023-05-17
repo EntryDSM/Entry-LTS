@@ -1,7 +1,3 @@
 export const ArrayForDropdown = (first: number, last: number) => {
-  let array = [];
-  for (let i = first; i <= last; i++) {
-    array.push(String(i));
-  }
-  return array;
+  return Array.from({ length: last - first + 1 }, (_, i) => String(i + first));
 };

@@ -15,7 +15,7 @@ const MainFunction = () => {
   const onClick = () => console.log('clicked!');
 
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
-
+  const navigate = useNavigate();
   return (
     <_Wrapper>
       <Pc>

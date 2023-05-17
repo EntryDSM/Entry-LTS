@@ -120,40 +120,40 @@ const UserInfo = ({ userInfoValues, setUserInfoValues, isBlackExam }: UserTypePr
         </ApplicationContent>
       )}
       {!isBlackExam && (
-        <ApplicationContent grid={1} title="보호자명" width={40}>
-          <Input
-            type="text"
-            placeholder="보호자명"
-            width={230}
-            name="parent_name"
-            value={inputValues.parent_name}
-            onChange={changeInputValues}
-          />
-        </ApplicationContent>
-      )}
-      {!isBlackExam && (
-        <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-          <Input
-            type="number"
-            placeholder="본인 연락처"
-            width={230}
-            name="telephone_number"
-            value={inputValues.telephone_number}
-            onChange={changeInputValues}
-          />
-        </ApplicationContent>
-      )}
-      {!isBlackExam && (
-        <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
-          <Input
-            type="number"
-            placeholder="보호자 연락처"
-            width={230}
-            name="parent_tel"
-            value={inputValues.parent_tel}
-            onChange={changeInputValues}
-          />
-        </ApplicationContent>
+        <>
+          <ApplicationContent grid={1} title="보호자명" width={40}>
+            <Input
+              type="text"
+              placeholder="보호자명"
+              width={230}
+              name="parent_name"
+              value={inputValues.parent_name}
+              onChange={changeInputValues}
+            />
+          </ApplicationContent>
+
+          <ApplicationContent grid={1} title="본인 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
+            <Input
+              type="number"
+              placeholder="본인 연락처"
+              width={230}
+              name="telephone_number"
+              value={inputValues.telephone_number}
+              onChange={changeInputValues}
+            />
+          </ApplicationContent>
+
+          <ApplicationContent grid={1} title="보호자 연락처" placeholder="‘-’ 문자를 제외한 숫자만 입력해주세요">
+            <Input
+              type="number"
+              placeholder="보호자 연락처"
+              width={230}
+              name="parent_tel"
+              value={inputValues.parent_tel}
+              onChange={changeInputValues}
+            />
+          </ApplicationContent>
+        </>
       )}
     </_ApplicationWrapper>
   );
@@ -187,6 +187,7 @@ const _ApplicationImg = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
+  border-radius: 4px;
   object-fit: cover;
 `;
 

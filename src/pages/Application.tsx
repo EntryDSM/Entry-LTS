@@ -18,7 +18,7 @@ export interface UserTypeValue {
 }
 
 export interface UserInfoValue {
-  img: any;
+  img: string;
   name: string;
   sex: string;
   birthday: string;
