@@ -1,5 +1,6 @@
 import * as _ from './style';
 import LogoOrange from '../../assets/LogoOrange.svg';
+import LogoGreen from '../../assets/LogoGreen.svg';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button, Text } from '@team-entry/design_system';
@@ -94,8 +95,12 @@ const Header = () => {
           )}
         </Mobile>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex' }}>
-            <img src={LogoOrange} alt="" style={{ marginRight: 12, cursor: 'pointer' }} />
+          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src={isAdmin ? LogoGreen : LogoOrange}
+              alt=""
+              style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
+            />
             <Text color="realBlack" size="header1">
               EntryDSM
             </Text>
@@ -106,9 +111,9 @@ const Header = () => {
                 const { name, url } = res;
                 return (
                   <Link to={url}>
-                    <_._Text fontColor={location.pathname.includes(url)} fontSize={18} fontWeight={500}>
+                    <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
                       {name}
-                    </_._Text>
+                    </Text>
                   </Link>
                 );
               })}

@@ -1,6 +1,5 @@
 import CreateDOM from 'react-dom/client';
 import { GlobalStyle } from './style/globalStyle.style';
-
 import App from './App';
 import { StyledProvider } from '@team-entry/design_system';
 import { Global } from '@emotion/react';

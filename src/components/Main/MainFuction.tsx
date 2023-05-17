@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
 import Banner from '../../assets/ReplaceBanner.svg';
-import Navigation from '../../assets/Navigation.svg';
-import Calculator from '../../assets/Calculator.svg';
-import BookOpen from '../../assets/BookOpen.svg';
-import User from '../../assets/User.svg';
 import BoardsAtMain from './BoardAtMain';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
+import { useAthority } from '@/hooks/useAuthority';
 
 const progressState = [
   { id: 0, title: '원서 제출', date: '10/17~10/20' },
@@ -17,41 +14,39 @@ const progressState = [
   { id: 3, title: '2차 발표', date: '11/03 10:00' },
 ];
 
-interface ICurrentDate {
-  now: boolean;
-}
-
 const MainFunction = () => {
-  const DATE = 1;
+  const { isAdmin, authorityColor } = useAthority();
+  
+  const DATE:number = 1;
   const onClick = () => console.log('clicked!');
   const progressBar = [
-    { id: 0, element: <_ProgressCircle now={0 <= DATE} /> },
-    { id: 1, element: <_ProgressStep now={1 <= DATE} /> },
-    { id: 2, element: <_ProgressCircle now={1 <= DATE} /> },
-    { id: 3, element: <_ProgressStep now={2 <= DATE} /> },
-    { id: 4, element: <_ProgressCircle now={2 <= DATE} /> },
-    { id: 5, element: <_ProgressStep now={3 <= DATE} /> },
-    { id: 6, element: <_ProgressCircle now={3 <= DATE} /> },
+    { id: 0, element: <_ProgressCircle now={0 <= DATE} isAdmin={isAdmin} /> },
+    { id: 1, element: <_ProgressStep now={1 <= DATE} isAdmin={isAdmin} /> },
+    { id: 2, element: <_ProgressCircle now={1 <= DATE} isAdmin={isAdmin} /> },
+    { id: 3, element: <_ProgressStep now={2 <= DATE} isAdmin={isAdmin} /> },
+    { id: 4, element: <_ProgressCircle now={2 <= DATE} isAdmin={isAdmin} /> },
+    { id: 5, element: <_ProgressStep now={3 <= DATE} isAdmin={isAdmin} /> },
+    { id: 6, element: <_ProgressCircle now={3 <= DATE} isAdmin={isAdmin} /> },
   ];
   const shortcut = [
     {
       id: 0,
-      icon: <img src={Navigation} alt="Navigation" style={{ marginBottom: '8px' }} />,
+      icon: 'NavigationArrow',
       title: '입학설명회 참석 예약',
     },
     {
       id: 1,
-      icon: <img src={Calculator} alt="Calculator" style={{ marginBottom: '8px' }} />,
+      icon: 'Culculator',
       title: '성적 산출',
     },
     {
       id: 2,
-      icon: <img src={BookOpen} alt="BookOpen" style={{ marginBottom: '8px' }} />,
+      icon: 'Book',
       title: '학교 소개 ',
     },
     {
       id: 3,
-      icon: <img src={User} alt="User" style={{ marginBottom: '8px' }} />,
+      icon: 'Account',
       title: 'Entry 개발자 소개',
     },
   ];
@@ -71,7 +66,7 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 상담 문의: 042-8832-1121
             </Text>
-            <Button color="orange" onClick={onClick} margin={['bottom', 20]}>
+            <Button color={authorityColor} onClick={onClick} margin={['bottom', 20]}>
               원서 접수 →
             </Button>
           </Pc>
@@ -83,11 +78,11 @@ const MainFunction = () => {
               작성한 원서를 제출하세요
             </Text>
             <div>
-              <Button color="orange" onClick={onClick} margin={[20, 0, 20, 0]}>
+              <Button color={authorityColor} onClick={onClick} margin={[20, 0, 20, 0]}>
                 원서 접수 →
               </Button>
             </div>
-            <Button icon="NavigationArrow" color="orange" kind="outlined" onClick={onClick} margin={[0, 0, 30, 0]}>
+            <Button icon="NavigationArrow" color={authorityColor} kind="outlined" onClick={onClick} margin={[0, 0, 30, 0]}>
               입학 설명회 참석 예약
             </Button>
           </Mobile>
@@ -96,7 +91,7 @@ const MainFunction = () => {
           <_Progress>
             <_ProgressCards>
               {progressState.map((state) => (
-                <_ProgressCard key={state.id} now={state.id <= DATE}>
+                <_ProgressCard key={state.id} now={state.id <= DATE} isAdmin={isAdmin}>
                   <Text color="realWhite" size="title1">
                     {state.title}
                   </Text>
@@ -119,7 +114,7 @@ const MainFunction = () => {
           <_Shortcut>
             {shortcut.map((item) => (
               <_ShorcutButton key={item.id}>
-                {item.icon}
+                <Icon icon={item.icon as IconType} color={`${authorityColor}500`} margin={[0,0,8,0]} />
                 <Text align="center" color="black800" size={isTablet ? 'body3' : 'title2'}>
                   {item.title}
                 </Text>
@@ -208,7 +203,7 @@ const _ProgressCards = styled.div`
   height: 5rem;
 `;
 
-const _ProgressCard = styled.div<ICurrentDate>`
+const _ProgressCard = styled.div<{now: boolean, isAdmin: boolean}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -216,7 +211,7 @@ const _ProgressCard = styled.div<ICurrentDate>`
   width: 9.5rem;
   height: 4.5rem;
   border-radius: 5px;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.orange100)};
+  background-color: ${({ now, isAdmin }) => (now ? (isAdmin ? theme.color.green500 : theme.color.orange500) : (isAdmin ? theme.color.green100 : theme.color.orange100))};
 `;
 
 const _ProgressBar = styled.div`
@@ -226,17 +221,17 @@ const _ProgressBar = styled.div`
   margin-top: 0.5rem;
 `;
 
-const _ProgressStep = styled.div<ICurrentDate>`
+const _ProgressStep = styled.div<{now: boolean, isAdmin: boolean}>`
   width: 10.2rem;
   height: 4px;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  background-color: ${({ now, isAdmin }) => (now ? (isAdmin ? theme.color.green500 : theme.color.orange500) : theme.color.black100)};
 `;
 
-const _ProgressCircle = styled.div<ICurrentDate>`
+const _ProgressCircle = styled.div<{now: boolean, isAdmin: boolean}>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  background-color: ${({ now, isAdmin }) => (now ? (isAdmin ? theme.color.green500 : theme.color.orange500) : theme.color.black100)};
 `;
 
 const _Discription = styled.div`

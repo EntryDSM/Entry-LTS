@@ -2,12 +2,14 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import Video from '../../assets/ReplaceVideo.svg';
+import { useAthority } from '@/hooks/useAuthority';
 
 const SchoolVideo = () => {
+  const { authorityColor } = useAthority();
   return (
     <_Wrapper>
       <_Title>
-        <Text color="orange500" size="header1">
+        <Text color={`${authorityColor}500`} size="header1">
           학교 소개 영상
         </Text>
       </_Title>

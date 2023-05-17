@@ -28,7 +28,7 @@ const BoardHeader = (props: IBoard) => {
             </Text>
           </Mobile>
         </>
-      </Div>  
+      </Div>
       <Div>
         {isComment && (
           <>

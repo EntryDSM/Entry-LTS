@@ -29,7 +29,7 @@ const BoardTitle = (props: IBoardTitle) => {
         <Text color="black900" size="header1">
           {title}
         </Text>
-        <Text margin={[0, 0, 22, 0]} color="realBlack" size="title3">
+        <Text margin={[5, 0, 22, 0]} color="black700" size="body1">
           {subTitle}
         </Text>
       </Pc>
@@ -52,7 +52,7 @@ const BoardTitle = (props: IBoardTitle) => {
           </Button>
         </_ButtonWrapper>
         <div>
-          {isCustomer && !click && !isAdmin && (
+          {(!isCustomer || (isCustomer && ((!click && !isAdmin) || (click && isAdmin)))) && (
             <Link to={link}>
               <Button color={authorityColor} onClick={onClick}>
                 {button3}

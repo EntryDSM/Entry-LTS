@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
+import { useAthority } from '@/hooks/useAuthority';
+import { useNavigate } from 'react-router-dom';
 
 const BoardElement = (props: IBoard) => {
   const { isNumber, isComment, isWriteDay, isWriter, isOpen = false } = props;
   const [clicked, setClicked] = useState(false);
+  const { isAdmin } = useAthority();
+  const navigate = useNavigate();
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
@@ -84,6 +88,14 @@ const BoardElement = (props: IBoard) => {
                   2022-12-21
                 </Text>
               </_Answer>
+              {isAdmin && (
+                <_EditAnswerButtons>
+                  <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
+                    삭제
+                  </Button>
+                  <Button onClick={() => navigate('/customer/writeFAQ')}>수정</Button>
+                </_EditAnswerButtons>
+              )}
             </_AnswerPart>
           </Pc>
           <Mobile>
@@ -99,6 +111,14 @@ const BoardElement = (props: IBoard) => {
                   2022-12-21
                 </Text>
               </_Answer>
+              {isAdmin && (
+                <_EditAnswerButtons>
+                  <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
+                    삭제
+                  </Button>
+                  <Button onClick={() => console.log('삭제')}>수정</Button>
+                </_EditAnswerButtons>
+              )}
             </_AnswerPart>
           </Mobile>
         </>
@@ -137,6 +157,7 @@ const fallingAnswer = keyframes`
 `;
 
 const _AnswerPart = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   background-color: ${theme.color.black50};
@@ -155,4 +176,12 @@ const _Answer = styled.div`
   @media screen and (max-width: 769px) {
     height: 10rem;
   }
+`;
+
+const _EditAnswerButtons = styled.div`
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  gap: 10px;
 `;

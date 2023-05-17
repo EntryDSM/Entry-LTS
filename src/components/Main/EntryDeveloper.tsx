@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
+import { useAthority } from '@/hooks/useAuthority';
 
 const developers = [
   { id: 0, name: '이름이름', major: '분야분야' },
@@ -18,10 +19,11 @@ const developers = [
 ];
 
 const EntryDeveloper = () => {
+  const { authorityColor } = useAthority()
   return (
     <_Wrapper>
       <_Title>
-        <Text color="orange500" size="header1">
+        <Text color={`${authorityColor}500`} size="header1">
           Entry 개발자 소개
         </Text>
       </_Title>

@@ -6,6 +6,7 @@ import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardHeader from '../components/Board/BoardHeader';
 import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
+import { useAthority } from '@/hooks/useAuthority';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -17,6 +18,7 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
+  const { isAdmin, authorityColor } = useAthority();
 
   return (
     <_Container>
@@ -30,7 +32,7 @@ const CustomerPage = () => {
           button2="자주 묻는 질문"
           button3="질문 작성"
           isCustomer={true}
-          link={'write'}
+          link={isAdmin ? 'writeFAQ' :'write'}
         ></BoardTitle>
 
         {!click ? (
@@ -58,7 +60,7 @@ const CustomerPage = () => {
                   <>
                     <Pc>
                       <Text
-                        color={name === category ? `orange500` : `orange100`}
+                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="title2"
                         cursor="pointer"
                         onClick={() => setCategory(name)}
@@ -68,7 +70,7 @@ const CustomerPage = () => {
                     </Pc>
                     <Mobile>
                       <Text
-                        color={name === category ? `orange500` : `orange100`}
+                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="body3"
                         cursor="pointer"
                         onClick={() => setCategory(name)}

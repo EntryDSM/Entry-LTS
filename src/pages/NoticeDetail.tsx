@@ -5,9 +5,11 @@ import Noticeimg from '../assets/ReplaceNotice.svg';
 import { useNavigate } from 'react-router-dom';
 import File from '../components/File';
 import { Mobile, Pc } from '..//hooks/useResponsive';
+import { useAthority } from '@/hooks/useAuthority';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
+  const { isAdmin } = useAthority();
   return (
     <_Container>
       <_Wrapper>
@@ -78,10 +80,19 @@ const NoticeDetail = () => {
         <_Files>
           <File />
           <File />
+          <File />
         </_Files>
-        <Button onClick={() => navigate(-1)} margin={['top', 28]}>
-          목록으로
-        </Button>
+        <_ButtonFooter>
+          <Button onClick={() => navigate(-1)}>목록으로</Button>
+          {isAdmin && (
+            <_AdminButtons>
+              <Button onClick={() => console.log('clicked')} color="delete" kind="delete">
+                삭제
+              </Button>
+              <Button onClick={() => navigate('/notice/write')}>수정</Button>
+            </_AdminButtons>
+          )}
+        </_ButtonFooter>
       </_Wrapper>
     </_Container>
   );
@@ -141,4 +152,16 @@ const _Files = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
+`;
+
+const _ButtonFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 28px 0px 50px 0px;
+`;
+
+const _AdminButtons = styled.div`
+  display: flex;
+  gap: 10px;
 `;
