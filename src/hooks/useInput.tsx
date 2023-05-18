@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export const useInput = <T,>(initialForm: T) => {
   const [form, setForm] = useState<T>(initialForm);

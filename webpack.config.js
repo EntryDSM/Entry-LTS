@@ -49,7 +49,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ REACT_APP_BASE_URL: 'http://localhost:3002' }),
     new webpack.DefinePlugin({
       'process.env.REACT_APP_BASE_URL': JSON.stringify(process.env.REACT_APP_BASE_URL),
     }),
