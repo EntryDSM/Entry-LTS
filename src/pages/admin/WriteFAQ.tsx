@@ -3,14 +3,13 @@ import styled from '@emotion/styled';
 import { Button, Input, Text, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useNavigate } from 'react-router-dom';
+import { useInput } from '@/hooks/useInput';
 
 const WriteFAQPage = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState({ 답변: '' });
   const navigate = useNavigate();
 
-  const onChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setValue(e.target.value);
-  };
+  const { form: inputValue, onChange: setInputValue } = useInput(value);
 
   const onClick = () => {
     navigate(-1);
@@ -31,12 +30,13 @@ const WriteFAQPage = () => {
         <_Line />
         <Input type="text" label="질문" width="100%" placeholder="질문을 입력해주세요" />
         <Textarea
+          name="답변"
           label="답변"
           width="100%"
           placeholder="답변을 입력해주세요"
           limit={600}
-          value={value}
-          onChange={onChange}
+          value={inputValue.답변}
+          onChange={setInputValue}
           margin={['top', 20]}
         />
         <_ButtonBox>

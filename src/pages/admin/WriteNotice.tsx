@@ -9,14 +9,10 @@ import File from '@/components/File';
 const WriteNotice = () => {
   const [value, setValue] = useState('');
   const [switchCheck, setSwitchCheck] = useState(false);
-  const [radioValue, setRadioValue] = useState({ type: '' });
+  const [inputValue, setInputValue] = useState({ type: '', content: '' });
   const navigate = useNavigate();
 
-  const onChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setValue(e.target.value);
-  };
-
-  const { form: valueType, onChange: setValueType } = useInput(radioValue);
+  const { form: valueType, onChange: setValueType } = useInput(inputValue);
 
   const onClick = () => {
     navigate(-1);
@@ -61,12 +57,13 @@ const WriteNotice = () => {
           </_RadioWrapper>
           <Input type="text" label="제목" width="100%" placeholder="제목을 입력해주세요" />
           <Textarea
+            name="content"
             label="본문"
             width="100%"
             placeholder="내용을 입력해주세요"
             limit={600}
             value={value}
-            onChange={onChange}
+            onChange={setValueType}
             margin={['top', 20]}
           />
         </_NoticeInputs>

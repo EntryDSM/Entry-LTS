@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text } from '@team-entry/design_system';
 import Banner from '../../assets/ReplaceBanner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';

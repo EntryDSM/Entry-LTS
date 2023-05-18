@@ -95,7 +95,7 @@ const Header = () => {
           )}
         </Mobile>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <_._LogoButton onClick={() => setVisibility(false)} to="/">
             <img
               src={isAdmin ? LogoGreen : LogoOrange}
               alt=""
@@ -104,7 +104,7 @@ const Header = () => {
             <Text color="realBlack" size="header1">
               EntryDSM
             </Text>
-          </Link>
+          </_._LogoButton>
           <Pc>
             <_._Texts>
               {headerList.map((res) => {
