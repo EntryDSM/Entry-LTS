@@ -1,11 +1,13 @@
 import * as _ from './style';
-import Logo from '../../assets/Logo.svg';
+import LogoOrange from '../../assets/LogoOrange.svg';
+import LogoGreen from '../../assets/LogoGreen.svg';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { Cookies } from 'react-cookie';
+import { useAthority } from '@/hooks/useAuthority';
 
 type THeader = '고객 문의' | '공지 사항' | '성적 산출' | '전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -37,6 +39,7 @@ const Header = () => {
   const location = useLocation();
   const cookie = new Cookies();
   const isLogin = cookie.get('access_token');
+  const { isAdmin, authorityColor } = useAthority();
 
   const onClick = () => {
     console.log('clicked');
@@ -92,21 +95,25 @@ const Header = () => {
           )}
         </Mobile>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link onClick={() => setVisibility(false)} to="/" style={{ display: 'flex' }}>
-            <img src={Logo} alt="" style={{ marginRight: 12, cursor: 'pointer' }} />
+          <_._LogoButton onClick={() => setVisibility(false)} to="/">
+            <img
+              src={isAdmin ? LogoGreen : LogoOrange}
+              alt=""
+              style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
+            />
             <Text color="realBlack" size="header1">
               EntryDSM
             </Text>
-          </Link>
+          </_._LogoButton>
           <Pc>
             <_._Texts>
               {headerList.map((res) => {
                 const { name, url } = res;
                 return (
                   <Link to={url}>
-                    <_._Text fontColor={location.pathname.includes(url)} fontSize={18} fontWeight={500}>
+                    <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
                       {name}
-                    </_._Text>
+                    </Text>
                   </Link>
                 );
               })}
@@ -115,11 +122,11 @@ const Header = () => {
         </div>
         <Pc>
           {isLogin ? (
-            <Button color="orange" kind="rounded" onClick={onClick}>
+            <Button color={authorityColor} kind="rounded" onClick={onClick}>
               확인
             </Button>
           ) : (
-            <Button color="orange" kind="rounded" onClick={onClick}>
+            <Button color={authorityColor} kind="rounded" onClick={onClick}>
               로그인
             </Button>
           )}

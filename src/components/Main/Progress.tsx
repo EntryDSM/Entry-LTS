@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
-import { progressBar, progressState } from '../../constant/main';
+import { ProgressBar, progressState } from '../../constant/main';
+import { useAthority } from '@/hooks/useAuthority';
 
 interface ICurrentDate {
   now: boolean;
+  isAdmin: boolean;
 }
 const Progress = () => {
   const DATE = 1;
+  const { isAdmin } = useAthority();
   return (
     <_Progress>
       <_ProgressCards>
         {progressState.map((state) => (
-          <_ProgressCard key={state.id} now={state.id <= DATE}>
+          <_ProgressCard key={state.id} now={state.id <= DATE} isAdmin={isAdmin}>
             <Text color="realWhite" size="title1">
               {state.title}
             </Text>
@@ -22,11 +25,9 @@ const Progress = () => {
           </_ProgressCard>
         ))}
       </_ProgressCards>
-      <_ProgressBar>
-        {progressBar.map((element) => {
-          return element;
-        })}
-      </_ProgressBar>
+      <_ProgressBarWrapper>
+        <ProgressBar />
+      </_ProgressBarWrapper>
     </_Progress>
   );
 };
@@ -56,10 +57,17 @@ const _ProgressCard = styled.div<ICurrentDate>`
   width: 9.5rem;
   height: 4.5rem;
   border-radius: 5px;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.orange100)};
+  background-color: ${({ now, isAdmin }) =>
+    now
+      ? isAdmin
+        ? theme.color.green500
+        : theme.color.orange500
+      : isAdmin
+      ? theme.color.green100
+      : theme.color.orange100};
 `;
 
-const _ProgressBar = styled.div`
+const _ProgressBarWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

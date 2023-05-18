@@ -1,6 +1,7 @@
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
+import { Link } from 'react-router-dom';
 
 export const _HeaderContainer = styled.div`
   position: fixed;
@@ -98,3 +99,8 @@ export const _Background = styled.div`
   align-items: center;
   text-align: center;
 `;
+
+export const _LogoButton = styled(Link)`
+  display: flex;
+  align-items: center;
+`

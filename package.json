@@ -20,7 +20,7 @@
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@team-entry/design_system": "^1.0.74",
+    "@team-entry/design_system": "^1.0.75",
     "@types/react-responsive": "^8.0.5",
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",

@@ -12,6 +12,8 @@ import WriteCustomerPage from './pages/WriteCustomerPage';
 import EditBannerPage from './pages/admin/EditBanner';
 import ApplicationPage from './pages/Application';
 import NotFound from './pages/NotFound';
+import WriteFAQPage from './pages/admin/WriteFAQ';
+import WriteNoticePage from './pages/admin/WriteNotice';
 
 const Router = createBrowserRouter([
   {
@@ -27,6 +29,7 @@ const Router = createBrowserRouter([
         children: [
           { index: true, element: <NoticePage /> },
           { path: ':id', element: <NoticeDetailPage /> },
+          { path: 'write', element: <WriteNoticePage /> },
         ],
       },
       {
@@ -35,6 +38,7 @@ const Router = createBrowserRouter([
           { index: true, element: <CustomerPage /> },
           { path: ':id', element: <CustomerDetailPage /> },
           { path: 'write', element: <WriteCustomerPage /> },
+          { path: 'writeFAQ', element: <WriteFAQPage /> },
         ],
       },
       {

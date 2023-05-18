@@ -1,16 +1,31 @@
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Input, Text, Textarea, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
+import { useAthority } from '@/hooks/useAuthority';
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
+  const [writeAnswer, setWriteAnswer] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const { isAdmin, authorityColor } = useAthority();
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setInputValue(value);
+  };
   return (
     <_Container>
       <_Wrapper>
+        {writeAnswer && (
+          <Text size="header1" color="black" margin={[0, 0, 30, 0]}>
+            Q&A 답변작성
+          </Text>
+        )}
+        <_QustionBackground isWriteAnswer={writeAnswer} />
         <Pc>
           <_Title>
-            <Text color="orange500" size="header2">
+            <Text color={`${authorityColor}500`} size="header2">
               Q.
             </Text>
             <Text color="black900" size="title1">
@@ -20,13 +35,25 @@ const CustomerDetailPage = () => {
           <Text color="black600" size="body2">
             성적 입력시에 자퇴의 경우는 어떻게 해야 될까요?
           </Text>
-          <Text color="black400" size="body1" margin={['top', 80]}>
-            36 | 김*연 | 2022-12-21
-          </Text>
+          <_QuestionBottom>
+            <Text color="black400" size="body1">
+              36 | 김*연 | 2022-12-21
+            </Text>
+            {isAdmin && !writeAnswer && (
+              <_EditCustomerButtons>
+                <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
+                  질문 작성
+                </Button>
+                <Button color="delete" kind="delete" onClick={() => console.log('작성')}>
+                  질문 삭제
+                </Button>
+              </_EditCustomerButtons>
+            )}
+          </_QuestionBottom>
         </Pc>
         <Mobile>
           <_Title>
-            <Text color="orange500" size="title1">
+            <Text color={`${authorityColor}500`} size="title1">
               Q.
             </Text>
             <Text color="black900" size="title2">
@@ -36,18 +63,50 @@ const CustomerDetailPage = () => {
           <Text color="black600" size="body5">
             성적 입력시에 자퇴의 경우는 어떻게 해야 될까요?
           </Text>
-          <Text color="black400" size="body3" margin={['top', 80]}>
-            36 | 김*연 | 2022-12-21
-          </Text>
-        </Mobile>
-        <_Bottom>
-          <_Answer>
-            <Text color="black500" size="title2">
-              아직 작성된 답변이 없습니다
+          <_QuestionBottom>
+            <Text color="black400" size="body3">
+              36 | 김*연 | 2022-12-21
             </Text>
-          </_Answer>
-          <Button onClick={() => navigate(-1)}>목록으로</Button>
-        </_Bottom>
+            {isAdmin && !writeAnswer && (
+              <_EditCustomerButtons>
+                <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
+                  질문 작성
+                </Button>
+                <Button color="delete" kind="delete" onClick={() => console.log('작성')}>
+                  질문 삭제
+                </Button>
+              </_EditCustomerButtons>
+            )}
+          </_QuestionBottom>
+        </Mobile>
+        {writeAnswer ? (
+          <>
+            <Input type="text" label="질문" width="100%" placeholder="질문을 입력해주세요" margin={[30, 0, 0, 0]} />
+            <Textarea
+              label="답변"
+              width="100%"
+              placeholder="답변을 입력해주세요"
+              limit={600}
+              value={inputValue}
+              onChange={onChange}
+              margin={['top', 20]}
+            />
+            <_InputButton>
+              <Button color="green" kind="contained" onClick={() => setWriteAnswer(false)}>
+                게시
+              </Button>
+            </_InputButton>
+          </>
+        ) : (
+          <_AnswerBottom>
+            <_Answer>
+              <Text color="black500" size="title2">
+                아직 작성된 답변이 없습니다
+              </Text>
+            </_Answer>
+            <Button onClick={() => navigate(-1)}>목록으로</Button>
+          </_AnswerBottom>
+        )}
       </_Wrapper>
     </_Container>
   );
@@ -56,12 +115,12 @@ const CustomerDetailPage = () => {
 export default CustomerDetailPage;
 
 const _Container = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
   width: 100vw;
-  height: 100vh;
 `;
 
 const _Wrapper = styled.div`
@@ -69,7 +128,6 @@ const _Wrapper = styled.div`
   width: 100%;
   max-width: 60rem;
   padding: 0 20px;
-  height: 12rem;
 `;
 
 const _Title = styled.div`
@@ -79,12 +137,39 @@ const _Title = styled.div`
   margin-bottom: 1rem;
 `;
 
-const _Bottom = styled.div`
+const _QustionBackground = styled.div<{ isWriteAnswer: boolean }>`
+  position: absolute;
+  top: 170px;
+  left: 0px;
+  width: 100vw;
+  height: 200px;
+  background-color: ${({ isWriteAnswer }) => (isWriteAnswer ? theme.color.black50 : null)};
+  z-index: -100;
+`;
+
+const _EditCustomerButtons = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const _QuestionBottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
+`;
+
+const _InputButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0px 50px 0px;
+`;
+
+const _AnswerBottom = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 1rem;
-  margin-top: 6rem;
+  margin-top: 5rem;
   @media screen and (max-width: 769px) {
     width: 100%;
     align-items: flex-start;

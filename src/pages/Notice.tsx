@@ -4,9 +4,11 @@ import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
 import { Link } from 'react-router-dom';
+import { useAthority } from '@/hooks/useAuthority';
 
 const NoticePage = () => {
   const [click, setClick] = useState(false);
+  const { isAdmin } = useAthority();
 
   return (
     <_Container>
@@ -18,6 +20,9 @@ const NoticePage = () => {
           subTitle="학교에서 게시한 입학 공지사항을 확인하세요"
           button1="입학 공지사항"
           button2="예비 신입생 안내"
+          button3={isAdmin && '공지작성'}
+          isCustomer={false}
+          link="write"
         />
         <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
         <Link to="/notice/1">

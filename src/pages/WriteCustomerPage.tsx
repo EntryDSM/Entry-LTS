@@ -2,15 +2,17 @@ import { SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Switch, Text, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
+import { useNavigate } from 'react-router-dom';
 
 const WriteCustomerPage = () => {
   const [click, setClick] = useState(false);
   const [value, setValue] = useState('');
+  const navigate = useNavigate();
   const onChange = (e: { target: { value: SetStateAction<string> } }) => {
     setValue(e.target.value);
   };
   const onClick = () => {
-    console.log('clicked!');
+    navigate(-1)
   };
   return (
     <_Container>

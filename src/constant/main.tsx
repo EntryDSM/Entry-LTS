@@ -1,9 +1,11 @@
+import { useAthority } from '@/hooks/useAuthority';
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
 import React from 'react';
 
 interface ICurrentDate {
   now: boolean;
+  isAdmin: boolean;
 }
 
 export const boardContent = [
@@ -80,27 +82,33 @@ export const progressState = [
   { id: 3, title: '2차 발표', date: '11/03 10:00' },
 ];
 
-const DATE = 1;
+export const ProgressBar = () => {
+  const DATE = 1;
+  const { isAdmin } = useAthority();
+  return (
+    <>
+      <_ProgressCircle now={0 <= DATE} isAdmin={isAdmin} />
+      <_ProgressStep now={1 <= DATE} isAdmin={isAdmin} />
+      <_ProgressCircle now={1 <= DATE} isAdmin={isAdmin} />
+      <_ProgressStep now={2 <= DATE} isAdmin={isAdmin} />
+      <_ProgressCircle now={2 <= DATE} isAdmin={isAdmin} />
+      <_ProgressStep now={3 <= DATE} isAdmin={isAdmin} />
+      <_ProgressCircle now={3 <= DATE} isAdmin={isAdmin} />
+    </>
+  );
+};
 
 const _ProgressStep = styled.div<ICurrentDate>`
   width: 10.2rem;
   height: 4px;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  background-color: ${({ now, isAdmin }) =>
+    now ? (isAdmin ? theme.color.green500 : theme.color.orange500) : theme.color.black100};
 `;
 
 const _ProgressCircle = styled.div<ICurrentDate>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: ${({ now }) => (now ? theme.color.orange500 : theme.color.black100)};
+  background-color: ${({ now, isAdmin }) =>
+    now ? (isAdmin ? theme.color.green500 : theme.color.orange500) : theme.color.black100};
 `;
-
-export const progressBar = [
-  <_ProgressCircle now={0 <= DATE} />,
-  <_ProgressStep now={1 <= DATE} />,
-  <_ProgressCircle now={1 <= DATE} />,
-  <_ProgressStep now={2 <= DATE} />,
-  <_ProgressCircle now={2 <= DATE} />,
-  <_ProgressStep now={3 <= DATE} />,
-  <_ProgressCircle now={3 <= DATE} />,
-];

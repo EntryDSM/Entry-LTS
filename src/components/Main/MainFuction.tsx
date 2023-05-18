@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text } from '@team-entry/design_system';
+import Banner from '../../assets/ReplaceBanner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
-import Banner from '../../assets/ReplaceBanner.svg';
 import { shortcut } from '../../constant/main';
 import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
+import { useAthority } from '@/hooks/useAuthority';
 import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
 
 const MainFunction = () => {
+  const { isAdmin, authorityColor } = useAthority();
   const onClick = () => console.log('clicked!');
-
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
   return (
@@ -30,7 +31,7 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 상담 문의: 042-8832-1121
             </Text>
-            <Button color="orange" onClick={() => navigate('/application')} margin={['bottom', 20]}>
+            <Button color={authorityColor} onClick={() => navigate('/application')} margin={['bottom', 20]}>
               원서 접수 →
             </Button>
           </Pc>
@@ -42,11 +43,17 @@ const MainFunction = () => {
               작성한 원서를 제출하세요
             </Text>
             <div>
-              <Button color="orange" onClick={() => navigate('/application')} margin={[20, 0, 20, 0]}>
+              <Button color={authorityColor} onClick={() => navigate('/application')} margin={[20, 0, 20, 0]}>
                 원서 접수 →
               </Button>
             </div>
-            <Button icon="NavigationArrow" color="orange" kind="outlined" onClick={onClick} margin={[0, 0, 30, 0]}>
+            <Button
+              icon="NavigationArrow"
+              color={authorityColor}
+              kind="outlined"
+              onClick={onClick}
+              margin={[0, 0, 30, 0]}
+            >
               입학 설명회 참석 예약
             </Button>
           </Mobile>

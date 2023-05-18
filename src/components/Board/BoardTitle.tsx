@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
+import { useAthority } from '@/hooks/useAuthority';
 
 interface IBoardTitle {
   click: boolean;
@@ -18,6 +19,7 @@ interface IBoardTitle {
 
 const BoardTitle = (props: IBoardTitle) => {
   const { click, setClick, title, subTitle, button1, button2, button3, isCustomer, link } = props;
+  const { isAdmin, authorityColor } = useAthority();
   const onClick = () => {
     console.log('clicked!');
   };
@@ -27,7 +29,7 @@ const BoardTitle = (props: IBoardTitle) => {
         <Text color="black900" size="header1">
           {title}
         </Text>
-        <Text margin={[0, 0, 22, 0]} color="realBlack" size="title3">
+        <Text margin={[5, 0, 22, 0]} color="black700" size="body1">
           {subTitle}
         </Text>
       </Pc>
@@ -42,17 +44,17 @@ const BoardTitle = (props: IBoardTitle) => {
       </Mobile>
       <_Buttons>
         <_ButtonWrapper>
-          <Button onClick={() => setClick(false)} color={'orange'} kind={click ? 'outlined' : 'contained'}>
+          <Button onClick={() => setClick(false)} color={authorityColor} kind={click ? 'outlined' : 'contained'}>
             {button1}
           </Button>
-          <Button onClick={() => setClick(true)} color={'orange'} kind={click ? 'contained' : 'outlined'}>
+          <Button onClick={() => setClick(true)} color={authorityColor} kind={click ? 'contained' : 'outlined'}>
             {button2}
           </Button>
         </_ButtonWrapper>
         <div>
-          {isCustomer && !click && (
+          {(!isCustomer || (isCustomer && ((!click && !isAdmin) || (click && isAdmin)))) && (
             <Link to={link}>
-              <Button color="orange" onClick={onClick}>
+              <Button color={authorityColor} onClick={onClick}>
                 {button3}
               </Button>
             </Link>

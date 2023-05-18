@@ -7,14 +7,14 @@ export const _File = styled.div`
   gap: 8px;
 `;
 
-export const _Download = styled.div`
+export const _Download = styled.div<{ color: string }>`
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  background-color: ${theme.color.orange500};
+  background-color: ${({ color }) => (color === 'orange' ? theme.color.orange500 : theme.color.green500)};
   border-radius: 18px;
   @media screen and (max-width: 768px) {
     width: 28px;
