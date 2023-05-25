@@ -9,7 +9,7 @@ import Menu from '@/assets/Menu.svg';
 import { Cookies } from 'react-cookie';
 import { useAthority } from '@/hooks/useAuthority';
 
-type THeader = '고객 문의' | '공지 사항' | '성적 산출' | '전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
+type THeader = '문의사항' | '공지사항' | '성적 산출' | '전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
 interface IHeaderList {
   name: THeader;
@@ -18,14 +18,14 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '고객 문의', url: '/customer' },
-  { name: '공지 사항', url: '/notice' },
+  { name: '문의사항', url: '/customer' },
+  { name: '공지사항', url: '/notice' },
   { name: '성적 산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '고객 문의', url: '/customer' },
-  { name: '공지 사항', url: '/notice' },
+  { name: '문의사항', url: '/customer' },
+  { name: '공지사항', url: '/notice' },
   { name: '로그인', url: '/login', type: 'logout' },
   { name: '마이페이지', url: '/mypage', type: 'login' },
   { name: '로그아웃', url: '/logout', type: 'login' },

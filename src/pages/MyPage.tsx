@@ -5,9 +5,11 @@ import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardElement from '../components/Board/BoardElement';
 import { useModal } from '../hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
+import { ApplyInfoStatus } from '@/utils/api/user';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
+  const { data } = ApplyInfoStatus();
   const onClick = () => {
     console.log('clicked!!');
   };

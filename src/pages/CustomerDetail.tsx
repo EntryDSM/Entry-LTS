@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
-import { Button, Input, Text, Textarea, theme } from '@team-entry/design_system';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Input, Spinner, Text, Textarea, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
+import { GetQnaDetail } from '@/utils/api/qna';
 import { useAthority } from '@/hooks/useAuthority';
+import QnaAnswer from '@/components/Answer/QnaAnswer';
+const { isAdmin, authorityColor } = useAthority();
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { qnaId } = location.state;
   const [writeAnswer, setWriteAnswer] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const { isAdmin, authorityColor } = useAthority();
+
+  const { data, isLoading } = GetQnaDetail(qnaId);
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setInputValue(value);
   };
+
+  if (isLoading) return <Spinner margin={[0, 'auto']} size={40} color="orange" />;
   return (
     <_Container>
       <_Wrapper>
@@ -29,15 +38,15 @@ const CustomerDetailPage = () => {
               Q.
             </Text>
             <Text color="black900" size="title1">
-              성적 입력에 관하여...
+              {data?.title}
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            성적 입력시에 자퇴의 경우는 어떻게 해야 될까요?
+            {data?.content}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
-              36 | 김*연 | 2022-12-21
+              36 | {data?.username} | {data?.created_at?.slice(0, 10)}
             </Text>
             {isAdmin && !writeAnswer && (
               <_EditCustomerButtons>
@@ -57,15 +66,15 @@ const CustomerDetailPage = () => {
               Q.
             </Text>
             <Text color="black900" size="title2">
-              성적 입력에 관하여...
+              {data?.title}
             </Text>
           </_Title>
           <Text color="black600" size="body5">
-            성적 입력시에 자퇴의 경우는 어떻게 해야 될까요?
+            {data?.content}
           </Text>
           <_QuestionBottom>
-            <Text color="black400" size="body3">
-              36 | 김*연 | 2022-12-21
+            <Text color="black400" size="body3" margin={['top', 80]}>
+              36 | {data?.username} | {data?.created_at?.slice(0, 10)}
             </Text>
             {isAdmin && !writeAnswer && (
               <_EditCustomerButtons>
@@ -100,9 +109,13 @@ const CustomerDetailPage = () => {
         ) : (
           <_AnswerBottom>
             <_Answer>
-              <Text color="black500" size="title2">
-                아직 작성된 답변이 없습니다
-              </Text>
+              {data?.is_replied ? (
+                <QnaAnswer title={data?.title} content={data?.content} created_at={data?.created_at} />
+              ) : (
+                <Text color="black500" size="title2">
+                  아직 작성된 답변이 없습니다
+                </Text>
+              )}
             </_Answer>
             <Button onClick={() => navigate(-1)}>목록으로</Button>
           </_AnswerBottom>
@@ -134,7 +147,7 @@ const _Title = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 1rem;
+  margin-bottom: 10px;
 `;
 
 const _QustionBackground = styled.div<{ isWriteAnswer: boolean }>`

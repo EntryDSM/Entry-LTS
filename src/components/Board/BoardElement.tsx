@@ -1,14 +1,26 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAthority } from '@/hooks/useAuthority';
 import { useNavigate } from 'react-router-dom';
 
 const BoardElement = (props: IBoard) => {
-  const { isNumber, isComment, isWriteDay, isWriter, isOpen = false } = props;
+  const {
+    isNumber,
+    isComment,
+    isWriteDay,
+    isWriter,
+    isPublic,
+    isOpen = false,
+    boardNumber,
+    title,
+    isReplied,
+    userName,
+    createdAt,
+  } = props;
   const [clicked, setClicked] = useState(false);
   const { isAdmin } = useAthority();
   const navigate = useNavigate();
@@ -17,12 +29,15 @@ const BoardElement = (props: IBoard) => {
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
         <Div>
           <Pc>
-            <Text color="black700" size="body1" width={6}>
-              {isNumber ? '36' : '입학문의'}
+            <Text align="center" color="black700" size="body1" width={6}>
+              {isNumber ? boardNumber : '입학문의'}
             </Text>
-            <Text color="black800" size="body3" margin={['left', 20]}>
-              성적 입력에 관하여...
-            </Text>
+            <Div style={{ marginLeft: 20 }}>
+              {isPublic == false && <Icon color="orange500" size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
+              <Text align="center" color="black800" size="body3">
+                {title}
+              </Text>
+            </Div>
           </Pc>
           <Mobile>
             {!isNumber && (
@@ -39,34 +54,46 @@ const BoardElement = (props: IBoard) => {
           {isComment && (
             <>
               <Pc>
-                <Text color="black500" size="body5" width={6}>
-                  대기중
-                </Text>
+                {isReplied ? (
+                  <Text align="center" color="orange500" size="body5" width={6}>
+                    완료
+                  </Text>
+                ) : (
+                  <Text align="center" color="black500" size="body5" width={6}>
+                    대기중
+                  </Text>
+                )}
               </Pc>
               <Mobile>
-                <Text color="black500" size="body5" width={5}>
-                  대기중
-                </Text>
+                {isReplied ? (
+                  <Text align="center" color="orange500" size="body5" width={5}>
+                    완료
+                  </Text>
+                ) : (
+                  <Text align="center" color="black500" size="body5" width={5}>
+                    대기중
+                  </Text>
+                )}
               </Mobile>
             </>
           )}
           {isWriter && (
             <Pc>
-              <Text color="black500" size="body5" width={6}>
-                정지관
+              <Text align="center" color="black500" size="body5" width={6}>
+                {userName}
               </Text>
             </Pc>
           )}
           {isWriteDay && (
             <>
               <Pc>
-                <Text color="black500" size="body5" width={6}>
-                  2023-01-10
+                <Text align="center" color="black500" size="body5" width={6}>
+                  {createdAt?.slice(0, 10)}
                 </Text>
               </Pc>
               <Mobile>
-                <Text color="black500" size="body5" width={5}>
-                  2023-01-10
+                <Text align="center" color="black500" size="body5" width={5.5}>
+                  {createdAt?.slice(0, 10)}
                 </Text>
               </Mobile>
             </>

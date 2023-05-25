@@ -21,7 +21,6 @@ root.render(
   <>
     <StyledProvider>
       <QueryClientProvider client={queryClient}>
-        <Global styles={GlobalStyle} />
         <App />
       </QueryClientProvider>
     </StyledProvider>

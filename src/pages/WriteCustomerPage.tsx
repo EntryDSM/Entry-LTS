@@ -1,19 +1,20 @@
-import { SetStateAction, useState } from 'react';
+import { ChangeEvent, SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Switch, Text, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
-import { useNavigate } from 'react-router-dom';
+import { CreateQna } from '@/utils/api/qna';
+import { useInput } from '@/hooks/useInput';
 
 const WriteCustomerPage = () => {
-  const [click, setClick] = useState(false);
-  const [value, setValue] = useState('');
-  const navigate = useNavigate();
-  const onChange = (e: { target: { value: SetStateAction<string> } }) => {
-    setValue(e.target.value);
+  const [click, setClick] = useState(true);
+  const { form, onChange } = useInput({ title: '', content: '' });
+
+  const { mutate } = CreateQna({ ...form, is_public: click });
+
+  const writeQna = () => {
+    mutate();
   };
-  const onClick = () => {
-    navigate(-1)
-  };
+
   return (
     <_Container>
       <_Wrapper>
@@ -34,20 +35,29 @@ const WriteCustomerPage = () => {
           </Text>
           <Switch isClick={click} onClick={() => setClick(!click)} color="orange" />
         </_OpenLetter>
-        <Input type="text" label="제목" width="100%" placeholder="제목을 입력하세요" />
+        <Input
+          name="title"
+          value={form.title}
+          onChange={onChange}
+          type="text"
+          label="제목"
+          width="100%"
+          placeholder="제목을 입력하세요"
+        />
         <div>
           <Textarea
+            name="content"
             label="본문"
             width="100%"
             placeholder="내용을 입력하세요"
             limit={300}
-            value={value}
+            value={form.content}
             onChange={onChange}
             margin={['top', 20]}
           />
         </div>
         <_ButtonBox>
-          <Button color="orange" onClick={onClick}>
+          <Button color="orange" onClick={writeQna}>
             질문 작성
           </Button>
         </_ButtonBox>
