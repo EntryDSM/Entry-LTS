@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Icon, IconType, Text } from '@team-entry/design_system';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
-interface ShorcutButtonProps {
+interface IShorcutButtonProps {
   icon: string;
   title: string;
 }
 
-const ShortCutButton = ({ icon, title }: ShorcutButtonProps) => {
-  const { authorityColor } = useAthority();
+const ShortCutButton = ({ icon, title }: IShorcutButtonProps) => {
+  const { authorityColor } = useAuthority();
   return (
     <_ShorcutButton>
       <Icon icon={icon as IconType} color={`${authorityColor}500`} />

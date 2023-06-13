@@ -4,7 +4,7 @@ const cookies = new Cookies();
 
 type authorityColorType = 'orange' | 'green';
 
-export const useAthority = () => {
+export const useAuthority = () => {
   const authority = cookies.get('authority');
   const isAdmin = authority === 'admin' ? true : false;
   const authorityColor: authorityColorType = isAdmin ? 'green' : 'orange';

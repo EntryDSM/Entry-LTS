@@ -7,7 +7,7 @@ import BoardHeader from '../components/Board/BoardHeader';
 import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
 import { GetAllQna } from '@/utils/api/qna';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -19,7 +19,7 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
 
   const { data } = GetAllQna();
 
@@ -42,7 +42,7 @@ const CustomerPage = () => {
           button2="자주 묻는 질문"
           button3="질문 작성"
           isCustomer={true}
-          link={isAdmin ? 'writeFAQ' :'write'}
+          link={isAdmin ? 'writeFAQ' : 'write'}
         ></BoardTitle>
 
         {!click ? (

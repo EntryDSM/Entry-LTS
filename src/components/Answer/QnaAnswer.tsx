@@ -1,26 +1,50 @@
+import { useAuthority } from '@/hooks/useAuthority';
+import { Mobile, Pc } from '@/hooks/useResponsive';
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import React from 'react';
 
 const QnaAnswer = ({ title, content, created_at }) => {
+  const { authorityColor } = useAuthority();
+
   return (
     <_Reply>
-      <div>
-        <_Title>
-          <Text color="orange500" size="title1">
-            A.
+      <Pc>
+        <div>
+          <_Title>
+            <Text color={`${authorityColor}500`} size="header2">
+              A.
+            </Text>
+            <Text color="black900" size="title1">
+              {title}
+            </Text>
+          </_Title>
+          <Text color="black600" size="body2">
+            {content}
           </Text>
-          <Text color="black900" size="title2">
-            {title}
-          </Text>
-        </_Title>
-        <Text color="black600" size="body2">
-          {content}
+        </div>
+        <Text color="black400" size="body1">
+          {created_at?.slice(0, 10)}
         </Text>
-      </div>
-      <Text color="black400" size="body1">
-        {created_at?.slice(0, 10)}
-      </Text>
+      </Pc>
+      <Mobile>
+        <div>
+          <_Title>
+            <Text color={`${authorityColor}500`} size="title1">
+              A.
+            </Text>
+            <Text color="black900" size="title2">
+              {title}
+            </Text>
+          </_Title>
+          <Text color="black600" size="body5">
+            {content}
+          </Text>
+        </div>
+        <Text color="black400" size="body3">
+          {created_at?.slice(0, 10)}
+        </Text>
+      </Mobile>
     </_Reply>
   );
 };
@@ -33,7 +57,6 @@ const _Reply = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 25px;
 `;
 
 const _Title = styled.div`

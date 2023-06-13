@@ -4,7 +4,7 @@ import { IBoard } from '@/interfaces/Board';
 import { Button, Icon, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate } from 'react-router-dom';
 
 const BoardElement = (props: IBoard) => {
@@ -22,7 +22,7 @@ const BoardElement = (props: IBoard) => {
     createdAt,
   } = props;
   const [clicked, setClicked] = useState(false);
-  const { isAdmin } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   return (
     <>
@@ -33,7 +33,7 @@ const BoardElement = (props: IBoard) => {
               {isNumber ? boardNumber : '입학문의'}
             </Text>
             <Div style={{ marginLeft: 20 }}>
-              {!isPublic && <Icon color="orange500" size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
+              {!isPublic && <Icon color={`${authorityColor}500`} size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
               <Text align="center" color="black800" size="body3">
                 {title}
               </Text>
@@ -55,7 +55,7 @@ const BoardElement = (props: IBoard) => {
             <>
               <Pc>
                 {isReplied ? (
-                  <Text align="center" color="orange500" size="body5" width={6}>
+                  <Text align="center" color={`${authorityColor}500`} size="body5" width={6}>
                     완료
                   </Text>
                 ) : (
@@ -66,7 +66,7 @@ const BoardElement = (props: IBoard) => {
               </Pc>
               <Mobile>
                 {isReplied ? (
-                  <Text align="center" color="orange500" size="body5" width={5}>
+                  <Text align="center" color={`${authorityColor}500`} size="body5" width={5}>
                     완료
                   </Text>
                 ) : (
@@ -104,7 +104,7 @@ const BoardElement = (props: IBoard) => {
         <>
           <Pc>
             <_AnswerPart style={{ height: '14rem' }}>
-              <Text color="black800" size="body3" width={6}>
+              <Text align="center" color="black800" size="body3" width={6}>
                 답변
               </Text>
               <_Answer>
@@ -127,7 +127,7 @@ const BoardElement = (props: IBoard) => {
           </Pc>
           <Mobile>
             <_AnswerPart style={{ height: '10rem' }}>
-              <Text color="black800" size="body5" width={5}>
+              <Text align="center" color="black800" size="body5" width={5}>
                 답변
               </Text>
               <_Answer>

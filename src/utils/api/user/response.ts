@@ -1,11 +1,11 @@
-export interface AuthorizationResponse {
+export interface IAuthorizationResponse {
   access_token: string;
   refresh_token: string;
 }
 
 type ApplicationType = 'COMMON' | 'MEISTER' | 'SOCIAL';
 
-export interface ApplyInfoStatusResponse {
+export interface IApplyInfoStatusResponse {
   phone_number: string;
   name: string;
   is_submitted: boolean;

@@ -3,13 +3,13 @@ import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Button, Text } from '@team-entry/design_system';
+import { Button, Icon, Stack, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { Cookies } from 'react-cookie';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
-type THeader = '문의사항' | '공지사항' | '성적 산출' | '전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
+type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
 interface IHeaderList {
   name: THeader;
@@ -39,7 +39,7 @@ const Header = () => {
   const location = useLocation();
   const cookie = new Cookies();
   const isLogin = cookie.get('access_token');
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
     console.log('clicked');
@@ -122,9 +122,12 @@ const Header = () => {
         </div>
         <Pc>
           {isLogin ? (
-            <Button color={authorityColor} kind="rounded" onClick={onClick}>
-              확인
-            </Button>
+            <Stack align="center">
+              <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
+                정지관
+              </Text>
+              <Icon cursor="pointer" icon="DownArrow" color="black500" />
+            </Stack>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
               로그인

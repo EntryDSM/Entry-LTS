@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 interface IBoardTitle {
   click: boolean;
@@ -19,7 +19,7 @@ interface IBoardTitle {
 
 const BoardTitle = (props: IBoardTitle) => {
   const { click, setClick, title, subTitle, button1, button2, button3, isCustomer, link } = props;
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
   const onClick = () => {
     console.log('clicked!');
   };

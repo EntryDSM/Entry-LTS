@@ -8,12 +8,12 @@ import { shortcut } from '../../constant/main';
 import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
 
 const MainFunction = () => {
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
   const onClick = () => console.log('clicked!');
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();

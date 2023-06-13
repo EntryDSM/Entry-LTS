@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Radio, theme, Dropdown } from '@team-entry/design_system';
 import ApplicationContent from '@/components/Application/ApplicationContent';
-import { UserTypeValue } from '@/pages/Application';
+import { IUserTypeValue } from '@/pages/Application';
 import { useInput } from '@/hooks/useInput';
 
-interface UserTypeProps {
-  userTypeValues: UserTypeValue;
-  setUserTypeValues: React.Dispatch<React.SetStateAction<UserTypeValue>>;
+interface IUserTypeProps {
+  userTypeValues: IUserTypeValue;
+  setUserTypeValues: React.Dispatch<React.SetStateAction<IUserTypeValue>>;
 }
 
-const UserType = ({ userTypeValues, setUserTypeValues }: UserTypeProps) => {
+const UserType = ({ userTypeValues, setUserTypeValues }: IUserTypeProps) => {
   const { form: inputValues, setForm: setInputValues, onChange: changeInputValues } = useInput(userTypeValues);
   setUserTypeValues(inputValues);
   return (

@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
 
-interface ApplicationContentProps {
+interface IApplicationContentProps {
   grid: number;
   width?: number;
   required?: boolean;
@@ -18,7 +18,7 @@ const ApplicationContent = ({
   title,
   placeholder,
   children,
-}: ApplicationContentProps) => {
+}: IApplicationContentProps) => {
   return (
     <_ApplicationContent width={width}>
       <_ApplicationGridbox grid={grid}>

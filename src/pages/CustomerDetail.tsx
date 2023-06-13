@@ -4,9 +4,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Input, Spinner, Text, Textarea, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 import QnaAnswer from '@/components/Answer/QnaAnswer';
-const { isAdmin, authorityColor } = useAthority();
+const { isAdmin, authorityColor } = useAuthority();
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
@@ -50,9 +50,15 @@ const CustomerDetailPage = () => {
             </Text>
             {isAdmin && !writeAnswer && (
               <_EditCustomerButtons>
-                <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
-                  질문 작성
-                </Button>
+                {data?.is_replied ? (
+                  <Button color="black" kind="contained" onClick={() => {}}>
+                    수정
+                  </Button>
+                ) : (
+                  <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
+                    답변 작성
+                  </Button>
+                )}
                 <Button color="delete" kind="delete" onClick={() => console.log('작성')}>
                   질문 삭제
                 </Button>
@@ -76,21 +82,11 @@ const CustomerDetailPage = () => {
             <Text color="black400" size="body3" margin={['top', 80]}>
               36 | {data?.username} | {data?.created_at?.slice(0, 10)}
             </Text>
-            {isAdmin && !writeAnswer && (
-              <_EditCustomerButtons>
-                <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
-                  질문 작성
-                </Button>
-                <Button color="delete" kind="delete" onClick={() => console.log('작성')}>
-                  질문 삭제
-                </Button>
-              </_EditCustomerButtons>
-            )}
           </_QuestionBottom>
         </Mobile>
         {writeAnswer ? (
           <>
-            <Input type="text" label="질문" width="100%" placeholder="질문을 입력해주세요" margin={[30, 0, 0, 0]} />
+            <Input type="text" label="제목" width="100%" placeholder="제목을 입력해주세요" margin={[30, 0, 0, 0]} />
             <Textarea
               label="답변"
               width="100%"
@@ -199,10 +195,11 @@ const _Answer = styled.div`
   background-color: ${theme.color.realWhite};
   border: 1px solid ${theme.color.black200};
   border-radius: 5px;
+  padding: 25px;
   @media screen and (max-width: 769px) {
     width: 100%;
     height: 10rem;
     border: none;
-    padding: 20px;
+    padding: 0;
   }
 `;

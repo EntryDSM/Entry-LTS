@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
 import { ProgressBar, progressState } from '../../constant/main';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 interface ICurrentDate {
   now: boolean;
@@ -10,7 +10,7 @@ interface ICurrentDate {
 }
 const Progress = () => {
   const DATE = 1;
-  const { isAdmin } = useAthority();
+  const { isAdmin } = useAuthority();
   return (
     <_Progress>
       <_ProgressCards>

@@ -9,7 +9,7 @@ import UserPreview from '@/components/Application/UserPreview';
 import GradeProgram from '@/components/Grade/GradeProgram';
 import { IElement } from './GradeProgramPage';
 
-export interface UserTypeValue {
+export interface IUserTypeValue {
   application_type: string;
   is_daejeon: string;
   educational_status: string;
@@ -17,7 +17,7 @@ export interface UserTypeValue {
   application_remark: string;
 }
 
-export interface UserInfoValue {
+export interface IUserInfoValue {
   img: string;
   name: string;
   sex: string;
@@ -28,7 +28,7 @@ export interface UserInfoValue {
   telephone_number: string;
 }
 
-export interface UserWriteValue {
+export interface IUserWriteValue {
   intro: string;
   study_plan: string;
 }
@@ -38,7 +38,7 @@ const Application = () => {
 
   const [gradeCurrent, setGradeCurrent] = useState<number>(0);
 
-  const [userType, setUserType] = useState<UserTypeValue>({
+  const [userType, setUserType] = useState<IUserTypeValue>({
     application_type: '',
     is_daejeon: '',
     educational_status: '',
@@ -46,7 +46,7 @@ const Application = () => {
     application_remark: '',
   });
 
-  const [userInfo, setUserInfo] = useState<UserInfoValue>({
+  const [userInfo, setUserInfo] = useState<IUserInfoValue>({
     img: '',
     name: '',
     sex: '',
@@ -57,7 +57,7 @@ const Application = () => {
     telephone_number: '',
   });
 
-  const [userWrite, setUserWrite] = useState<UserWriteValue>({
+  const [userWrite, setUserWrite] = useState<IUserWriteValue>({
     intro: '',
     study_plan: '',
   });
