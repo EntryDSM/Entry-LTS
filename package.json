@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode development",
-    "dev": "webpack serve --open --mode development --config webpack.config.js"
+    "dev": "webpack serve --open --mode development --config webpack.config.js",
+    "analyze": "webpack-bundle-analyzer ./dist/bundle-report.json --default-sizes gzip"
   },
   "repository": "git+https://github.com/EntryDSM/Entry-LTS.git",
   "author": "jikwan <jikwan0327@gmail.com>",
@@ -20,7 +21,7 @@
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.10.5",
-    "@team-entry/design_system": "^1.0.77",
+    "@team-entry/design_system": "^1.0.79",
     "@types/react-responsive": "^8.0.5",
     "axios": "^1.2.2",
     "dotenv": "^16.0.3",

@@ -1476,7 +1476,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11.10.5, @emotion/react@npm:^11.11.0":
+"@emotion/react@npm:^11.10.5":
+  version: 11.11.1
+  resolution: "@emotion/react@npm:11.11.1"
+  dependencies:
+    "@babel/runtime": ^7.18.3
+    "@emotion/babel-plugin": ^11.11.0
+    "@emotion/cache": ^11.11.0
+    "@emotion/serialize": ^1.1.2
+    "@emotion/use-insertion-effect-with-fallbacks": ^1.0.1
+    "@emotion/utils": ^1.2.1
+    "@emotion/weak-memoize": ^0.3.1
+    hoist-non-react-statics: ^3.3.1
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+  checksum: aec3c36650f5f0d3d4445ff44d73dd88712b1609645b6af3e6d08049cfbc51f1785fe13dea1a1d4ab1b0800d68f2339ab11e459687180362b1ef98863155aae5
+  languageName: node
+  linkType: hard
+
+"@emotion/react@npm:^11.11.0":
   version: 11.11.0
   resolution: "@emotion/react@npm:11.11.0"
   dependencies:
@@ -1963,15 +1984,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@team-entry/design_system@npm:^1.0.77":
-  version: 1.0.77
-  resolution: "@team-entry/design_system@npm:1.0.77"
+"@team-entry/design_system@npm:^1.0.79":
+  version: 1.0.79
+  resolution: "@team-entry/design_system@npm:1.0.79"
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 0b85919f16734da371117d77b0699f1c0488a80576dfd03f4ffdd6a2410f27ce33e846851a055c42eed2b6e975facc313c8271299776fa81e3d05605067a9612
+  checksum: cda4a9dacefed5d7cbc03fa811d32daf7d3bfb518da74401d92629c9cf988ed98ba6c2b4ec99fe0c4ef3693fcf4450b351889ca4f2951c2267b5db9f9a471945
   languageName: node
   linkType: hard
 
@@ -3892,7 +3913,7 @@ __metadata:
     "@emotion/styled": ^11.10.5
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
     "@svgr/webpack": ^6.5.1
-    "@team-entry/design_system": ^1.0.77
+    "@team-entry/design_system": ^1.0.79
     "@types/file-saver": ^2.0.5
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
@@ -7862,11 +7883,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=23ec76"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: ab417a2f398380c90a6cf5a5f74badd17866adf57f1165617d6a551f059c3ba0a3e4da0d147b3ac5681db9ac76a303c5876394b13b3de75fdd5b1eaa06181c9d
+  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 

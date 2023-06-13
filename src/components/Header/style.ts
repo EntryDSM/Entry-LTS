@@ -103,4 +103,4 @@ export const _Background = styled.div`
 export const _LogoButton = styled(Link)`
   display: flex;
   align-items: center;
-`
+`;

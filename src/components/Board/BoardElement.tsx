@@ -33,7 +33,7 @@ const BoardElement = (props: IBoard) => {
               {isNumber ? boardNumber : '입학문의'}
             </Text>
             <Div style={{ marginLeft: 20 }}>
-              {isPublic == false && <Icon color="orange500" size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
+              {!isPublic && <Icon color="orange500" size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
               <Text align="center" color="black800" size="body3">
                 {title}
               </Text>

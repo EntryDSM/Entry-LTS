@@ -17,7 +17,7 @@ export const GetAllQna = () => {
 
 export const GetQnaDetail = (qnaId: string) => {
   const response = async () => {
-    const { data } = await instance.get<IQnaDetailResponse>(`qna/${qnaId}`);
+    const { data } = await instance.get<IQnaDetailResponse>(`${router}/${qnaId}`);
     return data;
   };
 
@@ -39,7 +39,7 @@ export const GetMyQna = () => {
     const { data } = await instance.get(`${router}`);
     return data;
   };
-  return useQuery(['qna', 'my'], response, {
+  return useQuery(['myQna'], response, {
     onSuccess: () => console.log('success'),
     onError: () => console.log('error'),
   });
@@ -52,8 +52,7 @@ export const CreateQna = (body: ICreateQna) => {
   };
 
   return useMutation(response, {
-    onSuccess: (res: AxiosResponse) => {
-      console.log(res.data);
+    onSuccess: () => {
       alert('성공');
       navigate('/customer');
     },

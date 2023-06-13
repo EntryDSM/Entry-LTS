@@ -9,10 +9,10 @@ const WriteCustomerPage = () => {
   const [click, setClick] = useState(true);
   const { form, onChange } = useInput({ title: '', content: '' });
 
-  const { mutate } = CreateQna({ ...form, is_public: click });
+  const { mutate: createQna } = CreateQna({ ...form, is_public: click });
 
   const writeQna = () => {
-    mutate();
+    createQna();
   };
 
   return (
