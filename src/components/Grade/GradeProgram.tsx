@@ -6,21 +6,21 @@ import SelectGrade from './SelectGrade';
 import AllSelect from './AllSelect';
 import { IElement } from '@/pages/GradeProgramPage';
 
-interface arrProps {
+interface IArrProps {
   step: number;
   title: string;
   element: IElement[][];
   subTitle?: string | undefined;
 }
 
-interface ProgramProps {
-  arr: arrProps[];
+interface IProgramProps {
+  arr: IArrProps[];
   current: number;
   element: IElement[][];
   setElement: React.Dispatch<React.SetStateAction<IElement[][]>>;
 }
 
-const Program = ({ arr, current, element, setElement }: ProgramProps) => {
+const Program = ({ arr, current, element, setElement }: IProgramProps) => {
   return (
     <_Wrapper>
       <Title>

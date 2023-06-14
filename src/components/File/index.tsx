@@ -1,14 +1,14 @@
 import React from 'react';
 import { Icon, Text } from '@team-entry/design_system';
 import * as _ from './style';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
-interface FileProps {
+interface IFileProps {
   canEdit?: boolean;
 }
 
-const File = ({ canEdit }: FileProps) => {
-  const { authorityColor } = useAthority();
+const File = ({ canEdit }: IFileProps) => {
+  const { authorityColor } = useAuthority();
   return (
     <_._File>
       <_._Download color={authorityColor}>

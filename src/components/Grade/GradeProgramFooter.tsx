@@ -2,13 +2,13 @@ import styled from '@emotion/styled';
 import { Button } from '@team-entry/design_system';
 import React, { SetStateAction } from 'react';
 
-interface ProgramFooterProps {
+interface IProgramFooterProps {
   arr: number;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ProgramFooter = ({ arr, current, setCurrent }: ProgramFooterProps) => {
+const ProgramFooter = ({ arr, current, setCurrent }: IProgramFooterProps) => {
   return (
     <_Buttons>
       {current > 0 && (

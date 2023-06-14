@@ -8,12 +8,12 @@ import { shortcut } from '../../constant/main';
 import { Link } from 'react-router-dom';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useMediaQuery } from 'react-responsive';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
 
 const MainFunction = () => {
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
   const onClick = () => console.log('clicked!');
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const MainFunction = () => {
               지금은 원서제출 기간입니다.
             </Text>
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
-              입학 상담 문의: 042-8832-1121
+              입학 상담 문의: 042-886-1121
             </Text>
             <Button color={authorityColor} onClick={() => navigate('/application')} margin={['bottom', 20]}>
               원서 접수 →
@@ -122,6 +122,7 @@ const _Application = styled.div`
     justify-content: space-between;
     flex-direction: column-reverse;
     align-items: center;
+    margin-top: 10%;
     border: 0;
   }
 `;

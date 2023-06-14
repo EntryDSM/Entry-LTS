@@ -4,11 +4,11 @@ import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
 import { Link } from 'react-router-dom';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const NoticePage = () => {
   const [click, setClick] = useState(false);
-  const { isAdmin } = useAthority();
+  const { isAdmin } = useAuthority();
 
   return (
     <_Container>

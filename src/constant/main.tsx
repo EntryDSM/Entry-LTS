@@ -1,4 +1,4 @@
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
 import React from 'react';
@@ -84,7 +84,7 @@ export const progressState = [
 
 export const ProgressBar = () => {
   const DATE = 1;
-  const { isAdmin } = useAthority();
+  const { isAdmin } = useAuthority();
   return (
     <>
       <_ProgressCircle now={0 <= DATE} isAdmin={isAdmin} />

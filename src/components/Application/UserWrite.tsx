@@ -1,15 +1,15 @@
 import React, { SetStateAction } from 'react';
-import { UserWriteValue } from '@/pages/Application';
+import { IUserWriteValue } from '@/pages/Application';
 import { Textarea, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import { useInput } from '@/hooks/useInput';
 
-interface UserTypeProps {
-  userWriteValues: UserWriteValue;
-  setUserWriteValues: React.Dispatch<SetStateAction<UserWriteValue>>;
+interface IUserTypeProps {
+  userWriteValues: IUserWriteValue;
+  setUserWriteValues: React.Dispatch<SetStateAction<IUserWriteValue>>;
 }
 
-const UserWrite = ({ userWriteValues, setUserWriteValues }: UserTypeProps) => {
+const UserWrite = ({ userWriteValues, setUserWriteValues }: IUserTypeProps) => {
   const { form: inputValues, onChange: changeInputValues } = useInput(userWriteValues);
   setUserWriteValues(inputValues);
   return (

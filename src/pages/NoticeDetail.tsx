@@ -5,11 +5,11 @@ import Noticeimg from '../assets/ReplaceNotice.svg';
 import { useNavigate } from 'react-router-dom';
 import File from '../components/File';
 import { Mobile, Pc } from '..//hooks/useResponsive';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
-  const { isAdmin } = useAthority();
+  const { isAdmin } = useAuthority();
   return (
     <_Container>
       <_Wrapper>

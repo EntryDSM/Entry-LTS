@@ -2,10 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import Video from '../../assets/ReplaceVideo.svg';
-import { useAthority } from '@/hooks/useAuthority';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const SchoolVideo = () => {
-  const { authorityColor } = useAthority();
+  const { authorityColor } = useAuthority();
   return (
     <_Wrapper id="SchoolVideo">
       <_Title>

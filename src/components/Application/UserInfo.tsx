@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Dropdown, Input, Radio, Text, theme } from '@team-entry/design_system';
-import { UserInfoValue } from '@/pages/Application';
+import { IUserInfoValue } from '@/pages/Application';
 import ApplicationContent from '@/components/Application/ApplicationContent';
 import { ArrayForDropdown } from '@/utils/ArrayForDropdown';
 import { useInput } from '@/hooks/useInput';
 
-interface UserTypeProps {
-  userInfoValues: UserInfoValue;
-  setUserInfoValues: React.Dispatch<React.SetStateAction<UserInfoValue>>;
+interface IUserTypeProps {
+  userInfoValues: IUserInfoValue;
+  setUserInfoValues: React.Dispatch<React.SetStateAction<IUserInfoValue>>;
   isBlackExam: boolean;
 }
 
-const UserInfo = ({ userInfoValues, setUserInfoValues, isBlackExam }: UserTypeProps) => {
+const UserInfo = ({ userInfoValues, setUserInfoValues, isBlackExam }: IUserTypeProps) => {
   const { form: inputValues, setForm: setInputValues, onChange: changeInputValues } = useInput(userInfoValues);
   setUserInfoValues(inputValues);
 

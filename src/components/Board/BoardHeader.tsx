@@ -10,10 +10,10 @@ const BoardHeader = (props: IBoard) => {
       <Div>
         <>
           <Pc>
-            <Text color="black700" size="body1" width={6}>
+            <Text align="center" color="black700" size="body1" width={6}>
               {isNumber ? '번호' : '구분'}
             </Text>
-            <Text color="black700" size="body1" margin={['left', 20]}>
+            <Text align="center" color="black700" size="body1" margin={['left', 20]}>
               제목
             </Text>
           </Pc>
@@ -33,12 +33,12 @@ const BoardHeader = (props: IBoard) => {
         {isComment && (
           <>
             <Pc>
-              <Text color="black700" size="body1" width={6}>
+              <Text align="center" color="black700" size="body1" width={6}>
                 답변
               </Text>
             </Pc>
             <Mobile>
-              <Text color="black700" size="body3" width={5}>
+              <Text align="center" color="black700" size="body3" width={5}>
                 답변
               </Text>
             </Mobile>
@@ -46,7 +46,7 @@ const BoardHeader = (props: IBoard) => {
         )}
         {isWriter && (
           <Pc>
-            <Text color="black700" size="body1" width={6}>
+            <Text align="center" color="black700" size="body1" width={6}>
               작성자
             </Text>
           </Pc>
@@ -54,12 +54,12 @@ const BoardHeader = (props: IBoard) => {
         {isWriteDay && (
           <>
             <Pc>
-              <Text color="black700" size="body1" width={6}>
+              <Text align="center" color="black700" size="body1" width={6}>
                 작성일
               </Text>
             </Pc>
             <Mobile>
-              <Text color="black700" size="body3" width={5}>
+              <Text align="center" color="black700" size="body3" width={5.5}>
                 작성일
               </Text>
             </Mobile>

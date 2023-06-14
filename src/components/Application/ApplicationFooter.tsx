@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Button, theme } from '@team-entry/design_system';
-import { UserInfoValue, UserTypeValue, UserWriteValue } from '@/pages/Application';
+import { IUserInfoValue, IUserTypeValue, IUserWriteValue } from '@/pages/Application';
 
-type BlackExam = Omit<UserInfoValue, 'parent_name' | 'parent_tel' | 'telephone_number'>;
-type NotBlackExam = Omit<UserInfoValue, 'blackExam'>;
+type BlackExam = Omit<IUserInfoValue, 'parent_name' | 'parent_tel' | 'telephone_number'>;
+type NotBlackExam = Omit<IUserInfoValue, 'blackExam'>;
 type UserInfo = BlackExam | NotBlackExam;
 
-interface ApplicationFooterProps {
-  check?: Omit<UserTypeValue, 'application_remark' | 'graduated_at'> | UserInfo | UserWriteValue | string;
+interface IApplicationFooterProps {
+  check?: Omit<IUserTypeValue, 'application_remark' | 'graduated_at'> | UserInfo | IUserWriteValue | string;
   current: number;
   setCurrent: React.Dispatch<React.SetStateAction<number>>;
   gradeCurrent: number;
@@ -23,7 +23,7 @@ const ApplicationFooter = ({
   setGradeCurrent,
   check,
   isBlackExam,
-}: ApplicationFooterProps) => {
+}: IApplicationFooterProps) => {
   const progress = [0, 1, 2, 3, 4];
   const checkDisabled = Object.values(check).includes('');
 

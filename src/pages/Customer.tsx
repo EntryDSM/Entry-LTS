@@ -6,7 +6,8 @@ import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardHeader from '../components/Board/BoardHeader';
 import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
-import { useAthority } from '@/hooks/useAuthority';
+import { GetAllQna } from '@/utils/api/qna';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -18,7 +19,16 @@ const CustomerPage = () => {
     { name: '진학 문의' },
     { name: '기타' },
   ];
-  const { isAdmin, authorityColor } = useAthority();
+  const { isAdmin, authorityColor } = useAuthority();
+
+  const { data } = GetAllQna();
+
+  const isQnaPublic = (e: React.MouseEvent<HTMLElement>, isPublic: boolean) => {
+    if (!isPublic) {
+      e.preventDefault();
+      alert('비공개글 입니다.');
+    }
+  };
 
   return (
     <_Container>
@@ -26,30 +36,41 @@ const CustomerPage = () => {
         <BoardTitle
           click={click}
           setClick={setClick}
-          title="고객문의"
-          subTitle="입학 상담 문의: 042-8832-1121"
+          title="문의사항"
+          subTitle="입학 상담 문의: 042-886-1121"
           button1="Q&A"
           button2="자주 묻는 질문"
           button3="질문 작성"
           isCustomer={true}
-          link={isAdmin ? 'writeFAQ' :'write'}
+          link={isAdmin ? 'writeFAQ' : 'write'}
         ></BoardTitle>
 
         {!click ? (
           <>
             <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <Link to="/customer/1">
-              <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            </Link>
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            {data?.qna_list?.map((qna, idx) => {
+              return (
+                <Link
+                  to={`/customer/${qna.id}`}
+                  onClick={(e) => isQnaPublic(e, qna.is_public)}
+                  state={{ qnaId: qna.id }}
+                >
+                  <BoardElement
+                    title={qna.title}
+                    boardNumber={data.qna_list.length - idx}
+                    createdAt={qna.created_at}
+                    userName={qna.username}
+                    isPublic={qna.is_public}
+                    isReplied={qna.is_replied}
+                    isNumber={true}
+                    isTopBorder={false}
+                    isComment={true}
+                    isWriteDay={true}
+                    isWriter={true}
+                  />
+                </Link>
+              );
+            })}
           </>
         ) : (
           <>
