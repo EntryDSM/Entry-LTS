@@ -123,7 +123,7 @@ const Header = () => {
         <Pc>
           {isLogin ? (
             <Stack align="center">
-              <Text cursor="pointer" color="realblack" size="body1" margin={[0, 4, 0, 20]}>
+              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}>
                 정지관
               </Text>
               <Icon cursor="pointer" icon="DownArrow" color="black500" />
