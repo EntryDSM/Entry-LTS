@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 export const _HeaderContainer = styled.div`
   position: fixed;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   top: 0;
   left: 0;
+  padding: 0 100px;
   width: 100vw;
   height: 4rem;
   border-bottom: 1px solid #e6e6e6;

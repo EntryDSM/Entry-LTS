@@ -11,11 +11,11 @@ const BoardsAtMain = () => {
       {boardContent.map((item) => (
         <Board key={item.id}>
           <BoardTitle>
-            <Link to={item.link}>
-              <Text color="black600" size="title2">
-                {item.title} <img src={Arrow} alt="arrow" />
-              </Text>
-            </Link>
+            {/* <Link to={item.link}> */}
+            <Text color="black600" size="title2">
+              {item.title} <img src={Arrow} alt="arrow" />
+            </Text>
+            {/* </Link> */}
           </BoardTitle>
           {item.content.map((item, i) => (
             <BoardContent key={i} color="black900" size="body1">

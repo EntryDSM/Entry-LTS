@@ -18,16 +18,16 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '문의사항', url: '/customer' },
-  { name: '공지사항', url: '/notice' },
-  { name: '성적 산출', url: '/grade' },
+  // { name: '문의사항', url: '/customer' },
+  // { name: '공지사항', url: '/notice' },
+  // { name: '성적 산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '문의사항', url: '/customer' },
-  { name: '공지사항', url: '/notice' },
+  // { name: '문의사항', url: '/customer' },
+  // { name: '공지사항', url: '/notice' },
   { name: '로그인', url: '/login', type: 'logout' },
-  { name: '마이페이지', url: '/mypage', type: 'login' },
+  // { name: '마이페이지', url: '/mypage', type: 'login' },
   { name: '로그아웃', url: '/logout', type: 'login' },
 ];
 
@@ -42,7 +42,7 @@ const Header = () => {
   const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
-    console.log('clicked');
+    window.location.href = 'https://entrydsm.hs.kr/login';
   };
 
   useEffect(() => {
@@ -123,10 +123,8 @@ const Header = () => {
         <Pc>
           {isLogin ? (
             <Stack align="center">
-              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}>
-                정지관
-              </Text>
-              <Icon cursor="pointer" icon="DownArrow" color="black500" />
+              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}></Text>
+              {/* <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
             </Stack>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
