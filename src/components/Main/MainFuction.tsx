@@ -33,7 +33,9 @@ const MainFunction = () => {
             </Text>
             <Button
               color={authorityColor}
-              onClick={() => (window.location.href = 'https://auth.entrydsm.hs.kr/login')}
+              onClick={() =>
+                (window.location.href = 'https://auth.entrydsm.hs.kr/login?redirect_url=https://www.entrydsm.hs.kr')
+              }
               margin={['bottom', 20]}
             >
               원서 접수 →
@@ -49,7 +51,9 @@ const MainFunction = () => {
             <div>
               <Button
                 color={authorityColor}
-                onClick={() => (window.location.href = 'https://auth.entrydsm.hs.kr/login')}
+                onClick={() =>
+                  (window.location.href = 'https://auth.entrydsm.hs.kr/login?redirect_url=https://www.entrydsm.hs.kr')
+                }
                 margin={[20, 0, 20, 0]}
               >
                 원서 접수 →
