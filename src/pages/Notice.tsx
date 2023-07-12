@@ -5,17 +5,21 @@ import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
 import { Link } from 'react-router-dom';
 import { useAuthority } from '@/hooks/useAuthority';
+import { GetAllNotice } from '@/utils/api/notice';
+import { NoticeType } from '@/utils/api/notice/types';
 
 const NoticePage = () => {
-  const [click, setClick] = useState(false);
+  const [noticeType, setNoticeType] = useState(false);
   const { isAdmin } = useAuthority();
+
+  const { data } = GetAllNotice(noticeType ? 'FRESHMAN' : 'ADMISSION');
 
   return (
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={click}
-          setClick={setClick}
+          click={noticeType}
+          setClick={setNoticeType}
           title="공지사항"
           subTitle="학교에서 게시한 입학 공지사항을 확인하세요"
           button1="입학 공지사항"
@@ -24,16 +28,24 @@ const NoticePage = () => {
           isCustomer={false}
           link="write"
         />
-        <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <Link to="/notice/1">
-          <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        </Link>
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={true} />
+        <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={false} />
+        {data?.notices.reverse().map((notice, idx) => {
+          return (
+            <Link to={`/notice/${notice.id}`} state={{ noticeId: notice.id }}>
+              <BoardElement
+                boardNumber={data.notices.length - idx}
+                createdAt={notice.created_at}
+                title={notice.title}
+                isNumber={true}
+                isTopBorder={false}
+                isComment={false}
+                isWriteDay={true}
+                isWriter={false}
+                isPublic
+              />
+            </Link>
+          );
+        })}
       </_Wrapper>
     </_Container>
   );

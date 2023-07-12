@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
-import { getCookies, removeTokens, setTokens } from '../cookies';
+import { getCookies, removeTokens, setTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({

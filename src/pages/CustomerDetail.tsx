@@ -42,7 +42,7 @@ const CustomerDetailPage = () => {
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            {data?.content}
+            {data?.content.replace(/\n/g, '<br/>')}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
@@ -72,11 +72,11 @@ const CustomerDetailPage = () => {
               Q.
             </Text>
             <Text color="black900" size="title2">
-              {data?.title}
+              {data?.title.replace(/\n/g, '<br/>')}
             </Text>
           </_Title>
           <Text color="black600" size="body5">
-            {data?.content}
+            {data?.content.replace(/\n/g, '<br/>')}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body3" margin={['top', 80]}>

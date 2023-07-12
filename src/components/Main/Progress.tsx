@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
-import { ProgressBar, progressState } from '../../constant/main';
+import { progressState } from '../../constant/main';
 import { useAuthority } from '@/hooks/useAuthority';
+import { ProgressBar } from '@/components/ProgressBar';
 
 interface ICurrentDate {
   now: boolean;
@@ -13,7 +14,7 @@ const Progress = () => {
   const { isAdmin } = useAuthority();
   return (
     <_Progress>
-      <_ProgressCards>
+      {/* <_ProgressCards>
         {progressState.map((state) => (
           <_ProgressCard key={state.id} now={state.id <= DATE} isAdmin={isAdmin}>
             <Text color="realWhite" size="title1">
@@ -24,10 +25,9 @@ const Progress = () => {
             </Text>
           </_ProgressCard>
         ))}
-      </_ProgressCards>
-      <_ProgressBarWrapper>
-        <ProgressBar />
-      </_ProgressBarWrapper>
+      </_ProgressCards> */}
+      <ProgressBar />
+      <_ProgressBarWrapper></_ProgressBarWrapper>
     </_Progress>
   );
 };
