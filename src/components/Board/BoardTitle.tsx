@@ -24,7 +24,7 @@ const BoardTitle = (props: IBoardTitle) => {
     console.log('clicked!');
   };
   return (
-    <div style={{cursor: "default"}}>
+    <div style={{ cursor: 'default' }}>
       <Pc>
         <Text color="black900" size="header1">
           {title}
@@ -61,7 +61,7 @@ const BoardTitle = (props: IBoardTitle) => {
           )}
         </div>
       </_Buttons>
-    </ㅇ>
+    </div>
   );
 };
 
