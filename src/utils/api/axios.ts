@@ -1,17 +1,16 @@
 import axios, { AxiosError } from 'axios';
-import { Cookies } from 'react-cookie';
 import { ReissueToken } from './user';
+import { getCookies, removeTokens, setTokens } from '../cookies';
+import { AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
   timeout: 10000,
 });
 
-const cookie = new Cookies();
-
 instance.interceptors.request.use(
   (config) => {
-    const accessToken = cookie.get('access_token');
+    const accessToken = getCookies('access_token');
     const returnConfig = {
       ...config,
     };
@@ -33,26 +32,24 @@ instance.interceptors.response.use(
         config,
         response: { status },
       } = error;
-      const refreshToken = cookie.get('refresh_token');
+      const refreshToken = getCookies('refresh_token');
 
       if (status == 401 || error.response.data.message === 'Invalid Token' || status == 404) {
         const originalRequest = config;
 
         if (refreshToken) {
-          ReissueToken(refreshToken)
+          ReissueToken(refreshToken as string)
             .then((res) => {
-              cookie.set('access_token', res.access_token, { path: '/' });
-              cookie.set('refresh_token', res.refresh_token, { path: '/' });
+              setTokens(res.access_token, res.refresh_token);
               if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
               return axios(originalRequest);
             })
             .catch(() => {
-              cookie.remove('access_token');
-              cookie.remove('refresh_token');
-              window.location.href = '/login';
+              removeTokens();
+              window.location.href = AUTH_URL;
             });
         } else {
-          window.location.href = '/login';
+          window.location.href = AUTH_URL;
         }
       } else return Promise.reject(error);
     }
