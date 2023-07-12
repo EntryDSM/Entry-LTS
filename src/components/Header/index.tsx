@@ -6,8 +6,9 @@ import { useEffect, useState } from 'react';
 import { Button, Icon, Stack, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
-import { Cookies } from 'react-cookie';
 import { useAuthority } from '@/hooks/useAuthority';
+import { getCookies, removeTokens } from '@/utils/cookies';
+import { AUTH_URL } from '@/constant/env';
 
 type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -37,12 +38,11 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
-  const cookie = new Cookies();
-  const [isLogin, setIsLogin] = useState(cookie.get('access_token'));
+  const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
-    window.location.href = 'https://auth.entrydsm.hs.kr/login';
+    window.location.href = AUTH_URL;
   };
 
   useEffect(() => {
@@ -128,18 +128,7 @@ const Header = () => {
               <Button
                 color="delete"
                 onClick={() => {
-                  cookie.remove('access_token', {
-                    path: '/',
-                    secure: true,
-                    sameSite: 'none',
-                    domain: 'entrydsm.hs.kr',
-                  });
-                  cookie.remove('refresh_token', {
-                    path: '/',
-                    secure: true,
-                    sameSite: 'none',
-                    domain: 'entrydsm.hs.kr',
-                  });
+                  removeTokens();
                   setIsLogin(false);
                   alert('로그아웃 되었습니다');
                 }}

@@ -71,6 +71,7 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({ filename: 'app.css' }),
     new ReactRefreshWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     historyApiFallback: true,
