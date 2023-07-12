@@ -17,6 +17,7 @@ const BoardElement = (props: IBoard) => {
     isOpen = false,
     boardNumber,
     title,
+    content,
     isReplied,
     userName,
     createdAt,
@@ -109,10 +110,10 @@ const BoardElement = (props: IBoard) => {
               </Text>
               <_Answer>
                 <Text color="black600" size="body4">
-                  음 딱히 모르겠다 몸만 오세요
+                  {content}
                 </Text>
                 <Text color="black400" size="body5">
-                  2022-12-21
+                  {createdAt?.slice(0, 10)}
                 </Text>
               </_Answer>
               {isAdmin && (
@@ -132,10 +133,10 @@ const BoardElement = (props: IBoard) => {
               </Text>
               <_Answer>
                 <Text color="black600" size="body5">
-                  음 딱히 모르겠다 몸만 오세요
+                  {content}
                 </Text>
                 <Text color="black400" size="body3">
-                  2022-12-21
+                  {createdAt?.slice(0, 10)}
                 </Text>
               </_Answer>
               {isAdmin && (

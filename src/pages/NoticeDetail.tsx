@@ -2,86 +2,73 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import Noticeimg from '../assets/ReplaceNotice.svg';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import File from '../components/File';
 import { Mobile, Pc } from '..//hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
+import { GetNoticeDetail } from '@/utils/api/notice';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuthority();
+  const location = useLocation();
+  const { noticeId } = location.state;
+
+  const { data } = GetNoticeDetail(noticeId);
+
+  console.log(data);
+
   return (
     <_Container>
       <_Wrapper>
         <Pc>
           <Text color="black500" size="body1">
-            입학 공지사항
+            {data?.type === 'ADMISSION' && '입학 공지사항'}
+            {data?.type === 'FRESHMAN' && '예비 신입생 안내'}
           </Text>
           <Text color="black900" size="title1" margin={['bottom', 8]}>
-            2077 신입생 입학전 과제 제출 안내
+            {data?.title}
           </Text>
           <Text color="black500" size="body1">
-            장**|2022-11-18
+            {data?.created_at.slice(0, 10)}
           </Text>
           <_Line />
-          <img src={Noticeimg} alt="notice" style={{ marginBottom: '20px' }} />
+          {data?.image && <img src={data?.image} alt="notice" style={{ marginBottom: '20px' }} />}
           <Text color="black600" size="body2">
-            신입생 오리엔테이션 책자에 있는 입학전 과제입니다. 신학기 적응을 위한 준비이니 성실히 수행해서 제출하시기
-            바랍니다.
-            <br />
-            ■ 과제 제출 마감: 2023년 2월 22일
-            <br />
-            ■ 학교 홈페이지 학생 회원가입 -&gt; 학교 담당자가 승인
-            <br />
-            ■ 학교 홈페이지 로그인 후 [과제제출 - 신입생 - 각 교과]
-            <br />
-            게시판에 제출
-            <br />
-            과제 중 자기소개 PPT는 첨부한 기본틀을 참고하거나 자신만의 방식으로 만들어도 됩니다.
+            {data?.content}
           </Text>
-          <_FileTitle>
+          {/* <_FileTitle>
             <Text color="black900" size="title3">
               첨부파일
             </Text>
-          </_FileTitle>
+          </_FileTitle> */}
         </Pc>
         <Mobile>
           <Text color="black500" size="body5">
             입학 공지사항
           </Text>
           <Text color="black900" size="title1" margin={['bottom', 8]}>
-            2077 신입생 입학전 과제 제출 안내
+            {data?.title}
           </Text>
           <Text color="black500" size="body5">
-            장**|2022-11-18
+            {data?.created_at.slice(0, 10)}
           </Text>
           <_Line />
           <_Img src={Noticeimg} alt="notice" style={{ marginBottom: '20px' }} />
           <Text color="black600" size="body5" margin={['top', 4]}>
-            신입생 오리엔테이션 책자에 있는 입학전 과제입니다. 신학기 적응을 위한 준비이니 성실히 수행해서 제출하시기
-            바랍니다.
-            <br />
-            ■ 과제 제출 마감: 2023년 2월 22일
-            <br />
-            ■ 학교 홈페이지 학생 회원가입 -&gt; 학교 담당자가 승인
-            <br />
-            ■ 학교 홈페이지 로그인 후 [과제제출 - 신입생 - 각 교과]
-            <br />
-            게시판에 제출
-            <br />
-            과제 중 자기소개 PPT는 첨부한 기본틀을 참고하거나 자신만의 방식으로 만들어도 됩니다.
+            {data?.content}
           </Text>
-          <_FileTitle>
+          {/* <_FileTitle>
             <Text color="black900" size="body1">
               첨부파일
             </Text>
-          </_FileTitle>
+          </_FileTitle> */}
         </Mobile>
-        <_Files>
+        {/* <_Files>
           <File />
           <File />
           <File />
-        </_Files>
+        </_Files> */}
         <_ButtonFooter>
           <Button onClick={() => navigate(-1)}>목록으로</Button>
           {isAdmin && (

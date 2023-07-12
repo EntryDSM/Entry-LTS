@@ -11,4 +11,5 @@ export interface IBoard {
   isWriter?: boolean;
   isWriteDay?: boolean;
   isOpen?: boolean;
+  content?: string;
 }

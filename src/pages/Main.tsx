@@ -10,7 +10,7 @@ const Main = () => {
       <MainFunction />
       <Pc>
         <SchoolVideo />
-        <EntryDeveloper />
+        {/* <EntryDeveloper /> */}
       </Pc>
     </>
   );

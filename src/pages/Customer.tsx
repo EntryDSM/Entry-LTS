@@ -8,6 +8,7 @@ import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
 import { GetAllQna } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
+import { GetAllFaq } from '@/utils/api/faq';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -29,6 +30,8 @@ const CustomerPage = () => {
       alert('비공개글 입니다.');
     }
   };
+
+  const { data: getAllFaq } = GetAllFaq();
 
   return (
     <_Container>
@@ -105,16 +108,17 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
-            <BoardElement isNumber={false} isTopBorder={true} isOpen={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
-            <BoardElement isNumber={false} isTopBorder={true} />
+            {getAllFaq.map((faq) => (
+              <BoardElement
+                content={faq.content}
+                createdAt={faq.created_at}
+                title={faq.title}
+                isNumber={false}
+                isTopBorder={true}
+                isOpen={true}
+                isPublic
+              />
+            ))}
           </>
         )}
       </_Wrapper>
