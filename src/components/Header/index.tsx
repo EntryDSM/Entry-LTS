@@ -38,7 +38,7 @@ const Header = () => {
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const cookie = new Cookies();
-  const isLogin = cookie.get('access_token');
+  const [isLogin, setIsLogin] = useState(cookie.get('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
@@ -130,6 +130,8 @@ const Header = () => {
                 onClick={() => {
                   cookie.remove('access_token');
                   cookie.remove('refresh_token');
+                  setIsLogin(false);
+                  alert('로그아웃 되었습니다');
                 }}
               >
                 로그아웃
