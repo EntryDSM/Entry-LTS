@@ -43,7 +43,7 @@ const CustomerPage = () => {
           button3="질문 작성"
           isCustomer={true}
           link={isAdmin ? 'writeFAQ' : 'write'}
-        ></BoardTitle>
+        />
 
         {!click ? (
           <>

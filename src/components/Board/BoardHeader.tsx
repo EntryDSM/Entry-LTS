@@ -10,7 +10,7 @@ const BoardHeader = (props: IBoard) => {
       <Div>
         <>
           <Pc>
-            <Text align="center" color="black700" size="body1" width={6}>
+            <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? '번호' : '구분'}
             </Text>
             <Text align="center" color="black700" size="body1" margin={['left', 20]}>
@@ -19,7 +19,7 @@ const BoardHeader = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" width={4} margin={['right', 20]}>
+              <Text color="black700" size="body3" width={70} margin={['right', 20]}>
                 구분
               </Text>
             )}
@@ -33,12 +33,12 @@ const BoardHeader = (props: IBoard) => {
         {isComment && (
           <>
             <Pc>
-              <Text align="center" color="black700" size="body1" width={6}>
+              <Text align="center" color="black700" size="body1" width={100}>
                 답변
               </Text>
             </Pc>
             <Mobile>
-              <Text align="center" color="black700" size="body3" width={5}>
+              <Text align="center" color="black700" size="body3" width={90}>
                 답변
               </Text>
             </Mobile>
@@ -46,7 +46,7 @@ const BoardHeader = (props: IBoard) => {
         )}
         {isWriter && (
           <Pc>
-            <Text align="center" color="black700" size="body1" width={6}>
+            <Text align="center" color="black700" size="body1" width={100}>
               작성자
             </Text>
           </Pc>
@@ -54,12 +54,12 @@ const BoardHeader = (props: IBoard) => {
         {isWriteDay && (
           <>
             <Pc>
-              <Text align="center" color="black700" size="body1" width={6}>
+              <Text align="center" color="black700" size="body1" width={100}>
                 작성일
               </Text>
             </Pc>
             <Mobile>
-              <Text align="center" color="black700" size="body3" width={5.5}>
+              <Text align="center" color="black700" size="body3" width={95}>
                 작성일
               </Text>
             </Mobile>
