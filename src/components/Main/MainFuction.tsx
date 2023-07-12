@@ -34,7 +34,7 @@ const MainFunction = () => {
             <Button
               color={authorityColor}
               onClick={() =>
-                (window.location.href = 'https://auth.entrydsm.hs.kr/login?redirect_url=https://www.entrydsm.hs.kr')
+                (window.location.href = 'https://apply.entrydsm.hs.kr/login?redirect_url=https://www.entrydsm.hs.kr')
               }
               margin={['bottom', 20]}
             >
