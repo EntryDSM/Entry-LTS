@@ -48,7 +48,7 @@ const CustomerPage = () => {
         {!click ? (
           <>
             <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            {data?.qna_list?.map((qna, idx) => {
+            {data?.questions?.map((qna, idx) => {
               return (
                 <Link
                   to={`/customer/${qna.id}`}
@@ -57,7 +57,7 @@ const CustomerPage = () => {
                 >
                   <BoardElement
                     title={qna.title}
-                    boardNumber={data.qna_list.length - idx}
+                    boardNumber={data.questions.length - idx}
                     createdAt={qna.created_at}
                     userName={qna.username}
                     isPublic={qna.is_public}

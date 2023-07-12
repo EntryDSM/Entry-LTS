@@ -1,5 +1,5 @@
 export interface IQnaListResponse {
-  qna_list: IQnaCard[];
+  questions: IQnaCard[];
 }
 
 export interface IQnaCard {
