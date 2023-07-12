@@ -42,7 +42,7 @@ const Header = () => {
   const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
-    window.location.href = 'https://entrydsm.hs.kr/login';
+    window.location.href = 'https://auth.entrydsm.hs.kr/login';
   };
 
   useEffect(() => {
@@ -125,6 +125,15 @@ const Header = () => {
             <Stack align="center">
               <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}></Text>
               {/* <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
+              <Button
+                color="delete"
+                onClick={() => {
+                  cookie.remove('access_token');
+                  cookie.remove('refresh_token');
+                }}
+              >
+                로그아웃
+              </Button>
             </Stack>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
