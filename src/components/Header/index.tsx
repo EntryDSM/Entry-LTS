@@ -18,16 +18,16 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  // { name: '문의사항', url: '/customer' },
-  // { name: '공지사항', url: '/notice' },
-  // { name: '성적 산출', url: '/grade' },
+  { name: '문의사항', url: '/customer' },
+  { name: '공지사항', url: '/notice' },
+  { name: '성적 산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  // { name: '문의사항', url: '/customer' },
-  // { name: '공지사항', url: '/notice' },
+  { name: '문의사항', url: '/customer' },
+  { name: '공지사항', url: '/notice' },
   { name: '로그인', url: '/login', type: 'logout' },
-  // { name: '마이페이지', url: '/mypage', type: 'login' },
+  { name: '마이페이지', url: '/mypage', type: 'login' },
   { name: '로그아웃', url: '/logout', type: 'login' },
 ];
 
