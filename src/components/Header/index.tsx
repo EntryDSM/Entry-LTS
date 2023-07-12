@@ -38,11 +38,11 @@ const Header = () => {
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const cookie = new Cookies();
-  const isLogin = cookie.get('access_token');
+  const [isLogin, setIsLogin] = useState(cookie.get('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
 
   const onClick = () => {
-    console.log('clicked');
+    window.location.href = 'https://auth.entrydsm.hs.kr/login';
   };
 
   useEffect(() => {
@@ -123,10 +123,29 @@ const Header = () => {
         <Pc>
           {isLogin ? (
             <Stack align="center">
-              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}>
-                정지관
-              </Text>
-              <Icon cursor="pointer" icon="DownArrow" color="black500" />
+              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}></Text>
+              {/* <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
+              <Button
+                color="delete"
+                onClick={() => {
+                  cookie.remove('access_token', {
+                    path: '/',
+                    secure: true,
+                    sameSite: 'none',
+                    domain: 'entrydsm.hs.kr',
+                  });
+                  cookie.remove('refresh_token', {
+                    path: '/',
+                    secure: true,
+                    sameSite: 'none',
+                    domain: 'entrydsm.hs.kr',
+                  });
+                  setIsLogin(false);
+                  alert('로그아웃 되었습니다');
+                }}
+              >
+                로그아웃
+              </Button>
             </Stack>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>

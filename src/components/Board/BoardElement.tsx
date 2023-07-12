@@ -29,7 +29,7 @@ const BoardElement = (props: IBoard) => {
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
         <Div>
           <Pc>
-            <Text align="center" color="black700" size="body1" width={6}>
+            <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : '입학문의'}
             </Text>
             <Div style={{ marginLeft: 20 }}>
@@ -55,22 +55,22 @@ const BoardElement = (props: IBoard) => {
             <>
               <Pc>
                 {isReplied ? (
-                  <Text align="center" color={`${authorityColor}500`} size="body5" width={6}>
+                  <Text align="center" color={`${authorityColor}500`} size="body5" width={100}>
                     완료
                   </Text>
                 ) : (
-                  <Text align="center" color="black500" size="body5" width={6}>
+                  <Text align="center" color="black500" size="body5" width={100}>
                     대기중
                   </Text>
                 )}
               </Pc>
               <Mobile>
                 {isReplied ? (
-                  <Text align="center" color={`${authorityColor}500`} size="body5" width={5}>
+                  <Text align="center" color={`${authorityColor}500`} size="body5" width={90}>
                     완료
                   </Text>
                 ) : (
-                  <Text align="center" color="black500" size="body5" width={5}>
+                  <Text align="center" color="black500" size="body5" width={90}>
                     대기중
                   </Text>
                 )}
@@ -79,7 +79,7 @@ const BoardElement = (props: IBoard) => {
           )}
           {isWriter && (
             <Pc>
-              <Text align="center" color="black500" size="body5" width={6}>
+              <Text align="center" color="black500" size="body5" width={100}>
                 {userName}
               </Text>
             </Pc>
@@ -87,12 +87,12 @@ const BoardElement = (props: IBoard) => {
           {isWriteDay && (
             <>
               <Pc>
-                <Text align="center" color="black500" size="body5" width={6}>
+                <Text align="center" color="black500" size="body5" width={100}>
                   {createdAt?.slice(0, 10)}
                 </Text>
               </Pc>
               <Mobile>
-                <Text align="center" color="black500" size="body5" width={5.5}>
+                <Text align="center" color="black500" size="body5" width={95}>
                   {createdAt?.slice(0, 10)}
                 </Text>
               </Mobile>
@@ -104,7 +104,7 @@ const BoardElement = (props: IBoard) => {
         <>
           <Pc>
             <_AnswerPart style={{ height: '14rem' }}>
-              <Text align="center" color="black800" size="body3" width={6}>
+              <Text align="center" color="black800" size="body3" width={100}>
                 답변
               </Text>
               <_Answer>
@@ -127,7 +127,7 @@ const BoardElement = (props: IBoard) => {
           </Pc>
           <Mobile>
             <_AnswerPart style={{ height: '10rem' }}>
-              <Text align="center" color="black800" size="body5" width={5}>
+              <Text align="center" color="black800" size="body5" width={100}>
                 답변
               </Text>
               <_Answer>

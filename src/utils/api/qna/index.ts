@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { IQnaDetailResponse, IQnaListResponse } from './response';
 
-const router = 'qna';
+const router = 'question';
 
 export const GetAllQna = () => {
   const response = async () => {

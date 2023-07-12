@@ -31,7 +31,11 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 상담 문의: 042-886-1121
             </Text>
-            <Button color={authorityColor} onClick={() => navigate('/application')} margin={['bottom', 20]}>
+            <Button
+              color={authorityColor}
+              onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+              margin={['bottom', 20]}
+            >
               원서 접수 →
             </Button>
           </Pc>
@@ -43,7 +47,11 @@ const MainFunction = () => {
               작성한 원서를 제출하세요
             </Text>
             <div>
-              <Button color={authorityColor} onClick={() => navigate('/application')} margin={[20, 0, 20, 0]}>
+              <Button
+                color={authorityColor}
+                onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+                margin={[20, 0, 20, 0]}
+              >
                 원서 접수 →
               </Button>
             </div>
