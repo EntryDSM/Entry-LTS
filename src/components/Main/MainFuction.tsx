@@ -33,9 +33,7 @@ const MainFunction = () => {
             </Text>
             <Button
               color={authorityColor}
-              onClick={() =>
-                (window.location.href = 'https://apply.entrydsm.hs.kr/login?redirect_url=https://www.entrydsm.hs.kr')
-              }
+              onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={['bottom', 20]}
             >
               원서 접수 →
