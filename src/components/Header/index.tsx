@@ -128,8 +128,18 @@ const Header = () => {
               <Button
                 color="delete"
                 onClick={() => {
-                  cookie.remove('access_token');
-                  cookie.remove('refresh_token');
+                  cookie.remove('access_token', {
+                    path: '/',
+                    secure: true,
+                    sameSite: 'none',
+                    domain: 'entrydsm.hs.kr',
+                  });
+                  cookie.remove('refresh_token', {
+                    path: '/',
+                    secure: true,
+                    sameSite: 'none',
+                    domain: 'entrydsm.hs.kr',
+                  });
                   setIsLogin(false);
                   alert('로그아웃 되었습니다');
                 }}
