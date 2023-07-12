@@ -57,7 +57,7 @@ export const shortcut = [
   },
   {
     id: 1,
-    link: '/grade',
+    link: '/', //grade
     icon: 'Culculator',
     title: '성적 산출',
   },
