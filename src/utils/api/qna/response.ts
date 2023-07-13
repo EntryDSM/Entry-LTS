@@ -12,6 +12,19 @@ export interface IQnaCard {
   is_mine: boolean;
 }
 
+export interface IGetMyQnaList {
+  questions: IGetMyQna[];
+}
+
+export interface IGetMyQna {
+  id: number;
+  title: string;
+  created_at: string;
+  is_replied: boolean;
+  username: string;
+  is_public: boolean;
+}
+
 export interface IQnaDetailResponse {
   id: number;
   title: string;

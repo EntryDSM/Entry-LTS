@@ -7,9 +7,12 @@ import { useModal } from '../hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
 import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';
-import { DownloadPdf, GetPdfPreview } from '@/utils/api/pdf';
-import { Document, Page, pdfjs } from 'react-pdf';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import { DownloadPdf } from '@/utils/api/pdf';
+import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
+import { getSchedule } from '@/utils/api/schedule';
+import BoardHeader from '@/components/Board/BoardHeader';
+import { GetMyQna } from '@/utils/api/qna';
+import { Link } from 'react-router-dom';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -18,14 +21,23 @@ const MyPage = () => {
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const onDownloadPdf = DownloadPdf();
 
-  const { data: pdfPreview, isLoading } = GetPdfPreview();
-  const [numPages, setNumPages] = useState(0);
-  const [pageNumber, setPageNumber] = useState(1);
+  const { data: schedule } = getSchedule();
+  const currentDate = new Date();
+  const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
+  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+  const { data: firstPass } = GetFirstRoundPass();
+  const { data: secondPass } = GetSecondRoundPass();
 
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
-    setPageNumber(1);
-  };
+  let message;
+  if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
+    message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
+  } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
+    message = secondPass ? '최종합격되었습니다.' : '불합격입니다.';
+  } else {
+    message = '지금은 발표기간이 아닙니다';
+  }
+
+  const { data: myQnaList } = GetMyQna();
 
   const onClick = () => {
     console.log('clicked!!');
@@ -94,7 +106,7 @@ const MyPage = () => {
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button onClick={onClick}>발표 결과 확인</Button>
+              <Button onClick={() => alert(message)}>발표 결과 확인</Button>
               <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button>
@@ -104,7 +116,7 @@ const MyPage = () => {
             </Mobile>
           </_ApplyButtons>
         </_Apply>
-        {/* 
+
         <_BoarderTitle>
           <Pc>
             <Text margin={['left', 16]} color="black700" size="body1">
@@ -117,31 +129,28 @@ const MyPage = () => {
             </Text>
           </Mobile>
         </_BoarderTitle>
-        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} /> */}
-        <div style={{ width: '90%', marginTop: '20px' }}>
-          <Text color="black900" size="title2">
-            Pdf 미리보기
-          </Text>
+        <div style={{ width: '100%' }}>
+          <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+          {myQnaList?.questions?.map((qna, idx) => {
+            return (
+              <Link to={`/customer/${qna.id}`} state={{ qnaId: qna.id }}>
+                <BoardElement
+                  title={qna.title}
+                  boardNumber={myQnaList.questions.length - idx}
+                  createdAt={qna.created_at}
+                  userName={qna.username}
+                  isPublic={qna.is_public}
+                  isReplied={qna.is_replied}
+                  isNumber={true}
+                  isTopBorder={false}
+                  isComment={true}
+                  isWriteDay={true}
+                  isWriter={true}
+                />
+              </Link>
+            );
+          })}
         </div>
-        <_PDF>
-          <Document file={pdfPreview} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page pageNumber={pageNumber} />
-          </Document>
-        </_PDF>
-        {!isLoading && (
-          <_PDFButtonWrapper>
-            <_PDFButton onClick={() => setPageNumber((prev) => prev - 1)} disabled={pageNumber <= 1}>
-              <Icon icon="LeftArrow" color={pageNumber <= 1 ? 'black300' : 'realBlack'} cursor="pointer" />
-            </_PDFButton>
-            {pageNumber} of {numPages}
-            <_PDFButton onClick={() => setPageNumber((prev) => prev + 1)} disabled={pageNumber >= numPages}>
-              <Icon icon="RightArrow" color={pageNumber >= numPages ? 'black300' : 'realBlack'} cursor="pointer" />
-            </_PDFButton>
-          </_PDFButtonWrapper>
-        )}
       </_Wrapper>
       <Modal>
         {modalState === 'CANCEL_SUBMIT' && (
@@ -256,25 +265,4 @@ const _BoarderTitle = styled.div`
     height: 40px;
     margin-top: 60px;
   }
-`;
-
-const _PDF = styled.div`
-  height: 820px;
-  overflow: hidden;
-`;
-
-const _PDFButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 200px;
-  height: 50px;
-  background-color: white;
-  border-radius: 5px;
-`;
-
-const _PDFButton = styled.button`
-  width: 50px;
-  height: 50px;
-  background-color: white;
 `;

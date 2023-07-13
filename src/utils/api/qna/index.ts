@@ -3,7 +3,7 @@ import { instance } from '../axios';
 import { ICreateQna } from './request';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { IQnaDetailResponse, IQnaListResponse } from './response';
+import { IGetMyQnaList, IQnaDetailResponse, IQnaListResponse } from './response';
 
 const router = 'question';
 
@@ -36,7 +36,7 @@ export const GetQnaDetail = (qnaId: string) => {
 
 export const GetMyQna = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}`);
+    const { data } = await instance.get<IGetMyQnaList>(`${router}`);
     return data;
   };
   return useQuery(['myQna'], response, {
