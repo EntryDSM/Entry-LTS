@@ -1,14 +1,16 @@
 import * as _ from './style';
 import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import User from '@/assets/User.svg';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Stack, Text } from '@team-entry/design_system';
+import { Button, Icon, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
+import { getUserInfo } from '@/utils/api/application';
 
 type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -36,13 +38,16 @@ const Header = () => {
   const [list, setList] = useState<THeader>('');
   const [visibility, setVisibility] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
+  const navigate = useNavigate();
+  const { data } = getUserInfo();
 
   const onClick = () => {
-    window.location.href = AUTH_URL;
+    window.location.href = `${AUTH_URL}/login`;
   };
 
   useEffect(() => {
@@ -122,20 +127,43 @@ const Header = () => {
         </div>
         <Pc>
           {isLogin ? (
-            <Stack align="center">
-              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}></Text>
-              {/* <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
-              <Button
-                color="delete"
-                onClick={() => {
-                  removeTokens();
-                  setIsLogin(false);
-                  alert('로그아웃 되었습니다');
-                }}
-              >
-                로그아웃
-              </Button>
-            </Stack>
+            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
+              <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                <Text cursor="pointer" color="realBlack" size="body1">
+                  {data?.name}
+                </Text>
+                <Icon cursor="pointer" icon="DownArrow" color="black500" />
+              </_._DropdownWrapper>
+              {isDropdownOpen && (
+                <_._DropdownMenus
+                  onClick={() => {
+                    navigate('/mypage');
+                    setIsDropdownOpen(false);
+                  }}
+                >
+                  <_._DropdownMenu>
+                    <Icon icon="Account" color="black900" />
+                    <Text color="black900" size="body1">
+                      마이페이지
+                    </Text>
+                  </_._DropdownMenu>
+                  <_._Line />
+                  <_._DropdownMenu
+                    onClick={() => {
+                      removeTokens();
+                      setIsLogin(false);
+                      alert('로그아웃 되었습니다');
+                      setIsDropdownOpen(false);
+                    }}
+                  >
+                    <Icon icon="Logout" color="error" />
+                    <Text color="error" size="body1">
+                      로그아웃
+                    </Text>
+                  </_._DropdownMenu>
+                </_._DropdownMenus>
+              )}
+            </div>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
               로그인

@@ -105,3 +105,39 @@ export const _LogoButton = styled(Link)`
   display: flex;
   align-items: center;
 `;
+
+export const _DropdownWrapper = styled.div`
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+`;
+
+export const _DropdownMenus = styled.div`
+  position: absolute;
+  top: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  border: 1px solid ${theme.color.black100};
+`;
+
+export const _DropdownMenu = styled.div`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  background-color: ${theme.color.realWhite};
+  padding: 18px 0px 10px 20px;
+  z-index: 10;
+  &:hover {
+    background-color: ${theme.color.black200};
+  }
+`;
+
+export const _Line = styled.div`
+  width: 120px;
+  height: 1px;
+  background-color: ${theme.color.black200};
+`;

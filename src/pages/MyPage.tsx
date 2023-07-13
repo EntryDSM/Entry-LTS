@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardElement from '../components/Board/BoardElement';
 import { useModal } from '../hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
-import { ApplyInfoStatus } from '@/utils/api/user';
+import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
+import { AUTH_URL } from '@/constant/env';
+import { GetPdfPreview } from '@/utils/api/pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
+  const { mutate: deleteUserInfo } = DeleteUserInfo();
   const { data } = ApplyInfoStatus();
+  const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
+
+  const { data: pdfPreview, isLoading } = GetPdfPreview();
+  const [numPages, setNumPages] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+    setPageNumber(1);
+  };
+
   const onClick = () => {
     console.log('clicked!!');
   };
@@ -31,24 +47,30 @@ const MyPage = () => {
           <_UserInfo>
             <Pc>
               <Text color="realBlack" size="header1">
-                김이름 지원자님
+                {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                010-1234-1234
+                {data?.phone_number.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
               </Text>
             </Pc>
             <Mobile>
               <Text color="realBlack" size="body1">
-                김이름 지원자님
+                {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                010-1234-1234
+                {data?.phone_number.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
               </Text>
             </Mobile>
           </_UserInfo>
           <_UserButtons>
-            <Button onClick={onClick}>비밀번호 변경</Button>
-            <Button color="delete" kind="delete" onClick={onClick}>
+            <Button
+              onClick={() => {
+                window.location.href = `${AUTH_URL}/change-pwd`;
+              }}
+            >
+              비밀번호 변경
+            </Button>
+            <Button color="delete" kind="delete" onClick={openSignOutModal}>
               회원 탈퇴
             </Button>
           </_UserButtons>
@@ -60,17 +82,19 @@ const MyPage = () => {
           </Text>
           <_Line />
           <Text color="black900" size="body3">
-            일반 전형
+            {data?.application_type === 'COMMON' && '일반 전형'}
+            {data?.application_type === 'MEISTER' && '마이스터 전형'}
+            {data?.application_type === 'SOCIAL' && '사회통합 전형'}
           </Text>
           <div style={{ height: '4px' }} />
           <Text color="black900" size="title2">
-            지원서 제출 완료
+            지원서 제출 {data?.submitted ? '완료' : '미완료'}
           </Text>
           <_ApplyButtons>
             <Pc>
               <Button onClick={onClick}>원서 다운로드</Button>
               <Button onClick={onClick}>발표 결과 확인</Button>
-              <Button color="delete" kind="delete" onClick={onClick}>
+              <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button>
             </Pc>
@@ -79,7 +103,7 @@ const MyPage = () => {
             </Mobile>
           </_ApplyButtons>
         </_Apply>
-
+        {/* 
         <_BoarderTitle>
           <Pc>
             <Text margin={['left', 16]} color="black700" size="body1">
@@ -95,15 +119,39 @@ const MyPage = () => {
         <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
         <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
         <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+        <BoardElement isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} /> */}
+        <div style={{ width: '90%' }}>
+          <Text color="black900" size="title2">
+            Pdf 미리보기
+          </Text>
+        </div>
+        <_PDF>
+          <Document file={pdfPreview} onLoadSuccess={onDocumentLoadSuccess}>
+            <Page pageNumber={pageNumber} />
+          </Document>
+        </_PDF>
+        {!isLoading && (
+          <_PDFButtonWrapper>
+            <_PDFButton onClick={() => setPageNumber((prev) => prev - 1)} disabled={pageNumber <= 1}>
+              <Icon icon="LeftArrow" color={pageNumber <= 1 ? 'black300' : 'realBlack'} cursor="pointer" />
+            </_PDFButton>
+            {pageNumber} of {numPages}
+            <_PDFButton onClick={() => setPageNumber((prev) => prev + 1)} disabled={pageNumber >= numPages}>
+              <Icon icon="RightArrow" color={pageNumber >= numPages ? 'black300' : 'realBlack'} cursor="pointer" />
+            </_PDFButton>
+          </_PDFButtonWrapper>
+        )}
       </_Wrapper>
       <Modal>
         {modalState === 'CANCEL_SUBMIT' && (
           <CancelModal
             title="최종제출 취소"
             subTitle="정말 최종제출을 취소하시겠습니까?"
-            button={<div style={{ width: 200 }}>취소</div>}
-            onClick={close}
+            button={<div style={{ width: 200 }}>최종제출 취소</div>}
+            onClick={() => {
+              close();
+              deleteUserPdf();
+            }}
           />
         )}
         {modalState === 'SIGN_OUT' && (
@@ -111,7 +159,10 @@ const MyPage = () => {
             title="회원 탈퇴"
             subTitle="정말 탈퇴하시겠습니까?"
             button={<div style={{ width: 200 }}>회원 탈퇴</div>}
-            onClick={close}
+            onClick={() => {
+              close();
+              deleteUserInfo();
+            }}
           />
         )}
       </Modal>
@@ -204,4 +255,25 @@ const _BoarderTitle = styled.div`
     height: 40px;
     margin-top: 60px;
   }
+`;
+
+const _PDF = styled.div`
+  height: 820px;
+  overflow: hidden;
+`;
+
+const _PDFButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 200px;
+  height: 50px;
+  background-color: white;
+  border-radius: 5px;
+`;
+
+const _PDFButton = styled.button`
+  width: 50px;
+  height: 50px;
+  background-color: white;
 `;
