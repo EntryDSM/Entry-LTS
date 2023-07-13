@@ -135,13 +135,13 @@ const Header = () => {
                 <Icon cursor="pointer" icon="DownArrow" color="black500" />
               </_._DropdownWrapper>
               {isDropdownOpen && (
-                <_._DropdownMenus
-                  onClick={() => {
-                    navigate('/mypage');
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  <_._DropdownMenu>
+                <_._DropdownMenus>
+                  <_._DropdownMenu
+                    onClick={() => {
+                      navigate('/mypage');
+                      setIsDropdownOpen(false);
+                    }}
+                  >
                     <Icon icon="Account" color="black900" />
                     <Text color="black900" size="body1">
                       마이페이지
