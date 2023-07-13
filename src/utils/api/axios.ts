@@ -46,10 +46,10 @@ instance.interceptors.response.use(
             })
             .catch(() => {
               removeTokens();
-              window.location.href = AUTH_URL;
+              window.location.href = `${AUTH_URL}/login`;
             });
         } else {
-          window.location.href = AUTH_URL;
+          window.location.href = `${AUTH_URL}/login`;
         }
       } else return Promise.reject(error);
     }
