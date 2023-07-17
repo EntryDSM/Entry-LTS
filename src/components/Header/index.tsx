@@ -44,7 +44,7 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
-  const { data } = getUserInfo();
+  const { data } = getUserInfo(isLogin);
 
   const onClick = () => {
     window.location.href = `${AUTH_URL}/login`;
