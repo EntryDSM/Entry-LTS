@@ -42,7 +42,7 @@ const CustomerDetailPage = () => {
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            {data?.content.replace(/\n/g, '<br/>')}
+            {data?.content}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
