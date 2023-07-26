@@ -26,8 +26,8 @@ export const GetQnaDetail = (qnaId: string) => {
   return useQuery(['qna', qnaId], response, {
     onSuccess: () => {},
     onError: (err: AxiosError) => {
-      if (err.response.status === 403 || err.response.status === 404) {
-        alert('로그인 후 이용 가능합니다');
+      if (err.response.status === 403) {
+        alert('비공개 글 입니다');
         navigate(-1);
       }
     },

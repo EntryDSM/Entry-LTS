@@ -24,13 +24,6 @@ const CustomerPage = () => {
 
   const { data } = GetAllQna();
 
-  const isQnaPublic = (e: React.MouseEvent<HTMLElement>, isPublic: boolean) => {
-    if (!isPublic) {
-      e.preventDefault();
-      alert('비공개글 입니다.');
-    }
-  };
-
   const { data: getAllFaq } = GetAllFaq();
 
   return (
@@ -53,11 +46,7 @@ const CustomerPage = () => {
             <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
             {data?.questions?.map((qna, idx) => {
               return (
-                <Link
-                  to={`/customer/${qna.id}`}
-                  onClick={(e) => isQnaPublic(e, qna.is_public)}
-                  state={{ qnaId: qna.id }}
-                >
+                <Link to={`/customer/${qna.id}`} state={{ qnaId: qna.id }}>
                   <BoardElement
                     title={qna.title}
                     boardNumber={data.questions.length - idx}

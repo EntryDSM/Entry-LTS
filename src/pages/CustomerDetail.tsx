@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, Input, Spinner, Text, Textarea, theme } from '@team-entry/design_system';
@@ -22,8 +22,14 @@ const CustomerDetailPage = () => {
     setInputValue(value);
   };
 
-  if (!data?.is_mine) {
-  }
+  console.log(data);
+
+  useEffect(() => {
+    if (data && !data?.is_mine && !data?.is_public) {
+      alert('비공개글 입니다.');
+      navigate('/customer');
+    }
+  }, []);
 
   if (isLoading) return <Spinner margin={[0, 'auto']} size={40} color="orange" />;
   return (

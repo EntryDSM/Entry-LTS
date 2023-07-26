@@ -31,6 +31,7 @@ export interface IQnaDetailResponse {
   content: string;
   username: string;
   is_replied: boolean;
+  is_public: boolean;
   is_mine: boolean;
   created_at: string;
   reply: IReply;
