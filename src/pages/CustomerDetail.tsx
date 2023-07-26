@@ -22,6 +22,9 @@ const CustomerDetailPage = () => {
     setInputValue(value);
   };
 
+  if (!data?.is_mine) {
+  }
+
   if (isLoading) return <Spinner margin={[0, 'auto']} size={40} color="orange" />;
   return (
     <_Container>
