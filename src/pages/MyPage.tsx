@@ -21,21 +21,21 @@ const MyPage = () => {
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const onDownloadPdf = DownloadPdf();
 
-  const { data: schedule } = getSchedule();
-  const currentDate = new Date();
-  const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
-  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
-  const { data: firstPass } = GetFirstRoundPass();
-  const { data: secondPass } = GetSecondRoundPass();
-
-  let message;
-  if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
-    message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
-  } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
-    message = secondPass ? '최종합격되었습니다.' : '불합격입니다.';
-  } else {
-    message = '지금은 발표기간이 아닙니다';
-  }
+  // const { data: schedule } = getSchedule();
+  // const currentDate = new Date();
+  // const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
+  // const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+  // const { data: firstPass } = GetFirstRoundPass();
+  // const { data: secondPass } = GetSecondRoundPass();
+  //
+  // let message;
+  // if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
+  //   message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
+  // } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
+  //   message = secondPass ? '최종합격되었습니다.' : '불합격입니다.';
+  // } else {
+  //   message = '지금은 발표기간이 아닙니다';
+  // }
 
   const { data: myQnaList } = GetMyQna();
 
@@ -106,7 +106,7 @@ const MyPage = () => {
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button onClick={() => alert(message)}>발표 결과 확인</Button>
+              <Button onClick={onClick}>발표 결과 확인</Button>
               <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button>
