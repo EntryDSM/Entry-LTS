@@ -21,14 +21,14 @@ const MyPage = () => {
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const onDownloadPdf = DownloadPdf();
 
-  // const { data: schedule } = getSchedule();
-  // const currentDate = new Date();
-  // const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
-  // const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+  const { data: schedule } = getSchedule();
+  const currentDate = new Date();
+  const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
+  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
   // const { data: firstPass } = GetFirstRoundPass();
   // const { data: secondPass } = GetSecondRoundPass();
-  //
-  // let message;
+
+  let message;
   // if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
   //   message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
   // } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {

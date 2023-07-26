@@ -14,12 +14,14 @@ export const ReissueToken = async (refresh_token: string) => {
   return response.data;
 };
 
-export const ApplyInfoStatus = () => {
+export const ApplyInfoStatus = (isLogin?: boolean) => {
   const response = async () => {
     const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/status`);
     return data;
   };
-  return useQuery(['applyInfoStatus'], response);
+  return useQuery(['applyInfoStatus'], response, {
+    enabled: isLogin,
+  });
 };
 
 export const DeleteUserInfo = () => {

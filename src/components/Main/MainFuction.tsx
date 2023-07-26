@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Icon, IconType, Text } from '@team-entry/design_system';
 import Banner from '../../assets/ReplaceBanner.svg';
@@ -11,12 +11,18 @@ import { useMediaQuery } from 'react-responsive';
 import { useAuthority } from '@/hooks/useAuthority';
 import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
+import { getUserInfo } from '@/utils/api/application';
+import { getCookies } from '@/utils/cookies';
+import { ApplyInfoStatus } from '@/utils/api/user';
 
 const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
   const onClick = () => console.log('clicked!');
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
+  const { data } = ApplyInfoStatus(isLogin);
+
   return (
     <_Wrapper>
       <Pc>
@@ -32,6 +38,7 @@ const MainFunction = () => {
               입학 상담 문의: 042-886-8814
             </Text>
             <Button
+              disabled={data?.submitted}
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={['bottom', 20]}
