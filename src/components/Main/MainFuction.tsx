@@ -21,7 +21,7 @@ const MainFunction = () => {
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
-  const { data } = ApplyInfoStatus(isLogin);
+  // const { data } = ApplyInfoStatus(isLogin);
 
   return (
     <_Wrapper>
@@ -38,7 +38,6 @@ const MainFunction = () => {
               입학 상담 문의: 042-886-8814
             </Text>
             <Button
-              disabled={data?.submitted}
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={['bottom', 20]}
