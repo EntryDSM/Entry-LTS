@@ -11,6 +11,7 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -131,43 +132,45 @@ const Header = () => {
         </div>
         <Pc>
           {isLogin ? (
-            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
-              <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                <Text cursor="pointer" color="realBlack" size="body1">
-                  {data?.name}
-                </Text>
-                <Icon cursor="pointer" icon="DownArrow" color="black500" />
-              </_._DropdownWrapper>
-              {isDropdownOpen && (
-                <_._DropdownMenus>
-                  <_._DropdownMenu
-                    onClick={() => {
-                      navigate('/mypage');
-                      setIsDropdownOpen(false);
-                    }}
-                  >
-                    <Icon icon="Account" color="black900" />
-                    <Text color="black900" size="body1">
-                      마이페이지
-                    </Text>
-                  </_._DropdownMenu>
-                  <_._Line />
-                  <_._DropdownMenu
-                    onClick={() => {
-                      removeTokens();
-                      setIsLogin(false);
-                      alert('로그아웃 되었습니다');
-                      setIsDropdownOpen(false);
-                    }}
-                  >
-                    <Icon icon="Logout" color="error" />
-                    <Text color="error" size="body1">
-                      로그아웃
-                    </Text>
-                  </_._DropdownMenu>
-                </_._DropdownMenus>
-              )}
-            </div>
+            <OutsideClickHandler onOutsideClick={() => setIsDropdownOpen(false)}>
+              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
+                <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                  <Text cursor="pointer" color="realBlack" size="body1">
+                    {data?.name}
+                  </Text>
+                  <Icon cursor="pointer" icon="DownArrow" color="black500" />
+                </_._DropdownWrapper>
+                {isDropdownOpen && (
+                  <_._DropdownMenus>
+                    <_._DropdownMenu
+                      onClick={() => {
+                        navigate('/mypage');
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      <Icon icon="Account" color="black900" />
+                      <Text color="black900" size="body1">
+                        마이페이지
+                      </Text>
+                    </_._DropdownMenu>
+                    <_._Line />
+                    <_._DropdownMenu
+                      onClick={() => {
+                        removeTokens();
+                        setIsLogin(false);
+                        alert('로그아웃 되었습니다');
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      <Icon icon="Logout" color="error" />
+                      <Text color="error" size="body1">
+                        로그아웃
+                      </Text>
+                    </_._DropdownMenu>
+                  </_._DropdownMenus>
+                )}
+              </div>
+            </OutsideClickHandler>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
               로그인
