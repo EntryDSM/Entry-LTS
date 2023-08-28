@@ -97,7 +97,7 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            {getAllFaq.map((faq) => (
+            {getAllFaq?.map((faq) => (
               <BoardElement
                 content={faq.content}
                 createdAt={faq.created_at}
