@@ -1,6 +1,7 @@
 import { useQuery } from 'react-query';
 import { instance } from '../axios';
 import FileSaver from 'file-saver';
+import { Toast } from '@team-entry/design_system';
 
 const router = 'pdf';
 
@@ -27,7 +28,7 @@ export const DownloadPdf = () => {
       });
       FileSaver.saveAs(data, `입학원서 미리보기.pdf`);
     } catch (e) {
-      alert('잔류신청 현황 다운로드를 실패하였습니다.');
+      Toast('입학원서 pdf 다운로드를 실패하였습니다.', { type: 'error' });
     }
   };
   return fetcher;

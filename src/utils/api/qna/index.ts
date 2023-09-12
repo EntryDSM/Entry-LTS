@@ -4,6 +4,7 @@ import { ICreateQna } from './request';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
 import { IGetMyQnaList, IQnaDetailResponse, IQnaListResponse } from './response';
+import { Toast } from '@team-entry/design_system';
 
 const router = 'question';
 
@@ -27,7 +28,7 @@ export const GetQnaDetail = (qnaId: string) => {
     onSuccess: () => {},
     onError: (err: AxiosError) => {
       if (err.response.status === 403) {
-        alert('비공개 글 입니다');
+        Toast('비공개 글 입니다', { type: 'error' });
         navigate(-1);
       }
     },
@@ -53,16 +54,16 @@ export const CreateQna = (body: ICreateQna) => {
 
   return useMutation(response, {
     onSuccess: () => {
-      alert('성공');
+      Toast('성공', { type: 'success' });
       navigate('/customer');
     },
     onError: (error: AxiosError<AxiosError>) => {
       switch (error.response.data.status) {
         case 400:
-          alert('내용을 입력해주세요');
+          Toast('내용을 입력해주세요', { type: 'error' });
           break;
         case 404:
-          alert('로그인 오류 다시 로그인 해주세요');
+          Toast('로그인 오류 다시 로그인 해주세요', { type: 'error' });
           navigate('/login');
           break;
         default:

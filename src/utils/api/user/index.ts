@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from 'react-query';
 import { instance } from '../axios';
 import { IApplyInfoStatusResponse, IAuthorizationResponse } from './response';
+import { Toast } from '@team-entry/design_system';
 
 const router = 'user';
 
@@ -29,7 +30,7 @@ export const DeleteUserInfo = () => {
     await instance.delete(`${router}`);
   };
   return useMutation(response, {
-    onSuccess: () => alert('회원탈퇴에 성공하였습니다.'),
+    onSuccess: () => Toast('회원탈퇴에 성공하였습니다.', { type: 'success' }),
   });
 };
 
@@ -38,6 +39,6 @@ export const DeleteUserPdf = (param: number) => {
     await instance.delete(`${router + '/' + param}`);
   };
   return useMutation(response, {
-    onSuccess: () => alert('원서제출 취소에 성공하였습니다.'),
+    onSuccess: () => Toast('원서제출 취소에 성공하였습니다.', { type: 'success' }),
   });
 };
