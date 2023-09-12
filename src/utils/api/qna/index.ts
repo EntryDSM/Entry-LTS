@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { ICreateQna } from './request';
 import { useNavigate } from 'react-router-dom';
@@ -49,7 +49,7 @@ export const GetMyQna = () => {
 export const CreateQna = (body: ICreateQna) => {
   const navigate = useNavigate();
   const response = async () => {
-    return instance.post(`${router}`, body);
+    return await instance.post(`${router}`, body);
   };
 
   return useMutation(response, {

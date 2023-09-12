@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import FileSaver from 'file-saver';
 import { Toast } from '@team-entry/design_system';

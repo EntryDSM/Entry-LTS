@@ -34,7 +34,11 @@ instance.interceptors.response.use(
       } = error;
       const refreshToken = getCookies('refresh_token');
 
-      if (status == 401 || error.response.data.message === 'Invalid Token' || status == 404) {
+      if (
+        error.response.data.message === 'Invalid Token' ||
+        error.response.data.message === 'Expired Token' ||
+        error.response.data.message === 'User Not Found'
+      ) {
         const originalRequest = config;
 
         if (refreshToken) {
@@ -46,10 +50,10 @@ instance.interceptors.response.use(
             })
             .catch(() => {
               removeTokens();
-              window.location.href = `${AUTH_URL}/login`;
+              // window.location.href = `${AUTH_URL}/login`;
             });
         } else {
-          window.location.href = `${AUTH_URL}/login`;
+          // window.location.href = `${AUTH_URL}/login`;
         }
       } else return Promise.reject(error);
     }

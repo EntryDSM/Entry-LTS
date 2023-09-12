@@ -3,7 +3,7 @@ import { GlobalStyle } from './style/globalStyle.style';
 import App from './App';
 import { StyledProvider } from '@team-entry/design_system';
 import { Global } from '@emotion/react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const root = CreateDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -15,7 +15,7 @@ const queryClient = new QueryClient({
       staleTime: 5000,
     },
   },
-}); 
+});
 
 root.render(
   <>

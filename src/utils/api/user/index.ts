@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { IApplyInfoStatusResponse, IAuthorizationResponse } from './response';
 import { Toast } from '@team-entry/design_system';

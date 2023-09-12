@@ -35,7 +35,7 @@ const MainFunction = () => {
               지금은 원서제출 기간입니다.
             </Text>
             <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
-              입학 상담 문의: 042-886-8814
+              입학 문의: 042-866-8811, 042-866-8814
             </Text>
             <Button
               color={authorityColor}
