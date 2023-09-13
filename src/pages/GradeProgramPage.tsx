@@ -81,7 +81,7 @@ const GradeProgramPage = () => {
     },
     { step: 3, title: '직전전 학기', element },
     { step: 4, title: '출석 점수', element },
-    { step: 4, title: '봉사 점수', subTitle: '최대 12시간으로 환산됩니다', element },
+    { step: 4, title: '봉사 점수', subTitle: '최대 15시간으로 환산됩니다', element },
   ];
   return (
     <_Container>
