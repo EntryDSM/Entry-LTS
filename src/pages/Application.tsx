@@ -91,11 +91,10 @@ const Application = () => {
       { id: 7, title: '과학', type: 'grade', grade: 'A' },
     ],
     [
-      { id: 1, title: '결석', placeholder: '결석 일수', type: 'input', unit: '일', value: '' },
-      { id: 2, title: '지각', placeholder: '지각 횟수', type: 'input', unit: '회', value: '' },
-      { id: 3, title: '조퇴', placeholder: '조퇴 횟수', type: 'input', unit: '회', value: '' },
-      { id: 4, title: '결과', placeholder: '결과 일수', type: 'input', unit: '일', value: '' },
-      { id: 5, title: '미인정 환산 결석', placeholder: '미인정 환산 결석 횟수', type: 'input', unit: '일', value: '' },
+      { id: 1, title: '미인정 결석', placeholder: '결석 일수', type: 'input', unit: '일', value: '' },
+      { id: 2, title: '미인정 지각', placeholder: '지각 횟수', type: 'input', unit: '회', value: '' },
+      { id: 3, title: '미인정 조퇴', placeholder: '조퇴 횟수', type: 'input', unit: '회', value: '' },
+      { id: 4, title: '미인정 결과', placeholder: '결과 일수', type: 'input', unit: '일', value: '' },
     ],
     [
       { id: 1, title: '1학년 봉사활동 시간', placeholder: '봉사 시간', type: 'input', unit: '시간', value: '' },
