@@ -45,7 +45,7 @@ const BoardsAtMain = () => {
             <Link to="/customer">{item.title}</Link>
           </BoardContent>
         ))}
-        {!faqData && (
+        {!!faqData && (
           <BoardContent color="black900" size="body1">
             등록된 질문이 없습니다.
           </BoardContent>
