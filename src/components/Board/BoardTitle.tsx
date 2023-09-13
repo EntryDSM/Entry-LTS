@@ -52,7 +52,7 @@ const BoardTitle = (props: IBoardTitle) => {
           </Button>
         </_ButtonWrapper>
         <div>
-          {((isCustomer && ((!click && !isAdmin) || (click && isAdmin))) || (!isCustomer && isAdmin)) && (
+          {!click && !isAdmin && (
             <Link to={link}>
               <Button color={authorityColor} onClick={onClick}>
                 {button3}

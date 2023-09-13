@@ -37,13 +37,13 @@ const CustomerPage = () => {
           button1="Q&A"
           button2="자주 묻는 질문"
           button3="질문 작성"
-          isCustomer={true}
+          isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
 
         {!click ? (
           <>
-            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
+            <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
             {data?.questions?.map((qna, idx) => {
               return (
                 <Link to={`/customer/${qna.id}`} state={{ qnaId: qna.id }}>
