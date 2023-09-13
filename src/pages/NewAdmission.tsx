@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import Download from '../assets/Download.svg';
-import { Text, theme } from '@team-entry/design_system';
+import { Icon, Text, theme } from '@team-entry/design_system';
 
 const NewAdmissionPage = () => {
   return (
@@ -12,10 +12,10 @@ const NewAdmissionPage = () => {
         </Text>
         <_Download>
           <_Icon>
-            <img src={Download} alt="download" />
+            <Icon icon="Download" size={18} />
           </_Icon>
-          <Text color="black900" size="body1">
-            2077전형요강.pdf
+          <Text color="black900" size="body1" cursor="default">
+            2024전형요강.pdf
           </Text>
         </_Download>
         <_Image />

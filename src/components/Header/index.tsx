@@ -8,8 +8,8 @@ import { Button, Icon, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
-import { getCookies, removeTokens } from '@/utils/cookies';
-import { AUTH_URL } from '@/constant/env';
+import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
+import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -49,7 +49,8 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
-  const { data } = getUserInfo(isLogin);
+  const authority = getCookies('authority');
+  const { data } = getUserInfo(isLogin && authority != 'admin');
 
   const onClick = () => {
     window.location.href = `${AUTH_URL}/login`;
@@ -136,26 +137,41 @@ const Header = () => {
               <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
                 <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <Text cursor="pointer" color="realBlack" size="body1">
-                    {data?.name}
+                    {authority === 'admin' ? '어드민' : data?.name}
                   </Text>
                   <Icon cursor="pointer" icon="DownArrow" color="black500" />
                 </_._DropdownWrapper>
                 {isDropdownOpen && (
                   <_._DropdownMenus>
-                    <_._DropdownMenu
-                      onClick={() => {
-                        navigate('/mypage');
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      <Icon icon="Account" color="black900" />
-                      <Text color="black900" size="body1">
-                        마이페이지
-                      </Text>
-                    </_._DropdownMenu>
+                    {authority == 'admin' ? (
+                      <_._DropdownMenu onClick={() => (window.location.href = 'https://admin.entrydsm.hs.kr')}>
+                        <Icon icon="SignOut" color="green500" />
+                        <Text color="green500" size="body1">
+                          관리자 페이지
+                        </Text>
+                      </_._DropdownMenu>
+                    ) : (
+                      <_._DropdownMenu
+                        onClick={() => {
+                          navigate('/mypage');
+                          setIsDropdownOpen(false);
+                        }}
+                      >
+                        <Icon icon="Account" color="black900" />
+                        <Text color="black900" size="body1">
+                          마이페이지
+                        </Text>
+                      </_._DropdownMenu>
+                    )}
                     <_._Line />
                     <_._DropdownMenu
                       onClick={() => {
+                        removeCookies('authority', {
+                          path: '/',
+                          secure: true,
+                          sameSite: 'none',
+                          domain: COOKIE_DOMAIN,
+                        });
                         removeTokens();
                         setIsLogin(false);
                         alert('로그아웃 되었습니다');

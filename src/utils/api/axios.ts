@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
-import { getCookies, removeTokens, setTokens } from '@/utils/cookies';
+import { getCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({
@@ -28,11 +28,9 @@ instance.interceptors.response.use(
   async (response) => response,
   async (error: AxiosError<AxiosError>) => {
     if (axios.isAxiosError(error) && error.response) {
-      const {
-        config,
-        response: { status },
-      } = error;
+      const { config } = error;
       const refreshToken = getCookies('refresh_token');
+      const authority = getCookies('authority');
 
       if (
         error.response.data.message === 'Invalid Token' ||
@@ -45,15 +43,16 @@ instance.interceptors.response.use(
           ReissueToken(refreshToken as string)
             .then((res) => {
               setTokens(res.access_token, res.refresh_token);
+              setCookies('authority', authority === 'admin' ? 'admin' : 'user');
               if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
               return axios(originalRequest);
             })
             .catch(() => {
               removeTokens();
-              // window.location.href = `${AUTH_URL}/login`;
+              window.location.href = `${AUTH_URL}/login`;
             });
         } else {
-          // window.location.href = `${AUTH_URL}/login`;
+          window.location.href = `${AUTH_URL}/login`;
         }
       } else return Promise.reject(error);
     }
