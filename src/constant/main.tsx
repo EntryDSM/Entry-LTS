@@ -8,31 +8,6 @@ interface ICurrentDate {
   isAdmin: boolean;
 }
 
-export const boardContent = [
-  {
-    id: 0,
-    title: '입학 공지사항',
-    link: '/notice',
-    content: [
-      '2023학년도 신입생 입학전 과제 제출 안내',
-      '2023학년도 신입생 오리엔테이션 집행 안내',
-      '2023학년도 신입생 대상 정밀 건강검진 안내',
-      '2023학년도 신입생 2차전형 안내',
-    ],
-  },
-  {
-    id: 1,
-    title: '자주 묻는 질문',
-    link: '/customer',
-    content: [
-      '전학 또는 편입으로 입학할 수 있나요?',
-      '자기소개서는 공백을 포함하나요?',
-      '다른 마이스터고에 중복 지원이 가능한가요?',
-      '여런 전형에 중복 지원이 가능한가요?',
-    ],
-  },
-];
-
 export const developers = [
   { id: 0, name: '이름이름', major: '분야분야' },
   { id: 1, name: '이름이름', major: '분야분야' },

@@ -1,29 +1,56 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import Arrow from '../../assets/BoardArrow.svg';
-import { boardContent } from '../../constant/main';
 import { Link } from 'react-router-dom';
+import { GetAllNotice } from '@/utils/api/notice';
+import { GetAllFaq } from '@/utils/api/faq';
 
 const BoardsAtMain = () => {
+  const { data: noticeData } = GetAllNotice('FRESHMAN');
+  const { data: faqData } = GetAllFaq();
+  console.log(!!faqData);
   return (
     <Boards>
-      {boardContent.map((item) => (
-        <Board key={item.id}>
-          <BoardTitle>
-            <Link to={item.link}>
-              <Text color="black600" size="title2">
-                {item.title} <img src={Arrow} alt="arrow" />
-              </Text>
-            </Link>
-          </BoardTitle>
-          {item.content.map((item, i) => (
-            <BoardContent key={i} color="black900" size="body1">
-              {item}
-            </BoardContent>
-          ))}
-        </Board>
-      ))}
+      <Board>
+        <BoardTitle>
+          <Link to="/notice">
+            <Text color="black600" size="title2">
+              입학 공지사항 <img src={Arrow} alt="arrow" />
+            </Text>
+          </Link>
+        </BoardTitle>
+        {noticeData?.notices.splice(0, 5).map((item, i) => (
+          <BoardContent key={i} color="black900" size="body1">
+            <Link to={`/notice/${item.id}`}>{item.title}</Link>
+          </BoardContent>
+        ))}
+        {!!noticeData?.notices && (
+          <BoardContent color="black900" size="body1">
+            등록된 공지사항이 없습니다.
+          </BoardContent>
+        )}
+      </Board>
+
+      <Board>
+        <BoardTitle>
+          <Link to="/customer">
+            <Text color="black600" size="title2">
+              자주 묻는 질문 <img src={Arrow} alt="arrow" />
+            </Text>
+          </Link>
+        </BoardTitle>
+        {faqData?.splice(0, 5).map((item, i) => (
+          <BoardContent key={i} color="black900" size="body1">
+            <Link to="/customer">{item.title}</Link>
+          </BoardContent>
+        ))}
+        {!faqData && (
+          <BoardContent color="black900" size="body1">
+            등록된 질문이 없습니다.
+          </BoardContent>
+        )}
+      </Board>
     </Boards>
   );
 };
@@ -46,7 +73,8 @@ const Boards = styled.div`
 const Board = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 10px;
   width: 20rem;
   height: 14rem;
   margin-left: 0.5%;
