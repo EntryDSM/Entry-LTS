@@ -2,25 +2,28 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { useNavigate } from 'react-router-dom';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const NotFound = () => {
   const location = useNavigate();
+  const { authorityColor, isAdmin } = useAuthority();
+
   return (
     <_Container>
       <_Wrapper>
         <_Title>
-          <Text color="orange500" size="header1">
+          <Text color={`${authorityColor}500`} size="header1">
             404
           </Text>
           <Text color="black900" size="header1">
             Not Found
           </Text>
         </_Title>
-        <_Line />
+        <_Line isAdmin={isAdmin} />
         <Text color="black600" size="title2">
           존재하지 않는 페이지입니다.
         </Text>
-        <Button color="orange" onClick={() => location(-1)}>
+        <Button color={authorityColor} onClick={() => location(-1)}>
           돌아가기
         </Button>
       </_Wrapper>
@@ -52,9 +55,9 @@ const _Title = styled.div`
   align-items: center;
 `;
 
-const _Line = styled.div`
+const _Line = styled.div<{ isAdmin: boolean }>`
   width: 90px;
   height: 2px;
-  background-color: ${theme.color.orange500};
+  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
   border: 0;
 `;

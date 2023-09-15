@@ -1,23 +1,35 @@
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
-import BeforeGraduate from '../assets/BeforeGraduate.svg';
-import Graduate from '../assets/Graduate.svg';
-import BlackExam from '../assets/BlackExam.svg';
 import { Link } from 'react-router-dom';
 import { Pc } from '@/hooks/useResponsive';
+import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 
-const list = [
+interface IGradeListProps {
+  icon: IconType;
+  title: string;
+  text: string;
+  type: string;
+}
+
+const list: IGradeListProps[] = [
   {
-    img: BeforeGraduate,
+    icon: 'DeleteUser',
     title: '졸업예정자',
     text: '아직 중학교를 졸업하지 않은\n졸업자를 칭합니다',
     type: 'beforegraduate',
   },
-  { img: Graduate, title: '졸업자', text: '이미 중학교를 졸업한 \n지원자를 칭합니다.', type: 'graduate' },
-  { img: BlackExam, title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'blackexam' },
+  {
+    icon: 'ApproveUser',
+    title: '졸업자',
+    text: '이미 중학교를 졸업한 \n지원자를 칭합니다.',
+    type: 'graduate',
+  },
+  { icon: 'Reader', title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'blackexam' },
 ];
 
 const GradePage = () => {
+  const { authorityColor } = useAuthority();
+
   return (
     <_Container>
       <Pc>
@@ -25,13 +37,15 @@ const GradePage = () => {
           <Text color="black900" size="header1">
             성적 산출 유형 선택
           </Text>
-          <_Line />
+          <_Line authorityColor={authorityColor} />
           <_Cards>
             {list.map((res) => {
-              const { img, text, title, type } = res;
+              const { icon, text, title, type } = res;
               return (
                 <_Card>
-                  <img src={img}></img>
+                  <_IconBackground authorityColor={authorityColor}>
+                    <Icon icon={icon} size={46} />
+                  </_IconBackground>
                   <Text margin={[41, 0, 15, 0]} color="black900" size="title2">
                     {title}
                   </Text>
@@ -39,7 +53,7 @@ const GradePage = () => {
                     {text}
                   </Text>
                   <Link to="/gradeProgram" state={{ type }}>
-                    <Button onClick={() => console.log('hello')} color="orange" kind="rounded">
+                    <Button onClick={() => {}} color={authorityColor} kind="rounded">
                       선택
                     </Button>
                   </Link>
@@ -70,10 +84,10 @@ const _Wrapper = styled.div`
   margin-top: 10rem;
 `;
 
-const _Line = styled.div`
+const _Line = styled.div<{ authorityColor: AuthorityColorType }>`
   width: 4rem;
   height: 2px;
-  background-color: ${theme.color.orange500};
+  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}500`]};
   margin: 2rem;
 `;
 
@@ -98,4 +112,15 @@ const _Card = styled.div`
     width: 15rem;
     height: 22rem;
   }
+`;
+
+const _IconBackground = styled.div<{ authorityColor: AuthorityColorType }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}500`]};
+  border: 1px solid ${theme.color.black100};
+  width: 90px;
+  height: 90px;
+  border-radius: 50px;
 `;

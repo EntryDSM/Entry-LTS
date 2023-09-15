@@ -3,6 +3,7 @@ import { Input, Text, theme } from '@team-entry/design_system';
 import React, { SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { Grade } from './AllSelect';
+import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 
 interface ISelectGrade {
   current: number;
@@ -30,6 +31,8 @@ const SelectGrade = ({
   index,
 }: ISelectGrade) => {
   let arr = ['A', 'B', 'C', 'D', 'E', 'X'];
+
+  const { authorityColor } = useAuthority();
 
   const ChangeGrade = (grade: Grade) => {
     let findIndex = element[current].findIndex((item) => item.id === index + 1);
@@ -60,7 +63,7 @@ const SelectGrade = ({
         <_Buttons>
           {arr.map((res: Grade, i) => {
             return (
-              <_Button onClick={() => ChangeGrade(res)} isClick={res === grade}>
+              <_Button authorityColor={authorityColor} onClick={() => ChangeGrade(res)} isClick={res === grade}>
                 {res}
               </_Button>
             );
@@ -103,7 +106,7 @@ const _Buttons = styled.div`
   align-items: center;
 `;
 
-const _Button = styled.div<{ isClick?: boolean }>`
+const _Button = styled.div<{ isClick?: boolean; authorityColor: AuthorityColorType }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -111,9 +114,10 @@ const _Button = styled.div<{ isClick?: boolean }>`
   height: 2.8rem;
   border-radius: 50px;
   ${theme.font.title2};
-  border: 1px solid ${theme.color.orange500};
-  color: ${({ isClick }) => (isClick ? theme.color.realWhite : theme.color.orange500)};
-  background-color: ${({ isClick }) => (isClick ? theme.color.orange500 : theme.color.realWhite)};
+  border: 1px solid ${({ authorityColor }) => theme.color[`${authorityColor}500`]};
+  color: ${({ isClick, authorityColor }) => (isClick ? theme.color.realWhite : theme.color[`${authorityColor}500`])};
+  background-color: ${({ isClick, authorityColor }) =>
+    isClick ? theme.color[`${authorityColor}500`] : theme.color.realWhite};
   cursor: pointer;
 `;
 

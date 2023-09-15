@@ -1,6 +1,7 @@
 import { getSchedule } from '@/utils/api/schedule';
 import { Text } from '@team-entry/design_system';
 import * as _ from './style';
+import { useAuthority } from '@/hooks/useAuthority';
 
 export const ProgressBar = () => {
   const { data, isLoading } = getSchedule();
@@ -10,6 +11,8 @@ export const ProgressBar = () => {
   const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
   const interviewDate = new Date(data?.schedules[3]?.date ?? '');
   const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
+
+  const { authorityColor } = useAuthority();
 
   if (isLoading) {
     return <></>;
@@ -107,7 +110,7 @@ export const ProgressBar = () => {
       <_._Progress>
         <_._ProgressCards>
           {progressState.map((state, idx) => (
-            <_._ProgressCard key={idx} now={state.condition}>
+            <_._ProgressCard key={idx} now={state.condition} authorityColor={authorityColor}>
               <Text color="realWhite" size="title1">
                 {state.title}
               </Text>

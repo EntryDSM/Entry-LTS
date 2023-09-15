@@ -2,8 +2,11 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Download from '../assets/Download.svg';
 import { Icon, Text, theme } from '@team-entry/design_system';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const NewAdmissionPage = () => {
+  const { isAdmin } = useAuthority();
+
   return (
     <_Container>
       <_Wrapper>
@@ -11,7 +14,7 @@ const NewAdmissionPage = () => {
           신입생 전형 요강
         </Text>
         <_Download>
-          <_Icon>
+          <_Icon isAdmin={isAdmin}>
             <Icon icon="Download" size={18} />
           </_Icon>
           <Text color="black900" size="body1" cursor="default">
@@ -47,14 +50,14 @@ const _Download = styled.div`
   gap: 1rem;
 `;
 
-const _Icon = styled.div`
+const _Icon = styled.div<{ isAdmin: boolean }>`
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background-color: ${theme.color.orange500};
+  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
   border-radius: 50%;
 `;
 

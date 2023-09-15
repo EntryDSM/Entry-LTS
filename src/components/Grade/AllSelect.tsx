@@ -14,10 +14,10 @@ interface IAllSelect {
 const arr: Grade[] = ['A', 'B', 'C', 'D', 'E', 'X'];
 
 const AllSelect = ({ current, element, setElement }: IAllSelect) => {
-  const [grade, setGrade] = useState<Grade>('A');
+  const [grade, setGrade] = useState<Grade>('X');
 
   useEffect(() => {
-    setGrade('A');
+    setGrade('X');
   }, [current]);
 
   const ChangeAllGrade = (grade: Grade) => {

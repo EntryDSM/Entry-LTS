@@ -7,8 +7,9 @@ import BoardHeader from '../components/Board/BoardHeader';
 import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
 import { GetAllQna } from '@/utils/api/qna';
-import { useAuthority } from '@/hooks/useAuthority';
+import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import { GetAllFaq } from '@/utils/api/faq';
+import PageNation from '@/components/PageNation';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
@@ -91,7 +92,7 @@ const CustomerPage = () => {
                         {name}
                       </Text>
                     </Mobile>
-                    {name !== '기타' && <_Circle />}
+                    {name !== '기타' && <_Circle authorityColor={authorityColor} />}
                   </>
                 );
               })}
@@ -143,9 +144,9 @@ const _Categories = styled.div`
   }
 `;
 
-const _Circle = styled.div`
+const _Circle = styled.div<{ authorityColor: AuthorityColorType }>`
   width: 4px;
   height: 4px;
-  background-color: ${theme.color.orange100};
+  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}100`]};
   border-radius: 50px;
 `;
