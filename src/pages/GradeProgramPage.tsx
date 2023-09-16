@@ -24,7 +24,7 @@ const GradeProgramPage = () => {
   const { Modal, modalState, setModalState, open } = useModal();
   const [element, setElement] = useState<IElement[][]>([
     [
-      { id: 1, title: '사회', subTitle: '(과목이 없을 경우 X로 기입해주세요)', type: 'grade', grade: 'A' },
+      { id: 1, title: '사회', type: 'grade', grade: 'A' },
       { id: 2, title: '기술가정', type: 'grade', grade: 'A' },
       { id: 3, title: '역사', type: 'grade', grade: 'A' },
       { id: 4, title: '수학', type: 'grade', grade: 'A' },
@@ -33,7 +33,7 @@ const GradeProgramPage = () => {
       { id: 7, title: '과학', type: 'grade', grade: 'A' },
     ],
     [
-      { id: 1, title: '사회', subTitle: '(과목이 없을 경우 X로 기입해주세요)', type: 'grade', grade: 'A' },
+      { id: 1, title: '사회', type: 'grade', grade: 'A' },
       { id: 2, title: '기술가정', type: 'grade', grade: 'A' },
       { id: 3, title: '역사', type: 'grade', grade: 'A' },
       { id: 4, title: '수학', type: 'grade', grade: 'A' },
@@ -42,7 +42,7 @@ const GradeProgramPage = () => {
       { id: 7, title: '과학', type: 'grade', grade: 'A' },
     ],
     [
-      { id: 1, title: '사회', subTitle: '(과목이 없을 경우 X로 기입해주세요)', type: 'grade', grade: 'A' },
+      { id: 1, title: '사회', type: 'grade', grade: 'A' },
       { id: 2, title: '기술가정', type: 'grade', grade: 'A' },
       { id: 3, title: '역사', type: 'grade', grade: 'A' },
       { id: 4, title: '수학', type: 'grade', grade: 'A' },
@@ -72,13 +72,14 @@ const GradeProgramPage = () => {
   ]);
   const [current, setCurrent] = useState<number>(0);
   let arr = [
-    { step: 1, title: '3학년 1학기', element },
+    { step: 1, title: '3학년 1학기', subTitle: '(과목이 없을 경우 X로 기입해주세요)', element },
     {
       step: 2,
       title: '직전 학기',
+      subTitle: '(과목이 없을 경우 X로 기입해주세요)',
       element,
     },
-    { step: 3, title: '직전전 학기', element },
+    { step: 3, title: '직전전 학기', subTitle: '(과목이 없을 경우 X로 기입해주세요)', element },
     { step: 4, title: '출석 점수', element },
     { step: 4, title: '봉사 점수', subTitle: '최대 15시간으로 환산됩니다', element },
   ];

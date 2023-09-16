@@ -28,9 +28,6 @@ const Program = ({ arr, current, element, setElement }: IProgramProps) => {
           <Text color="black900" size="header1">
             {arr[current].title}
           </Text>
-          <Text color="black600" size="body1">
-            (과목이 없을 경우 X로 기입해주세요)
-          </Text>
           {arr[current].subTitle && (
             <Text color="black600" size="body1">
               {arr[current].subTitle}
