@@ -22,8 +22,6 @@ const CustomerDetailPage = () => {
     setInputValue(value);
   };
 
-  console.log(data);
-
   useEffect(() => {
     if (data && !data?.is_mine && !data?.is_public) {
       alert('비공개글 입니다.');

@@ -12,6 +12,7 @@ interface IUserTypeProps {
 const UserWrite = ({ userWriteValues, setUserWriteValues }: IUserTypeProps) => {
   const { form: inputValues, onChange: changeInputValues } = useInput(userWriteValues);
   setUserWriteValues(inputValues);
+
   return (
     <_Wrapper>
       <Textarea

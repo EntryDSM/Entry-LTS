@@ -2043,10 +2043,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/match-sorter-utils@npm:^8.7.0":
+  version: 8.8.4
+  resolution: "@tanstack/match-sorter-utils@npm:8.8.4"
+  dependencies:
+    remove-accents: 0.4.2
+  checksum: d005f500754f52ef94966cbbe4217f26e7e3c07291faa2578b06bca9a5abe01689569994c37a1d01c6e783addf5ffbb28fa82eba7961d36eabf43ec43d1e496b
+  languageName: node
+  linkType: hard
+
 "@tanstack/query-core@npm:4.35.0":
   version: 4.35.0
   resolution: "@tanstack/query-core@npm:4.35.0"
   checksum: 7a6f24164bce5d7367e2bb58f94380d9608bf4df2726e4e8b0e4f42e84d40cc7883baab2127c0c7e8eaa5c4d444a80c1e5f6e7930d21768a863c82baf22a75d4
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:^4.35.3":
+  version: 4.35.3
+  resolution: "@tanstack/react-query-devtools@npm:4.35.3"
+  dependencies:
+    "@tanstack/match-sorter-utils": ^8.7.0
+    superjson: ^1.10.0
+    use-sync-external-store: ^1.2.0
+  peerDependencies:
+    "@tanstack/react-query": ^4.35.3
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 59495f9dabdb13efa780444de9b4c89cc34528109da1fe993f2f710a63959a73acb250f50c6a120d11d0e34006582f9913a448c8f62a0a2d0e9f72a733129d7a
   languageName: node
   linkType: hard
 
@@ -2069,16 +2093,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@team-entry/design_system@npm:^1.0.102":
-  version: 1.0.102
-  resolution: "@team-entry/design_system@npm:1.0.102"
+"@team-entry/design_system@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@team-entry/design_system@npm:1.1.1"
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     react: ^18.2.0
     react-dom: ^18.2.0
     react-toastify: ^9.1.3
-  checksum: c7a6694c722a5e22c679c6e374460a74aa97abe1470c6493ee0214b03fd8f0988b52ba404ed0a2d64a40b3f020c5753d2b1427f39152c8e1cb1ed43ca8f20b27
+  checksum: a1e9cd547e1618c5ab4ce8a386b1bffffbc5acbf5b10ccc254a36f4d308df8637eaabb02eec1536f44823f3b598b4af8e5483c2a018bd6bf36318694cf77a4e7
   languageName: node
   linkType: hard
 
@@ -3639,6 +3663,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"copy-anything@npm:^3.0.2":
+  version: 3.0.5
+  resolution: "copy-anything@npm:3.0.5"
+  dependencies:
+    is-what: ^4.1.8
+  checksum: d39f6601c16b7cbd81cdb1c1f40f2bf0f2ca0297601cf7bfbb4ef1d85374a6a89c559502329f5bada36604464df17623e111fe19a9bb0c3f6b1c92fe2cbe972f
+  languageName: node
+  linkType: hard
+
 "core-js-compat@npm:^3.31.0":
   version: 3.32.2
   resolution: "core-js-compat@npm:3.32.2"
@@ -4122,7 +4155,8 @@ __metadata:
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
     "@svgr/webpack": ^6.5.1
     "@tanstack/react-query": ^4.35.0
-    "@team-entry/design_system": ^1.0.102
+    "@tanstack/react-query-devtools": ^4.35.3
+    "@team-entry/design_system": ^1.1.1
     "@types/file-saver": ^2.0.5
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
@@ -5764,6 +5798,13 @@ __metadata:
   dependencies:
     call-bind: ^1.0.2
   checksum: 95bd9a57cdcb58c63b1c401c60a474b0f45b94719c30f548c891860f051bc2231575c290a6b420c6bc6e7ed99459d424c652bd5bf9a1d5259505dc35b4bf83de
+  languageName: node
+  linkType: hard
+
+"is-what@npm:^4.1.8":
+  version: 4.1.15
+  resolution: "is-what@npm:4.1.15"
+  checksum: fe27f6cd4af41be59a60caf46ec09e3071bcc69b9b12a7c871c90f54360edb6d0bc7240cb944a251fb0afa3d35635d1cecea9e70709876b368a8285128d70a89
   languageName: node
   linkType: hard
 
@@ -7518,6 +7559,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"remove-accents@npm:0.4.2":
+  version: 0.4.2
+  resolution: "remove-accents@npm:0.4.2"
+  checksum: 84a6988555dea24115e2d1954db99509588d43fe55a1590f0b5894802776f7b488b3151c37ceb9e4f4b646f26b80b7325dcea2fae58bc3865df146e1fa606711
+  languageName: node
+  linkType: hard
+
 "renderkid@npm:^3.0.0":
   version: 3.0.0
   resolution: "renderkid@npm:3.0.0"
@@ -8205,6 +8253,15 @@ __metadata:
   version: 4.2.0
   resolution: "stylis@npm:4.2.0"
   checksum: 0eb6cc1b866dc17a6037d0a82ac7fa877eba6a757443e79e7c4f35bacedbf6421fadcab4363b39667b43355cbaaa570a3cde850f776498e5450f32ed2f9b7584
+  languageName: node
+  linkType: hard
+
+"superjson@npm:^1.10.0":
+  version: 1.13.1
+  resolution: "superjson@npm:1.13.1"
+  dependencies:
+    copy-anything: ^3.0.2
+  checksum: 9c8c664a924ce097250112428805ccc8b500018b31a91042e953d955108b8481c156005d836b413940c9fa5f124a3195f55f3a518fe76510a254a59f9151a204
   languageName: node
   linkType: hard
 
