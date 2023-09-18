@@ -1,22 +1,30 @@
-import { SetStateAction, useState } from 'react';
+import { ChangeEvent, SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Input, Text, Textarea } from '@team-entry/design_system';
+import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from '@/hooks/useInput';
+import { useTextArea } from '@/hooks/useTextArea';
+import { CreateFaq } from '@/utils/api/faq';
+import { ICreateFaq } from '@/utils/api/faq/types';
+import { useAuthority } from '@/hooks/useAuthority';
 
 const WriteFAQPage = () => {
-  const [value, setValue] = useState({ 답변: '' });
-  const navigate = useNavigate();
-
-  const { form: inputValue, onChange: setInputValue } = useInput(value);
+  const { form: inputValue, onChange: setInputValue } = useInput<Omit<ICreateFaq, 'content'>>({
+    title: '',
+    faq_type: 'ADMISSION',
+  });
+  const { form: textAreaValue, onChange: setTextAreaValue } = useTextArea({ content: '' });
+  const { mutate: createFaq } = CreateFaq();
+  const { authorityColor } = useAuthority();
 
   const onClick = () => {
-    navigate(-1);
+    createFaq({ ...inputValue, ...textAreaValue });
   };
   return (
     <_Container>
       <_Wrapper>
+        <></>
         <Pc>
           <Text color="black900" size="header1">
             FAQ 작성
@@ -28,15 +36,60 @@ const WriteFAQPage = () => {
           </Text>
         </Mobile>
         <_Line />
-        <Input type="text" label="질문" width="100%" placeholder="질문을 입력해주세요" />
+        <Text color="black900" size="body5" margin={[0, 0, 6, 5]}>
+          분류
+        </Text>
+        <Stack gap={60} margin={['bottom', 20]}>
+          <Radio
+            name="faq_type"
+            label="입학"
+            value="ADMISSION"
+            color={authorityColor}
+            onClick={setInputValue}
+            isChecked={inputValue.faq_type === 'ADMISSION'}
+          />
+          <Radio
+            name="faq_type"
+            label="진로"
+            value="COURSE"
+            color={authorityColor}
+            onClick={setInputValue}
+            isChecked={inputValue.faq_type === 'COURSE'}
+          />
+          <Radio
+            name="faq_type"
+            label="학교생활"
+            value="SCHOOL_LIFE"
+            color={authorityColor}
+            onClick={setInputValue}
+            isChecked={inputValue.faq_type === 'SCHOOL_LIFE'}
+          />
+          <Radio
+            name="faq_type"
+            label="기타"
+            value="OTHER"
+            color={authorityColor}
+            onClick={setInputValue}
+            isChecked={inputValue.faq_type === 'OTHER'}
+          />
+        </Stack>
+        <Input
+          name="title"
+          type="text"
+          label="질문"
+          width="100%"
+          placeholder="질문을 입력해주세요"
+          value={inputValue.title}
+          onChange={setInputValue}
+        />
         <Textarea
-          name="답변"
+          name="content"
           label="답변"
           width="100%"
           placeholder="답변을 입력해주세요"
-          limit={600}
-          value={inputValue.답변}
-          onChange={setInputValue}
+          maxLength={600}
+          value={textAreaValue.content}
+          onChange={setTextAreaValue}
           margin={['top', 20]}
         />
         <_ButtonBox>
@@ -58,14 +111,14 @@ const _Container = styled.div`
 `;
 
 const _Wrapper = styled.div`
-  margin-top: 7rem;
+  margin-top: 85px;
   width: 60rem;
   height: 38rem;
   padding: 0 20px;
 `;
 
 const _Line = styled.div`
-  margin: 25px 0px;
+  margin: 20px 0px;
   width: 70px;
   height: 1.5px;
   background-color: #cacaca;

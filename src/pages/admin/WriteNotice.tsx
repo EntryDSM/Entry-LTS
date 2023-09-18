@@ -61,7 +61,7 @@ const WriteNotice = () => {
             label="본문"
             width="100%"
             placeholder="내용을 입력해주세요"
-            limit={600}
+            maxLength={600}
             value={value}
             onChange={setValueType}
             margin={['top', 20]}

@@ -6,6 +6,7 @@ import { Mobile, Pc } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate } from 'react-router-dom';
+import { faqTypeToKorean } from '@/utils/translate';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -20,6 +21,7 @@ const BoardElement = (props: IBoard) => {
     content,
     isReplied,
     userName,
+    faq_type,
     createdAt,
   } = props;
   const [clicked, setClicked] = useState(false);
@@ -31,7 +33,7 @@ const BoardElement = (props: IBoard) => {
         <Div>
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
-              {isNumber ? boardNumber : '입학문의'}
+              {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
               {!isPublic && <Icon color={`${authorityColor}500`} size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
@@ -43,7 +45,7 @@ const BoardElement = (props: IBoard) => {
           <Mobile>
             {!isNumber && (
               <Text color="black700" size="body3" margin={['right', 20]}>
-                입학문의
+                {faqTypeToKorean[faq_type]}
               </Text>
             )}
             <Text color="black800" size="body5">

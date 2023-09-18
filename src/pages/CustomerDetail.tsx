@@ -98,7 +98,7 @@ const CustomerDetailPage = () => {
               label="답변"
               width="100%"
               placeholder="답변을 입력해주세요"
-              limit={600}
+              maxLength={600}
               value={inputValue}
               onChange={onChange}
               margin={['top', 20]}

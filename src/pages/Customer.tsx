@@ -103,6 +103,7 @@ const CustomerPage = () => {
                 content={faq.content}
                 createdAt={faq.created_at}
                 title={faq.title}
+                faq_type={faq.faq_type}
                 isNumber={false}
                 isTopBorder={true}
                 isOpen={true}
