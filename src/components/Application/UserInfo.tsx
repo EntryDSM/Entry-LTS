@@ -59,13 +59,13 @@ const UserInfo = ({ userInfoValues, setUserInfoValues, isBlackExam }: IUserTypeP
       </ApplicationContent>
 
       <ApplicationContent grid={2} title="성별" width={40}>
-        <Radio label="남자" name="sex" value="MEN" onClick={changeInputValues} isChecked={inputValues.sex === 'MEN'} />
+        <Radio label="남자" name="sex" value="MEN" onClick={changeInputValues} checked={inputValues.sex === 'MEN'} />
         <Radio
           label="여자"
           name="sex"
           value="WOMEN"
           onClick={changeInputValues}
-          isChecked={inputValues.sex === 'WOMEN'}
+          checked={inputValues.sex === 'WOMEN'}
         />
       </ApplicationContent>
       <ApplicationContent grid={3} title="생년월일" width={40}>

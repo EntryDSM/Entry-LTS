@@ -2,7 +2,6 @@ import { ChangeEvent, SetStateAction, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
-import { useNavigate } from 'react-router-dom';
 import { useInput } from '@/hooks/useInput';
 import { useTextArea } from '@/hooks/useTextArea';
 import { CreateFaq } from '@/utils/api/faq';
@@ -46,7 +45,7 @@ const WriteFAQPage = () => {
             value="ADMISSION"
             color={authorityColor}
             onClick={setInputValue}
-            isChecked={inputValue.faq_type === 'ADMISSION'}
+            checked={inputValue.faq_type === 'ADMISSION'}
           />
           <Radio
             name="faq_type"
@@ -54,7 +53,7 @@ const WriteFAQPage = () => {
             value="COURSE"
             color={authorityColor}
             onClick={setInputValue}
-            isChecked={inputValue.faq_type === 'COURSE'}
+            checked={inputValue.faq_type === 'COURSE'}
           />
           <Radio
             name="faq_type"
@@ -62,7 +61,7 @@ const WriteFAQPage = () => {
             value="SCHOOL_LIFE"
             color={authorityColor}
             onClick={setInputValue}
-            isChecked={inputValue.faq_type === 'SCHOOL_LIFE'}
+            checked={inputValue.faq_type === 'SCHOOL_LIFE'}
           />
           <Radio
             name="faq_type"
@@ -70,7 +69,7 @@ const WriteFAQPage = () => {
             value="OTHER"
             color={authorityColor}
             onClick={setInputValue}
-            isChecked={inputValue.faq_type === 'OTHER'}
+            checked={inputValue.faq_type === 'OTHER'}
           />
         </Stack>
         <Input

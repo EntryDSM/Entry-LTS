@@ -4,6 +4,7 @@ import App from './App';
 import { CustomToastContainer, StyledProvider } from '@team-entry/design_system';
 import { Global } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const root = CreateDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -23,6 +24,7 @@ root.render(
       <QueryClientProvider client={queryClient}>
         <App />
         <CustomToastContainer />
+        <ReactQueryDevtools initialIsOpen={true} />
       </QueryClientProvider>
     </StyledProvider>
   </>,
