@@ -1,17 +1,17 @@
 import { instance } from '../axios';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { ICreateFaq, IGetFaq, IQnaFaqDetail } from './types';
+import { FaqType, ICreateFaq, IGetFaq, IQnaFaqDetail } from './types';
 import { Toast } from '@team-entry/design_system';
 import { useNavigate } from 'react-router-dom';
 
 const router = 'faq';
 
-export const GetAllFaq = () => {
+export const GetAllFaq = (type?: FaqType) => {
   const response = async () => {
-    const { data } = await instance.get<IGetFaq[]>(`${router}/all`);
+    const { data } = await instance.get<IGetFaq[]>(`${router}?type=${type || ''}`);
     return data;
   };
-  return useQuery(['faq'], response);
+  return useQuery(['faq', type], response);
 };
 
 export const GetFaqDetail = (id: number) => {
