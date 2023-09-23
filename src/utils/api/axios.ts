@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
-import { getCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
+import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
 
 export const instance = axios.create({
@@ -47,9 +47,19 @@ instance.interceptors.response.use(
               if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
               return axios(originalRequest);
             })
-            .catch(() => {
-              removeTokens();
-              window.location.href = `${AUTH_URL}/login`;
+            .catch((res: AxiosError<AxiosError>) => {
+              if (
+                res?.response?.data.status === 404 ||
+                res.response?.data.status === 403 ||
+                res?.response?.data.message === 'Expired Token' ||
+                res.response?.data.message === 'Invalid Token'
+              ) {
+                removeTokens();
+                removeCookies('authority');
+                if (res.response.data.message !== 'Invalid Token') {
+                  window.location.href = `${AUTH_URL}/login`;
+                }
+              }
             });
         } else {
           window.location.href = `${AUTH_URL}/login`;
