@@ -10,22 +10,24 @@ import { GetAllQna } from '@/utils/api/qna';
 import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import { GetAllFaq } from '@/utils/api/faq';
 import PageNation from '@/components/PageNation';
+import { FaqType } from '@/utils/api/faq/types';
 
 const CustomerPage = () => {
   const [click, setClick] = useState(false);
-  const [category, setCategory] = useState('전체');
-  const categories = [
-    { name: '전체' },
-    { name: '입학 문의' },
-    { name: '취업 문의' },
-    { name: '진학 문의' },
-    { name: '기타' },
-  ];
+  const [category, setCategory] = useState<FaqType>('');
+  const categories: Record<string, FaqType> = {
+    전체: '',
+    '입학 문의': 'ADMISSION',
+    '진학 문의': 'COURSE',
+    '학교 생활': 'SCHOOL_LIFE',
+    기타: 'OTHER',
+  };
+
   const { isAdmin, authorityColor } = useAuthority();
 
   const { data } = GetAllQna();
 
-  const { data: getAllFaq } = GetAllFaq();
+  const { data: getAllFaq } = GetAllFaq(category);
 
   return (
     <_Container>
@@ -68,31 +70,30 @@ const CustomerPage = () => {
         ) : (
           <>
             <_Categories>
-              {categories.map((res, i) => {
-                const { name } = res;
+              {Object.entries(categories).map((res, i) => {
                 return (
                   <>
                     <Pc>
                       <Text
-                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="title2"
                         cursor="pointer"
-                        onClick={() => setCategory(name)}
+                        onClick={() => setCategory(res[1])}
                       >
-                        {name}
+                        {res[0]}
                       </Text>
                     </Pc>
                     <Mobile>
                       <Text
-                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="body3"
                         cursor="pointer"
-                        onClick={() => setCategory(name)}
+                        onClick={() => setCategory(res[1])}
                       >
-                        {name}
+                        {res[0]}
                       </Text>
                     </Mobile>
-                    {name !== '기타' && <_Circle authorityColor={authorityColor} />}
+                    {res[0] !== '기타' && <_Circle authorityColor={authorityColor} />}
                   </>
                 );
               })}

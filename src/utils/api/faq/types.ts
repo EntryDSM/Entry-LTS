@@ -1,4 +1,4 @@
-export type FaqType = 'ADMISSION' | 'COURSE' | 'SCHOOL_LIFE' | 'OTHER';
+export type FaqType = 'ADMISSION' | 'COURSE' | 'SCHOOL_LIFE' | 'OTHER' | '';
 
 export interface ICreateFaq {
   title: string;
