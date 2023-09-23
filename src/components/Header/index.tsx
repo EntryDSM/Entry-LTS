@@ -74,6 +74,19 @@ const Header = () => {
     }
   };
 
+  const Logout = () => {
+    removeCookies('authority', {
+      path: '/',
+      secure: true,
+      sameSite: 'none',
+      domain: COOKIE_DOMAIN,
+    });
+    removeTokens();
+    setIsLogin(false);
+    alert('로그아웃 되었습니다');
+    navigate('/');
+  };
+
   return (
     <>
       <_._HeaderContainer>
@@ -105,9 +118,9 @@ const Header = () => {
                     <Link to="/mypage">
                       <_._MenuElement color="black">마이페이지</_._MenuElement>
                     </Link>
-                    <Link to="/logout">
-                      <_._MenuElement color="red">로그아웃</_._MenuElement>
-                    </Link>
+                    <_._MenuElement color="red" onClick={Logout}>
+                      로그아웃
+                    </_._MenuElement>
                   </>
                 )}
               </_._Menu>
@@ -175,16 +188,7 @@ const Header = () => {
                     <_._Line />
                     <_._DropdownMenu
                       onClick={() => {
-                        removeCookies('authority', {
-                          path: '/',
-                          secure: true,
-                          sameSite: 'none',
-                          domain: COOKIE_DOMAIN,
-                        });
-                        removeTokens();
-                        setIsLogin(false);
-                        alert('로그아웃 되었습니다');
-                        navigate('/');
+                        Logout();
                         setIsDropdownOpen(false);
                       }}
                     >
