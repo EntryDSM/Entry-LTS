@@ -34,9 +34,6 @@ const headerList: IHeaderList[] = [
 const menuList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
   { name: '공지사항', url: '/notice' },
-  { name: '로그인', url: '/login', type: 'logout' },
-  { name: '마이페이지', url: '/mypage', type: 'login' },
-  { name: '로그아웃', url: '/logout', type: 'login' },
 ];
 
 const Header = () => {
@@ -85,22 +82,34 @@ const Header = () => {
           {isOpen && (
             <_._Background onClick={closeMenu}>
               <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
-                {menuList
-                  .filter((list) => (isLogin ? list.type !== 'logout' : list.type !== 'login'))
-                  .map((list, idx) => {
-                    return (
-                      <Link key={idx} to={list.url}>
-                        <_._MenuElement
-                          color={list.name === '로그아웃' ? 'red' : 'black'}
-                          onClick={() => {
-                            setVisibility(false);
-                          }}
-                        >
-                          {list.name}
-                        </_._MenuElement>
-                      </Link>
-                    );
-                  })}
+                {menuList.map((list, idx) => {
+                  return (
+                    <Link key={idx} to={list.url}>
+                      <_._MenuElement
+                        color={'black'}
+                        onClick={() => {
+                          setVisibility(false);
+                        }}
+                      >
+                        {list.name}
+                      </_._MenuElement>
+                    </Link>
+                  );
+                })}
+                {isLogin ? (
+                  <_._MenuElement color="black" onClick={onClick}>
+                    로그인
+                  </_._MenuElement>
+                ) : (
+                  <>
+                    <Link to="/mypage">
+                      <_._MenuElement color="black">마이페이지</_._MenuElement>
+                    </Link>
+                    <Link to="/logout">
+                      <_._MenuElement color="red">로그아웃</_._MenuElement>
+                    </Link>
+                  </>
+                )}
               </_._Menu>
             </_._Background>
           )}
