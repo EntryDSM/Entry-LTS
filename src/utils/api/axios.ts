@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
 import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
+import { useNavigate } from 'react-router-dom';
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -55,7 +56,8 @@ instance.interceptors.response.use(
               }
             });
         } else {
-          window.location.href = `${AUTH_URL}/login`;
+          removeTokens();
+          window.location.href = '/';
         }
       } else return Promise.reject(error);
     }
