@@ -85,6 +85,7 @@ const Header = () => {
     setIsLogin(false);
     alert('로그아웃 되었습니다');
     navigate('/');
+    setIsOpen(false);
   };
 
   return (
@@ -110,10 +111,6 @@ const Header = () => {
                   );
                 })}
                 {isLogin ? (
-                  <_._MenuElement color="black" onClick={onClick}>
-                    로그인
-                  </_._MenuElement>
-                ) : (
                   <>
                     <Link to="/mypage">
                       <_._MenuElement color="black">마이페이지</_._MenuElement>
@@ -122,6 +119,10 @@ const Header = () => {
                       로그아웃
                     </_._MenuElement>
                   </>
+                ) : (
+                  <_._MenuElement color="black" onClick={onClick}>
+                    로그인
+                  </_._MenuElement>
                 )}
               </_._Menu>
             </_._Background>
