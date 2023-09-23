@@ -33,9 +33,9 @@ instance.interceptors.response.use(
       const authority = getCookies('authority');
 
       if (
-        error.response.data.message === 'Invalid Token' ||
-        error.response.data.message === 'Expired Token' ||
-        error.response.data.message === 'User Not Found'
+        error.response.data?.message === 'Invalid Token' ||
+        error.response.data?.message === 'Expired Token' ||
+        error.response.data?.message === 'User Not Found'
       ) {
         const originalRequest = config;
 
@@ -48,17 +48,10 @@ instance.interceptors.response.use(
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {
-              if (
-                res?.response?.data.status === 404 ||
-                res.response?.data.status === 403 ||
-                res?.response?.data.message === 'Expired Token' ||
-                res.response?.data.message === 'Invalid Token'
-              ) {
-                removeTokens();
-                removeCookies('authority');
-                if (res.response.data.message !== 'Invalid Token') {
-                  window.location.href = `${AUTH_URL}/login`;
-                }
+              removeTokens();
+              removeCookies('authority');
+              if (res?.response?.data.message !== 'Expired Token') {
+                window.location.href = `${AUTH_URL}/login`;
               }
             });
         } else {
