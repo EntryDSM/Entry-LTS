@@ -25,7 +25,7 @@ const BoardsAtMain = () => {
             <Link to={`/notice/${item.id}`}>{item.title}</Link>
           </BoardContent>
         ))}
-        {!!noticeData?.notices && (
+        {!noticeData?.notices?.length && (
           <BoardContent color="black900" size="body1">
             등록된 공지사항이 없습니다.
           </BoardContent>
@@ -45,7 +45,7 @@ const BoardsAtMain = () => {
             <Link to="/customer">{item.title}</Link>
           </BoardContent>
         ))}
-        {!!faqData && (
+        {!faqData?.length && (
           <BoardContent color="black900" size="body1">
             등록된 질문이 없습니다.
           </BoardContent>
