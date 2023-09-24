@@ -35,10 +35,8 @@ const Progress = () => {
 export default Progress;
 
 const _Progress = styled.div`
-  height: 9rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const _ProgressCards = styled.div`

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Icon, IconType, Text } from '@team-entry/design_system';
-import Banner from '../../assets/ReplaceBanner.svg';
+import Banner from '../../assets/Banner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
 import { shortcut } from '../../constant/main';
@@ -14,14 +14,21 @@ import { useNavigate } from 'react-router-dom';
 import { getUserInfo } from '@/utils/api/application';
 import { getCookies } from '@/utils/cookies';
 import { ApplyInfoStatus } from '@/utils/api/user';
+import { GetReserveLink } from '@/utils/api/reserve';
 
 const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
-  const onClick = () => console.log('clicked!');
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   // const { data } = ApplyInfoStatus(isLogin);
+  const { data: reserve } = GetReserveLink();
+
+  const onClick = () => {
+    if (!!reserve) {
+      window.location.href = reserve.reserve_link;
+    }
+  };
 
   return (
     <_Wrapper>
@@ -110,7 +117,7 @@ const _Wrapper = styled.div`
   max-width: 76rem;
   min-height: 100vh;
   @media screen and (max-width: 768px) {
-    padding: 0;
+    padding-top: 4rem;
   }
 `;
 
@@ -136,7 +143,6 @@ const _Application = styled.div`
     justify-content: space-between;
     flex-direction: column-reverse;
     align-items: center;
-    margin-top: 10%;
     border: 0;
   }
 `;

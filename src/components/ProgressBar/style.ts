@@ -7,10 +7,8 @@ interface ICurrentDate {
 }
 
 export const _Progress = styled.div`
-  height: 9rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 export const _ProgressCards = styled.div`
@@ -54,7 +52,8 @@ export const _ProgressCircle = styled.div<ICurrentDate>`
 `;
 
 export const _Overflow = styled.div`
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   display: flex;
   justify-content: space-between;
   flex-direction: column-reverse;
