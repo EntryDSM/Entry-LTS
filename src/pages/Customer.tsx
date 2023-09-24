@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
@@ -13,7 +13,6 @@ import PageNation from '@/components/PageNation';
 import { FaqType } from '@/utils/api/faq/types';
 
 const CustomerPage = () => {
-  const [click, setClick] = useState(false);
   const [category, setCategory] = useState<FaqType>('');
   const categories: Record<string, FaqType> = {
     전체: '',
@@ -29,12 +28,20 @@ const CustomerPage = () => {
 
   const { data: getAllFaq } = GetAllFaq(category);
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const setType = () => {
+    searchParams.get('type') !== 'faq' ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
+
+    setSearchParams(searchParams);
+  };
+
   return (
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={click}
-          setClick={setClick}
+          click={searchParams.get('type') === 'faq'}
+          setClick={setType}
           title="문의사항"
           subTitle="입학 상담 문의: 042-866-8811, 042-866-8814"
           button1="Q&A"
@@ -44,7 +51,7 @@ const CustomerPage = () => {
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
 
-        {!click ? (
+        {searchParams.get('type') !== 'faq' ? (
           <>
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
             {data?.questions?.map((qna, idx) => {

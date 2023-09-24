@@ -26,10 +26,14 @@ export const GetQnaDetail = (qnaId: string) => {
 
   return useQuery(['qna', qnaId], response, {
     onSuccess: () => {},
-    onError: (err: AxiosError) => {
-      if (err.response.status === 403) {
+    onError: (err: AxiosError<AxiosError>) => {
+      console.log(err);
+      if (err.response?.data.status === 403) {
         Toast('비공개 글 입니다', { type: 'error' });
-        navigate(-1);
+        navigate('/customer');
+      } else if (err.response.data.message === 'The account does not exist') {
+        Toast('로그인이 필요합니다', { type: 'error' });
+        navigate('/customer');
       }
     },
   });

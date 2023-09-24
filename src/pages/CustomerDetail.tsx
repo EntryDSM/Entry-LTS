@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Input, Spinner, Text, Textarea, theme } from '@team-entry/design_system';
+import { Button, Input, Spinner, Stack, Text, Textarea, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
@@ -22,14 +22,12 @@ const CustomerDetailPage = () => {
     setInputValue(value);
   };
 
-  useEffect(() => {
-    if (data && !data?.is_mine && !data?.is_public) {
-      alert('비공개글 입니다.');
-      navigate('/customer');
-    }
-  }, []);
-
-  if (isLoading) return <Spinner margin={[0, 'auto']} size={40} color="orange" />;
+  if (isLoading)
+    return (
+      <_Loading>
+        <Spinner margin={[0, 'auto']} size={40} color="orange" />
+      </_Loading>
+    );
   return (
     <_Container>
       <_Wrapper>
@@ -129,6 +127,14 @@ const CustomerDetailPage = () => {
 };
 
 export default CustomerDetailPage;
+
+const _Loading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const _Container = styled.div`
   position: relative;
