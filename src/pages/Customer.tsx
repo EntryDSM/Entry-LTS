@@ -56,7 +56,7 @@ const CustomerPage = () => {
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
             {data?.questions?.map((qna, idx) => {
               return (
-                <Link to={`/customer/${qna.id}`} state={{ qnaId: qna.id }}>
+                <Link to={`/customer/${qna.id}`}>
                   <BoardElement
                     title={qna.title}
                     boardNumber={data.questions.length - idx}

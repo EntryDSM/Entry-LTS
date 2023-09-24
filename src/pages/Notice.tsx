@@ -31,7 +31,7 @@ const NoticePage = () => {
         <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={false} />
         {data?.notices.reverse().map((notice, idx) => {
           return (
-            <Link to={`/notice/${notice.id}`} state={{ noticeId: notice.id }}>
+            <Link to={`/notice/${notice.id}`}>
               <BoardElement
                 boardNumber={data.notices.length - idx}
                 createdAt={notice.created_at}

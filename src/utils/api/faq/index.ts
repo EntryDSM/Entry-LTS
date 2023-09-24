@@ -30,7 +30,7 @@ export const CreateFaq = () => {
   return useMutation(response, {
     onSuccess: () => {
       Toast('Faq가 성공적으로 추가되었습니다.', { type: 'success' });
-      navigate('/customer');
+      navigate('/customer?type=faq');
     },
   });
 };

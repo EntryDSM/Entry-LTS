@@ -32,7 +32,7 @@ export const GetQnaDetail = (qnaId: string) => {
         Toast('비공개 글 입니다', { type: 'error' });
         navigate('/customer');
       } else if (err.response.data.message === 'The account does not exist') {
-        Toast('로그인이 필요합니다', { type: 'error' });
+        Toast('권한이 없습니다', { type: 'error' });
         navigate('/customer');
       }
     },
@@ -68,7 +68,7 @@ export const CreateQna = (body: ICreateQna) => {
           break;
         case 404:
           Toast('로그인 오류 다시 로그인 해주세요', { type: 'error' });
-          navigate('/login');
+          navigate('/customer');
           break;
         default:
           return;

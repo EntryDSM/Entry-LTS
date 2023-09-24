@@ -34,7 +34,7 @@ const BoardsAtMain = () => {
 
       <Board>
         <BoardTitle>
-          <Link to="/customer">
+          <Link to="/customer?type=faq">
             <Text color="black600" size="title2">
               자주 묻는 질문 <img src={Arrow} alt="arrow" />
             </Text>
@@ -42,7 +42,7 @@ const BoardsAtMain = () => {
         </BoardTitle>
         {faqData?.splice(0, 5).map((item, i) => (
           <BoardContent key={i} color="black900" size="body1">
-            <Link to="/customer">{item.title}</Link>
+            <Link to="/customer?type=faq">{item.title}</Link>
           </BoardContent>
         ))}
         {!faqData?.length && (

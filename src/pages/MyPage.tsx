@@ -133,7 +133,7 @@ const MyPage = () => {
           <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
           {myQnaList?.questions?.map((qna, idx) => {
             return (
-              <Link to={`/customer/${qna.id}`} state={{ qnaId: qna.id }}>
+              <Link to={`/customer/${qna.id}`}>
                 <BoardElement
                   title={qna.title}
                   boardNumber={myQnaList.questions.length - idx}
