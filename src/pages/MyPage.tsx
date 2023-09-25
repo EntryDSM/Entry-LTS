@@ -107,9 +107,9 @@ const MyPage = () => {
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
               <Button onClick={onClick}>발표 결과 확인</Button>
-              <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
+              {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
-              </Button>
+              </Button> */}
             </Pc>
             <Mobile>
               <Button onClick={onClick}>발표 결과 확인</Button>
