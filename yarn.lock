@@ -2093,16 +2093,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@team-entry/design_system@npm:^1.1.4":
-  version: 1.1.4
-  resolution: "@team-entry/design_system@npm:1.1.4"
+"@team-entry/design_system@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "@team-entry/design_system@npm:1.1.6"
   dependencies:
     "@emotion/react": ^11.10.5
     "@emotion/styled": ^11.10.5
     react: ^18.2.0
     react-dom: ^18.2.0
     react-toastify: ^9.1.3
-  checksum: 45a8617409711693e7abdd333f23549bb977a14af749fecb925c0cc0bdc646cf226f9911e9b202e6e9dc203faa0d8f0eabc381b685e09953e9488c5da0af26e7
+  checksum: d034bb57a9cc593989816f0fe48f40b2e7304cc1d6a49aa7932a96377f2dae2f92c2e08a3ab0f96fe4238a85a32c217f191bd8409ab31d7e444592c80b179ac0
   languageName: node
   linkType: hard
 
@@ -4156,7 +4156,7 @@ __metadata:
     "@svgr/webpack": ^6.5.1
     "@tanstack/react-query": ^4.35.0
     "@tanstack/react-query-devtools": ^4.35.3
-    "@team-entry/design_system": ^1.1.4
+    "@team-entry/design_system": ^1.1.6
     "@types/file-saver": ^2.0.5
     "@types/node": ^18.11.18
     "@types/react": ^18.0.27
