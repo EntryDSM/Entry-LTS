@@ -11,7 +11,7 @@ export const GetAllFaq = (type?: FaqType) => {
     const { data } = await instance.get<IGetFaq[]>(`${router}?type=${type || ''}`);
     return data;
   };
-  return useQuery(['faq', type], response);
+  return useQuery(['faq', type || ''], response);
 };
 
 export const GetFaqDetail = (id: number) => {
