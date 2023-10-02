@@ -11,9 +11,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useAuthority } from '@/hooks/useAuthority';
 import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
-import { getUserInfo } from '@/utils/api/application';
 import { getCookies } from '@/utils/cookies';
-import { ApplyInfoStatus } from '@/utils/api/user';
 import { GetReserveLink } from '@/utils/api/reserve';
 
 const MainFunction = () => {
@@ -41,13 +39,14 @@ const MainFunction = () => {
             <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1">
               지금은 원서제출 기간입니다.
             </Text>
-            <Text align={isTablet ? 'center' : 'start'} color="black600" size="title2">
+            <PhoneNumber align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 문의: 042-866-8811, 042-866-8814
-            </Text>
+            </PhoneNumber>
             <Button
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={['bottom', 20]}
+              isBig
             >
               원서 접수 →
             </Button>
@@ -206,4 +205,8 @@ const _Overflow = styled.div`
     align-items: flex-start;
     width: 100%;
   }
+`;
+
+const PhoneNumber = styled(Text)`
+  font-size: 20px;
 `;
