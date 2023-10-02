@@ -1,5 +1,5 @@
 import { getSchedule } from '@/utils/api/schedule';
-import { Text } from '@team-entry/design_system';
+import { Skeleton, Text } from '@team-entry/design_system';
 import * as _ from './style';
 import { useAuthority } from '@/hooks/useAuthority';
 
@@ -104,6 +104,8 @@ export const ProgressBar = () => {
       ),
     },
   ];
+
+  if (isLoading) return <Skeleton width={720} height={112} isLoaded rounded={5} />;
 
   return (
     <_._Overflow>
