@@ -1,29 +1,6 @@
 import { css } from '@emotion/react';
 
 export const GlobalStyle = css`
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 700;
-    font-style: bold;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Bold.woff2') format('woff2');
-  }
-
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 500;
-    font-style: medium;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Medium.woff2')
-      format('woff2');
-  }
-
-  @font-face {
-    font-family: 'Pretendard';
-    font-weight: 400;
-    font-style: regular;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Regular.woff2')
-      format('woff2');
-  }
-
   html,
   body,
   div,
@@ -163,7 +140,7 @@ export const GlobalStyle = css`
     font-weight: 300;
     color: black;
     line-height: 1.2;
-    font-family: 'Pretendard', sans-serif;
+    font-family: 'pretendard', sans-serif;
   }
   .normal {
     font-weight: 400;
