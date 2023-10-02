@@ -5,24 +5,23 @@ export const GlobalStyle = css`
     font-family: 'Pretendard';
     font-weight: 700;
     font-style: bold;
-    src: local('Pretendard')
-      url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Bold.woff2') format('woff2');
+    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Bold.woff2') format('woff2');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-weight: 500;
     font-style: medium;
-    src: local('Pretendard')
-      url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Medium.woff2') format('woff2');
+    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Medium.woff2')
+      format('woff2');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
     font-style: regular;
-    src: local('Pretendard')
-      url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Regular.woff2') format('woff2');
+    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Regular.woff2')
+      format('woff2');
   }
 
   html,
