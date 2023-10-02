@@ -9,6 +9,8 @@ const BoardsAtMain = () => {
   const { data: noticeData } = GetAllNotice('FRESHMAN');
   const { data: faqData } = GetAllFaq();
 
+  console.log(noticeData);
+
   return (
     <Boards>
       <Board>
@@ -19,7 +21,7 @@ const BoardsAtMain = () => {
             </Text>
           </Link>
         </BoardTitle>
-        {noticeData?.notices.splice(0, 5).map((item, i) => (
+        {noticeData?.notices?.slice(0, 5).map((item, i) => (
           <BoardContent key={i} color="black900" size="body1">
             <Link to={`/notice/${item.id}`}>{item.title}</Link>
           </BoardContent>
