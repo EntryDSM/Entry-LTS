@@ -29,9 +29,10 @@ const CustomerPage = () => {
   const { data: getAllFaq } = GetAllFaq(category);
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [current, setCurrent] = useState(0);
 
-  const setType = () => {
-    searchParams.get('type') !== 'faq' ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
+  const setType = (current: boolean) => {
+    current ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
 
     setSearchParams(searchParams);
   };
@@ -120,6 +121,7 @@ const CustomerPage = () => {
             ))}
           </>
         )}
+        <PageNation pageNum={1} current={current} setCurrent={setCurrent} />
       </_Wrapper>
     </_Container>
   );
