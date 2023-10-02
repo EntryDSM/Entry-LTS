@@ -24,7 +24,7 @@ const CustomerPage = () => {
 
   const { isAdmin, authorityColor } = useAuthority();
 
-  const { data } = GetAllQna();
+  const { data: getAllQna } = GetAllQna();
 
   const { data: getAllFaq } = GetAllFaq(category);
 
@@ -33,6 +33,7 @@ const CustomerPage = () => {
 
   const setType = (current: boolean) => {
     current ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
+    setCurrent(0);
 
     setSearchParams(searchParams);
   };
@@ -55,12 +56,12 @@ const CustomerPage = () => {
         {searchParams.get('type') !== 'faq' ? (
           <>
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
-            {data?.questions?.map((qna, idx) => {
+            {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
                 <Link to={`/customer/${qna.id}`}>
                   <BoardElement
                     title={qna.title}
-                    boardNumber={data.questions.length - idx}
+                    boardNumber={getAllQna.questions.length - (idx + current * 10)}
                     createdAt={qna.created_at}
                     userName={qna.username}
                     isPublic={qna.is_public}
@@ -107,7 +108,7 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            {getAllFaq?.map((faq) => (
+            {getAllFaq?.slice(0 + current * 10, current * 10 + 10).map((faq) => (
               <BoardElement
                 content={faq.content}
                 createdAt={faq.created_at}
@@ -121,7 +122,15 @@ const CustomerPage = () => {
             ))}
           </>
         )}
-        <PageNation pageNum={1} current={current} setCurrent={setCurrent} />
+        <PageNation
+          pageNum={Math.floor(
+            searchParams.get('type') == 'faq'
+              ? Math.ceil(getAllFaq?.length / 10) || 0
+              : Math.ceil(getAllQna?.questions?.length / 10) || 0,
+          )}
+          current={current}
+          setCurrent={setCurrent}
+        />
       </_Wrapper>
     </_Container>
   );
@@ -133,6 +142,7 @@ const _Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
+  margin-bottom: 80px;
 `;
 
 const _Wrapper = styled.div`
@@ -140,7 +150,6 @@ const _Wrapper = styled.div`
   width: 100%;
   max-width: 60rem;
   padding: 0 20px;
-  height: 38rem;
 `;
 
 const _Categories = styled.div`

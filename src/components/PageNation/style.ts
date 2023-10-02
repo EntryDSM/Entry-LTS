@@ -1,27 +1,29 @@
+import { AuthorityColorType } from '@/hooks/useAuthority';
 import styled from '@emotion/styled';
-import { Button, theme } from '@team-entry/design_system';
+import { theme } from '@team-entry/design_system';
 
-export const _Pages = styled.div`
+export const _Buttons = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 25px 0 50px 0;
+  margin: 50px auto 0;
 `;
 
-export const _Arrow = styled(Button)`
-  border-radius: 50px;
-`;
-
-export const _PageButton = styled.button`
+export const _Button = styled.div<{ clicked?: boolean; authorityColor?: AuthorityColorType }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 42px;
   height: 42px;
   border-radius: 50px;
-  background-color: ${theme.color.realWhite};
-  border: 1px solid ${theme.color.orange500};
-  color: ${theme.color.orange500};
-  ${theme.font.body3};
+  border: 1px solid ${({ authorityColor }) => theme.color[authorityColor + '500']};
+  color: ${({ clicked, authorityColor }) => (clicked ? theme.color.realWhite : theme.color[authorityColor + '500'])};
+  cursor: pointer;
+  background-color: ${({ clicked, authorityColor }) =>
+    clicked ? theme.color[authorityColor + '500'] : theme.color.realWhite};
   &:hover {
-    background-color: ${theme.color.orange500};
     color: ${theme.color.realWhite};
+    background-color: ${({ authorityColor }) => theme.color[authorityColor + '500']};
   }
 `;
