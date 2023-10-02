@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Button, Input, Spinner, Stack, Text, Textarea, theme } from '@team-entry/design_system';
+import { Button, Input, Spinner, Stack, Text, Textarea, Toast, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
 import QnaAnswer from '@/components/Answer/QnaAnswer';
 import { useInput } from '@/hooks/useInput';
 import { DeleteQna, DeleteReply, EditReply, WriteReply } from '@/utils/api/admin';
+import { getCookies } from '@/utils/cookies';
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
@@ -21,10 +22,18 @@ const CustomerDetailPage = () => {
   const { mutate: deleteQna } = DeleteQna();
 
   const { data, isLoading } = GetQnaDetail(qnaId);
+  const accessToken = getCookies('access_token');
 
   useEffect(() => {
     if (data) setForm({ title: data?.reply?.title, content: data?.reply?.content });
   }, [data]);
+
+  useEffect(() => {
+    if (!accessToken) {
+      Toast('로그인이 필요합니다.', { type: 'error' });
+      navigate('/customer');
+    }
+  }, []);
 
   if (isLoading)
     return (
