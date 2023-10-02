@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import Arrow from '../../assets/BoardArrow.svg';
@@ -9,7 +8,7 @@ import { GetAllFaq } from '@/utils/api/faq';
 const BoardsAtMain = () => {
   const { data: noticeData } = GetAllNotice('FRESHMAN');
   const { data: faqData } = GetAllFaq();
-  console.log(!!faqData);
+
   return (
     <Boards>
       <Board>
@@ -25,7 +24,7 @@ const BoardsAtMain = () => {
             <Link to={`/notice/${item.id}`}>{item.title}</Link>
           </BoardContent>
         ))}
-        {!noticeData?.notices?.length && (
+        {noticeData?.notices?.length === 0 && (
           <BoardContent color="black900" size="body1">
             등록된 공지사항이 없습니다.
           </BoardContent>
@@ -40,12 +39,12 @@ const BoardsAtMain = () => {
             </Text>
           </Link>
         </BoardTitle>
-        {faqData?.splice(0, 5).map((item, i) => (
+        {faqData?.slice(0, 5).map((item, i) => (
           <BoardContent key={i} color="black900" size="body1">
             <Link to="/customer?type=faq">{item.title}</Link>
           </BoardContent>
         ))}
-        {!faqData?.length && (
+        {faqData?.length === 0 && (
           <BoardContent color="black900" size="body1">
             등록된 질문이 없습니다.
           </BoardContent>
