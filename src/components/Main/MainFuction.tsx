@@ -37,7 +37,7 @@ const MainFunction = () => {
         <_ApplicationDetail>
           <Pc>
             <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1">
-              지금은 원서제출 기간입니다.
+              지금은 원서제출 기간이 아닙니다.
             </Text>
             <PhoneNumber align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 문의: 042-866-8811, 042-866-8814
@@ -45,7 +45,7 @@ const MainFunction = () => {
             <Button
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
-              margin={['bottom', 20]}
+              margin={[10, 0, 20, 0]}
               isBig
             >
               원서 접수 →
@@ -53,7 +53,7 @@ const MainFunction = () => {
           </Pc>
           <Mobile>
             <Text color="black900" size="title1">
-              지금은 원서제출 기간입니다.
+              지금은 원서제출 기간이 아닙니다.
             </Text>
             <Text color="black900" size="body3" margin={[10, 0, 0, 0]}>
               작성한 원서를 제출하세요
@@ -151,7 +151,7 @@ const _ApplicationDetail = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-height: 9rem;
-  width: 35%;
+  width: 36%;
   @media screen and (max-width: 1136px) and (min-width: 769px) {
     justify-content: flex-start;
     width: 50%;

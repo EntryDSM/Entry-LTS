@@ -51,13 +51,13 @@ instance.interceptors.response.use(
             .catch((res: AxiosError<AxiosError>) => {
               removeTokens();
               removeCookies('authority');
-              if (res?.response?.data.message !== 'Expired Token') {
-                window.location.href = `${AUTH_URL}/login`;
-              }
+              // if (res?.response?.data.message !== 'Expired Token') {
+              //   window.location.href = `/login`;
+              // }
             });
         } else {
           removeTokens();
-          window.location.href = '/';
+          // window.location.href = '/';
         }
       } else return Promise.reject(error);
     }
