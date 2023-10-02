@@ -31,7 +31,7 @@ const MainFunction = () => {
   return (
     <_Wrapper>
       <Pc>
-        <_Banner src={Banner} alt="banner" />
+        <_Banner src={Banner} alt="banner" width={'100%'} height={221} />
       </Pc>
       <_Application>
         <_ApplicationDetail>
