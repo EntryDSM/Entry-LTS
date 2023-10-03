@@ -7,6 +7,11 @@ import { useAuthority } from '@/hooks/useAuthority';
 const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
+  const DownLoad = () => {
+    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=6f74d1d723f2461fe90d9c6a5f2cc761';
+    window.open(pdfUrl);
+  };
+
   return (
     <_Container>
       <_Wrapper>
@@ -14,14 +19,14 @@ const NewAdmissionPage = () => {
           신입생 전형 요강
         </Text>
         <_Download>
-          <_Icon isAdmin={isAdmin}>
+          <_Icon isAdmin={isAdmin} onClick={DownLoad}>
             <Icon icon="Download" size={18} />
           </_Icon>
           <Text color="black900" size="body1" cursor="default">
             2024전형요강.pdf
           </Text>
         </_Download>
-        <_Image />
+        {/* <_Image /> */}
       </_Wrapper>
     </_Container>
   );

@@ -9,6 +9,7 @@ interface IFileProps {
 
 const File = ({ canEdit }: IFileProps) => {
   const { authorityColor } = useAuthority();
+
   return (
     <_._File>
       <_._Download color={authorityColor}>
