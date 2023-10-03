@@ -5,7 +5,7 @@ import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { faqTypeToKorean } from '@/utils/translate';
 
 const BoardElement = (props: IBoard) => {
@@ -27,11 +27,12 @@ const BoardElement = (props: IBoard) => {
   const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div style={{ maxWidth: 500, width: isMobile && '50%' }}>
+        <Div style={{ maxWidth: 500, width: isMobile && searchParams.get('type') != 'faq' && '50%' }}>
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
