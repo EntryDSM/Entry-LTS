@@ -55,7 +55,7 @@ const CustomerDetailPage = () => {
             <Text color={`${authorityColor}500`} size="header2">
               Q.
             </Text>
-            <Text color="black900" size="title1">
+            <Text color="black900" size="title1" margin={['top', 4]}>
               {data?.title}
             </Text>
           </_Title>
@@ -96,7 +96,7 @@ const CustomerDetailPage = () => {
             <Text color={`${authorityColor}500`} size="title1">
               Q.
             </Text>
-            <Text color="black900" size="title2">
+            <Text color="black900" size="title2" margin={['top', 4]}>
               {data?.title.replace(/\n/g, '<br/>')}
             </Text>
           </_Title>
@@ -209,7 +209,7 @@ const _Wrapper = styled.div`
 
 const _Title = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 12px;
   margin-bottom: 10px;
 `;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Button, Icon, Text, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../../hooks/useResponsive';
+import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
+import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate } from 'react-router-dom';
@@ -27,17 +27,25 @@ const BoardElement = (props: IBoard) => {
   const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
+
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div>
+        <Div style={{ maxWidth: 500, width: isMobile && '50%' }}>
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
               {!isPublic && <Icon color={`${authorityColor}500`} size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
-              <Text align="center" color="black800" size="body3">
+              <Text
+                color="black800"
+                size="body3"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+                style={{ overflow: 'hidden' }}
+                width={285}
+              >
                 {title}
               </Text>
             </Div>
@@ -48,12 +56,18 @@ const BoardElement = (props: IBoard) => {
                 {faqTypeToKorean[faq_type]}
               </Text>
             )}
-            <Text color="black800" size="body5">
-              성적 입력에 관하여...
+            <Text
+              color="black800"
+              size="body5"
+              textOverflow="ellipsis"
+              whiteSpace="nowrap"
+              style={{ overflow: 'hidden' }}
+            >
+              {title}
             </Text>
           </Mobile>
         </Div>
-        <Div>
+        <Div style={{ justifyContent: 'end' }}>
           {isComment && (
             <>
               <Pc>
