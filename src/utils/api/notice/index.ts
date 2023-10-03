@@ -12,7 +12,7 @@ export const GetAllNotice = (type: NoticeType) => {
   return useQuery(['notice', type], response);
 };
 
-export const GetNoticeDetail = (id: number) => {
+export const GetNoticeDetail = (id: string) => {
   const response = async () => {
     const { data } = await instance.get(`${router}/${id}`);
     return data;

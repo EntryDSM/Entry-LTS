@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import Noticeimg from '../assets/ReplaceNotice.svg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import File from '../components/File';
 import { Mobile, Pc } from '..//hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
@@ -11,12 +11,9 @@ import { GetNoticeDetail } from '@/utils/api/notice';
 const NoticeDetail = () => {
   const navigate = useNavigate();
   const { isAdmin } = useAuthority();
-  const location = useLocation();
-  const { noticeId } = location.state;
+  const { id: noticeId } = useParams();
 
   const { data } = GetNoticeDetail(noticeId);
-
-  console.log(data);
 
   return (
     <_Container>
