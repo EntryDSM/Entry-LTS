@@ -6,7 +6,7 @@ const router = 'notice';
 
 export const GetAllNotice = (type: NoticeType) => {
   const response = async () => {
-    const { data } = await instance.get<IAllNotice>(`${router}/all/${type}`);
+    const { data } = await instance.get<IAllNotice>(`${router}?type=${type}`);
     return data;
   };
   return useQuery(['notice', type], response);
