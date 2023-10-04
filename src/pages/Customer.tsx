@@ -24,9 +24,9 @@ const CustomerPage = () => {
 
   const { isAdmin, authorityColor } = useAuthority();
 
-  const { data: getAllQna } = GetAllQna();
+  const { data: getAllQna, isLoading: qnaLoading } = GetAllQna();
 
-  const { data: getAllFaq } = GetAllFaq(category);
+  const { data: getAllFaq, isLoading: faqLoading } = GetAllFaq(category);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [current, setCurrent] = useState(0);
@@ -122,15 +122,18 @@ const CustomerPage = () => {
             ))}
           </>
         )}
-        <PageNation
-          pageNum={Math.floor(
-            searchParams.get('type') == 'faq'
-              ? Math.ceil(getAllFaq?.length / 10) || 0
-              : Math.ceil(getAllQna?.questions?.length / 10) || 0,
-          )}
-          current={current}
-          setCurrent={setCurrent}
-        />
+        {((searchParams.get('type') == 'faq' && getAllQna.questions.length !== 0) ||
+          (searchParams.get('type') == 'faq' && getAllFaq.length !== 0)) && (
+          <PageNation
+            pageNum={Math.floor(
+              searchParams.get('type') == 'faq'
+                ? Math.ceil(getAllFaq?.length / 10) || 0
+                : Math.ceil(getAllQna?.questions?.length / 10) || 0,
+            )}
+            current={current}
+            setCurrent={setCurrent}
+          />
+        )}
       </_Wrapper>
     </_Container>
   );
