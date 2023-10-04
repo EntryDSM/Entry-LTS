@@ -44,7 +44,7 @@ export const shortcut = [
   },
   {
     id: 3,
-    link: '#EntryDeveloper',
+    link: '/EntryDeveloper',
     icon: 'ApproveUser',
     title: 'Entry 개발자 소개',
   },
