@@ -23,7 +23,7 @@ interface IHeaderList {
 
 const headerList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
-  // { name: '공지사항', url: '/notice' },
+  { name: '공지사항', url: '/notice' },
   // { name: '성적 산출', url: '/grade' },
   {
     name: '신입생 전형 요강',
@@ -33,7 +33,7 @@ const headerList: IHeaderList[] = [
 
 const menuList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
-  // { name: '공지사항', url: '/notice' },
+  { name: '공지사항', url: '/notice' },
 ];
 
 const Header = () => {
