@@ -6,12 +6,13 @@ import { useAuthority } from '@/hooks/useAuthority';
 interface IShorcutButtonProps {
   icon: string;
   title: string;
+  onClick?: () => void;
 }
 
-const ShortCutButton = ({ icon, title }: IShorcutButtonProps) => {
+const ShortCutButton = ({ icon, title, onClick }: IShorcutButtonProps) => {
   const { authorityColor } = useAuthority();
   return (
-    <_ShorcutButton>
+    <_ShorcutButton onClick={onClick}>
       <Icon icon={icon as IconType} color={`${authorityColor}500`} />
       <Text color="black800" size="title2">
         {title}

@@ -88,6 +88,10 @@ const Header = () => {
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setIsLogin(!!getCookies('access_token'));
+  }, [getCookies('access_token')]);
+
   return (
     <>
       <_._HeaderContainer>
