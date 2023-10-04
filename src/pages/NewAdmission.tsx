@@ -18,8 +18,8 @@ const NewAdmissionPage = () => {
         <Text color="black900" size="header1">
           신입생 전형 요강
         </Text>
-        <_Download>
-          <_Icon isAdmin={isAdmin} onClick={DownLoad}>
+        <_Download onClick={DownLoad}>
+          <_Icon isAdmin={isAdmin}>
             <Icon icon="Download" size={18} />
           </_Icon>
           <Text color="black900" size="body1" cursor="default">
