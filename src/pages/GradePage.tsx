@@ -1,6 +1,6 @@
 import { Button, Icon, IconType, Text, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Pc } from '@/hooks/useResponsive';
 import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 
@@ -16,7 +16,7 @@ const list: IGradeListProps[] = [
     icon: 'DeleteUser',
     title: '졸업예정자',
     text: '아직 중학교를 졸업하지 않은\n졸업자를 칭합니다',
-    type: 'beforegraduate',
+    type: 'prospectiveGraduate',
   },
   {
     icon: 'ApproveUser',
@@ -24,11 +24,12 @@ const list: IGradeListProps[] = [
     text: '이미 중학교를 졸업한 \n지원자를 칭합니다.',
     type: 'graduate',
   },
-  { icon: 'Reader', title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'blackexam' },
+  { icon: 'Reader', title: '검정고시', text: '(중학교 졸업학력)\n\n', type: 'qualificationExam' },
 ];
 
 const GradePage = () => {
   const { authorityColor } = useAuthority();
+  const navigate = useNavigate();
 
   return (
     <_Container>
@@ -52,11 +53,15 @@ const GradePage = () => {
                   <Text margin={['bottom', 80]} align="center" color="black600" size="body2">
                     {text}
                   </Text>
-                  <Link to="/gradeProgram" state={{ type }}>
-                    <Button onClick={() => {}} color={authorityColor} kind="rounded">
-                      선택
-                    </Button>
-                  </Link>
+                  <Button
+                    onClick={() => {
+                      navigate(`/gradeProgram?gradeStatus=${type}`);
+                    }}
+                    color={authorityColor}
+                    kind="rounded"
+                  >
+                    선택
+                  </Button>
                 </_Card>
               );
             })}

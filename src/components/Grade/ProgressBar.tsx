@@ -1,39 +1,57 @@
-import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
+import { GradeStatusType } from '@/interfaces/grade';
 
-const ProgressBar = ({ step = 1 }: { step: number }) => {
-  const { authorityColor } = useAuthority();
-  const progess = [
-    { element: <_Circle authorityColor={authorityColor} isNow={1 <= step} /> },
-    { element: <_Line authorityColor={authorityColor} isNow={2 <= step} /> },
-    { element: <_Circle authorityColor={authorityColor} isNow={2 <= step} /> },
-    { element: <_Line authorityColor={authorityColor} isNow={3 <= step} /> },
-    { element: <_Circle authorityColor={authorityColor} isNow={3 <= step} /> },
-    { element: <_Line authorityColor={authorityColor} isNow={4 <= step} /> },
-    { element: <_Circle authorityColor={authorityColor} isNow={4 <= step} /> },
-  ];
+interface IProgressBarProps {
+  step: number;
+  gradeStatus: GradeStatusType;
+}
+
+const ProgressBar = ({ step, gradeStatus }: IProgressBarProps) => {
+  let progress = [];
+  let title = [];
+  switch (gradeStatus) {
+    case 'graduate':
+      progress = [
+        { element: <_Circle key={1} isNow={1 <= step} /> },
+        { element: <_Line key={2} isNow={2 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={3} isNow={2 <= step} /> },
+        { element: <_Line key={4} isNow={3 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={5} isNow={3 <= step} /> },
+        { element: <_Line key={6} isNow={4 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={7} isNow={4 <= step} /> },
+        { element: <_Line key={8} isNow={5 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={9} isNow={5 <= step} /> },
+      ];
+      title = ['3학년 2학기', '3학년 1학기', '2학년 2학기', '2학년 1학기', '출석 및 봉사'];
+      break;
+    case 'prospectiveGraduate':
+      progress = [
+        { element: <_Circle key={1} isNow={1 <= step} /> },
+        { element: <_Line key={2} isNow={2 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={3} isNow={2 <= step} /> },
+        { element: <_Line key={4} isNow={3 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={5} isNow={3 <= step} /> },
+        { element: <_Line key={6} isNow={4 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={7} isNow={4 <= step} /> },
+      ];
+      title = ['3학년 1학기', '직전 학기', '직전전 학기', '출석 및 봉사'];
+      break;
+  }
 
   return (
     <>
       <_Wrapper>
-        {progess.map((res) => {
+        {progress.map((res) => {
           return res.element;
         })}
       </_Wrapper>
       <_Texts>
-        <Text color="black800" size="body5">
-          3학년 1학기
-        </Text>
-        <Text color="black800" size="body5">
-          직전 학기
-        </Text>
-        <Text color="black800" size="body5">
-          직전전 학기
-        </Text>
-        <Text color="black800" size="body5">
-          성적 산출
-        </Text>
+        {title.map((item) => (
+          <Text color="black800" size="body5">
+            {item}
+          </Text>
+        ))}
       </_Texts>
     </>
   );
@@ -44,9 +62,9 @@ export default ProgressBar;
 const _Wrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
-  margin: 0.5rem 0;
+  margin: 8px 0;
 `;
 
 const _Texts = styled.div`
@@ -56,21 +74,18 @@ const _Texts = styled.div`
   width: 100%;
 `;
 
-const _Circle = styled.div<{ isNow?: boolean; authorityColor: AuthorityColorType }>`
+const _Circle = styled.div<{ isNow?: boolean }>`
   width: 1.3rem;
   height: 1.3rem;
-  background-color: ${({ isNow, authorityColor }) =>
-    isNow ? theme.color[`${authorityColor}500`] : theme.color.realWhite};
+  background-color: ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.realWhite)};
   border-radius: 50px;
-  border: 4px solid
-    ${({ isNow, authorityColor }) => (isNow ? theme.color[`${authorityColor}500`] : theme.color.black100)};
+  border: 4px solid ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.black100)};
   margin: 0 0.9rem;
 `;
 
-const _Line = styled.div<{ isNow?: boolean; authorityColor: AuthorityColorType }>`
-  width: 26%;
+const _Line = styled.div<{ isNow?: boolean; gradeStatus?: GradeStatusType }>`
+  width: ${({ gradeStatus }) => (gradeStatus === 'graduate' ? 18 : 25)}%;
   height: 0.15rem;
   border-radius: 5px;
-  background-color: ${({ isNow, authorityColor }) =>
-    isNow ? theme.color[`${authorityColor}500`] : theme.color.black100};
+  background-color: ${({ isNow }) => (isNow ? theme.color.orange500 : theme.color.black100)};
 `;
