@@ -122,8 +122,8 @@ const CustomerPage = () => {
             ))}
           </>
         )}
-        {((searchParams.get('type') == 'faq' && getAllQna.questions.length !== 0) ||
-          (searchParams.get('type') == 'faq' && getAllFaq.length !== 0)) && (
+        {((searchParams.get('type') == 'faq' && getAllQna?.questions?.length !== 0) ||
+          (searchParams.get('type') == 'faq' && getAllFaq?.length !== 0)) && (
           <PageNation
             pageNum={Math.floor(
               searchParams.get('type') == 'faq'
