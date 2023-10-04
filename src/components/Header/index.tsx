@@ -33,7 +33,7 @@ const headerList: IHeaderList[] = [
 
 const menuList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
-  { name: '공지사항', url: '/notice' },
+  // { name: '공지사항', url: '/notice' },
 ];
 
 const Header = () => {
