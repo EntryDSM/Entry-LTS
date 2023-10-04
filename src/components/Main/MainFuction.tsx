@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, IconType, Text } from '@team-entry/design_system';
+import { Button, Icon, IconType, Text, Toast } from '@team-entry/design_system';
 import Banner from '../../assets/Banner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
@@ -20,13 +20,7 @@ const MainFunction = () => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   // const { data } = ApplyInfoStatus(isLogin);
-  const { data: reserve } = GetReserveLink();
-
-  const onClick = () => {
-    if (!!reserve) {
-      window.location.href = reserve.reserve_link;
-    }
-  };
+  const { mutate: reserve_addmission } = GetReserveLink();
 
   return (
     <_Wrapper>
@@ -37,7 +31,7 @@ const MainFunction = () => {
         <_ApplicationDetail>
           <Pc>
             <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1">
-              지금은 원서제출 기간이 아닙니다.
+              지금은 모의접수 기간입니다.
             </Text>
             <PhoneNumber align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 문의: 042-866-8811, 042-866-8814
@@ -53,7 +47,7 @@ const MainFunction = () => {
           </Pc>
           <Mobile>
             <Text color="black900" size="title1">
-              지금은 원서제출 기간이 아닙니다.
+              지금은 모의접수 기간입니다.
             </Text>
             <Text color="black900" size="body3" margin={[10, 0, 0, 0]}>
               작성한 원서를 제출하세요
@@ -71,7 +65,7 @@ const MainFunction = () => {
               icon="NavigationArrow"
               color={authorityColor}
               kind="outlined"
-              onClick={onClick}
+              onClick={reserve_addmission}
               margin={[0, 0, 30, 0]}
             >
               입학 설명회 참석 예약
@@ -88,7 +82,19 @@ const MainFunction = () => {
             {shortcut.map((item) =>
               item.link.includes('/') ? (
                 <Link to={item.link}>
-                  <_ShortcutButton icon={item.icon} title={item.title} />
+                  <_ShortcutButton
+                    icon={item.icon}
+                    title={item.title}
+                    onClick={() => {
+                      switch (item.title) {
+                        case '입학설명회 참석 예약':
+                          break;
+                        case 'Entry 개발자 소개':
+                          Toast('추후 추가 예정입니다.', { type: 'error' });
+                          break;
+                      }
+                    }}
+                  />
                 </Link>
               ) : (
                 <a href={item.link}>
