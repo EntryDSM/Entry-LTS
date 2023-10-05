@@ -28,7 +28,7 @@ const MyPage = () => {
   // const { data: firstPass } = GetFirstRoundPass();
   // const { data: secondPass } = GetSecondRoundPass();
 
-  let message;
+  // let message;
   // if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
   //   message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
   // } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
@@ -67,7 +67,7 @@ const MyPage = () => {
               </Text>
             </Pc>
             <Mobile>
-              <Text color="realBlack" size="body1">
+              <Text color="realBlack" size="body3">
                 {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
@@ -99,9 +99,14 @@ const MyPage = () => {
             {data?.application_type === 'MEISTER' && '마이스터 전형'}
             {data?.application_type === 'SOCIAL' && '사회통합 전형'}
           </Text>
-          <div style={{ height: '4px' }} />
-          <Text color="black900" size="title2">
+          <Text color="black900" size="title2" margin={['top', 4]}>
             지원서 제출 {data?.submitted ? '완료' : '미완료'}
+          </Text>
+          <Text color="black900" size="body3" margin={['top', 25]}>
+            서류 도착 여부
+          </Text>
+          <Text color="black900" size="title2" margin={['top', 4]}>
+            서류가 학교에 {data?.printed_arrived ? '도착하였습니다' : '도착하지 않았습니다'}
           </Text>
           <_ApplyButtons>
             <Pc>
@@ -237,7 +242,6 @@ const _UserButtons = styled.div`
 
 const _Apply = styled.div`
   width: 100%;
-  height: 12rem;
   background-color: ${theme.color.black50};
   padding: 16px;
   border-radius: 4px;
