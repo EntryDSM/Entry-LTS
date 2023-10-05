@@ -30,7 +30,10 @@ export const DeleteUserInfo = () => {
     await instance.delete(`${router}`);
   };
   return useMutation(response, {
-    onSuccess: () => Toast('회원탈퇴에 성공하였습니다.', { type: 'success' }),
+    onSuccess: () => {
+      Toast('회원탈퇴에 성공하였습니다.', { type: 'success' });
+      window.location.replace('https://www.entrydsm.hs.kr/');
+    },
   });
 };
 
