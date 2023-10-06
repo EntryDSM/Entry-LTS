@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Icon, IconType, Text, Toast } from '@team-entry/design_system';
 import Banner from '../../assets/Banner.svg';
+import AdminBanner from '../../assets/AdminBanner.svg';
 import Progress from './Progress';
 import BoardsAtMain from './BoardAtMain';
 import { shortcut } from '../../constant/main';
@@ -25,7 +26,7 @@ const MainFunction = () => {
   return (
     <_Wrapper>
       <Pc>
-        <_Banner src={Banner} alt="banner" width={'100%'} height={221} />
+        <_Banner src={isAdmin ? AdminBanner : Banner} alt="banner" width={'100%'} height={221} />
       </Pc>
       <_Application>
         <_ApplicationDetail>
