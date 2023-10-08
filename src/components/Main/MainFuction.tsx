@@ -31,8 +31,8 @@ const MainFunction = () => {
       <_Application>
         <_ApplicationDetail>
           <Pc>
-            <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1">
-              지금은 모의접수 기간입니다.
+            <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1" whiteSpace="nowrap">
+              지금은 원서접수 기간이 아닙니다
             </Text>
             <PhoneNumber align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 문의: 042-866-8811, 042-866-8814
@@ -48,7 +48,7 @@ const MainFunction = () => {
           </Pc>
           <Mobile>
             <Text color="black900" size="title1">
-              지금은 모의접수 기간입니다.
+              지금은 원서접수 기간이 아닙니다
             </Text>
             <Text color="black900" size="body3" margin={[10, 0, 0, 0]}>
               작성한 원서를 제출하세요
