@@ -38,6 +38,7 @@ const MainFunction = () => {
               입학 문의: 042-866-8811, 042-866-8814
             </PhoneNumber>
             <Button
+              disabled
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={[10, 0, 20, 0]}
@@ -55,6 +56,7 @@ const MainFunction = () => {
             </Text>
             <div>
               <Button
+                disabled
                 color={authorityColor}
                 onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
                 margin={[20, 0, 20, 0]}
