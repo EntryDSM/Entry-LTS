@@ -19,7 +19,13 @@ const BoardHeader = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" width={70} margin={['right', 20]}>
+              <Text
+                color="black700"
+                style={{ display: 'flex', justifyContent: 'center' }}
+                size="body3"
+                width={60}
+                margin={['right', 20]}
+              >
                 구분
               </Text>
             )}
@@ -77,7 +83,7 @@ const _HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  min-height: 3rem;
   border-bottom: 1px solid black;
   @media screen and (max-width: 769px) {
     padding: 20px;

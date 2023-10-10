@@ -44,7 +44,7 @@ const BoardElement = (props: IBoard) => {
                 size="body3"
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
-                style={{ overflow: 'hidden' }}
+                style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
                 width={285}
               >
                 {title}
@@ -53,7 +53,7 @@ const BoardElement = (props: IBoard) => {
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" margin={['right', 20]}>
+              <Text color="black700" size="body3" margin={['right', 20]} whiteSpace="nowrap">
                 {faqTypeToKorean[faq_type]}
               </Text>
             )}
@@ -61,8 +61,8 @@ const BoardElement = (props: IBoard) => {
               color="black800"
               size="body5"
               textOverflow="ellipsis"
-              whiteSpace="nowrap"
-              style={{ overflow: 'hidden' }}
+              whiteSpace="pre-line"
+              style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
             >
               {title}
             </Text>
@@ -179,7 +179,7 @@ const _ElementContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  min-height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
   @media screen and (max-width: 769px) {
