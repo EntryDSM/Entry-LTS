@@ -35,7 +35,7 @@ export const ProgressBar = () => {
       condition: firstAnnouncementDate <= currentDate && currentDate < interviewDate,
     },
     {
-      title: '심층 면접',
+      title: '2차 전형',
       date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}:${interviewDate
         .getMinutes()
         .toString()
