@@ -1,4 +1,4 @@
-export type NoticeType = 'FRESHMAN' | 'ADMISSION';
+export type NoticeType = 'FRESHMAN' | 'ADMISSION' | '';
 
 export interface IAllNotice {
   notices: INotice[];
@@ -18,4 +18,12 @@ export interface INoticeDetail {
   created_at: string;
   type: NoticeType;
   image: string;
+}
+
+export interface ICreateNotice {
+  title: string;
+  content: string;
+  type: NoticeType;
+  is_pinned: boolean;
+  file: string;
 }
