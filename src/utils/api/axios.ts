@@ -3,6 +3,7 @@ import { ReissueToken } from './user';
 import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
 import { AUTH_URL } from '@/constant/env';
 import { useNavigate } from 'react-router-dom';
+import { Toast } from '@team-entry/design_system';
 
 export const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -49,6 +50,9 @@ instance.interceptors.response.use(
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {
+              if (res.response.status >= 500) {
+                return Toast('서버 에러 잠시 뒤 시도해 주세요', { type: 'error' });
+              }
               removeTokens();
               removeCookies('authority');
               // if (res?.response?.data.message !== 'Expired Token') {
