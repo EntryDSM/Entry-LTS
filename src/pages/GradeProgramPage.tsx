@@ -70,10 +70,7 @@ const GradeProgramPage = () => {
   useEffect(() => {
     gradeStatus === 'qualificationExam'
       ? setScore({
-          gradeScore: Math.min(
-            140,
-            Math.max(0, Math.round(((((blackexam.score - 50) / 50) * 80 * 175) / 100) * 10) / 10),
-          ),
+          gradeScore: Math.min(140, Math.max(0, Math.round(((blackexam.score - 50) / 50) * 80 * 10) / 10)),
           attendenceScore: 15,
           volunteerScore: Math.min(15, Math.max(0, Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10)),
           maxScore: getMaxScore(),
@@ -141,7 +138,13 @@ const GradeProgramPage = () => {
             )}
           </_Selects>
         </DIV>
-        <GradeFooter gradeStatus={gradeStatus as GradeStatusType} current={current} setCurrent={setCurrent} />
+        <GradeFooter
+          gradeStatus={gradeStatus as GradeStatusType}
+          current={current}
+          setCurrent={setCurrent}
+          maxScore={score.volunteerScore + score.attendenceScore}
+          gradeScore={score.gradeScore}
+        />
       </Wrapper>
     </Container>
   );

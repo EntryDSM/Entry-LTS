@@ -3,7 +3,7 @@ import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
 
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
-  return 170;
+  return 110;
 };
 
 /**출석 점수 계산하는 함수 */
@@ -60,5 +60,5 @@ export const getSelectGradeScore = (gradeCurrent: number, selectGradeElement: IS
     result += allSubjectsGrade[i];
   }
 
-  return Math.round((result * 1750) / 100) / 10;
+  return Math.round(result * 10) / 10;
 };

@@ -9,8 +9,6 @@ const BoardsAtMain = () => {
   const { data: noticeData } = GetAllNotice('FRESHMAN');
   const { data: faqData } = GetAllFaq();
 
-  console.log(noticeData);
-
   return (
     <Boards>
       <Board>
