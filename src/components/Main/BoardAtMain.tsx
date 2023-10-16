@@ -6,7 +6,7 @@ import { GetAllNotice } from '@/utils/api/notice';
 import { GetAllFaq } from '@/utils/api/faq';
 
 const BoardsAtMain = () => {
-  const { data: noticeData } = GetAllNotice('FRESHMAN');
+  const { data: noticeData } = GetAllNotice('');
   const { data: faqData } = GetAllFaq();
 
   return (

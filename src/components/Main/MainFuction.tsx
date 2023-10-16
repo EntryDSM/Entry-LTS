@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Icon, IconType, Text, Toast } from '@team-entry/design_system';
 import Banner from '../../assets/Banner.svg';
@@ -14,6 +14,8 @@ import _ShortcutButton from './ShortcutButton';
 import { useNavigate } from 'react-router-dom';
 import { getCookies } from '@/utils/cookies';
 import { GetReserveLink } from '@/utils/api/reserve';
+import { useModal } from '@/hooks/useModal';
+import Modal from '../Modal';
 
 const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
@@ -22,6 +24,14 @@ const MainFunction = () => {
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   // const { data } = ApplyInfoStatus(isLogin);
   const { mutate: reserve_addmission } = GetReserveLink();
+  const { isOpen, modalState, Modal, setModalState, open, close } = useModal();
+
+  useEffect(() => {
+    if (!Boolean(sessionStorage.getItem('modal'))) {
+      setModalState('START_NOTICE');
+      open();
+    }
+  }, []);
 
   return (
     <_Wrapper>
@@ -111,6 +121,24 @@ const MainFunction = () => {
         </Pc>
         <BoardsAtMain />
       </_Discription>
+      {modalState === 'START_NOTICE' && (
+        <Modal>
+          <Text size="title2" color="gray50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
+            반드시 공지사항의 원서접수시 유의사항을 <br /> 읽으시고 원서접수를 진행해주세요.
+          </Text>
+          <Button
+            kind="outlined"
+            margin={['top', 30]}
+            onClick={() => {
+              close();
+              setModalState('');
+              sessionStorage.setItem('modal', 'true');
+            }}
+          >
+            확인
+          </Button>
+        </Modal>
+      )}
     </_Wrapper>
   );
 };

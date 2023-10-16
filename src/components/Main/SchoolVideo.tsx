@@ -34,6 +34,7 @@ const _Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   height: 100vh;
+  padding-bottom: 40px;
 `;
 
 const _Title = styled.div`

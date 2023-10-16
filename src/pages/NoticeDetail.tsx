@@ -1,12 +1,11 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { Button, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Text, theme } from '@team-entry/design_system';
 import Noticeimg from '../assets/ReplaceNotice.svg';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import File from '../components/File';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Mobile, Pc } from '..//hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
-import { GetNoticeDetail } from '@/utils/api/notice';
+import { DeleteNotice, GetNoticeDetail } from '@/utils/api/notice';
+import File from '@/components/File';
 
 const NoticeDetail = () => {
   const navigate = useNavigate();
@@ -14,6 +13,11 @@ const NoticeDetail = () => {
   const { id: noticeId } = useParams();
 
   const { data } = GetNoticeDetail(noticeId);
+  const { mutate: deleteNotice } = DeleteNotice();
+
+  const handleDownload = () => {
+    window.open('https://dsmhs.djsch.kr/boardCnts/fileDown.do?m=0602&s=dsmhs&fileSeq=5ac43f3743ed132c144b697e6d0485ad');
+  };
 
   return (
     <_Container>
@@ -34,11 +38,19 @@ const NoticeDetail = () => {
           <Text color="black600" size="body2">
             {data?.content}
           </Text>
-          {/* <_FileTitle>
-            <Text color="black900" size="title3">
+          <_FileTitle onClick={() => {}}>
+            <Text color="black900" size="title3" margin={['bottom', 10]}>
               첨부파일
             </Text>
-          </_FileTitle> */}
+            <_Download onClick={handleDownload}>
+              <_Icon isAdmin={isAdmin}>
+                <Icon icon="Download" size={18} />
+              </_Icon>
+              <Text color="black900" size="body1" cursor="pointer">
+                2024학년도 신입생 원서접수 시 유의사항
+              </Text>
+            </_Download>
+          </_FileTitle>
         </Pc>
         <Mobile>
           <Text color="black500" size="body5">
@@ -70,7 +82,13 @@ const NoticeDetail = () => {
           <Button onClick={() => navigate(-1)}>목록으로</Button>
           {isAdmin && (
             <_AdminButtons>
-              <Button onClick={() => console.log('clicked')} color="delete" kind="delete">
+              <Button
+                onClick={() => {
+                  deleteNotice(noticeId);
+                }}
+                color="delete"
+                kind="delete"
+              >
                 삭제
               </Button>
               <Button onClick={() => navigate('/notice/write')}>수정</Button>
@@ -148,4 +166,21 @@ const _ButtonFooter = styled.div`
 const _AdminButtons = styled.div`
   display: flex;
   gap: 10px;
+`;
+
+const _Download = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
+const _Icon = styled.div<{ isAdmin: boolean }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: ${({ isAdmin }) => (isAdmin ? theme.color.green500 : theme.color.orange500)};
+  border-radius: 50%;
 `;
