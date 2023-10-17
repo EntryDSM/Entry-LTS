@@ -34,6 +34,9 @@ export const DeleteUserInfo = () => {
       Toast('회원탈퇴에 성공하였습니다.', { type: 'success' });
       window.location.replace('https://www.entrydsm.hs.kr/');
     },
+    onError: () => {
+      Toast('최종제출시 회원탈퇴는 불가능합니다.', { type: 'error' });
+    },
   });
 };
 
