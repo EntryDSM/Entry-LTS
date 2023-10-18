@@ -50,7 +50,7 @@ instance.interceptors.response.use(
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {
-              if (res.response.status >= 500) {
+              if (+res?.response?.data.code >= 500) {
                 return Toast('서버 에러 잠시 뒤 시도해 주세요', { type: 'error' });
               }
               removeTokens();
