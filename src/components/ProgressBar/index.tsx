@@ -58,48 +58,57 @@ export const ProgressBar = () => {
     {
       element: (
         <_._ProgressCircle
-          now={startDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={startDate < currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
-        <_._ProgressStep now={endDate < currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3} />
+        <_._ProgressStep
+          authorityColor={authorityColor}
+          now={endDate < currentDate && currentDate <= secondAnnouncementDate}
+        />
       ),
     },
 
     {
       element: (
         <_._ProgressCircle
-          now={firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={firstAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={interviewDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={interviewDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={secondAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={secondAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },

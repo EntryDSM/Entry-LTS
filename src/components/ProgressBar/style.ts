@@ -4,6 +4,7 @@ import { theme } from '@team-entry/design_system';
 
 interface ICurrentDate {
   now: boolean;
+  authorityColor: AuthorityColorType;
 }
 
 export const _Progress = styled.div`
@@ -41,14 +42,14 @@ export const _ProgressBar = styled.div`
 export const _ProgressStep = styled.div<ICurrentDate>`
   width: 10.2rem;
   height: 4px;
-  background-color: ${({ now }) => (now ? theme.color.green500 : theme.color.black100)};
+  background-color: ${({ now, authorityColor }) => (now ? theme.color[`${authorityColor}500`] : theme.color.black100)};
 `;
 
 export const _ProgressCircle = styled.div<ICurrentDate>`
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
-  background-color: ${({ now }) => (now ? theme.color.green500 : theme.color.black100)};
+  background-color: ${({ now, authorityColor }) => (now ? theme.color[`${authorityColor}500`] : theme.color.black100)};
 `;
 
 export const _Overflow = styled.div`
