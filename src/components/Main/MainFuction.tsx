@@ -42,7 +42,7 @@ const MainFunction = () => {
         <_ApplicationDetail>
           <Pc>
             <Text align={isTablet ? 'center' : 'start'} color="black900" size="header1" whiteSpace="nowrap">
-              지금은 원서접수 기간입니다.
+              원서접수가 마감되었습니다.
             </Text>
             <PhoneNumber align={isTablet ? 'center' : 'start'} color="black600" size="title2">
               입학 문의: 042-866-8811, 042-866-8814
@@ -51,6 +51,7 @@ const MainFunction = () => {
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={[10, 0, 20, 0]}
+              disabled
               isBig
             >
               원서 접수 →
@@ -58,7 +59,7 @@ const MainFunction = () => {
           </Pc>
           <Mobile>
             <Text color="black900" size="title1">
-              지금은 원서접수 기간입니다.
+              원서접수가 마감되었습니다.
             </Text>
             <Text color="black900" size="body3" margin={[10, 0, 0, 0]}>
               작성한 원서를 제출하세요
@@ -68,6 +69,7 @@ const MainFunction = () => {
                 color={authorityColor}
                 onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
                 margin={[20, 0, 20, 0]}
+                disabled
               >
                 원서 접수 →
               </Button>
@@ -121,6 +123,7 @@ const MainFunction = () => {
         </Pc>
         <BoardsAtMain />
       </_Discription>
+      {/* 원서접수 기간 중 사용할 모달
       {modalState === 'START_NOTICE' && (
         <Modal>
           <Text size="title2" color="gray50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
@@ -138,7 +141,7 @@ const MainFunction = () => {
             확인
           </Button>
         </Modal>
-      )}
+      )} */}
     </_Wrapper>
   );
 };
