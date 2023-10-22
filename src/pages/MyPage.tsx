@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Icon, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
@@ -8,11 +8,11 @@ import CancelModal from '@/components/Modal/CancelModal';
 import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';
 import { DownloadPdf } from '@/utils/api/pdf';
-import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
-import { getSchedule } from '@/utils/api/schedule';
+import { GetFirstRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
 import { GetMyQna } from '@/utils/api/qna';
 import { Link } from 'react-router-dom';
+import DefaultModal from '@/components/Modal/DefaultModal';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -21,32 +21,8 @@ const MyPage = () => {
   const { mutate: deleteUserPdf } = DeleteUserPdf(data?.receipt_code);
   const onDownloadPdf = DownloadPdf();
 
-  const { data: schedule } = getSchedule();
-  const currentDate = new Date();
-  const firstAnnouncementDate = new Date(schedule?.schedules[2]?.date ?? '');
-  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
-  // const { data: firstPass } = GetFirstRoundPass();
-  // const { data: secondPass } = GetSecondRoundPass();
-
-  // let message;
-  // if (firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
-  //   message = firstPass ? '1차 전형에 합격하였습니다!' : '1차 전형에 합격하지 못하였습니다.';
-  // } else if (secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3) {
-  //   message = secondPass ? '최종합격되었습니다.' : '불합격입니다.';
-  // } else {
-  //   message = '지금은 발표기간이 아닙니다';
-  // }
-
+  const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
   const { data: myQnaList } = GetMyQna();
-
-  const onClick = () => {
-    console.log('clicked!!');
-  };
-
-  const openCancelSubmitModal = () => {
-    setModalState('CANCEL_SUBMIT');
-    open();
-  };
 
   const openSignOutModal = () => {
     setModalState('SIGN_OUT');
@@ -111,13 +87,13 @@ const MyPage = () => {
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button onClick={onClick}>발표 결과 확인</Button>
+              <Button onClick={getFirstRound}>발표 결과 확인</Button>
               {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button> */}
             </Pc>
             <Mobile>
-              <Button onClick={onClick}>발표 결과 확인</Button>
+              <Button onClick={getFirstRound}>발표 결과 확인</Button>
             </Mobile>
           </_ApplyButtons>
         </_Apply>
@@ -157,8 +133,9 @@ const MyPage = () => {
           })}
         </div>
       </_Wrapper>
-      <Modal>
-        {modalState === 'CANCEL_SUBMIT' && (
+
+      {modalState === 'CANCEL_SUBMIT' && (
+        <Modal>
           <CancelModal
             title="최종제출 취소"
             subTitle="정말 최종제출을 취소하시겠습니까?"
@@ -168,8 +145,10 @@ const MyPage = () => {
               deleteUserPdf();
             }}
           />
-        )}
-        {modalState === 'SIGN_OUT' && (
+        </Modal>
+      )}
+      {modalState === 'SIGN_OUT' && (
+        <Modal>
           <CancelModal
             title="회원 탈퇴"
             subTitle="정말 탈퇴하시겠습니까?"
@@ -179,8 +158,47 @@ const MyPage = () => {
               deleteUserInfo();
             }}
           />
-        )}
-      </Modal>
+        </Modal>
+      )}
+      {modalState === 'PASSED_ROUND' && (
+        <Modal>
+          <DefaultModal
+            color="black900"
+            title="1차 발표 결과 확인"
+            subTitle={
+              <div style={{ lineHeight: '26px' }}>
+                축하드립니다!
+                <br />
+                <div style={{ textAlign: 'left' }}>
+                  대덕소프트웨어마이스터고 <strong>1차 전형 합격</strong>입니다!
+                  <br />
+                  2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
+                  <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을 확인하시기 바랍니다.
+                </div>
+              </div>
+            }
+            button="확인"
+            onClick={close}
+          />
+        </Modal>
+      )}
+      {modalState === 'NOT_PASSED_ROUND' && (
+        <Modal>
+          <DefaultModal
+            color="black900"
+            title="1차 발표 결과 확인"
+            subTitle={
+              <div style={{ lineHeight: '26px' }}>
+                지원해주셔서 감사합니다.
+                <br />
+                대덕소프트웨어마이스터고 1차 전형 결과 불합격입니다.
+              </div>
+            }
+            button="확인"
+            onClick={close}
+          />
+        </Modal>
+      )}
     </_Container>
   );
 };
