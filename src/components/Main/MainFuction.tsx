@@ -123,11 +123,11 @@ const MainFunction = () => {
         </Pc>
         <BoardsAtMain />
       </_Discription>
-      {/* 원서접수 기간 중 사용할 모달
+      {/* 원서접수 기간 중 사용할 모달 */}
       {modalState === 'START_NOTICE' && (
         <Modal>
           <Text size="title2" color="gray50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
-            반드시 공지사항의 원서접수시 유의사항을 <br /> 읽으시고 원서접수를 진행해주세요.
+            합격자 확인은 로그인 후 마이페이지를 확인해주세요!
           </Text>
           <Button
             kind="outlined"
@@ -141,7 +141,7 @@ const MainFunction = () => {
             확인
           </Button>
         </Modal>
-      )} */}
+      )}
     </_Wrapper>
   );
 };
