@@ -20,7 +20,7 @@ export const GetFirstRoundPass = ({ setModalState, open }: IGetFirstRoundPassPro
       return Toast('지금은 1차 발표 기간이 아닙니다.', { type: 'error' });
     },
     onSuccess: (res) => {
-      if (res) setModalState('PASSED_ROUND'), open();
+      if (res.first_round_pass) setModalState('PASSED_ROUND'), open();
       else setModalState('NOT_PASSED_ROUND'), open();
     },
   });
