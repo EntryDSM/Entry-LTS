@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { Button, Icon, Text, theme } from '@team-entry/design_system';
+import { Button, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import BoardElement from '../components/Board/BoardElement';
 import { useModal } from '../hooks/useModal';
@@ -24,10 +23,10 @@ const MyPage = () => {
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
   const { data: myQnaList } = GetMyQna();
 
-  const openSignOutModal = () => {
-    setModalState('SIGN_OUT');
-    open();
-  };
+  // const openSignOutModal = () => {
+  //   setModalState('SIGN_OUT');
+  //   open();
+  // };
 
   return (
     <_Container>
@@ -59,9 +58,9 @@ const MyPage = () => {
             >
               비밀번호 변경
             </Button>
-            <Button color="delete" kind="delete" onClick={openSignOutModal}>
+            {/* <Button color="delete" kind="delete" onClick={openSignOutModal}>
               회원 탈퇴
-            </Button>
+            </Button> */}
           </_UserButtons>
         </_User>
 
