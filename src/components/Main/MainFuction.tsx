@@ -51,7 +51,6 @@ const MainFunction = () => {
               color={authorityColor}
               onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
               margin={[10, 0, 20, 0]}
-              disabled
               isBig
             >
               원서 접수 →
@@ -69,7 +68,6 @@ const MainFunction = () => {
                 color={authorityColor}
                 onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
                 margin={[20, 0, 20, 0]}
-                disabled
               >
                 원서 접수 →
               </Button>
