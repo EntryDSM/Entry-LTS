@@ -92,26 +92,26 @@ const MainFunction = () => {
           <_Shortcut>
             {shortcut.map((item) =>
               item.link.includes('/') ? (
-                // <Link to={item.link}>
                 <_ShortcutButton
                   icon={item.icon}
                   title={item.title}
                   onClick={() => {
-                    item.title == '입학설명회 참석 예약'
-                      ? window.open(
+                    switch (item.title) {
+                      case '입학설명회 참석 예약':
+                        window.open(
                           'https://docs.google.com/forms/d/e/1FAIpQLSeomGdo53Qimaa2CKeP-xynBAucfUDXUR--R6hIWnh6oRD01A/viewform',
-                        )
-                      : // switch (item.title) {
-                        //   case '입학설명회 참석 예약':
-                        //     break;
-                        //   case 'Entry 개발자 소개':
+                        );
+                        break;
+                      case '성적 산출':
+                        navigate(item.link);
+                        break;
+                      default:
                         Toast('추후 추가 예정입니다.', { type: 'error' });
-                    // break;
-                    // }
+                        break;
+                    }
                   }}
                 />
               ) : (
-                // </Link>
                 <a href={item.link}>
                   <_ShortcutButton icon={item.icon} title={item.title} />
                 </a>
