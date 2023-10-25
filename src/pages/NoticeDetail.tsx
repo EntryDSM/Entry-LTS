@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Button, Icon, Text, theme } from '@team-entry/design_system';
+import { Button, Icon, Text, VStack, theme } from '@team-entry/design_system';
 import Noticeimg from '../assets/ReplaceNotice.svg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Mobile, Pc } from '..//hooks/useResponsive';
@@ -17,6 +17,16 @@ const NoticeDetail = () => {
 
   const handleDownload = () => {
     window.open('https://dsmhs.djsch.kr/boardCnts/fileDown.do?m=0602&s=dsmhs&fileSeq=5ac43f3743ed132c144b697e6d0485ad');
+  };
+
+  const handleDownLoadSecond = () => {
+    window.open('https://dsmhs.djsch.kr/boardCnts/fileDown.do?m=0602&s=dsmhs&fileSeq=b6306b3342266d6f1217f6e1ab6d0737');
+  };
+
+  const handleDownLoadCoronaSecond = () => {
+    window.open(
+      'https://dsmhs.djsch.kr//boardCnts/fileDown.do?m=0602&s=dsmhs&fileSeq=a0f33f698324301c21c725e186f076c4',
+    );
   };
 
   return (
@@ -38,19 +48,43 @@ const NoticeDetail = () => {
           <Text color="black600" size="body2">
             {data?.content}
           </Text>
-          <_FileTitle onClick={() => {}}>
-            <Text color="black900" size="title3" margin={['bottom', 10]}>
-              첨부파일
-            </Text>
-            <_Download onClick={handleDownload}>
-              <_Icon isAdmin={isAdmin}>
-                <Icon icon="Download" size={18} />
-              </_Icon>
-              <Text color="black900" size="body1" cursor="pointer">
-                2024학년도 신입생 원서접수 시 유의사항
+          {!(+noticeId % 2) && (
+            <_FileTitle onClick={() => {}}>
+              <Text color="black900" size="title3" margin={['bottom', 10]}>
+                첨부파일
               </Text>
-            </_Download>
-          </_FileTitle>
+              {noticeId == '2' && (
+                <_Download onClick={handleDownload}>
+                  <_Icon isAdmin={isAdmin}>
+                    <Icon icon="Download" size={18} />
+                  </_Icon>
+                  <Text color="black900" size="body1" cursor="pointer">
+                    2024학년도 신입생 원서접수 시 유의사항
+                  </Text>
+                </_Download>
+              )}
+              {noticeId == '4' && (
+                <VStack gap={5}>
+                  <_Download onClick={handleDownLoadSecond}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      2024학년도 신입생 2차 전형 안내
+                    </Text>
+                  </_Download>
+                  <_Download onClick={handleDownLoadCoronaSecond}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      2024 코로나19 예방을 위한 2차전형 응시자 유의사항 안내문
+                    </Text>
+                  </_Download>
+                </VStack>
+              )}
+            </_FileTitle>
+          )}
         </Pc>
         <Mobile>
           <Text color="black500" size="body5">
