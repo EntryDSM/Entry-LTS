@@ -7,7 +7,7 @@ import CancelModal from '@/components/Modal/CancelModal';
 import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';
 import { DownloadPdf } from '@/utils/api/pdf';
-import { GetFirstRoundPass } from '@/utils/api/pass';
+import { GetFirstRoundPass, GetSecondRoundPass } from '@/utils/api/pass';
 import BoardHeader from '@/components/Board/BoardHeader';
 import { GetMyQna } from '@/utils/api/qna';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,7 @@ const MyPage = () => {
   const onDownloadPdf = DownloadPdf();
 
   const { mutate: getFirstRound } = GetFirstRoundPass({ setModalState, open });
+  const { mutate: getSecondRound } = GetSecondRoundPass({ setModalState, open });
   const { data: myQnaList } = GetMyQna();
 
   // const openSignOutModal = () => {
@@ -86,13 +87,13 @@ const MyPage = () => {
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button onClick={getFirstRound}>발표 결과 확인</Button>
+              <Button onClick={getSecondRound}>발표 결과 확인</Button>
               {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button> */}
             </Pc>
             <Mobile>
-              <Button onClick={getFirstRound}>발표 결과 확인</Button>
+              <Button onClick={getSecondRound}>발표 결과 확인</Button>
             </Mobile>
           </_ApplyButtons>
         </_Apply>
@@ -160,20 +161,35 @@ const MyPage = () => {
         </Modal>
       )}
       {modalState === 'PASSED_ROUND' && (
+        // <Modal>
+        //   <DefaultModal
+        //     color="black900"
+        //     title="1차 발표 결과 확인"
+        //     subTitle={
+        //       <div style={{ lineHeight: '26px' }}>
+        //         축하드립니다!
+        //         <br />
+        //         <div style={{ textAlign: 'left' }}>
+        //           대덕소프트웨어마이스터고 <strong>1차 전형 합격</strong>입니다!
+        //           <br />
+        //           2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
+        //           <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을 확인하시기 바랍니다.
+        //         </div>
+        //       </div>
+        //     }
+        //     button="확인"
+        //     onClick={close}
+        //   />
+        // </Modal>
         <Modal>
           <DefaultModal
             color="black900"
-            title="1차 발표 결과 확인"
+            title="2차 발표 결과 확인"
             subTitle={
               <div style={{ lineHeight: '26px' }}>
-                축하드립니다!
+                축하드립니다! <strong>최종합격</strong>하셨습니다!
                 <br />
-                <div style={{ textAlign: 'left' }}>
-                  대덕소프트웨어마이스터고 <strong>1차 전형 합격</strong>입니다!
-                  <br />
-                  2차 전형 관련 안내 사항은 <strong>본교 홈페이지</strong>와
-                  <br /> <strong>원서접수 사이트의 입학 공지사항</strong>을 확인하시기 바랍니다.
-                </div>
+                꼭, <strong>공지사항</strong>을 확인하세요!
               </div>
             }
             button="확인"
@@ -182,15 +198,31 @@ const MyPage = () => {
         </Modal>
       )}
       {modalState === 'NOT_PASSED_ROUND' && (
+        // <Modal>
+        //   <DefaultModal
+        //     color="black900"
+        //     title="1차 발표 결과 확인"
+        //     subTitle={
+        //       <div style={{ lineHeight: '26px' }}>
+        //         지원해주셔서 감사합니다.
+        //         <br />
+        //         대덕소프트웨어마이스터고 1차 전형 결과 불합격입니다.
+        //       </div>
+
+        //     }
+        //     button="확인"
+        //     onClick={close}
+        //   />
+        // </Modal>
         <Modal>
           <DefaultModal
             color="black900"
-            title="1차 발표 결과 확인"
+            title="2차 발표 결과 확인"
             subTitle={
               <div style={{ lineHeight: '26px' }}>
-                지원해주셔서 감사합니다.
+                2차 전형 결과 불합격입니다.
                 <br />
-                대덕소프트웨어마이스터고 1차 전형 결과 불합격입니다.
+                본교에 지원에주셔서 감사합니다.
               </div>
             }
             button="확인"
