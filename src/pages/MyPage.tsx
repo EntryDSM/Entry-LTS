@@ -12,6 +12,7 @@ import BoardHeader from '@/components/Board/BoardHeader';
 import { GetMyQna } from '@/utils/api/qna';
 import { Link } from 'react-router-dom';
 import DefaultModal from '@/components/Modal/DefaultModal';
+import { getSchedule } from '@/utils/api/schedule';
 
 const MyPage = () => {
   const { Modal, open, close, setModalState, modalState } = useModal();
@@ -28,6 +29,11 @@ const MyPage = () => {
   //   setModalState('SIGN_OUT');
   //   open();
   // };
+
+  // 발표일
+  const { data: schedule, isLoading } = getSchedule();
+  const secondAnnouncementDate = new Date(schedule?.schedules[4]?.date ?? '');
+  const currentDate = new Date();
 
   return (
     <_Container>
@@ -87,7 +93,9 @@ const MyPage = () => {
           <_ApplyButtons>
             <Pc>
               <Button onClick={onDownloadPdf}>원서 다운로드</Button>
-              <Button onClick={getSecondRound}>발표 결과 확인</Button>
+              <Button disabled={currentDate < secondAnnouncementDate} onClick={getSecondRound}>
+                발표 결과 확인
+              </Button>
               {/* <Button color="delete" kind="delete" onClick={openCancelSubmitModal}>
                 원서 최종제출 취소
               </Button> */}
