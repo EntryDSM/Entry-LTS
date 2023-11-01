@@ -29,6 +29,30 @@ const NoticeDetail = () => {
     );
   };
 
+  const handleDownLoadFreshmanOrientation = () => {
+    window.open(
+      'https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/notice_file/2024%E1%84%92%E1%85%A1%E1%86%A8%E1%84%82%E1%85%A7%E1%86%AB%E1%84%83%E1%85%A9+%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%89%E1%85%A2%E1%86%BC+%E1%84%8B%E1%85%A9%E1%84%85%E1%85%B5%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB+%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%82%E1%85%A2.hwp',
+    );
+  };
+
+  const handleDownLoadFreshmanRegister = () => {
+    window.open(
+      'https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/notice_file/2024%E1%84%92%E1%85%A1%E1%86%A8%E1%84%82%E1%85%A7%E1%86%AB%E1%84%83%E1%85%A9+%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%89%E1%85%A2%E1%86%BC+%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%92%E1%85%A1%E1%86%A8%E1%84%83%E1%85%B3%E1%86%BC%E1%84%85%E1%85%A9%E1%86%A8+%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%82%E1%85%A2(%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%92%E1%85%A1%E1%86%A8%E1%84%83%E1%85%A9%E1%86%BC%E1%84%8B%E1%85%B4%E1%84%89%E1%85%A5+%E1%84%91%E1%85%A9%E1%84%92%E1%85%A1%E1%86%B7).hwp',
+    );
+  };
+
+  const handleDownLoadOrientationDocument = () => {
+    window.open(
+      'https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/notice_file/%E1%84%8B%E1%85%A9%E1%84%85%E1%85%B5%E1%84%8B%E1%85%A6%E1%86%AB%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB+%E1%84%83%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B5%E1%86%AF+%E1%84%8C%E1%85%A6%E1%84%8E%E1%85%AE%E1%86%AF%E1%84%89%E1%85%A5%E1%84%85%E1%85%B2+%E1%84%86%E1%85%A9%E1%84%8B%E1%85%B3%E1%86%B7.pdf',
+    );
+  };
+
+  const handleDownLoadMedical = () => {
+    window.open(
+      'https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/notice_file/2024%E1%84%92%E1%85%A1%E1%86%A8%E1%84%82%E1%85%A7%E1%86%AB%E1%84%83%E1%85%A9+%E1%84%89%E1%85%B5%E1%86%AB%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%89%E1%85%A2%E1%86%BC+%E1%84%80%E1%85%A5%E1%86%AB%E1%84%80%E1%85%A1%E1%86%BC%E1%84%80%E1%85%A5%E1%86%B7%E1%84%8C%E1%85%B5%E1%86%AB+%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%82%E1%85%A2.hwp',
+    );
+  };
+
   return (
     <_Container>
       <_Wrapper>
@@ -79,6 +103,42 @@ const NoticeDetail = () => {
                     </_Icon>
                     <Text color="black900" size="body1" cursor="pointer">
                       2024 코로나19 예방을 위한 2차전형 응시자 유의사항 안내문
+                    </Text>
+                  </_Download>
+                </VStack>
+              )}
+              {noticeId === '6' && (
+                <VStack gap={5}>
+                  <_Download onClick={handleDownLoadFreshmanOrientation}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      2024학년도 신입생 오리엔테이션 안내
+                    </Text>
+                  </_Download>
+                  <_Download onClick={handleDownLoadFreshmanRegister}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      2024학년도 신입생 입학 등록 안내(입학동의서 포함)
+                    </Text>
+                  </_Download>
+                  <_Download onClick={handleDownLoadOrientationDocument}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      오리엔테이션 당일 제출서류 모음
+                    </Text>
+                  </_Download>
+                  <_Download onClick={handleDownLoadMedical}>
+                    <_Icon isAdmin={isAdmin}>
+                      <Icon icon="Download" size={18} />
+                    </_Icon>
+                    <Text color="black900" size="body1" cursor="pointer">
+                      2024학년도 신입생 건강검진 안내
                     </Text>
                   </_Download>
                 </VStack>
