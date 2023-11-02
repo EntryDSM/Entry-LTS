@@ -197,7 +197,8 @@ const MyPage = () => {
               <div style={{ lineHeight: '26px' }}>
                 축하드립니다! <strong>최종합격</strong>하셨습니다!
                 <br />
-                꼭, <strong>공지사항</strong>을 확인하세요!
+                꼭, <strong>공지사항</strong>을 확인하고
+                <strong> 입학동의서</strong>를 제출해주세요!
               </div>
             }
             button="확인"
