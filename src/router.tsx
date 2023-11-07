@@ -10,10 +10,10 @@ import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
 import WriteCustomerPage from './pages/WriteCustomerPage';
 import EditBannerPage from './pages/admin/EditBanner';
-import ApplicationPage from './pages/Application';
 import NotFound from './pages/NotFound';
 import WriteFAQPage from './pages/admin/WriteFAQ';
 import WriteNoticePage from './pages/admin/WriteNotice';
+import NewAdmissionPage from './pages/NewAdmission';
 
 const Router = createBrowserRouter([
   {
@@ -54,12 +54,12 @@ const Router = createBrowserRouter([
         element: <MyPage />,
       },
       {
-        path: 'edit',
-        element: <EditBannerPage />,
+        path: 'admission',
+        element: <NewAdmissionPage />,
       },
       {
-        path: 'application',
-        element: <ApplicationPage />,
+        path: 'edit',
+        element: <EditBannerPage />,
       },
     ],
     errorElement: <NotFound />,

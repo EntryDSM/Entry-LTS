@@ -1,9 +1,10 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { instance } from '../axios';
 import { ICreateQna } from './request';
 import { useNavigate } from 'react-router-dom';
 import { AxiosError, AxiosResponse } from 'axios';
-import { IQnaDetailResponse, IQnaListResponse } from './response';
+import { IGetMyQnaList, IQnaDetailResponse, IQnaListResponse } from './response';
+import { Toast } from '@team-entry/design_system';
 
 const router = 'question';
 
@@ -25,10 +26,14 @@ export const GetQnaDetail = (qnaId: string) => {
 
   return useQuery(['qna', qnaId], response, {
     onSuccess: () => {},
-    onError: (err: AxiosError) => {
-      if (err.response.status === 403 || err.response.status === 404) {
-        alert('로그인 후 이용 가능합니다');
-        navigate(-1);
+    onError: (err: AxiosError<AxiosError>) => {
+      console.log(err);
+      if (err.response?.data.status === 403) {
+        Toast('비공개 글 입니다', { type: 'error' });
+        navigate('/customer');
+      } else if (err.response.data.message === 'The account does not exist') {
+        Toast('권한이 없습니다', { type: 'error' });
+        navigate('/customer');
       }
     },
   });
@@ -36,7 +41,7 @@ export const GetQnaDetail = (qnaId: string) => {
 
 export const GetMyQna = () => {
   const response = async () => {
-    const { data } = await instance.get(`${router}`);
+    const { data } = await instance.get<IGetMyQnaList>(`${router}`);
     return data;
   };
   return useQuery(['myQna'], response, {
@@ -48,22 +53,22 @@ export const GetMyQna = () => {
 export const CreateQna = (body: ICreateQna) => {
   const navigate = useNavigate();
   const response = async () => {
-    return instance.post(`${router}`, body);
+    return await instance.post(`${router}`, body);
   };
 
   return useMutation(response, {
     onSuccess: () => {
-      alert('성공');
+      Toast('성공', { type: 'success' });
       navigate('/customer');
     },
     onError: (error: AxiosError<AxiosError>) => {
       switch (error.response.data.status) {
         case 400:
-          alert('내용을 입력해주세요');
+          Toast('내용을 입력해주세요', { type: 'error' });
           break;
         case 404:
-          alert('로그인 오류 다시 로그인 해주세요');
-          navigate('/login');
+          Toast('로그인 오류 다시 로그인 해주세요', { type: 'error' });
+          navigate('/customer');
           break;
         default:
           return;

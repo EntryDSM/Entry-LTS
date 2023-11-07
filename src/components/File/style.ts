@@ -5,6 +5,7 @@ export const _File = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
 `;
 
 export const _Download = styled.div<{ color: string }>`

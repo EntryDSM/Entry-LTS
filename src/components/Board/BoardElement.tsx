@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
 import { IBoard } from '@/interfaces/Board';
-import { Button, Icon, Text, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../../hooks/useResponsive';
+import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
+import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { faqTypeToKorean } from '@/utils/translate';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -20,38 +21,54 @@ const BoardElement = (props: IBoard) => {
     content,
     isReplied,
     userName,
+    faq_type,
     createdAt,
   } = props;
   const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div>
+        <Div style={{ maxWidth: 500, width: isMobile && searchParams.get('type') != 'faq' && '50%' }}>
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
-              {isNumber ? boardNumber : '입학문의'}
+              {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
               {!isPublic && <Icon color={`${authorityColor}500`} size={18} margin={[0, 5, 0, 0]} icon="LockKey" />}
-              <Text align="center" color="black800" size="body3">
+              <Text
+                color="black800"
+                size="body3"
+                textOverflow="ellipsis"
+                whiteSpace="nowrap"
+                style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+                width={285}
+              >
                 {title}
               </Text>
             </Div>
           </Pc>
           <Mobile>
             {!isNumber && (
-              <Text color="black700" size="body3" margin={['right', 20]}>
-                입학문의
+              <Text color="black700" size="body3" margin={['right', 20]} whiteSpace="nowrap">
+                {faqTypeToKorean[faq_type]}
               </Text>
             )}
-            <Text color="black800" size="body5">
-              성적 입력에 관하여...
+            <Text
+              color="black800"
+              size="body5"
+              textOverflow="ellipsis"
+              whiteSpace="pre-line"
+              style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+            >
+              {title}
             </Text>
           </Mobile>
         </Div>
-        <Div>
+        <Div style={{ justifyContent: 'end' }}>
           {isComment && (
             <>
               <Pc>
@@ -162,7 +179,7 @@ const _ElementContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 3rem;
+  min-height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
   @media screen and (max-width: 769px) {

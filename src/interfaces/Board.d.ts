@@ -1,3 +1,5 @@
+import { FaqType } from '@/utils/api/faq/types';
+
 export interface IBoard {
   title?: string;
   boardNumber?: number;
@@ -12,4 +14,5 @@ export interface IBoard {
   isWriteDay?: boolean;
   isOpen?: boolean;
   content?: string;
+  faq_type?: FaqType;
 }

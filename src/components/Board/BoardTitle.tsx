@@ -23,6 +23,11 @@ const BoardTitle = (props: IBoardTitle) => {
   const onClick = () => {
     console.log('clicked!');
   };
+
+  const isQna = !click && isCustomer && !isAdmin;
+  const isFaq = isAdmin && click;
+  const isNotice = isAdmin && !isCustomer;
+
   return (
     <>
       <Pc>
@@ -52,7 +57,7 @@ const BoardTitle = (props: IBoardTitle) => {
           </Button>
         </_ButtonWrapper>
         <div>
-          {((isCustomer && ((!click && !isAdmin) || (click && isAdmin))) || (!isCustomer && isAdmin)) && (
+          {(isQna || isFaq || isNotice) && (
             <Link to={link}>
               <Button color={authorityColor} onClick={onClick}>
                 {button3}

@@ -50,7 +50,7 @@ const WriteCustomerPage = () => {
             label="본문"
             width="100%"
             placeholder="내용을 입력하세요"
-            limit={300}
+            maxLength={300}
             value={form.content}
             onChange={onChange}
             margin={['top', 20]}

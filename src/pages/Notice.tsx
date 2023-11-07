@@ -3,23 +3,31 @@ import styled from '@emotion/styled';
 import BoardElement from '../components/Board/BoardElement';
 import { useState } from 'react';
 import BoardTitle from '../components/Board/BoardTitle';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useAuthority } from '@/hooks/useAuthority';
 import { GetAllNotice } from '@/utils/api/notice';
-import { NoticeType } from '@/utils/api/notice/types';
 
 const NoticePage = () => {
-  const [noticeType, setNoticeType] = useState(false);
   const { isAdmin } = useAuthority();
 
-  const { data } = GetAllNotice(noticeType ? 'FRESHMAN' : 'ADMISSION');
+  const [current, setCurrent] = useState(0);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const setType = (current: boolean) => {
+    current ? searchParams.set('type', 'FRESHMAN') : searchParams.set('type', 'ADMISSION');
+    setCurrent(0);
+
+    setSearchParams(searchParams);
+  };
+
+  const { data } = GetAllNotice(searchParams.get('type') === 'FRESHMAN' ? 'FRESHMAN' : 'ADMISSION');
 
   return (
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={noticeType}
-          setClick={setNoticeType}
+          click={searchParams.get('type') === 'FRESHMAN'}
+          setClick={setType}
           title="공지사항"
           subTitle="학교에서 게시한 입학 공지사항을 확인하세요"
           button1="입학 공지사항"
@@ -29,11 +37,11 @@ const NoticePage = () => {
           link="write"
         />
         <BoardHeader isNumber={true} isTopBorder={false} isComment={false} isWriteDay={true} isWriter={false} />
-        {data?.notices.reverse().map((notice, idx) => {
+        {data?.notices.map((notice, idx) => {
           return (
-            <Link to={`/notice/${notice.id}`} state={{ noticeId: notice.id }}>
+            <Link to={`/notice/${notice.id}`}>
               <BoardElement
-                boardNumber={data.notices.length - idx}
+                boardNumber={idx + 1}
                 createdAt={notice.created_at}
                 title={notice.title}
                 isNumber={true}

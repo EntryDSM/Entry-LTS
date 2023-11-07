@@ -1,28 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Input, Spinner, Text, Textarea, theme } from '@team-entry/design_system';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Button, Input, Spinner, Stack, Text, Textarea, Toast, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
 import QnaAnswer from '@/components/Answer/QnaAnswer';
-const { isAdmin, authorityColor } = useAuthority();
+import { useInput } from '@/hooks/useInput';
+import { DeleteQna, DeleteReply, EditReply, WriteReply } from '@/utils/api/admin';
+import { getCookies } from '@/utils/cookies';
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { qnaId } = location.state;
+  const { id: qnaId } = useParams();
   const [writeAnswer, setWriteAnswer] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const { authorityColor, isAdmin } = useAuthority();
+  const { form, setForm, onChange } = useInput({ title: '', content: '' });
+  const { mutate: writeReply } = WriteReply(form);
+  const { mutate: editReply } = EditReply(form);
+  const { mutate: deleteReply } = DeleteReply();
+  const { mutate: deleteQna } = DeleteQna();
 
   const { data, isLoading } = GetQnaDetail(qnaId);
+  const accessToken = getCookies('access_token');
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setInputValue(value);
-  };
+  useEffect(() => {
+    if (data) setForm({ title: data?.reply?.title, content: data?.reply?.content });
+  }, [data]);
 
-  if (isLoading) return <Spinner margin={[0, 'auto']} size={40} color="orange" />;
+  useEffect(() => {
+    if (!accessToken) {
+      Toast('로그인이 필요합니다.', { type: 'error' });
+      navigate('/customer');
+    }
+  }, []);
+
+  if (isLoading)
+    return (
+      <_Loading>
+        <Spinner margin={[0, 'auto']} size={40} color={authorityColor} />
+      </_Loading>
+    );
   return (
     <_Container>
       <_Wrapper>
@@ -37,31 +55,38 @@ const CustomerDetailPage = () => {
             <Text color={`${authorityColor}500`} size="header2">
               Q.
             </Text>
-            <Text color="black900" size="title1">
+            <Text color="black900" size="title1" margin={['top', 4]}>
               {data?.title}
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            {data?.content.replace(/\n/g, '<br/>')}
+            {data?.content}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
-              36 | {data?.username} | {data?.created_at?.slice(0, 10)}
+              {data?.id} | {data?.username} | {data?.created_at?.slice(0, 10)}
             </Text>
             {isAdmin && !writeAnswer && (
               <_EditCustomerButtons>
                 {data?.is_replied ? (
-                  <Button color="black" kind="contained" onClick={() => {}}>
-                    수정
-                  </Button>
+                  <>
+                    <Button color="black" kind="contained" onClick={() => setWriteAnswer(true)}>
+                      수정
+                    </Button>
+                    <Button color="delete" kind="delete" onClick={() => deleteReply(qnaId)}>
+                      답변 삭제
+                    </Button>
+                  </>
                 ) : (
-                  <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
-                    답변 작성
-                  </Button>
+                  <>
+                    <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
+                      답변 작성
+                    </Button>
+                    <Button color="delete" kind="delete" onClick={() => deleteQna(qnaId)}>
+                      질문 삭제
+                    </Button>
+                  </>
                 )}
-                <Button color="delete" kind="delete" onClick={() => console.log('작성')}>
-                  질문 삭제
-                </Button>
               </_EditCustomerButtons>
             )}
           </_QuestionBottom>
@@ -71,7 +96,7 @@ const CustomerDetailPage = () => {
             <Text color={`${authorityColor}500`} size="title1">
               Q.
             </Text>
-            <Text color="black900" size="title2">
+            <Text color="black900" size="title2" margin={['top', 4]}>
               {data?.title.replace(/\n/g, '<br/>')}
             </Text>
           </_Title>
@@ -80,33 +105,68 @@ const CustomerDetailPage = () => {
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body3" margin={['top', 80]}>
-              36 | {data?.username} | {data?.created_at?.slice(0, 10)}
+              {data?.id} | {data?.username} | {data?.created_at?.slice(0, 10)}
             </Text>
           </_QuestionBottom>
         </Mobile>
         {writeAnswer ? (
           <>
-            <Input type="text" label="제목" width="100%" placeholder="제목을 입력해주세요" margin={[30, 0, 0, 0]} />
+            <Input
+              name="title"
+              type="text"
+              label="제목"
+              width="100%"
+              placeholder="제목을 입력해주세요"
+              value={form.title}
+              onChange={onChange}
+              margin={[30, 0, 0, 0]}
+            />
             <Textarea
+              name="content"
               label="답변"
               width="100%"
               placeholder="답변을 입력해주세요"
-              limit={600}
-              value={inputValue}
+              maxLength={600}
+              value={form.content}
               onChange={onChange}
               margin={['top', 20]}
             />
             <_InputButton>
-              <Button color="green" kind="contained" onClick={() => setWriteAnswer(false)}>
-                게시
-              </Button>
+              {' '}
+              {data?.is_replied ? (
+                <Button
+                  color="black"
+                  kind="contained"
+                  onClick={async () => {
+                    editReply(qnaId);
+                    setWriteAnswer(false);
+                  }}
+                >
+                  수정
+                </Button>
+              ) : (
+                <Button
+                  color="green"
+                  kind="contained"
+                  onClick={async () => {
+                    writeReply(qnaId);
+                    setWriteAnswer(false);
+                  }}
+                >
+                  게시
+                </Button>
+              )}
             </_InputButton>
           </>
         ) : (
           <_AnswerBottom>
             <_Answer>
               {data?.is_replied ? (
-                <QnaAnswer title={data?.title} content={data?.content} created_at={data?.created_at} />
+                <QnaAnswer
+                  title={data?.reply.title}
+                  content={data?.reply.content}
+                  created_at={data?.reply.created_at}
+                />
               ) : (
                 <Text color="black500" size="title2">
                   아직 작성된 답변이 없습니다
@@ -122,6 +182,14 @@ const CustomerDetailPage = () => {
 };
 
 export default CustomerDetailPage;
+
+const _Loading = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const _Container = styled.div`
   position: relative;
@@ -141,7 +209,7 @@ const _Wrapper = styled.div`
 
 const _Title = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   gap: 12px;
   margin-bottom: 10px;
 `;

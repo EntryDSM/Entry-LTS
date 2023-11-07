@@ -1,14 +1,17 @@
 import * as _ from './style';
 import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import User from '@/assets/User.svg';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Button, Icon, Stack, Text } from '@team-entry/design_system';
+import { Button, Icon, Text } from '@team-entry/design_system';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
-import { getCookies, removeTokens } from '@/utils/cookies';
-import { AUTH_URL } from '@/constant/env';
+import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
+import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
+import { getUserInfo } from '@/utils/api/application';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
 
@@ -22,27 +25,32 @@ const headerList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
   { name: '공지사항', url: '/notice' },
   { name: '성적 산출', url: '/grade' },
+  {
+    name: '신입생 전형 요강',
+    url: '/admission',
+  },
 ];
 
 const menuList: IHeaderList[] = [
   { name: '문의사항', url: '/customer' },
   { name: '공지사항', url: '/notice' },
-  { name: '로그인', url: '/login', type: 'logout' },
-  { name: '마이페이지', url: '/mypage', type: 'login' },
-  { name: '로그아웃', url: '/logout', type: 'login' },
 ];
 
 const Header = () => {
   const [list, setList] = useState<THeader>('');
   const [visibility, setVisibility] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
   const { isAdmin, authorityColor } = useAuthority();
+  const navigate = useNavigate();
+  const authority = getCookies('authority');
+  const { data } = getUserInfo(isLogin && authority != 'admin');
 
   const onClick = () => {
-    window.location.href = AUTH_URL;
+    window.location.href = `${AUTH_URL}/login`;
   };
 
   useEffect(() => {
@@ -66,6 +74,24 @@ const Header = () => {
     }
   };
 
+  const Logout = () => {
+    removeCookies('authority', {
+      path: '/',
+      secure: true,
+      sameSite: 'none',
+      domain: COOKIE_DOMAIN,
+    });
+    removeTokens();
+    setIsLogin(false);
+    alert('로그아웃 되었습니다');
+    navigate('/');
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    setIsLogin(!!getCookies('access_token'));
+  }, [getCookies('access_token')]);
+
   return (
     <>
       <_._HeaderContainer>
@@ -74,22 +100,34 @@ const Header = () => {
           {isOpen && (
             <_._Background onClick={closeMenu}>
               <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
-                {menuList
-                  .filter((list) => (isLogin ? list.type !== 'logout' : list.type !== 'login'))
-                  .map((list, idx) => {
-                    return (
-                      <Link key={idx} to={list.url}>
-                        <_._MenuElement
-                          color={list.name === '로그아웃' ? 'red' : 'black'}
-                          onClick={() => {
-                            setVisibility(false);
-                          }}
-                        >
-                          {list.name}
-                        </_._MenuElement>
-                      </Link>
-                    );
-                  })}
+                {menuList.map((list, idx) => {
+                  return (
+                    <Link key={idx} to={list.url}>
+                      <_._MenuElement
+                        color={'black'}
+                        onClick={() => {
+                          setVisibility(false);
+                        }}
+                      >
+                        {list.name}
+                      </_._MenuElement>
+                    </Link>
+                  );
+                })}
+                {isLogin ? (
+                  <>
+                    <Link to="/mypage">
+                      <_._MenuElement color="black">마이페이지</_._MenuElement>
+                    </Link>
+                    <_._MenuElement color="red" onClick={Logout}>
+                      로그아웃
+                    </_._MenuElement>
+                  </>
+                ) : (
+                  <_._MenuElement color="black" onClick={onClick}>
+                    로그인
+                  </_._MenuElement>
+                )}
               </_._Menu>
             </_._Background>
           )}
@@ -122,20 +160,52 @@ const Header = () => {
         </div>
         <Pc>
           {isLogin ? (
-            <Stack align="center">
-              <Text cursor="pointer" color="realBlack" size="body1" margin={[0, 4, 0, 20]}></Text>
-              {/* <Icon cursor="pointer" icon="DownArrow" color="black500" /> */}
-              <Button
-                color="delete"
-                onClick={() => {
-                  removeTokens();
-                  setIsLogin(false);
-                  alert('로그아웃 되었습니다');
-                }}
-              >
-                로그아웃
-              </Button>
-            </Stack>
+            <OutsideClickHandler onOutsideClick={() => setIsDropdownOpen(false)}>
+              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
+                <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                  <Text cursor="pointer" color="realBlack" size="body1">
+                    {authority === 'admin' ? '어드민' : data?.name}
+                  </Text>
+                  <Icon cursor="pointer" icon="DownArrow" color="black500" />
+                </_._DropdownWrapper>
+                {isDropdownOpen && (
+                  <_._DropdownMenus>
+                    {authority == 'admin' ? (
+                      <_._DropdownMenu onClick={() => (window.location.href = 'https://admin.entrydsm.hs.kr')}>
+                        <Icon icon="SignOut" color="green500" />
+                        <Text color="green500" size="body1">
+                          관리자 페이지
+                        </Text>
+                      </_._DropdownMenu>
+                    ) : (
+                      <_._DropdownMenu
+                        onClick={() => {
+                          navigate('/mypage');
+                          setIsDropdownOpen(false);
+                        }}
+                      >
+                        <Icon icon="Account" color="black900" />
+                        <Text color="black900" size="body1">
+                          마이페이지
+                        </Text>
+                      </_._DropdownMenu>
+                    )}
+                    <_._Line />
+                    <_._DropdownMenu
+                      onClick={() => {
+                        Logout();
+                        setIsDropdownOpen(false);
+                      }}
+                    >
+                      <Icon icon="Logout" color="error" />
+                      <Text color="error" size="body1">
+                        로그아웃
+                      </Text>
+                    </_._DropdownMenu>
+                  </_._DropdownMenus>
+                )}
+              </div>
+            </OutsideClickHandler>
           ) : (
             <Button color={authorityColor} kind="rounded" onClick={onClick}>
               로그인

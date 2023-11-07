@@ -1,6 +1,7 @@
 import { getSchedule } from '@/utils/api/schedule';
-import { Text } from '@team-entry/design_system';
+import { Skeleton, Text } from '@team-entry/design_system';
 import * as _ from './style';
+import { useAuthority } from '@/hooks/useAuthority';
 
 export const ProgressBar = () => {
   const { data, isLoading } = getSchedule();
@@ -10,6 +11,8 @@ export const ProgressBar = () => {
   const firstAnnouncementDate = new Date(data?.schedules[2]?.date ?? '');
   const interviewDate = new Date(data?.schedules[3]?.date ?? '');
   const secondAnnouncementDate = new Date(data?.schedules[4]?.date ?? '');
+
+  const { authorityColor } = useAuthority();
 
   if (isLoading) {
     return <></>;
@@ -25,15 +28,15 @@ export const ProgressBar = () => {
       title: '1차 발표',
       date: `${
         firstAnnouncementDate.getMonth() + 1
-      }/${firstAnnouncementDate.getDate()} ${firstAnnouncementDate.getHours()}/${firstAnnouncementDate
+      }/${firstAnnouncementDate.getDate()} ${firstAnnouncementDate.getHours()}:${firstAnnouncementDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
       condition: firstAnnouncementDate <= currentDate && currentDate < interviewDate,
     },
     {
-      title: '심층 면접',
-      date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}/${interviewDate
+      title: '2차 전형',
+      date: `${interviewDate.getMonth() + 1}/${interviewDate.getDate()} ${interviewDate.getHours()}:${interviewDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
@@ -43,7 +46,7 @@ export const ProgressBar = () => {
       title: '2차 발표',
       date: `${
         secondAnnouncementDate.getMonth() + 1
-      }/${secondAnnouncementDate.getDate()} ${secondAnnouncementDate.getHours()}/${secondAnnouncementDate
+      }/${secondAnnouncementDate.getDate()} ${secondAnnouncementDate.getHours()}:${secondAnnouncementDate
         .getMinutes()
         .toString()
         .padStart(2, '0')}`,
@@ -51,66 +54,74 @@ export const ProgressBar = () => {
     },
   ];
 
-  console.log(currentDate >= startDate);
-  console.log(currentDate, endDate);
-
   const progressBar = [
     {
       element: (
         <_._ProgressCircle
-          now={startDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={startDate < currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
-        <_._ProgressStep now={endDate < currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3} />
+        <_._ProgressStep
+          authorityColor={authorityColor}
+          now={endDate < currentDate && currentDate <= secondAnnouncementDate}
+        />
       ),
     },
 
     {
       element: (
         <_._ProgressCircle
-          now={firstAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={firstAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={interviewDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={interviewDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={interviewDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressStep
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={secondAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
     {
       element: (
         <_._ProgressCircle
-          now={secondAnnouncementDate <= currentDate && currentDate.getDate() <= secondAnnouncementDate.getDate() + 3}
+          authorityColor={authorityColor}
+          now={secondAnnouncementDate <= currentDate && currentDate <= secondAnnouncementDate}
         />
       ),
     },
   ];
+
+  if (isLoading) return <Skeleton width={720} height={112} isLoaded rounded={5} />;
 
   return (
     <_._Overflow>
       <_._Progress>
         <_._ProgressCards>
           {progressState.map((state, idx) => (
-            <_._ProgressCard key={idx} now={state.condition}>
+            <_._ProgressCard key={idx} now={state.condition} authorityColor={authorityColor}>
               <Text color="realWhite" size="title1">
                 {state.title}
               </Text>

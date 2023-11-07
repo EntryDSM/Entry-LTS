@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc } from '../hooks/useResponsive';
@@ -7,60 +7,61 @@ import BoardHeader from '../components/Board/BoardHeader';
 import BoardElement from '../components/Board/BoardElement';
 import BoardTitle from '../components/Board/BoardTitle';
 import { GetAllQna } from '@/utils/api/qna';
-import { useAuthority } from '@/hooks/useAuthority';
+import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import { GetAllFaq } from '@/utils/api/faq';
+import PageNation from '@/components/PageNation';
+import { FaqType } from '@/utils/api/faq/types';
 
 const CustomerPage = () => {
-  const [click, setClick] = useState(false);
-  const [category, setCategory] = useState('전체');
-  const categories = [
-    { name: '전체' },
-    { name: '입학 문의' },
-    { name: '취업 문의' },
-    { name: '진학 문의' },
-    { name: '기타' },
-  ];
-  const { isAdmin, authorityColor } = useAuthority();
-
-  const { data } = GetAllQna();
-
-  const isQnaPublic = (e: React.MouseEvent<HTMLElement>, isPublic: boolean) => {
-    if (!isPublic) {
-      e.preventDefault();
-      alert('비공개글 입니다.');
-    }
+  const [category, setCategory] = useState<FaqType>('');
+  const categories: Record<string, FaqType> = {
+    전체: '',
+    '입학 문의': 'ADMISSION',
+    '진학 문의': 'COURSE',
+    '학교 생활': 'SCHOOL_LIFE',
+    기타: 'OTHER',
   };
 
-  const { data: getAllFaq } = GetAllFaq();
+  const { isAdmin, authorityColor } = useAuthority();
+
+  const { data: getAllQna, isLoading: qnaLoading } = GetAllQna();
+
+  const { data: getAllFaq, isLoading: faqLoading } = GetAllFaq(category);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [current, setCurrent] = useState(0);
+
+  const setType = (current: boolean) => {
+    current ? searchParams.set('type', 'faq') : searchParams.set('type', 'qna');
+    setCurrent(0);
+
+    setSearchParams(searchParams);
+  };
 
   return (
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={click}
-          setClick={setClick}
+          click={searchParams.get('type') === 'faq'}
+          setClick={setType}
           title="문의사항"
-          subTitle="입학 상담 문의: 042-886-1121"
+          subTitle="입학 상담 문의: 042-866-8811, 042-866-8814"
           button1="Q&A"
           button2="자주 묻는 질문"
           button3="질문 작성"
-          isCustomer={true}
+          isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
 
-        {!click ? (
+        {searchParams.get('type') !== 'faq' ? (
           <>
-            <BoardHeader isNumber={true} isTopBorder={false} isComment={true} isWriteDay={true} isWriter={true} />
-            {data?.questions?.map((qna, idx) => {
+            <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
+            {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
-                <Link
-                  to={`/customer/${qna.id}`}
-                  onClick={(e) => isQnaPublic(e, qna.is_public)}
-                  state={{ qnaId: qna.id }}
-                >
+                <Link to={`/customer/${qna.id}`}>
                   <BoardElement
                     title={qna.title}
-                    boardNumber={data.questions.length - idx}
+                    boardNumber={getAllQna.questions.length - (idx + current * 10)}
                     createdAt={qna.created_at}
                     userName={qna.username}
                     isPublic={qna.is_public}
@@ -78,41 +79,41 @@ const CustomerPage = () => {
         ) : (
           <>
             <_Categories>
-              {categories.map((res, i) => {
-                const { name } = res;
+              {Object.entries(categories).map((res, i) => {
                 return (
                   <>
                     <Pc>
                       <Text
-                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="title2"
                         cursor="pointer"
-                        onClick={() => setCategory(name)}
+                        onClick={() => setCategory(res[1])}
                       >
-                        {name}
+                        {res[0]}
                       </Text>
                     </Pc>
                     <Mobile>
                       <Text
-                        color={name === category ? `${authorityColor}500` : `${authorityColor}100`}
+                        color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="body3"
                         cursor="pointer"
-                        onClick={() => setCategory(name)}
+                        onClick={() => setCategory(res[1])}
                       >
-                        {name}
+                        {res[0]}
                       </Text>
                     </Mobile>
-                    {name !== '기타' && <_Circle />}
+                    {res[0] !== '기타' && <_Circle authorityColor={authorityColor} />}
                   </>
                 );
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            {getAllFaq.map((faq) => (
+            {getAllFaq?.slice(0 + current * 10, current * 10 + 10).map((faq) => (
               <BoardElement
                 content={faq.content}
                 createdAt={faq.created_at}
                 title={faq.title}
+                faq_type={faq.faq_type}
                 isNumber={false}
                 isTopBorder={true}
                 isOpen={true}
@@ -120,6 +121,18 @@ const CustomerPage = () => {
               />
             ))}
           </>
+        )}
+        {((searchParams.get('type') == 'qna' && getAllQna?.questions?.length !== 0) ||
+          (searchParams.get('type') == 'faq' && getAllFaq?.length !== 0)) && (
+          <PageNation
+            pageNum={Math.floor(
+              searchParams.get('type') == 'faq'
+                ? Math.ceil(getAllFaq?.length / 10) || 0
+                : Math.ceil(getAllQna?.questions?.length / 10) || 0,
+            )}
+            current={current}
+            setCurrent={setCurrent}
+          />
         )}
       </_Wrapper>
     </_Container>
@@ -132,6 +145,7 @@ const _Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100vw;
+  margin-bottom: 80px;
 `;
 
 const _Wrapper = styled.div`
@@ -139,7 +153,6 @@ const _Wrapper = styled.div`
   width: 100%;
   max-width: 60rem;
   padding: 0 20px;
-  height: 38rem;
 `;
 
 const _Categories = styled.div`
@@ -154,9 +167,9 @@ const _Categories = styled.div`
   }
 `;
 
-const _Circle = styled.div`
+const _Circle = styled.div<{ authorityColor: AuthorityColorType }>`
   width: 4px;
   height: 4px;
-  background-color: ${theme.color.orange100};
+  background-color: ${({ authorityColor }) => theme.color[`${authorityColor}100`]};
   border-radius: 50px;
 `;

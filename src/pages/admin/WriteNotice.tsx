@@ -43,7 +43,7 @@ const WriteNotice = () => {
               label="예비 신입생 안내"
               name="type"
               value="junier"
-              isChecked={valueType.type === 'junier'}
+              checked={valueType.type === 'junier'}
               onClick={setValueType}
             />
             <Radio
@@ -51,7 +51,7 @@ const WriteNotice = () => {
               label="입학 공지사항"
               name="type"
               value="entry"
-              isChecked={valueType.type === 'entry'}
+              checked={valueType.type === 'entry'}
               onClick={setValueType}
             />
           </_RadioWrapper>
@@ -61,7 +61,7 @@ const WriteNotice = () => {
             label="본문"
             width="100%"
             placeholder="내용을 입력해주세요"
-            limit={600}
+            maxLength={600}
             value={value}
             onChange={setValueType}
             margin={['top', 20]}

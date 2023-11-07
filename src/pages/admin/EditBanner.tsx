@@ -21,8 +21,8 @@ const EditBannerPage = () => {
             </Button>
           </div>
         </_Title>
-        <EditBanner index={1} banner={BannerImg} />
-        <EditBanner index={2} banner={BannerImg} />
+        {/* <EditBanner index={1} banner={BannerImg} />
+        <EditBanner index={2} banner={BannerImg} /> */}
       </_Wrapper>
     </_Container>
   );
