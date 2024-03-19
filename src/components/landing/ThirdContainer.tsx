@@ -30,7 +30,7 @@ const Third = () => {
 
 const _Wrapper = styled.div`
   width: 100%;
-  height: 1080px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 10px;
