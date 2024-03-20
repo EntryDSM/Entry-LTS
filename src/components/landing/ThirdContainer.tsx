@@ -51,11 +51,11 @@ const _Text = styled.div`
 `;
 
 const _GraphContainer = styled.div`
-  width: 55%;
+  width: 1040px;
 `;
 
 const _AwardsContainer = styled.div`
-  width: 55%;
+  width: 1040px;
 `;
 
 const Img = styled.img`
