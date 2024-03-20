@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Text } from '@team-entry/design_system';
 import styled from '@emotion/styled';
-import ProjectLogo from '../../assets/ProjectLogo.svg';
+import { keyframes } from '@emotion/react';
 import Right from '../../assets/Right.svg';
 import Left from '../../assets/Left.svg';
 
 import projectImg from '../../assets/projectImg.png';
+import projectImg2 from '../../assets/projectImg2.png';
+import projectImg3 from '../../assets/projectImg3.png';
+import projectImg4 from '../../assets/projectImg4.png';
 
-const images = [projectImg, projectImg, projectImg, projectImg, projectImg];
+const images = [projectImg, projectImg2, projectImg3, projectImg4, projectImg3];
 const titles = ['스퀘어', '먹젠', '뭐넣지', '어쩌고', '저쩌고'];
 const details = [
   '스퀘어어쩌고저쩌고',
@@ -18,17 +21,33 @@ const details = [
 ];
 
 const Second = () => {
-  const [current, setCurrent] = useState(0); // Move state initialization inside the functional component
+  const [direction, setDirection] = useState('');
+  const [current, setCurrent] = useState(0);
 
   const handlePrev = () => {
+    setDirection('Left');
     const prevIndex = (current - 1 + images.length) % images.length;
     setCurrent(prevIndex);
   };
 
   const handleNext = () => {
+    setDirection('Right');
     const nextIndex = (current + 1) % images.length;
     setCurrent(nextIndex);
   };
+
+  const slideAnimation = keyframes`
+    0% {
+      transform: translateX(${direction === 'Left' ? '-100%' : '100%'});
+    }
+    100% {
+      transform: translateX(0);
+    }
+  `;
+
+  const SlideImage = styled(Image)`
+    animation: ${slideAnimation} 0.5s ease-in-out;
+  `;
 
   return (
     <>
@@ -44,7 +63,7 @@ const Second = () => {
           </Text>
         </_TextContainer>
         <TestBox>
-          <_ImgCard hidden>
+          {/* <_ImgCard hidden>
             <_ImgTitleBox>
               <_Logo src={images[current]} />
               {titles[current]}
@@ -52,12 +71,12 @@ const Second = () => {
             <Text color="realWhite" size="title1">
               {details[current]}
             </Text>
-          </_ImgCard>
-          <Image src={images[(current + 3) % 5]} />
-          <Image src={images[(current + 4) % 5]} />
-          <Image src={images[current]} />
-          <Image src={images[(current + 1) % 5]} />
-          <Image src={images[(current + 2) % 5]} />
+          </_ImgCard> */}
+          <SlideImage src={images[(current + 3) % 5]} />
+          <SlideImage src={images[(current + 4) % 5]} />
+          <SlideImage src={images[current]} />
+          <SlideImage src={images[(current + 1) % 5]} />
+          <SlideImage src={images[(current + 2) % 5]} />
           <_LeftArrowBox onClick={handlePrev}>
             <_Arrow src={Left} />
           </_LeftArrowBox>
@@ -77,16 +96,20 @@ const TestBox = styled.div`
   position: relative;
   justify-content: center;
   gap: 24px;
+  overflow: hidden;
 `;
 
 const Image = styled.img`
   height: 320px;
   width: 580px;
-  object-fit: fill;
+  object-fit: cover;
   border-radius: 8px;
+  transition-delay: 0.5s;
+  transition-duration: 2s;
   &:hover {
     background-color: rgba(0, 0, 0, 0.5);
   }
+  border: 1px solid #e6e6e6;
 `;
 
 const _Wrapper = styled.div`
