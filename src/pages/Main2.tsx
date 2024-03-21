@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Button, Text } from '@team-entry/design_system';
 import MainBgImg from '@/assets/MainBgImg.png';
 import Schedule from '@/components/Main2/Schedule';
+import Faq from '@/components/Main/Faq';
 
 const Main2 = () => {
   return (
@@ -30,6 +31,9 @@ const Main2 = () => {
           <Schedule />
         </_TopContainer>
       </_TopContainerWrapper>
+      <_FaqWrapper>
+        <Faq />
+      </_FaqWrapper>
     </_Wrapper>
   );
 };
@@ -65,4 +69,11 @@ const _Line = styled.div`
   background-color: white;
   margin-top: 70px;
   margin-bottom: 90px;
+`;
+
+const _FaqWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
