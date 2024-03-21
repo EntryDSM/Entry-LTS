@@ -5,6 +5,7 @@ import CustomerDetailPage from './pages/CustomerDetail';
 import GradePage from './pages/GradePage';
 import GradeProgramPage from './pages/GradeProgramPage';
 import Main from './pages/Main';
+import Main2 from './pages/Main2';
 import MyPage from './pages/MyPage';
 import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
@@ -22,7 +23,7 @@ const Router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Main />,
+        element: <Main2 />,
       },
       {
         path: 'notice',
