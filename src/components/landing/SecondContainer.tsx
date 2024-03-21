@@ -45,14 +45,29 @@ const Second = () => {
     }
   `;
 
-  const SlideImage = styled.img`
+  const _ImgCard = styled.div`
+    background-color: transparent;
+    transition: all 0.5s;
     height: 320px;
     width: 580px;
-    object-fit: cover;
-    border-radius: 8px;
-    border: 1px solid #e6e6e6;
     animation: ${slideAnimation} 0.5s ease-in-out;
   `;
+
+  const ImageCard = ({ arrNum }) => {
+    return (
+      <_ImgCard style={{ backgroundImage: `url(${images[arrNum]})` }}>
+        <_ImageBox>
+          <_ImgTitleBox>
+            <_Logo src={images[arrNum]} />
+            {titles[arrNum]}
+          </_ImgTitleBox>
+          <Text color="realWhite" size="title1">
+            {details[arrNum]}
+          </Text>
+        </_ImageBox>
+      </_ImgCard>
+    );
+  };
 
   return (
     <>
@@ -66,23 +81,14 @@ const Second = () => {
             학생 모두가 동아리 활동을 하며 함께 성장하고, 자체적으로
             <br /> 서비스 개발과 운영을 진행하며 실무 경험을 쌓아갑니다.
           </Text>
-          <_ImgCard />
         </_TextContainer>
         <ImageSlider>
-          {/* <_ImgCard hidden>
-            <_ImgTitleBox>
-              <_Logo src={images[current]} />
-              {titles[current]}
-            </_ImgTitleBox>
-            <Text color="realWhite" size="title1">
-              {details[current]}
-            </Text>
-          </_ImgCard> */}
-          <SlideImage src={images[(current + 3) % 5]} />
-          <SlideImage src={images[(current + 4) % 5]} />
-          <SlideImage src={images[current]} />
-          <SlideImage src={images[(current + 1) % 5]} />
-          <SlideImage src={images[(current + 2) % 5]} />
+          <ImageCard arrNum={(current + 3) % 5} />
+          <ImageCard arrNum={(current + 4) % 5} />
+          <ImageCard arrNum={current} />
+          <ImageCard arrNum={(current + 1) % 5} />
+          <ImageCard arrNum={(current + 2) % 5} />
+
           <_LeftArrowBox onClick={handlePrev}>
             <_Arrow src={Left} />
           </_LeftArrowBox>
@@ -179,30 +185,6 @@ const _Arrow = styled.img`
   height: 40px;
 `;
 
-const _ImgCard = styled.div`
-  flex-direction: column;
-  gap: 20px;
-  padding: 48px;
-  display: flex;
-  border-radius: 8px;
-  position: absolute;
-  justify-self: center;
-  transition: ease-in-out;
-  background-color: transparent;
-  transition: all 0.5s;
-  height: 320px;
-  width: 580px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-    & > * {
-      visibility: visible;
-    }
-  }
-  & > * {
-    visibility: hidden;
-  }
-`;
-
 const _ImgTitleBox = styled.div`
   display: flex;
   gap: 16px;
@@ -216,6 +198,27 @@ const _Logo = styled.img`
   width: 36px;
   height: 36px;
   border-radius: 8px;
+`;
+
+const _ImageBox = styled.div`
+  display: flex;
+  width: 580px;
+  height: 320px;
+  flex-direction: column;
+  gap: 20px;
+  padding: 48px;
+  border-radius: 8px;
+  transition: ease-in-out;
+  transition-duration: 0.2s;
+  & > * {
+    visibility: hidden;
+  }
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    & > * {
+      visibility: visible;
+    }
+  }
 `;
 
 export default Second;
