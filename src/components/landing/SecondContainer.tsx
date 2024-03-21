@@ -120,6 +120,7 @@ const _Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding: 64px 0;
 `;
 
 const _TextContainer = styled.div`
