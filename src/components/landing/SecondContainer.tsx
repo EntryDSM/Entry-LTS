@@ -45,7 +45,12 @@ const Second = () => {
     }
   `;
 
-  const SlideImage = styled(Image)`
+  const SlideImage = styled.img`
+    height: 320px;
+    width: 580px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e6e6e6;
     animation: ${slideAnimation} 0.5s ease-in-out;
   `;
 
@@ -61,8 +66,9 @@ const Second = () => {
             학생 모두가 동아리 활동을 하며 함께 성장하고, 자체적으로
             <br /> 서비스 개발과 운영을 진행하며 실무 경험을 쌓아갑니다.
           </Text>
+          <_ImgCard />
         </_TextContainer>
-        <TestBox>
+        <ImageSlider>
           {/* <_ImgCard hidden>
             <_ImgTitleBox>
               <_Logo src={images[current]} />
@@ -83,13 +89,13 @@ const Second = () => {
           <_RightArrowBox onClick={handleNext}>
             <_Arrow src={Right} />
           </_RightArrowBox>
-        </TestBox>
+        </ImageSlider>
       </_Wrapper>
     </>
   );
 };
 
-const TestBox = styled.div`
+const ImageSlider = styled.div`
   height: 320px;
   width: 100vw;
   display: flex;
@@ -97,19 +103,6 @@ const TestBox = styled.div`
   justify-content: center;
   gap: 24px;
   overflow: hidden;
-`;
-
-const Image = styled.img`
-  height: 320px;
-  width: 580px;
-  object-fit: cover;
-  border-radius: 8px;
-  transition-delay: 0.5s;
-  transition-duration: 2s;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  border: 1px solid #e6e6e6;
 `;
 
 const _Wrapper = styled.div`

@@ -12,7 +12,7 @@ const Third = () => {
             지금도 멈추지 않고
           </Text>
           <_Text>꿈을 이루어가고 있어요</_Text>
-          <Text color size="title2" align="center">
+          <Text color="black800" size="title2" align="center">
             대덕소프트웨어마이스터고등학교 학생들은 꾸준히 노력해 높은 취업률을 달성하고, <br />
             여러 대회에서 입상해나가고 있습니다
           </Text>
