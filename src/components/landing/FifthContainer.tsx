@@ -56,6 +56,11 @@ const _Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(180deg, #595959 0%, #222 100%);
+  overflow-x: hidden;
+  div {
+    width: 1240px;
+    max-width: 90vw;
+  }
 `;
 
 const _TitleContainer = styled.div`
@@ -86,9 +91,12 @@ const _Description = styled.div`
 const _BlogContainer = styled.div`
   width: 1240px;
   height: 400px;
+  overflow: hidden;
+  flex-wrap: wrap;
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
+  row-gap: 100px;
   padding: 48px 90px 52px 90px;
   background-color: ${theme.color.realWhite};
   border-radius: 6px;
@@ -116,4 +124,6 @@ const _Blog = styled(Link)`
 
 const _ButtonContainer = styled.div`
   margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
 `;
