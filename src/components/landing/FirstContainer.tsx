@@ -50,6 +50,9 @@ const _TitleBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 64px;
+  @media (max-height: 500px) {
+    gap: 24px;
+  }
 `;
 
 const _Title = styled.p`
@@ -60,7 +63,13 @@ const _Title = styled.p`
   @media (max-width: 800px) {
     font-size: 48px;
   }
+  @media (max-height: 800px) {
+    font-size: 48px;
+  }
   @media (max-width: 370px) {
+    font-size: 36px;
+  }
+  @media (max-height: 370px) {
     font-size: 36px;
   }
 `;
@@ -83,6 +92,10 @@ const _Button = styled.button`
     padding: 16px 48px;
     font-size: 20px;
   }
+  @media (max-height: 800px) {
+    padding: 16px 48px;
+    font-size: 20px;
+  }
 `;
 
 const Scroll = styled.img`
@@ -92,6 +105,10 @@ const Scroll = styled.img`
   animation: bounce 1s infinite;
 
   @media (max-width: 800px) {
+    width: 48px;
+  }
+
+  @media (max-height: 800px) {
     width: 48px;
   }
 
