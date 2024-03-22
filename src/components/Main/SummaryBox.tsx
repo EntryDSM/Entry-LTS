@@ -35,12 +35,13 @@ const SummaryBox = ({ title, content, idx }: SummaryBoxProps) => {
 
 const _FAQContainer = styled.div<T_Details>`
   background-color: ${({ isOpen }) => (isOpen ? '#fff1e9' : '#f8f8f8')};
-  color: #ff5f00;
+  color: ${({ isOpen }) => (isOpen ? '#ff5f00' : '#969696')};
   font-size: 28px;
   font-weight: 800;
   display: flex;
   gap: 24px;
   padding: 24px 32px;
+  border-radius: 12px;
   align-items: ${({ isOpen }) => (isOpen ? 'flex-start' : 'center')};
   & img {
     transform: ${({ isOpen }) => (isOpen ? '' : 'rotate(90deg)')};
