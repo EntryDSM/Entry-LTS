@@ -3,6 +3,7 @@ import { Button, Text } from '@team-entry/design_system';
 import MainBgImg from '@/assets/MainBgImg.png';
 import Schedule from '@/components/Main2/Schedule';
 import Faq from '@/components/Main/Faq';
+import ApplyandNotice from '@/components/Main/ApplyandNotice';
 
 const Main2 = () => {
   return (
@@ -32,7 +33,10 @@ const Main2 = () => {
         </_TopContainer>
       </_TopContainerWrapper>
       <_FaqWrapper>
-        <Faq />
+        <_MainContainer>
+          <ApplyandNotice />
+          <Faq />
+        </_MainContainer>
       </_FaqWrapper>
     </_Wrapper>
   );
@@ -74,6 +78,14 @@ const _Line = styled.div`
 const _FaqWrapper = styled.div`
   width: 100%;
   display: flex;
+  padding: 120px 32px;
+  justify-content: center;
+`;
+
+const _MainContainer = styled.div`
+  display: flex;
+  gap: 120px;
+  width: 100%;
+  max-width: 1200px;
   flex-direction: column;
-  align-items: center;
 `;
