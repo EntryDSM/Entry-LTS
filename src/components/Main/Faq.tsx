@@ -44,7 +44,8 @@ const Faq = () => {
 };
 
 const _Wrapper = styled.div`
-  width: 1200px;
+  max-width: 1200px;
+  width: 100%;
   position: relative;
   margin-top: 120px;
   display: flex;
