@@ -10,26 +10,28 @@ const Main2 = () => {
     <_Wrapper>
       <_TopContainerWrapper>
         <_TopContainer>
-          <_Title>
-            대덕 소프트웨어 마이스터고는 지금,
-            <br />
-            IT 업계를 선도할 다음 세대 인재를 모집하고 있어요
-          </_Title>
-          <_Line />
-          <Text size={'header1'} color={'realWhite'}>
-            지금은 원서제출 기간입니다
-          </Text>
-          <Button
-            color="orange"
-            isBig={true}
-            onClick={() => {
-              console.log('click!!');
-            }}
-            margin={['top', 20]}
-          >
-            지원하기
-          </Button>
-          <Schedule />
+          <div>
+            <_Title>
+              대덕 소프트웨어 마이스터고는 지금,
+              <br />
+              IT 업계를 선도할 다음 세대 인재를 모집하고 있어요
+            </_Title>
+            <_Line />
+            <Text size={'header1'} color={'realWhite'}>
+              지금은 원서제출 기간입니다
+            </Text>
+            <Button
+              color="orange"
+              isBig={true}
+              onClick={() => {
+                console.log('click!!');
+              }}
+              margin={['top', 20]}
+            >
+              지원하기
+            </Button>
+            <Schedule />
+          </div>
         </_TopContainer>
       </_TopContainerWrapper>
       <_FaqWrapper>
@@ -57,8 +59,17 @@ const _TopContainerWrapper = styled.div`
 const _TopContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 200px 17.7% 0 17.7%;
+  padding-top: 200px;
   background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  > div {
+    width: 94%;
+    max-width: 1180px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 
 const _Title = styled.div`

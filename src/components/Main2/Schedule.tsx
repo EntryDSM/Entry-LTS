@@ -45,11 +45,13 @@ export default Schedule;
 
 const _Wrapper = styled.div`
   width: 1180px;
+  max-width: 94%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   margin-top: 148px;
+  align-self: center;
 `;
 
 const _ProgressProvider = styled.div`
@@ -61,8 +63,9 @@ const _ProgressProvider = styled.div`
 const _TextProvider = styled.div`
   display: flex;
   justify-content: center;
-  gap: 256px;
+  gap: 13.3vw;
   div {
+    flex: none;
     width: 104px;
     color: white;
     text-align: center;
@@ -85,7 +88,7 @@ const _ScheduleCircle = styled.div`
 `;
 
 const _ScheduleLine = styled.div`
-  width: 300px;
+  width: 15.625vw;
   height: 1px;
   background-color: ${theme.color.orange800};
   margin: 0 20px;
