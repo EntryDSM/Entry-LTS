@@ -87,7 +87,7 @@ const Fourth = () => {
 
 const _Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -124,6 +124,7 @@ const _MOULogo = styled.div<Color>`
   flex-basis: 320px;
   flex-shrink: 0;
   background-color: ${({ backgroundColor }) => backgroundColor};
+  height: 175px;
 `;
 
 export default Fourth;
