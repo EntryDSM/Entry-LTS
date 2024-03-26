@@ -4,20 +4,35 @@ import Notification from '../../assets/Notification.svg';
 import Download2 from '../../assets/Download2.svg';
 import ArrowRight from '../../assets/ArrowRight.svg';
 import New from '../../assets/New.svg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명회', '4차 입학설명회'];
 
 const ApplyandNotice = () => {
-  const [nowDate, setNowDate] = useState();
+  const [nowDate, setNowDate] = useState(new Date());
   const [currentLoca, setCurrentLoca] = useState(0);
-  const now = new Date();
-  const SessionBox = ({ sessionName, current }) => {
+  const [latestNoticeIndex, setLatestNoticeIndex] = useState(null);
+
+  const dates = ['2023-07-24', '2024-03-21', '2024-03-26', '2024-07-26'];
+
+  useEffect(() => {
+    let latestIndex = null;
+    const today = new Date();
+    for (let i = 0; i < dates.length; i++) {
+      const noticeDate = new Date(dates[i]);
+      if (noticeDate < today) {
+        latestIndex = i;
+      } else {
+      }
+    }
+    setLatestNoticeIndex(latestIndex);
+  }, [nowDate]);
+  const SessionBox = ({ sessionName, current, date }) => {
     return (
       <_DateBox>
         <_TextBox>
           <_SessionName>{sessionName}</_SessionName>
-          <_Date>2024.03.21</_Date>
+          <_Date>{date}</_Date>
         </_TextBox>
         {current ? (
           <_ApplyButton>신청하기</_ApplyButton>
@@ -28,7 +43,6 @@ const ApplyandNotice = () => {
         )}
       </_DateBox>
     );
-    3;
   };
   const NoticeBox = () => {
     return (
@@ -44,15 +58,6 @@ const ApplyandNotice = () => {
       </_Notice>
     );
   };
-
-  const _LineBox = styled.div`
-    justify-content: center;
-    display: flex;
-    padding: 0 24px;
-    height: 100%;
-    top: calc(48px + ${currentLoca});
-  `;
-
   return (
     <_Wrapper>
       <_ApplyContainer>
@@ -60,11 +65,11 @@ const ApplyandNotice = () => {
         <_ApplyBox>
           <_LineBox>
             <_Line />
-            <_PointBox />
+            <_Point style={{ top: latestNoticeIndex !== null ? 48 + (latestNoticeIndex + 1) * 104 : 48 }} />
           </_LineBox>
           <_DateContainer>
-            {name.map((i) => (
-              <SessionBox sessionName={i} current={nowDate} />
+            {name.map((i, j) => (
+              <SessionBox date={dates[j]} sessionName={i} current={nowDate} />
             ))}
           </_DateContainer>
         </_ApplyBox>
@@ -94,7 +99,15 @@ const ApplyandNotice = () => {
 
 export default ApplyandNotice;
 
-const _PointBox = styled.div`
+const _LineBox = styled.div`
+  justify-content: center;
+  display: flex;
+  padding: 0 24px;
+  height: 100%;
+  position: relative;
+`;
+
+const _Point = styled.div`
   position: absolute;
   background-color: #ffa26e;
   border-radius: 100%;
@@ -271,6 +284,8 @@ const _ApplyButton = styled.button`
   background-color: #ff7e36;
   font-size: 14px;
   font-weight: 700;
+  color: white;
+  white-space: nowrap;
 `;
 
 const _SessionName = styled.p`
