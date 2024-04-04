@@ -115,25 +115,29 @@ export const _DropdownWrapper = styled.div`
 export const _DropdownMenus = styled.div`
   position: absolute;
   top: 35px;
+  left: -8px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 160px;
+  width: 100px;
   border: 1px solid ${theme.color.black100};
+  padding: 14px 0px;
+  background-color: white;
+  border-radius: 8px;
 `;
 
 export const _DropdownMenu = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
   width: 100%;
   background-color: ${theme.color.realWhite};
-  padding: 18px 0px 10px 20px;
   z-index: 10;
   &:hover {
     background-color: ${theme.color.black200};
   }
+  padding: 10px 15px;
 `;
 
 export const _Line = styled.div`
