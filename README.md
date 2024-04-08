@@ -6,6 +6,9 @@ EntryDSM의 ENTRY-LTS Repository입니다.
 EntryLTS는 대덕소프트웨어마이스터고등학교의 입학 관련 정보를 제공하는 홈페이지입니다. <br />
 성적 산출, 입학 공지사항, Q&A 등의 기능을 포함하고 있으며 합격 여부도 홈페이지를 통해 확인할 수 있습니다. <br />
 
+## 기술 스택
+`React`, `typescript`,`@tanstack/react-query`, `zustand`, `@team-entry/design-system`, `@emotion`, `axios`, `webpack`, 
+
 ## 기능
 
 ### Q&A
