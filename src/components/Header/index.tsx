@@ -39,9 +39,10 @@ const headerList: IHeaderList[] = [
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '문의사항', url: '/customer' },
+  { name: '원서접수', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: 'About', url: '/about' },
+  { name: '문의사항', url: '/customer' },
+  { name: '성적산출', url: '/grade' },
 ];
 
 const Header = () => {
