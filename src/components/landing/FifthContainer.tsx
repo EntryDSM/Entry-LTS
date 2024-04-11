@@ -115,10 +115,14 @@ const _Blog = styled(Link)`
   align-items: center;
   gap: 14px;
   cursor: pointer;
+  transition: 0.1s linear;
   > img {
     width: 300px;
     height: 200px;
     border-bottom: 1px solid ${theme.color.black100};
+  }
+  &:hover {
+    transform: translateY(-10px);
   }
 `;
 
