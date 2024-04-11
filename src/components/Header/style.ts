@@ -18,8 +18,7 @@ export const _Wrapper = styled.div`
   top: 0;
   left: 0;
   border-bottom: 1px solid #e6e6e6;
-  transition-property: background-color;
-  transition: 0.5s;
+  transition: background-color 0.5s;
   &:hover {
     background-color: white;
   }
