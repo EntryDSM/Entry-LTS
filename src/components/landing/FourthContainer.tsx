@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import AnimationBox from './AnimationBox';
-import { CSSProperties } from 'react';
 import MouLogoImgs from '@/assets/MouLogoImgs';
 
 const Fourth = () => {
@@ -73,13 +72,8 @@ const _AnimationContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  overflow-x: hidden;
-  height: 526px;
+  overflow: hidden;
 `;
-
-interface Color {
-  backgroundColor: CSSProperties['backgroundColor'];
-}
 
 const _MOULogo = styled.div`
   width: 320px;
