@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import AnimationBox from './AnimationBox';
 import { CSSProperties } from 'react';
+import MouLogoImgs from '@/assets/MouLogoImgs';
 
 const Fourth = () => {
   return (
@@ -20,64 +21,25 @@ const Fourth = () => {
         </_TextContainer>
         <_AnimationContainer>
           <AnimationBox rotate="left">
-            <_MOULogo backgroundColor="red">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="orange">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="yellow">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="green">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="skyblue">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="blue">
-              <h2>로고</h2>
-            </_MOULogo>
+            {MouLogoImgs.map((item, idx) => {
+              if (idx < 6) {
+                return <_MOULogo>{item}</_MOULogo>;
+              }
+            })}
           </AnimationBox>
           <AnimationBox rotate="right">
-            <_MOULogo backgroundColor="red">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="orange">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="yellow">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="green">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="skyblue">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="blue">
-              <h2>로고</h2>
-            </_MOULogo>
+            {MouLogoImgs.map((item, idx) => {
+              if (idx >= 6 && idx < 12) {
+                return <_MOULogo>{item}</_MOULogo>;
+              }
+            })}
           </AnimationBox>
           <AnimationBox rotate="left">
-            <_MOULogo backgroundColor="red">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="orange">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="yellow">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="green">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="skyblue">
-              <h2>로고</h2>
-            </_MOULogo>
-            <_MOULogo backgroundColor="blue">
-              <h2>로고</h2>
-            </_MOULogo>
+            {MouLogoImgs.map((item, idx) => {
+              if (idx >= 12) {
+                return <_MOULogo>{item}</_MOULogo>;
+              }
+            })}
           </AnimationBox>
         </_AnimationContainer>
       </_Wrapper>
@@ -119,11 +81,10 @@ interface Color {
   backgroundColor: CSSProperties['backgroundColor'];
 }
 
-const _MOULogo = styled.div<Color>`
+const _MOULogo = styled.div`
   width: 320px;
   flex-basis: 320px;
   flex-shrink: 0;
-  background-color: ${({ backgroundColor }) => backgroundColor};
   height: 175px;
 `;
 
