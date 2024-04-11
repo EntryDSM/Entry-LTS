@@ -50,11 +50,13 @@ const _Text = styled.div`
 `;
 
 const _GraphContainer = styled.div`
-  width: 1040px;
+  max-width: 1040px;
+  width: 90vw;
 `;
 
 const _AwardsContainer = styled.div`
-  width: 1040px;
+  max-width: 1040px;
+  width: 90vw;
 `;
 
 const Img = styled.img`
