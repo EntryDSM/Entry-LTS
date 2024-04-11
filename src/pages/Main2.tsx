@@ -12,9 +12,9 @@ const Main2 = () => {
         <_TopContainer>
           <div>
             <_Title>
-              대덕 소프트웨어 마이스터고는 지금,
+              대덕소프트웨어마이스터고는 지금,
               <br />
-              IT 업계를 선도할 다음 세대 인재를 모집하고 있어요
+              IT 업계를 선도할 차세대 인재를 모집하고 있어요
             </_Title>
             <_Line />
             <Text size={'header1'} color={'realWhite'}>
@@ -26,12 +26,11 @@ const Main2 = () => {
               onClick={() => {
                 console.log('click!!');
               }}
-              margin={['top', 20]}
             >
               지원하기
             </Button>
-            <Schedule />
           </div>
+          <Schedule />
         </_TopContainer>
       </_TopContainerWrapper>
       <_FaqWrapper>
@@ -59,15 +58,20 @@ const _TopContainerWrapper = styled.div`
 const _TopContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding-top: 200px;
+  padding-top: 70px;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  > div {
+  align-items: center;
+  gap: 166px;
+  > div:nth-child(1) {
     width: 94%;
     max-width: 1180px;
+    gap: 70px;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     align-items: start;
   }
 `;
@@ -82,8 +86,6 @@ const _Line = styled.div`
   width: 400px;
   height: 1px;
   background-color: white;
-  margin-top: 70px;
-  margin-bottom: 90px;
 `;
 
 const _FaqWrapper = styled.div`

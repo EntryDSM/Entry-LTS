@@ -50,7 +50,6 @@ const _Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  margin-top: 148px;
   align-self: center;
 `;
 
