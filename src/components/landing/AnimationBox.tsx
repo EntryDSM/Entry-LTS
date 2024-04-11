@@ -71,12 +71,12 @@ const copyRightRolling = keyframes`
 
 const RollingContainer1 = styled.div<AnimationBoxProps>`
   display: flex;
-  animation: ${({ rotate }) => (rotate === 'left' ? leftRolling : rightRolling)} linear 15s infinite;
+  animation: ${({ rotate }) => (rotate === 'left' ? leftRolling : rightRolling)} linear 20s infinite;
 `;
 
 const RollingContainer2 = styled.div<AnimationBoxProps>`
   display: flex;
-  animation: ${({ rotate }) => (rotate === 'left' ? copyLeftRolling : copyRightRolling)} linear 15s infinite;
+  animation: ${({ rotate }) => (rotate === 'left' ? copyLeftRolling : copyRightRolling)} linear 20s infinite;
 `;
 
 export default AnimationBox;
