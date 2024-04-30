@@ -13,7 +13,7 @@ const ApplyandNotice = () => {
   const [currentLoca, setCurrentLoca] = useState(0);
   const [latestNoticeIndex, setLatestNoticeIndex] = useState(0);
 
-  const dates = ['2024.04.29', '2024.04.30', '2024.05.01', '2024.05.02'];
+  const dates = ['2024.04.26', '2024.04.27', '2024.04.29', '2024.05.01'];
 
   useEffect(() => {
     let latestIndex = null;
@@ -156,17 +156,6 @@ const _NoticeTextBox = styled.div`
   justify-content: center;
 `;
 
-const _Notice = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 16px;
-  padding: 20px;
-  align-items: center;
-  border-radius: 8px;
-  border: 2px solid #f8f8f8;
-  cursor: pointer;
-`;
-
 const _MainNotificationIcon = styled.div`
   border-radius: 100%;
   display: flex;
@@ -294,6 +283,10 @@ const _VideoButton = styled.button`
   justify-content: center;
   background-color: #fff1e8;
   border-radius: 100%;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffdfcc;
+  }
 `;
 
 const _ApplyButton = styled.button`
@@ -323,4 +316,22 @@ const _Date = styled.p`
 
 const _Img = styled.img``;
 
-const _Img2 = styled.img``;
+const _Img2 = styled.img`
+  transition: transform 0.3s ease-in-out;
+`;
+
+const _Notice = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  padding: 20px;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid #f8f8f8;
+  cursor: pointer;
+  &:hover {
+    & > *:last-child {
+      transform: translateX(8px);
+    }
+  }
+`;
