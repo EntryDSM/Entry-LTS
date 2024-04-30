@@ -12,9 +12,9 @@ const Main2 = () => {
         <_TopContainer>
           <div>
             <_Title>
-              대덕소프트웨어마이스터고는 지금,
+              <span style={{ color: '#FF9900' }}>대덕소프트웨어마이스터고</span>는 지금,
               <br />
-              IT 업계를 선도할 차세대 인재를 모집하고 있어요
+              IT 업계를 선도할 미래 인재를 모집하고 있어요
             </_Title>
             <_Line />
             <Text size={'header1'} color={'realWhite'}>
