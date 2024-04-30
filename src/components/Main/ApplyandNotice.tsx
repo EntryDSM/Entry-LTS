@@ -11,9 +11,9 @@ const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명
 const ApplyandNotice = () => {
   const [nowDate, setNowDate] = useState(new Date());
   const [currentLoca, setCurrentLoca] = useState(0);
-  const [latestNoticeIndex, setLatestNoticeIndex] = useState(null);
+  const [latestNoticeIndex, setLatestNoticeIndex] = useState(0);
 
-  const dates = ['2023-07-24', '2024-03-21', '2024-03-26', '2024-07-26'];
+  const dates = ['2024.04.29', '2024.04.30', '2024.05.01', '2024.05.02'];
 
   useEffect(() => {
     let latestIndex = null;
@@ -27,19 +27,29 @@ const ApplyandNotice = () => {
     }
     setLatestNoticeIndex(latestIndex);
   }, [nowDate]);
-  const SessionBox = ({ sessionName, current, date }) => {
+
+  interface PropsType {
+    sessionName?: string;
+    current?: any;
+    date?: string;
+    even?: boolean;
+  }
+
+  const SessionBox = ({ sessionName, current, date }: PropsType) => {
     return (
-      <_DateBox>
+      <_DateBox style={{ backgroundColor: `${latestNoticeIndex + 1 == current ? '#FFF2EA' : '#f8f8f8'}` }}>
         <_TextBox>
           <_SessionName>{sessionName}</_SessionName>
-          <_Date>{date}</_Date>
+          <_Date style={{ color: `${latestNoticeIndex + 1 == current ? '#FF9154' : '#969696'}` }}>{date}</_Date>
         </_TextBox>
-        {current ? (
+        {latestNoticeIndex + 1 == current ? (
           <_ApplyButton>신청하기</_ApplyButton>
-        ) : (
+        ) : latestNoticeIndex + 1 > current ? (
           <_VideoButton>
             <_Img src={Youtube} />
           </_VideoButton>
+        ) : (
+          <></>
         )}
       </_DateBox>
     );
@@ -54,7 +64,7 @@ const ApplyandNotice = () => {
           </_TitleBox>
           <_NoticeDate>2024.03.21</_NoticeDate>
         </_NoticeTextBox>
-        <_Img src={ArrowRight} />
+        <_Img2 src={ArrowRight} />
       </_Notice>
     );
   };
@@ -65,11 +75,15 @@ const ApplyandNotice = () => {
         <_ApplyBox>
           <_LineBox>
             <_Line />
-            <_Point style={{ top: latestNoticeIndex !== null ? 48 + (latestNoticeIndex + 1) * 104 : 48 }} />
+            <_Point
+              style={{
+                top: latestNoticeIndex !== null && latestNoticeIndex < 3 ? 48 + (latestNoticeIndex + 1) * 104 : 48,
+              }}
+            />
           </_LineBox>
           <_DateContainer>
             {name.map((i, j) => (
-              <SessionBox date={dates[j]} sessionName={i} current={nowDate} />
+              <SessionBox key={j} date={dates[j]} sessionName={i} current={j} even={true} />
             ))}
           </_DateContainer>
         </_ApplyBox>
@@ -150,6 +164,7 @@ const _Notice = styled.div`
   align-items: center;
   border-radius: 8px;
   border: 2px solid #f8f8f8;
+  cursor: pointer;
 `;
 
 const _MainNotificationIcon = styled.div`
@@ -172,6 +187,7 @@ const _MainNoticeBox = styled.div`
   display: flex;
   border-radius: 8px;
   background-color: #fff2ea;
+  cursor: pointer;
 `;
 
 const _Wrapper = styled.div`
@@ -230,6 +246,10 @@ const _PageMoveButton = styled.button`
   font-weight: 600;
   font-size: 16px;
   color: #ff7326;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffdfcc;
+  }
 `;
 
 const _ApplyBox = styled.div`
@@ -257,7 +277,6 @@ const _DateBox = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 24px;
-  background-color: #f8f8f8;
   gap: 16px;
 `;
 
@@ -286,6 +305,10 @@ const _ApplyButton = styled.button`
   font-weight: 700;
   color: white;
   white-space: nowrap;
+  cursor: pointer;
+  &:hover {
+    background-color: #ff6c1a;
+  }
 `;
 
 const _SessionName = styled.p`
@@ -296,7 +319,8 @@ const _SessionName = styled.p`
 const _Date = styled.p`
   font-size: 16px;
   font-weight: 500;
-  color: #969696;
 `;
 
 const _Img = styled.img``;
+
+const _Img2 = styled.img``;
