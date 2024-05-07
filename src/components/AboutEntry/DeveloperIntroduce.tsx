@@ -19,47 +19,47 @@ const DeveloperIntroduce = () => {
   );
 };
 
+interface MouseEventType {
+  mouseOver: boolean;
+  mouseLeave: boolean;
+}
+
 const Card = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<MouseEventType>({ mouseOver: false, mouseLeave: false });
+
   return (
     <CardWrapper
       onMouseOver={() => {
-        setIsOpen(true);
+        setIsOpen({ mouseLeave: false, mouseOver: true });
       }}
       onMouseLeave={() => {
-        setIsOpen(false);
+        setIsOpen({ mouseLeave: true, mouseOver: false });
       }}
     >
       <span>1학년</span>
-      <BigStar isOpen={isOpen}>
-        <BigStarAnimationBox isOpen={isOpen}>
+      <BigStar mouseOver={isOpen.mouseOver} mouseLeave={isOpen.mouseLeave}>
+        <BigStarAnimationBox mouseOver={isOpen.mouseOver} mouseLeave={isOpen.mouseLeave}>
           <Star size={48} />
         </BigStarAnimationBox>
       </BigStar>
       <InfoContainer>
-        <DefaultInfo isOpen={isOpen}>
+        <DefaultInfo mouseOver={isOpen.mouseOver} mouseLeave={isOpen.mouseLeave}>
           <p>Beakend</p>
           <div>
             <Name>이태영</Name>
-            {isOpen && (
-              <StarAnimationBox>
-                <Star size={25}></Star>
-              </StarAnimationBox>
-            )}
+            <StarAnimationBox mouseOver={isOpen.mouseOver} mouseLeave={isOpen.mouseLeave}>
+              <Star size={25}></Star>
+            </StarAnimationBox>
           </div>
         </DefaultInfo>
-        {isOpen && (
-          <>
-            <About>
-              <p>About</p>
-              <span>쉽지 않은 사용자 경험을 중요시하는 배젠드 데브오브즈 햄스터입니다.</span>
-            </About>
-            <Link>
-              <a href="https://github.com/wlalsplus100">@hamster</a>
-              <Github />
-            </Link>
-          </>
-        )}
+        <About mouseLeave={isOpen.mouseLeave} mouseOver={isOpen.mouseOver}>
+          <p>About</p>
+          <span>쉽지 않은 사용자 경험을 중요시하는 배젠드 데브오브즈 햄스터입니다.</span>
+        </About>
+        <Link mouseLeave={isOpen.mouseLeave} mouseOver={isOpen.mouseOver}>
+          <a href="https://github.com/wlalsplus100">@hamster</a>
+          <Github />
+        </Link>
       </InfoContainer>
     </CardWrapper>
   );
@@ -67,16 +67,21 @@ const Card = () => {
 
 export default DeveloperIntroduce;
 
-interface IsOpen {
-  isOpen: boolean;
-}
-
 const smallStarAnimation = keyframes`
     0% {
         transform: scale(0);
     }
     100% {
         transform: scale(100%);
+    }
+`;
+
+const smallStarReverseAnimation = keyframes`
+    0% {
+        transform: scale(100%);
+    }
+    100% {
+        transform: scale(0);
     }
 `;
 
@@ -89,6 +94,15 @@ const defaultInfoPullUp = keyframes`
     }
 `;
 
+const defaultInfoPullUpReverse = keyframes`
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(0, 100%)
+    }
+`;
+
 const opacityAnimation = keyframes`
     0% {
         opacity: 0;
@@ -98,12 +112,30 @@ const opacityAnimation = keyframes`
     }
 `;
 
+const opacityReverseAnimation = keyframes`
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+`;
+
 const bigStarAnimation = keyframes`
     0% {
         transform: rotate(45deg);
     } 
     100% {
-        transform: rotate(-44deg)
+        transform: rotate(180deg);
+    }
+`;
+
+const bigStarReverseAnimation = keyframes`
+    0% {
+        transform: rotate(180deg);
+    } 
+    100% {
+        transform: rotate(45deg);
     }
 `;
 
@@ -112,7 +144,16 @@ const bigStarContainerAnimation = keyframes`
       transform: translate(0, 0);
     }
     100% {
-        transform: translate(100px, -100px);
+        transform: translate(100px, -80px);
+    }
+`;
+
+const bigStarContainerReverseAnimation = keyframes`
+    0% {
+      transform: translate(100px, -80px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 `;
 
@@ -181,11 +222,11 @@ const InfoContainer = styled.div`
   gap: 24px;
 `;
 
-const DefaultInfo = styled.div<IsOpen>`
+const DefaultInfo = styled.div<MouseEventType>`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  animation: ${({ isOpen }) => (isOpen ? defaultInfoPullUp : '')} 300ms linear;
+  animation: ${({ mouseOver }) => (mouseOver ? defaultInfoPullUp : defaultInfoPullUpReverse)} 300ms linear forwards;
 
   & > p {
     font-weight: bold;
@@ -205,7 +246,7 @@ const Name = styled.p`
   font-weight: bold;
 `;
 
-const About = styled.span`
+const About = styled.span<MouseEventType>`
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -219,17 +260,35 @@ const About = styled.span`
     font-size: 14px;
     word-break: keep-all;
   }
-  animation: ${opacityAnimation} 300ms 300ms forwards linear;
+  animation: ${({ mouseOver, mouseLeave }) =>
+    mouseOver
+      ? css`
+          ${opacityAnimation} 300ms 300ms forwards
+        `
+      : mouseLeave
+      ? css`
+          ${opacityReverseAnimation} 300ms forwards
+        `
+      : ''};
 `;
 
-const Link = styled.div`
+const Link = styled.div<MouseEventType>`
   display: flex;
   justify-content: flex-end;
   align-items: center;
   gap: 8px;
   opacity: 0;
 
-  animation: ${opacityAnimation} 200ms 600ms forwards linear;
+  animation: ${({ mouseOver, mouseLeave }) =>
+    mouseOver
+      ? css`
+          ${opacityAnimation} 200ms 600ms forwards
+        `
+      : mouseLeave
+      ? css`
+          ${opacityReverseAnimation} 200ms forwards
+        `
+      : ''};
 
   & > a {
     font-size: 14px;
@@ -237,12 +296,21 @@ const Link = styled.div`
   }
 `;
 
-const StarAnimationBox = styled.div`
+const StarAnimationBox = styled.div<MouseEventType>`
   transform: scale(0);
-  animation: ${smallStarAnimation} 300ms 300ms forwards;
+  animation: ${({ mouseOver, mouseLeave }) =>
+    mouseOver
+      ? css`
+          ${smallStarAnimation} 300ms 300ms forwards
+        `
+      : mouseLeave
+      ? css`
+          ${smallStarReverseAnimation} 300ms forwards
+        `
+      : ''};
 `;
 
-const BigStar = styled.div<IsOpen>`
+const BigStar = styled.div<MouseEventType>`
   position: absolute;
   width: 48px;
   height: 48px;
@@ -250,24 +318,28 @@ const BigStar = styled.div<IsOpen>`
   display: flex;
   justify-content: center;
   align-items: center;
-  ${({ isOpen }) =>
-    isOpen
+  animation: ${({ mouseOver, mouseLeave }) =>
+    mouseOver
       ? css`
-          animation: ${bigStarContainerAnimation} 600ms forwards;
+          ${bigStarContainerAnimation} 300ms forwards ease
         `
-      : css`
-          animation: ${bigStarContainerAnimation} 300ms reverse backwards;
-        `};
+      : mouseLeave
+      ? css`
+          ${bigStarContainerReverseAnimation} 300ms forwards ease
+        `
+      : ''};
 `;
 
-const BigStarAnimationBox = styled.div<IsOpen>`
+const BigStarAnimationBox = styled.div<MouseEventType>`
   transform: rotate(45deg);
-  ${({ isOpen }) =>
-    isOpen
+  animation: ${({ mouseOver, mouseLeave }) =>
+    mouseOver
       ? css`
-          animation: ${bigStarAnimation} 300ms forwards;
+          ${bigStarAnimation} 300ms forwards ease
         `
-      : css`
-          animation: ${bigStarAnimation} 300ms reverse backwards;
-        `};
+      : mouseLeave
+      ? css`
+          ${bigStarReverseAnimation} 300ms forwards ease
+        `
+      : ''};
 `;
