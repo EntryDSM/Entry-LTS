@@ -24,6 +24,7 @@ const Main = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0px 60px;
   }
 `;
 
