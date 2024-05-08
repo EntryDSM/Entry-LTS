@@ -46,6 +46,7 @@ const TextAnimation = keyframes`
 const Wrapper = styled.div`
   background-color: #ff7e36;
   position: relative;
+  height: 100vh;
 
   @media screen and (max-height: 616px) {
     height: 120vh;
