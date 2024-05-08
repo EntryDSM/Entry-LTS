@@ -1,16 +1,17 @@
 import WhatIsEntry from '@/components/AboutEntry/WhatIsEntry';
 import DeveloperIntroduce from '@/components/AboutEntry/DeveloperIntroduce';
 import styled from '@emotion/styled';
+import MediumBlog from '@/components/AboutEntry/MediumBlog';
 
 const AboutEntry = () => {
   return (
     <Main>
-      <WhatIsEntry></WhatIsEntry>
+      <WhatIsEntry />
       <div>
-        <DeveloperIntroduce></DeveloperIntroduce>
+        <DeveloperIntroduce />
       </div>
       <div>
-        
+        <MediumBlog />
       </div>
     </Main>
   );
