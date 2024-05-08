@@ -9,6 +9,9 @@ const AboutEntry = () => {
       <div>
         <DeveloperIntroduce></DeveloperIntroduce>
       </div>
+      <div>
+        
+      </div>
     </Main>
   );
 };
@@ -20,7 +23,6 @@ const Main = styled.main`
   gap: 330px;
   & > div {
     width: 100vw;
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
