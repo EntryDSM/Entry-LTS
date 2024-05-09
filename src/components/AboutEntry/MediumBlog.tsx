@@ -44,6 +44,7 @@ const Section = styled.section`
     display: flex;
     gap: 20px;
   }
+  margin-bottom: 93px;
 `;
 
 const BlogMore = styled.div`
