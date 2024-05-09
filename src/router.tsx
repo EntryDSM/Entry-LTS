@@ -22,7 +22,7 @@ const Router = createBrowserRouter([
     element: <Header />,
     children: [
       {
-        path: '',
+        path: '/main',
         element: <Main2 />,
       },
       {
