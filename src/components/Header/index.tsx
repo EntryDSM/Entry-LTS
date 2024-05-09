@@ -155,7 +155,7 @@ const Header = () => {
             )}
           </Mobile>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2.4vw' }}>
-            <_._LogoButton onClick={() => setVisibility(false)} to="/">
+            <_._LogoButton onClick={() => setVisibility(false)} to="/main">
               <img
                 src={isAdmin ? LogoGreen : LogoOrange}
                 alt=""
