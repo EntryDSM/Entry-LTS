@@ -29,6 +29,9 @@ export const _Wrapper = styled.div<ScrollType>`
   &:hover .logoText {
     color: black;
   }
+  & .modalText {
+    color: #494949;
+  }
 `;
 
 export const _HeaderContainer = styled.div<ScrollType>`

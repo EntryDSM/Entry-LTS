@@ -210,12 +210,14 @@ const Header = () => {
                   {isDropdownOpen && (
                     <_._DropdownMenus>
                       <_._DropdownMenu>
-                        <Text size="body1" color="#494949">
-                          팀 소개
-                        </Text>
+                        <Link to="/about">
+                          <Text size="body1" color="#494949" className="modalText">
+                            팀 소개
+                          </Text>
+                        </Link>
                       </_._DropdownMenu>
                       <_._DropdownMenu>
-                        <Text size="body1" color="#494949">
+                        <Text size="body1" color="#494949" className="modalText">
                           학교 소개
                         </Text>
                       </_._DropdownMenu>
