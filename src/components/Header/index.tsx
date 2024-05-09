@@ -113,7 +113,12 @@ const Header = () => {
 
   return (
     <>
-      <_._Wrapper scroll={scrollY}>
+      <_._Wrapper
+        scroll={scrollY}
+        onClick={() => {
+          isDropdownOpen && setIsDropdownOpen(false);
+        }}
+      >
         <_._HeaderContainer scroll={scrollY}>
           <Mobile>
             <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
@@ -155,7 +160,7 @@ const Header = () => {
             )}
           </Mobile>
           <div style={{ display: 'flex', alignItems: 'center', gap: '2.4vw' }}>
-            <_._LogoButton onClick={() => setVisibility(false)} to="/">
+            <_._LogoButton onClick={() => setVisibility(false)} to="/main">
               <img
                 src={isAdmin ? LogoGreen : LogoOrange}
                 alt=""
@@ -244,7 +249,13 @@ const Header = () => {
           </Pc>
         </_._HeaderContainer>
       </_._Wrapper>
-      <Outlet />
+      <div
+        onClick={() => {
+          isDropdownOpen && setIsDropdownOpen(false);
+        }}
+      >
+        <Outlet />
+      </div>
     </>
   );
 };
