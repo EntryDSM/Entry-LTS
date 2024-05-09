@@ -3,23 +3,36 @@ import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
 import { Link } from 'react-router-dom';
 
-export const _HeaderContainer = styled.div`
+interface ScrollType {
+  scroll: number;
+}
+
+export const _Wrapper = styled.div`
+  width: 100vw;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #e6e6e6;
+  transition: background-color 0.5s;
+  &:hover {
+    background-color: white;
+  }
+  background-color: transparent;
+`;
+
+export const _HeaderContainer = styled.div<ScrollType>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  top: 0;
-  left: 0;
-  padding: 0 100px;
-  width: 100vw;
+  width: 100%;
   height: 4rem;
-  border-bottom: 1px solid #e6e6e6;
-  background-color: #ffffff;
-  z-index: 100;
-  @media screen and (max-width: 1024px) and (min-width: 768px) {
-    justify-content: space-between;
-    padding: 10px;
-  }
+  max-width: 1600px;
+  background-color: ${({ scroll }) => (scroll >= 1 ? '#fff' : 'transparent')};
   @media screen and (max-width: 768px) {
     justify-content: center;
     border: 0;
@@ -28,8 +41,7 @@ export const _HeaderContainer = styled.div`
 
 export const _Texts = styled.div`
   display: flex;
-  gap: 40px;
-  margin-left: 52px;
+  gap: 1vw;
 `;
 
 export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: boolean }>`
@@ -109,31 +121,36 @@ export const _LogoButton = styled(Link)`
 export const _DropdownWrapper = styled.div`
   cursor: pointer;
   display: flex;
+  align-items: center;
   gap: 4px;
 `;
 
 export const _DropdownMenus = styled.div`
   position: absolute;
   top: 35px;
+  left: -8px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 160px;
+  width: 100px;
   border: 1px solid ${theme.color.black100};
+  padding: 14px 0px;
+  background-color: white;
+  border-radius: 8px;
 `;
 
 export const _DropdownMenu = styled.div`
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
   width: 100%;
   background-color: ${theme.color.realWhite};
-  padding: 18px 0px 10px 20px;
   z-index: 10;
   &:hover {
     background-color: ${theme.color.black200};
   }
+  padding: 10px 15px;
 `;
 
 export const _Line = styled.div`

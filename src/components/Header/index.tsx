@@ -13,7 +13,17 @@ import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-type THeader = '문의사항' | '공지사항' | '성적 산출' | '신입생 전형 요강' | '로그인' | '마이페이지' | '로그아웃' | '';
+type THeader =
+  | '문의사항'
+  | '공지사항'
+  | '성적산출'
+  | '신입생 전형 요강'
+  | '로그인'
+  | '마이페이지'
+  | '로그아웃'
+  | '원서접수'
+  | 'About'
+  | '';
 
 interface IHeaderList {
   name: THeader;
@@ -22,18 +32,17 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '문의사항', url: '/customer' },
+  { name: '원서접수', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: '성적 산출', url: '/grade' },
-  {
-    name: '신입생 전형 요강',
-    url: '/admission',
-  },
+  { name: '문의사항', url: '/customer' },
+  { name: '성적산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '문의사항', url: '/customer' },
+  { name: '원서접수', url: '/admission' },
   { name: '공지사항', url: '/notice' },
+  { name: '문의사항', url: '/customer' },
+  { name: '성적산출', url: '/grade' },
 ];
 
 const Header = () => {
@@ -43,11 +52,23 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
-  const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
+  // const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
+  const [isLogin, setIsLogin] = useState(true);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   const authority = getCookies('authority');
   const { data } = getUserInfo(isLogin && authority != 'admin');
+  const [scrollY, setScrollY] = useState<number>(window.scrollY);
+
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScrollEvent);
+    return () => {
+      window.removeEventListener('scroll', handleScrollEvent);
+    };
+  }, []);
 
   const onClick = () => {
     window.location.href = `${AUTH_URL}/login`;
@@ -88,131 +109,135 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  useEffect(() => {
-    setIsLogin(!!getCookies('access_token'));
-  }, [getCookies('access_token')]);
+  // useEffect(() => {
+  //   setIsLogin(!!getCookies('access_token'));
+  // }, [getCookies('access_token')]);
 
   return (
     <>
-      <_._HeaderContainer>
-        <Mobile>
-          <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
-          {isOpen && (
-            <_._Background onClick={closeMenu}>
-              <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
-                {menuList.map((list, idx) => {
-                  return (
-                    <Link key={idx} to={list.url}>
-                      <_._MenuElement
-                        color={'black'}
-                        onClick={() => {
-                          setVisibility(false);
-                        }}
-                      >
-                        {list.name}
+      <_._Wrapper>
+        <_._HeaderContainer scroll={scrollY}>
+          <Mobile>
+            <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
+            {isOpen && (
+              <_._Background onClick={closeMenu}>
+                <_._Menu onClick={(e) => e.stopPropagation()} visibility={visibility}>
+                  {menuList.map((list, idx) => {
+                    return (
+                      <Link key={idx} to={list.url}>
+                        <_._MenuElement
+                          color={'black'}
+                          onClick={() => {
+                            setVisibility(false);
+                          }}
+                        >
+                          {list.name}
+                        </_._MenuElement>
+                      </Link>
+                    );
+                  })}
+                  {isLogin ? (
+                    <>
+                      <Link to="/mypage">
+                        <_._MenuElement color="black">마이페이지</_._MenuElement>
+                      </Link>
+                      <_._MenuElement color="red" onClick={Logout}>
+                        로그아웃
                       </_._MenuElement>
+                    </>
+                  ) : (
+                    <>
+                      <_._MenuElement color="black" onClick={onClick}>
+                        로그인
+                      </_._MenuElement>
+                    </>
+                  )}
+                </_._Menu>
+              </_._Background>
+            )}
+          </Mobile>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2.4vw' }}>
+            <_._LogoButton onClick={() => setVisibility(false)} to="/">
+              <img
+                src={isAdmin ? LogoGreen : LogoOrange}
+                alt=""
+                style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
+              />
+              <Text color="realBlack" size="header1">
+                EntryDSM
+              </Text>
+            </_._LogoButton>
+            <Pc>
+              <_._Texts>
+                {headerList.map((res) => {
+                  const { name, url } = res;
+                  return (
+                    <Link to={url}>
+                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
+                        {name}
+                      </Text>
                     </Link>
                   );
                 })}
-                {isLogin ? (
-                  <>
-                    <Link to="/mypage">
-                      <_._MenuElement color="black">마이페이지</_._MenuElement>
-                    </Link>
-                    <_._MenuElement color="red" onClick={Logout}>
-                      로그아웃
-                    </_._MenuElement>
-                  </>
-                ) : (
-                  <_._MenuElement color="black" onClick={onClick}>
-                    로그인
-                  </_._MenuElement>
-                )}
-              </_._Menu>
-            </_._Background>
-          )}
-        </Mobile>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <_._LogoButton onClick={() => setVisibility(false)} to="/">
-            <img
-              src={isAdmin ? LogoGreen : LogoOrange}
-              alt=""
-              style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
-            />
-            <Text color="realBlack" size="header1">
-              EntryDSM
-            </Text>
-          </_._LogoButton>
+              </_._Texts>
+            </Pc>
+          </div>
           <Pc>
-            <_._Texts>
-              {headerList.map((res) => {
-                const { name, url } = res;
-                return (
-                  <Link to={url}>
-                    <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
-                      {name}
+            {isLogin ? (
+              <>
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '2vw',
+                  }}
+                >
+                  <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                    <Text
+                      size="body1"
+                      color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
+                    >
+                      About
+                    </Text>
+                    <Icon cursor="pointer" icon="DownArrow" color="black500" />
+                  </_._DropdownWrapper>
+                  {isDropdownOpen && (
+                    <_._DropdownMenus>
+                      <_._DropdownMenu>
+                        <Text size="body1" color="#494949">
+                          팀 소개
+                        </Text>
+                      </_._DropdownMenu>
+                      <_._DropdownMenu>
+                        <Text size="body1" color="#494949">
+                          학교 소개
+                        </Text>
+                      </_._DropdownMenu>
+                    </_._DropdownMenus>
+                  )}
+                  <Link to="/mypage">
+                    <Text
+                      size="body1"
+                      color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
+                    >
+                      마이페이지
                     </Text>
                   </Link>
-                );
-              })}
-            </_._Texts>
-          </Pc>
-        </div>
-        <Pc>
-          {isLogin ? (
-            <OutsideClickHandler onOutsideClick={() => setIsDropdownOpen(false)}>
-              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', width: '160px' }}>
-                <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                  <Text cursor="pointer" color="realBlack" size="body1">
-                    {authority === 'admin' ? '어드민' : data?.name}
+                  <Text size="body1" color="#494949" style={{ fontSize: '22px' }}>
+                    김이름
                   </Text>
-                  <Icon cursor="pointer" icon="DownArrow" color="black500" />
-                </_._DropdownWrapper>
-                {isDropdownOpen && (
-                  <_._DropdownMenus>
-                    {authority == 'admin' ? (
-                      <_._DropdownMenu onClick={() => (window.location.href = 'https://admin.entrydsm.hs.kr')}>
-                        <Icon icon="SignOut" color="green500" />
-                        <Text color="green500" size="body1">
-                          관리자 페이지
-                        </Text>
-                      </_._DropdownMenu>
-                    ) : (
-                      <_._DropdownMenu
-                        onClick={() => {
-                          navigate('/mypage');
-                          setIsDropdownOpen(false);
-                        }}
-                      >
-                        <Icon icon="Account" color="black900" />
-                        <Text color="black900" size="body1">
-                          마이페이지
-                        </Text>
-                      </_._DropdownMenu>
-                    )}
-                    <_._Line />
-                    <_._DropdownMenu
-                      onClick={() => {
-                        Logout();
-                        setIsDropdownOpen(false);
-                      }}
-                    >
-                      <Icon icon="Logout" color="error" />
-                      <Text color="error" size="body1">
-                        로그아웃
-                      </Text>
-                    </_._DropdownMenu>
-                  </_._DropdownMenus>
-                )}
-              </div>
-            </OutsideClickHandler>
-          ) : (
-            <Button color={authorityColor} kind="rounded" onClick={onClick}>
-              로그인
-            </Button>
-          )}
-        </Pc>
-      </_._HeaderContainer>
+                </div>
+              </>
+            ) : (
+              <Button color={authorityColor} kind="contained" onClick={onClick}>
+                로그인
+              </Button>
+            )}
+          </Pc>
+        </_._HeaderContainer>
+      </_._Wrapper>
       <Outlet />
     </>
   );
