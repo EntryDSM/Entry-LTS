@@ -7,7 +7,7 @@ interface ScrollType {
   scroll: number;
 }
 
-export const _Wrapper = styled.div`
+export const _Wrapper = styled.div<ScrollType>`
   width: 100vw;
   padding: 0 16px;
   display: flex;
@@ -17,12 +17,18 @@ export const _Wrapper = styled.div`
   z-index: 100;
   top: 0;
   left: 0;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid ${({ scroll }) => (scroll ? '#e6e6e6' : 'transparent')};
   transition: background-color 0.5s;
   &:hover {
     background-color: white;
+    border-bottom-color: #e6e6e6;
+    color: black;
   }
-  background-color: transparent;
+  background-color: ${({ scroll }) => (scroll >= 1 ? '#fff' : 'transparent')};
+  color: ${({ scroll }) => (scroll ? '#000' : '#fff')};
+  &:hover .logoText {
+    color: black;
+  }
 `;
 
 export const _HeaderContainer = styled.div<ScrollType>`
@@ -32,7 +38,7 @@ export const _HeaderContainer = styled.div<ScrollType>`
   width: 100%;
   height: 4rem;
   max-width: 1600px;
-  background-color: ${({ scroll }) => (scroll >= 1 ? '#fff' : 'transparent')};
+  background-color: transparent;
   @media screen and (max-width: 768px) {
     justify-content: center;
     border: 0;
@@ -44,8 +50,8 @@ export const _Texts = styled.div`
   gap: 1vw;
 `;
 
-export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: boolean }>`
-  color: ${(props) => (props.fontColor ? '#FF7E36' : '#494949')};
+export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: string }>`
+  color: ${(props) => (props.fontColor ? `#${props.fontColor}` : '#000')};
   font-size: ${(props) => props.fontSize}px;
   font-weight: ${(props) => props.fontWeight};
   cursor: pointer;

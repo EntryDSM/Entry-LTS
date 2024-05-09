@@ -1,7 +1,6 @@
 import * as _ from './style';
 import LogoOrange from '../../assets/LogoOrange.svg';
 import LogoGreen from '../../assets/LogoGreen.svg';
-import User from '@/assets/User.svg';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button, Icon, Text } from '@team-entry/design_system';
@@ -11,7 +10,6 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
 import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
-import OutsideClickHandler from 'react-outside-click-handler';
 
 type THeader =
   | '문의사항'
@@ -115,7 +113,7 @@ const Header = () => {
 
   return (
     <>
-      <_._Wrapper>
+      <_._Wrapper scroll={scrollY}>
         <_._HeaderContainer scroll={scrollY}>
           <Mobile>
             <_._MenuIcon onClick={closeMenu} src={Menu} alt="" />
@@ -163,9 +161,15 @@ const Header = () => {
                 alt=""
                 style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
               />
-              <Text color="realBlack" size="header1">
-                EntryDSM
-              </Text>
+              {scrollY >= 1 ? (
+                <_._Text fontColor="#000" fontSize={24} fontWeight={600} className="logoText">
+                  EntryDSM
+                </_._Text>
+              ) : (
+                <_._Text fontColor="fff" fontSize={24} fontWeight={600} className="logoText">
+                  EntryDSM
+                </_._Text>
+              )}
             </_._LogoButton>
             <Pc>
               <_._Texts>
