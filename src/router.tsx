@@ -14,6 +14,7 @@ import NotFound from './pages/NotFound';
 import WriteFAQPage from './pages/admin/WriteFAQ';
 import WriteNoticePage from './pages/admin/WriteNotice';
 import NewAdmissionPage from './pages/NewAdmission';
+import AboutEntry from './pages/AboutEntry';
 
 const Router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const Router = createBrowserRouter([
       {
         path: 'edit',
         element: <EditBannerPage />,
+      },
+      {
+        path: 'about',
+        element: <AboutEntry />,
       },
     ],
     errorElement: <NotFound />,
