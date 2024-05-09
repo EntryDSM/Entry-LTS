@@ -3,6 +3,18 @@ import Medium from '@/assets/Medium';
 import styled from '@emotion/styled';
 
 const MediumBlog = () => {
+  const blogs = new Array(9).fill(
+    <Blogfigure
+      href="https://naver.com"
+      blogData={{
+        backgroundImg: '',
+        date: '2024.05.08',
+        title: '아주 멋있는 제목임',
+        description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
+      }}
+    />,
+  );
+
   return (
     <Section>
       <h2>저희가 문제를 해결해가는 과정을 보여드릴게요</h2>
@@ -15,98 +27,7 @@ const MediumBlog = () => {
           </span>
           <Medium />
         </BlogMore>
-        <BlogSection>
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-          <Blogfigure
-            href="naver.com"
-            blogData={{
-              backgroundImg: '',
-              date: '2024.05.08',
-              title: '아주 멋있는 제목임',
-              description: '아주 멋있는 블로그 내용이 여기 아래에 있어요',
-            }}
-          />
-        </BlogSection>
+        <BlogSection>{blogs}</BlogSection>
       </div>
     </Section>
   );
