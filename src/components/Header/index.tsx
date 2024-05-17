@@ -114,7 +114,7 @@ const Header = () => {
   return (
     <>
       <_._Wrapper
-        scroll={scrollY}
+        scroll={location.pathname === '/main' || location.pathname === '/' ? scrollY : 1}
         onClick={() => {
           isDropdownOpen && setIsDropdownOpen(false);
         }}
@@ -166,7 +166,7 @@ const Header = () => {
                 alt=""
                 style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
               />
-              {scrollY >= 1 ? (
+              {(location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1 ? (
                 <_._Text fontColor="#000" fontSize={24} fontWeight={600} className="logoText">
                   EntryDSM
                 </_._Text>
