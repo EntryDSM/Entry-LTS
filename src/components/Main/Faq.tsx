@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import Arrow from '../../assets/GrayArrow.svg';
 import SummaryBox from './SummaryBox';
+import { useState } from 'react';
 
 const Faq = () => {
   const questions: Array<string> = [
@@ -21,6 +22,15 @@ const Faq = () => {
     누군가는 차마 눈을 뜨지 못할 충격적인 디자인을 해냅니다. 쌈@뽕한 디자인을 위해 \
     한 몸 희생하신 당신께 감사를.',
   ];
+  const [nowOpen, setNowOpen] = useState<number>(-1);
+
+  const handleClick = (idx: number) => {
+    if (idx === nowOpen) {
+      setNowOpen(-1);
+      return;
+    }
+    setNowOpen(idx);
+  };
 
   return (
     <_Wrapper>
@@ -36,7 +46,15 @@ const Faq = () => {
       </_TitleBox>
       <_FAQBox>
         {questions.map((question, idx) => {
-          return <SummaryBox title={question} content={answers[idx]} idx={idx} />;
+          return (
+            <SummaryBox
+              title={question}
+              content={answers[idx]}
+              idx={idx}
+              setNowOpen={handleClick}
+              isOpen={nowOpen === idx}
+            />
+          );
         })}
       </_FAQBox>
     </_Wrapper>
