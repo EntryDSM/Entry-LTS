@@ -5,6 +5,7 @@ import CustomerDetailPage from './pages/CustomerDetail';
 import GradePage from './pages/GradePage';
 import GradeProgramPage from './pages/GradeProgramPage';
 import Main from './pages/Main';
+import Main2 from './pages/Main2';
 import MyPage from './pages/MyPage';
 import NoticePage from './pages/Notice';
 import NoticeDetailPage from './pages/NoticeDetail';
@@ -14,6 +15,7 @@ import NotFound from './pages/NotFound';
 import WriteFAQPage from './pages/admin/WriteFAQ';
 import WriteNoticePage from './pages/admin/WriteNotice';
 import NewAdmissionPage from './pages/NewAdmission';
+import Landing from './pages/Landing';
 import AboutEntry from './pages/AboutEntry';
 
 const Router = createBrowserRouter([
@@ -23,7 +25,11 @@ const Router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Main />,
+        element: <Landing />,
+      },
+      {
+        path: '/main',
+        element: <Main2 />,
       },
       {
         path: 'notice',
