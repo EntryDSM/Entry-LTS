@@ -36,7 +36,7 @@ const Fifth = () => {
           color="orange"
           kind="contained"
           onClick={() => {
-            window.open('https://medium.com/entrydsm');
+            window.open('/about');
           }}
         >
           더 알아보기
