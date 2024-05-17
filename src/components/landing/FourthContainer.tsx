@@ -54,6 +54,7 @@ const _Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 100px;
+  margin-bottom: 135px;
 `;
 
 const _TextContainer = styled.div`
