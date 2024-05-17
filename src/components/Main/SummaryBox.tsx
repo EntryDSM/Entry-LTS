@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 import OrangeArrow from '../../assets/OrangeArrow.svg';
 import GrayArrow from '../../assets/GrayArrow.svg';
 
@@ -7,17 +6,17 @@ interface SummaryBoxProps {
   title: string;
   content: string;
   idx: number;
+  isOpen: boolean;
+  setNowOpen: (idx: number) => void;
 }
 
 interface T_Details {
   isOpen: boolean;
 }
 
-const SummaryBox = ({ title, content, idx }: SummaryBoxProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
+const SummaryBox = ({ title, content, idx, isOpen, setNowOpen }: SummaryBoxProps) => {
   return (
-    <_FAQContainer isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+    <_FAQContainer isOpen={isOpen} onClick={() => setNowOpen(idx)}>
       <span>{`${idx + 1}`.padStart(2, '0')}</span>
       <_Details>
         <_Summary>
