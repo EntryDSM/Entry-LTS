@@ -114,7 +114,7 @@ const Header = () => {
   return (
     <>
       <_._Wrapper
-        scroll={scrollY}
+        scroll={location.pathname === '/main' || location.pathname === '/' ? scrollY : 1}
         onClick={() => {
           isDropdownOpen && setIsDropdownOpen(false);
         }}
@@ -166,12 +166,12 @@ const Header = () => {
                 alt=""
                 style={{ width: '35px', height: '48px', marginRight: 12, cursor: 'pointer' }}
               />
-              {scrollY >= 1 ? (
-                <_._Text fontColor="#000" fontSize={24} fontWeight={600} className="logoText">
+              {(location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1 ? (
+                <_._Text fontColor="#000" fontSize={18} fontWeight={500} className="logoText">
                   EntryDSM
                 </_._Text>
               ) : (
-                <_._Text fontColor="fff" fontSize={24} fontWeight={600} className="logoText">
+                <_._Text fontColor="fff" fontSize={18} fontWeight={500} className="logoText">
                   EntryDSM
                 </_._Text>
               )}
@@ -210,7 +210,15 @@ const Header = () => {
                     >
                       About
                     </Text>
-                    <Icon cursor="pointer" icon="DownArrow" color="black500" />
+                    <Icon
+                      cursor="pointer"
+                      icon="DownArrow"
+                      color={
+                        (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                          ? 'realBlack'
+                          : 'realWhite'
+                      }
+                    />
                   </_._DropdownWrapper>
                   {isDropdownOpen && (
                     <_._DropdownMenus>
