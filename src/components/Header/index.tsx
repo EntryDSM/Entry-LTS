@@ -218,6 +218,7 @@ const Header = () => {
                           ? 'realBlack'
                           : 'realWhite'
                       }
+                      className="downArrow"
                     />
                   </_._DropdownWrapper>
                   {isDropdownOpen && (
