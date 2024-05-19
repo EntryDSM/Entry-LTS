@@ -50,8 +50,7 @@ const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
-  // const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   const authority = getCookies('authority');
@@ -107,9 +106,9 @@ const Header = () => {
     setIsOpen(false);
   };
 
-  // useEffect(() => {
-  //   setIsLogin(!!getCookies('access_token'));
-  // }, [getCookies('access_token')]);
+  useEffect(() => {
+    setIsLogin(!!getCookies('accessToken'));
+  }, [getCookies('accessToken')]);
 
   return (
     <>
