@@ -13,7 +13,7 @@ const ApplyandNotice = () => {
   const [currentLoca, setCurrentLoca] = useState(0);
   const [latestNoticeIndex, setLatestNoticeIndex] = useState(0);
 
-  const dates = ['2024.04.26', '2024.04.27', '2024.04.29', '2024.05.01'];
+  const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
 
   useEffect(() => {
     let latestIndex = null;
