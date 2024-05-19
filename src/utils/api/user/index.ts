@@ -17,7 +17,7 @@ export const ReissueToken = async (refreshToken: string) => {
 
 export const ApplyInfoStatus = (isLogin?: boolean) => {
   const response = async () => {
-    const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/status`);
+    const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/info`);
     return data;
   };
   return useQuery(['applyInfoStatus'], response, {
