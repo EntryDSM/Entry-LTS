@@ -32,6 +32,9 @@ export const _Wrapper = styled.div<ScrollType>`
   & .modalText {
     color: #494949;
   }
+  &:hover .downArrow {
+    color: #494949;
+  }
 `;
 
 export const _HeaderContainer = styled.div<ScrollType>`
