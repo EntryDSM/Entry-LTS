@@ -9,7 +9,7 @@ interface ScrollType {
 
 export const _Wrapper = styled.div<ScrollType>`
   width: 100vw;
-  padding: 0 16px;
+  padding: 0 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +50,7 @@ export const _HeaderContainer = styled.div<ScrollType>`
 
 export const _Texts = styled.div`
   display: flex;
-  gap: 1vw;
+  gap: 20px;
 `;
 
 export const _Text = styled.div<{ fontSize: number; fontWeight: number; fontColor?: string }>`
