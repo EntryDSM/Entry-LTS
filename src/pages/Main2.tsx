@@ -6,14 +6,9 @@ import Faq from '@/components/Main/Faq';
 import ApplyandNotice from '@/components/Main/ApplyandNotice';
 import { getSchedule } from '@/utils/api/schedule';
 import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
-import { useEffect } from 'react';
 
 const Main2 = () => {
   const { data } = getSchedule();
-
-  useEffect(() => {
-    console.log(scheduleStatusCalculater(data?.currentStatus));
-  }, [data]);
 
   return (
     <_Wrapper>

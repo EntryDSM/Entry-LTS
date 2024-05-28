@@ -15,7 +15,6 @@ const Schedule = () => {
   const { data } = getSchedule();
 
   useEffect(() => {
-    console.log(data?.schedules);
     if (data?.schedules) {
       const formatData = {
         scheduleName: scheduleCalculater(data?.schedules[0].type),
@@ -29,7 +28,6 @@ const Schedule = () => {
             scheduleTime: timeformatter(schedule.date),
           };
         });
-      console.log(formatData);
       setSchedulesData([formatData, ...formatDatas]);
     }
   }, [data]);
