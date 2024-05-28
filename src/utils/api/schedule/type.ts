@@ -1,4 +1,5 @@
-export type ScheduleType =
+export type ScheduleType = 'START_DATE' | 'END_DATE' | 'FIRST_ANNOUNCEMENT' | 'INTERVIEW' | 'SECOND_ANNOUNCEMENT';
+export type ScheduleStatusType =
   | 'NOT_APPLICATION_PERIOD'
   | 'APPLICATION_PERIOD'
   | 'BEFORE_FIRST_ANNOUNCEMENT'
@@ -16,5 +17,5 @@ export interface IEditScheduleRequest {
 
 export interface IGetScheduleResponse {
   schedules: IEditScheduleRequest[];
-  current_status: ScheduleType;
+  currentStatus: ScheduleStatusType;
 }
