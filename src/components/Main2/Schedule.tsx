@@ -1,24 +1,43 @@
+import { getSchedule } from '@/utils/api/schedule';
+import { scheduleCalculater } from '@/utils/scheduleCalculater';
+import { timeformatter } from '@/utils/timeFormatter';
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type ScheduleType = {
   scheduleName: string;
   scheduleTime: string;
 };
 
-const schedules: ScheduleType[] = [
-  { scheduleName: '원서 제출', scheduleTime: '10/17~10/20' },
-  { scheduleName: '1차 발표', scheduleTime: '10/24 18:00' },
-  { scheduleName: '심층면접', scheduleTime: '10/28 9:00' },
-  { scheduleName: '최종발표', scheduleTime: '11/03 10:00' },
-];
-
 const Schedule = () => {
+  const [schedules, setSchedulesData] = useState<ScheduleType[]>();
+  const { data } = getSchedule();
+
+  useEffect(() => {
+    console.log(data?.schedules);
+    if (data?.schedules) {
+      const formatData = {
+        scheduleName: scheduleCalculater(data?.schedules[0].type),
+        scheduleTime: timeformatter(data.schedules[0].date, data.schedules[1].date),
+      };
+      const formatDatas = data?.schedules
+        ?.filter((_, i) => i !== 1 && i !== 0)
+        .map((schedule) => {
+          return {
+            scheduleName: scheduleCalculater(schedule.type),
+            scheduleTime: timeformatter(schedule.date),
+          };
+        });
+      console.log(formatData);
+      setSchedulesData([formatData, ...formatDatas]);
+    }
+  }, [data]);
+
   return (
     <_Wrapper>
       <_ProgressProvider>
-        {schedules.map((_, index) => {
+        {schedules?.map((_, index) => {
           return (
             <React.Fragment key={index}>
               <_ScheduleCircle />
@@ -28,7 +47,7 @@ const Schedule = () => {
         })}
       </_ProgressProvider>
       <_TextProvider>
-        {schedules.map((schedule) => {
+        {schedules?.map((schedule) => {
           return (
             <div>
               {schedule.scheduleName}
