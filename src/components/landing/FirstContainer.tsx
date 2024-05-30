@@ -2,6 +2,8 @@ import { Button, Text } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import MouseScroll from '../../assets/MouseScroll.svg';
 import LandingBgImg from '../../assets/LandingBgImg.png';
+import { Arrow_Double } from '@/assets/Arrow_Double';
+import ArrowDoubleDown from '@/assets/ArrowDoubleDown.svg';
 // import { useNavigate } from 'react-router-dom';
 
 // const navigate = useNavigate();
@@ -17,7 +19,7 @@ const First = () => {
           </_Title>
           <_Button>원서접수</_Button>
         </_TitleBox>
-        <Scroll src={MouseScroll} />
+        <Scroll src={ArrowDoubleDown} />
       </_Wrapper>
     </WrapperWithBackground>
   );
@@ -99,6 +101,8 @@ const _Button = styled.button`
 `;
 
 const Scroll = styled.img`
+  height: 48px;
+  width: 48px;
   position: absolute;
   justify-items: center;
   bottom: 28px;
