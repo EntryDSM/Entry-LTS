@@ -77,6 +77,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     port: 3002,
+    allowedHosts: "all"
   },
   watchOptions: {
     poll: true,

@@ -1,0 +1,7 @@
+config:
+  name: entry-lts
+  service_type: fe
+  port: 3002
+  domain:
+    prod: entry-lts.xquare.app
+    stag: entry-lts-stag.xquare.app
