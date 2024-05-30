@@ -2,7 +2,6 @@ import { Button, Text } from '@team-entry/design_system';
 import styled from '@emotion/styled';
 import MouseScroll from '../../assets/MouseScroll.svg';
 import LandingBgImg from '../../assets/LandingBgImg.png';
-import { Arrow_Double } from '@/assets/Arrow_Double';
 import ArrowDoubleDown from '@/assets/ArrowDoubleDown.svg';
 // import { useNavigate } from 'react-router-dom';
 
