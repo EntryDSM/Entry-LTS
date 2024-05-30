@@ -90,7 +90,7 @@ const MainFunction = () => {
         </_Overflow>
       </_Application>
       <_Discription>
-        <Pc>
+        {/* <Pc>
           <_Shortcut>
             {shortcut.map((item) =>
               item.link.includes('/') ? (
@@ -120,7 +120,7 @@ const MainFunction = () => {
               ),
             )}
           </_Shortcut>
-        </Pc>
+        </Pc> */}
         <BoardsAtMain />
       </_Discription>
       {/* 원서접수 기간 중 사용할 모달 */}
