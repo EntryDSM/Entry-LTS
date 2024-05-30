@@ -11,4 +11,4 @@ RUN yarn install
 
 EXPOSE 3002
 
-CMD ["yarn", "dev"]
+CMD ["yarn", "build"]
