@@ -1,8 +1,8 @@
-name: deploy-xquare-stag
+name: deploy-xquare-prod
 
 on:
   push:
-    branches: main
+    branches: develop
 
 jobs:
   build:
@@ -18,6 +18,6 @@ jobs:
       - name: Deploy to xquare
         uses: team-xquare/xquare-deployment-action@master
         with:
-          environment: prod
+          environment: stag
           access_key: ${{ secrets.ACCESS_KEY }}
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
