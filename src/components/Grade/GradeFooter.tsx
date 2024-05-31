@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { GradeStatusType } from '@/interfaces/grade';
 import { useModal } from '@/hooks/useModal';
+import { MAIN_URL } from '@/constant/env';
 
 interface IGradeFooterProps {
   gradeStatus: GradeStatusType;
@@ -84,7 +85,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
                 kind="outlined"
                 color="black"
                 onClick={() => {
-                  (window.location.href = 'https://www.entrydsm.hs.kr/grade'), close();
+                  (window.location.href = `${MAIN_URL}/grade`), close();
                 }}
               >
                 다시 입력
@@ -93,7 +94,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
                 kind="contained"
                 color="orange"
                 onClick={() => {
-                  (window.location.href = 'https://www.entrydsm.hs.kr/'), close();
+                  (window.location.href = `${MAIN_URL}`), close();
                 }}
               >
                 닫기

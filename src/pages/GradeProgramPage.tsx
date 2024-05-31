@@ -12,6 +12,7 @@ import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
 import { getAttendenceScore, getMaxScore, getSelectGradeScore, getVoluntterScore } from '@/utils/gradeCalculater';
+import { MAIN_URL } from '@/constant/env';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
@@ -64,7 +65,7 @@ const GradeProgramPage = () => {
     if (gradeStatus === 'prospectiveGraduate') setCurrent(1);
     else if (gradeStatus === 'graduate') setCurrent(0);
     else if (gradeStatus === 'qualificationExam') setCurrent(4);
-    else window.location.replace('https://www.entrydsm.hs.kr/grade');
+    else window.location.replace(`${MAIN_URL}/grade`);
   }, [gradeStatus]);
 
   useEffect(() => {

@@ -16,6 +16,7 @@ import { getCookies } from '@/utils/cookies';
 import { GetReserveLink } from '@/utils/api/reserve';
 import { useModal } from '@/hooks/useModal';
 import Modal from '../Modal';
+import { APPLY_URL } from '@/constant/env';
 
 const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
@@ -49,7 +50,7 @@ const MainFunction = () => {
             </PhoneNumber>
             <Button
               color={authorityColor}
-              onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+              onClick={() => (window.location.href = `${APPLY_URL}`)}
               margin={[10, 0, 20, 0]}
               isBig
               disabled
@@ -67,7 +68,7 @@ const MainFunction = () => {
             <div>
               <Button
                 color={authorityColor}
-                onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+                onClick={() => (window.location.href = `${APPLY_URL}`)}
                 margin={[20, 0, 20, 0]}
                 disabled
               >
