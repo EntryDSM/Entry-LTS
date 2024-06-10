@@ -58,7 +58,7 @@ const CustomerPage = () => {
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
             {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
-                <Link to={`/customer/${qna.id}`}>
+                <Link to={`/customer/${qna.id}`} key={qna.id}>
                   <BoardElement
                     title={qna.title}
                     boardNumber={getAllQna.questions.length - (idx + current * 10)}
@@ -108,8 +108,9 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            {getAllFaq?.slice(0 + current * 10, current * 10 + 10).map((faq) => (
+            {getAllFaq?.slice(0 + current * 10, current * 10 + 10).map((faq, index) => (
               <BoardElement
+                key={index}
                 content={faq.content}
                 createdAt={faq.created_at}
                 title={faq.title}
