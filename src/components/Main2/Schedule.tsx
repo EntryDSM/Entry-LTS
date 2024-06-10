@@ -18,10 +18,10 @@ const Schedule = () => {
     if (data?.schedules) {
       const formatData = {
         scheduleName: scheduleCalculater(data?.schedules[0].type),
-        scheduleTime: timeformatter(data.schedules[0].date, data.schedules[1].date),
+        scheduleTime: timeformatter(data.schedules[0].date, data.schedules[4].date),
       };
       const formatDatas = data?.schedules
-        ?.filter((_, i) => i !== 1 && i !== 0)
+        ?.filter((_, i) => i !== 4 && i !== 0)
         .map((schedule) => {
           return {
             scheduleName: scheduleCalculater(schedule.type),
