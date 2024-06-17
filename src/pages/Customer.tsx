@@ -122,6 +122,7 @@ const CustomerPage = () => {
                     isTopBorder={true}
                     isOpen={true}
                     isPublic
+                    boardId={faq.id}
                   />
                 ))}
           </>

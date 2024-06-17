@@ -4,22 +4,48 @@ import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@tea
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useInput } from '@/hooks/useInput';
 import { useTextArea } from '@/hooks/useTextArea';
-import { CreateFaq } from '@/utils/api/faq';
+import { CreateFaq, GetFaqDetail, UpdateFaq } from '@/utils/api/faq';
 import { ICreateFaq } from '@/utils/api/faq/types';
 import { useAuthority } from '@/hooks/useAuthority';
+import { useParams } from 'react-router-dom';
 
 const WriteFAQPage = () => {
-  const { form: inputValue, onChange: setInputValue } = useInput<Omit<ICreateFaq, 'content'>>({
+  const {
+    form: inputValue,
+    onChange: setInputValue,
+    setForm: setInputForm,
+  } = useInput<Omit<ICreateFaq, 'content'>>({
     title: '',
     faqType: 'ADMISSION',
   });
-  const { form: textAreaValue, onChange: setTextAreaValue } = useTextArea({ content: '' });
+  const { form: textAreaValue, onChange: setTextAreaValue, setForm: setTextAreaForm } = useTextArea({ content: '' });
+  const { id } = useParams();
   const { mutate: createFaq } = CreateFaq();
+  const { mutate: updateFaq } = UpdateFaq(id);
+  const { data: faqDetail } = GetFaqDetail(id);
   const { authorityColor } = useAuthority();
 
+  useEffect(() => {
+    if (!faqDetail) return;
+
+    setInputForm({
+      title: faqDetail.title,
+      faqType: faqDetail.faqType,
+    });
+
+    setTextAreaForm({
+      content: faqDetail.content,
+    });
+  }, [faqDetail]);
+
   const onClick = () => {
-    createFaq({ ...inputValue, ...textAreaValue });
+    if (id) {
+      updateFaq({ ...inputValue, ...textAreaValue });
+    } else {
+      createFaq({ ...inputValue, ...textAreaValue });
+    }
   };
+
   return (
     <_Container>
       <_Wrapper>
@@ -93,7 +119,7 @@ const WriteFAQPage = () => {
         />
         <_ButtonBox>
           <Button color="green" onClick={onClick}>
-            게시
+            {id ? '수정' : '게시'}
           </Button>
         </_ButtonBox>
       </_Wrapper>

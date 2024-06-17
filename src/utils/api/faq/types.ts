@@ -18,9 +18,9 @@ export interface IGetFaq {
   faqs: GetFaqType[];
 }
 
-export interface IQnaFaqDetail {
+export interface IFaqDetail {
   title: string;
   content: string;
-  created_at: string;
-  type: FaqType;
+  createdAt: string;
+  faqType: FaqType;
 }

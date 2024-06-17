@@ -16,6 +16,7 @@ const BoardElement = (props: IBoard) => {
     isWriter,
     isPublic,
     isOpen = false,
+    boardId,
     boardNumber,
     title,
     content,
@@ -138,7 +139,7 @@ const BoardElement = (props: IBoard) => {
                   <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
                     삭제
                   </Button>
-                  <Button onClick={() => navigate('/customer/writeFAQ')}>수정</Button>
+                  <Button onClick={() => navigate(`/customer/writeFAQ/${boardId}`)}>수정</Button>
                 </_EditAnswerButtons>
               )}
             </_AnswerPart>
