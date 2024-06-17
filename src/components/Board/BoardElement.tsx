@@ -7,6 +7,7 @@ import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { faqTypeToKorean } from '@/utils/translate';
+import { DeleteFaq } from '@/utils/api/faq';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -29,6 +30,7 @@ const BoardElement = (props: IBoard) => {
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { mutate: deleteFaq } = DeleteFaq(boardId ?? '');
 
   return (
     <>
@@ -136,7 +138,13 @@ const BoardElement = (props: IBoard) => {
               </_Answer>
               {isAdmin && (
                 <_EditAnswerButtons>
-                  <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
+                  <Button
+                    color="delete"
+                    kind="delete"
+                    onClick={() => {
+                      deleteFaq();
+                    }}
+                  >
                     삭제
                   </Button>
                   <Button onClick={() => navigate(`/customer/writeFAQ/${boardId}`)}>수정</Button>

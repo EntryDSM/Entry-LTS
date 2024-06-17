@@ -35,15 +35,28 @@ export const CreateFaq = () => {
   });
 };
 
-export const UpdateFaq = (id: string) => {
+export const UpdateFaq = (faqId: string) => {
   const response = async (body: ICreateFaq) => {
-    return instance.patch(`${router}/${id}`, body);
+    return instance.patch(`${router}/${faqId}`, body);
   };
   const navigate = useNavigate();
   return useMutation(response, {
     onSuccess: () => {
       Toast('Faq가 성공적으로 수정되었습니다.', { type: 'success' });
       navigate('/customer?type=faq');
+    },
+  });
+};
+
+export const DeleteFaq = (faqId: string) => {
+  const response = async () => {
+    return instance.delete(`${router}/${faqId}`);
+  };
+  const navigate = useNavigate();
+  return useMutation(response, {
+    onSuccess: () => {
+      Toast('Faq가 성공적으로 삭제되었습니다.', { type: 'success' });
+      navigate(0);
     },
   });
 };
