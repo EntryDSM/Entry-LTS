@@ -54,7 +54,6 @@ const GradeProgramPage = () => {
         { step: 5, title: '출석 점수 & 봉사 점수' },
       ]
     : [
-        { step: 0, title: '' },
         { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
@@ -62,7 +61,7 @@ const GradeProgramPage = () => {
       ];
 
   useEffect(() => {
-    if (gradeStatus === 'prospectiveGraduate') setCurrent(1);
+    if (gradeStatus === 'prospectiveGraduate') setCurrent(0);
     else if (gradeStatus === 'graduate') setCurrent(0);
     else if (gradeStatus === 'qualificationExam') setCurrent(4);
     else window.location.replace(`${MAIN_URL}/grade`);
