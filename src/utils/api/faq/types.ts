@@ -6,11 +6,16 @@ export interface ICreateFaq {
   faqType: FaqType;
 }
 
-export interface IGetFaq {
+export type GetFaqType = {
+  id: string;
   title: string;
   content: string;
   createdAt: string;
   faqType: FaqType;
+};
+
+export interface IGetFaq {
+  faqs: GetFaqType[];
 }
 
 export interface IQnaFaqDetail {

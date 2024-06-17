@@ -8,7 +8,7 @@ const router = 'faq';
 
 export const GetAllFaq = (type?: FaqType) => {
   const response = async () => {
-    const { data } = await instance.get<IGetFaq[]>(`${router}?type=${type || ''}`);
+    const { data } = await instance.get<IGetFaq>(`${router}/${type ? `?type=${type}` : `all`}`);
     return data;
   };
   return useQuery(['faq', type || ''], response);
