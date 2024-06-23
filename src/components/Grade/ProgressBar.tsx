@@ -47,8 +47,8 @@ const ProgressBar = ({ step, gradeStatus }: IProgressBarProps) => {
         })}
       </_Wrapper>
       <_Texts>
-        {title.map((item) => (
-          <Text color="black800" size="body5">
+        {title.map((item, idx) => (
+          <Text key={idx} color="black800" size="body5">
             {item}
           </Text>
         ))}

@@ -40,10 +40,10 @@ const GradePage = () => {
           </Text>
           <_Line authorityColor={authorityColor} />
           <_Cards>
-            {list.map((res) => {
+            {list.map((res, index) => {
               const { icon, text, title, type } = res;
               return (
-                <_Card>
+                <_Card key={index}>
                   <_IconBackground authorityColor={authorityColor}>
                     <Icon icon={icon} size={46} />
                   </_IconBackground>

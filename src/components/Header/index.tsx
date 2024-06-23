@@ -177,10 +177,10 @@ const Header = () => {
             </_._LogoButton>
             <Pc>
               <_._Texts>
-                {headerList.map((res) => {
+                {headerList.map((res, index) => {
                   const { name, url } = res;
                   return (
-                    <Link to={url}>
+                    <Link key={index} to={url}>
                       <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
                         {name}
                       </Text>

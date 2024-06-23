@@ -11,13 +11,14 @@ interface IGradeFooterProps {
   setCurrent: Dispatch<SetStateAction<number>>;
   maxScore: number;
   gradeScore: number;
+  onSubmit?: () => void;
 }
 
-const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }: IGradeFooterProps) => {
+const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore, onSubmit }: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
   return (
     <>
-      <_Footer>
+      <_Footer onSubmit={onSubmit}>
         <Button
           color="black"
           kind="outlined"
