@@ -12,7 +12,7 @@ import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
 import { getAttendenceScore, getMaxScore, getSelectGradeScore, getVoluntterScore } from '@/utils/gradeCalculater';
-import { MAIN_URL } from '@/constant/env';
+import { editScore, getScore } from '@/utils/api/score';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
@@ -26,6 +26,9 @@ const GradeProgramPage = () => {
     maxScore: 0,
   });
 
+  const { data, error, isLoading } = getScore();
+  console.log('안타까운', data);
+
   const { form: selectGradeElement, setForm: setSelectGradeElement } = useInput<ISelectGradeElement>({
     korean_grade: ['X', 'X', 'X', 'X'],
     social_grade: ['X', 'X', 'X', 'X'],
@@ -36,13 +39,38 @@ const GradeProgramPage = () => {
     tech_and_home_grade: ['X', 'X', 'X', 'X'],
   });
 
-  const { form: writeGradeElement, onChange: changeWriteGradeElement } = useInput<IWriteGradeElement>({
+  const {
+    form: writeGradeElement,
+    onChange: changeWriteGradeElement,
+    setForm: setWriteGradeElement,
+  } = useInput<IWriteGradeElement>({
     day_absence_count: 0,
     lecture_absence_count: 0,
     lateness_count: 0,
     early_leave_count: 0,
     volunteer_time: 0,
   });
+
+  useEffect(() => {
+    if (data) {
+      setSelectGradeElement({
+        korean_grade: data.koreanGrade.split(''),
+        social_grade: data.socialGrade.split(''),
+        history_grade: data.historyGrade.split(''),
+        math_grade: data.mathGrade.split(''),
+        science_grade: data.scienceGrade.split(''),
+        english_grade: data.englishGrade.split(''),
+        tech_and_home_grade: data.techAndHomeGrade.split(''),
+      });
+      setWriteGradeElement({
+        day_absence_count: data.absenceDayCount,
+        lecture_absence_count: data.lectureAbsenceCount,
+        lateness_count: data.latenessCount,
+        early_leave_count: data.earlyLeaveCount,
+        volunteer_time: data.volunteerTime,
+      });
+    }
+  }, [data, setSelectGradeElement]);
 
   const isGraduate = gradeStatus === 'graduate';
   const titles = isGraduate
@@ -54,18 +82,18 @@ const GradeProgramPage = () => {
         { step: 5, title: '출석 점수 & 봉사 점수' },
       ]
     : [
-        { step: 0, title: '' },
         { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 4, title: '출석 점수 & 봉사 점수' },
+        { step: 5, title: '' },
       ];
 
   useEffect(() => {
-    if (gradeStatus === 'prospectiveGraduate') setCurrent(1);
+    if (gradeStatus === 'prospectiveGraduate') setCurrent(0);
     else if (gradeStatus === 'graduate') setCurrent(0);
     else if (gradeStatus === 'qualificationExam') setCurrent(4);
-    else window.location.replace(`${MAIN_URL}/grade`);
+    else window.location.replace('https://www.entrydsm.hs.kr/grade');
   }, [gradeStatus]);
 
   useEffect(() => {
