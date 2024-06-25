@@ -37,13 +37,8 @@ const GradeProgramPage = () => {
   const handleBlackexamSubmit = () => {
     const payload = { averageScore: blackexam.score };
     editGedScoreMutate(payload, {
-      onSuccess: () => {
-        alert('점수 저장 성공.');
-      },
-      onError: () => {
-        console.log(payload);
-        alert('점수 저장 실패');
-      },
+      onSuccess: () => {},
+      onError: () => {},
     });
   };
 
@@ -109,12 +104,8 @@ const GradeProgramPage = () => {
     };
 
     editScoreMutate(payload, {
-      onSuccess: () => {
-        alert('점수가 성공적으로 저장되었습니다.');
-      },
-      onError: () => {
-        alert('점수 저장에 실패했습니다.');
-      },
+      onSuccess: () => {},
+      onError: () => {},
     });
   };
 
