@@ -202,7 +202,10 @@ const Header = () => {
                     gap: '2vw',
                   }}
                 >
-                  <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                  <_._DropdownWrapper
+                    onMouseOver={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
                     <Text
                       size="body1"
                       color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
