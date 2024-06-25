@@ -27,6 +27,13 @@ const GradeFooter = ({
   length,
 }: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
+
+  const clickEvent = () => {
+    if (onClick) {
+      onClick();
+    }
+    setModalState('SUBMIT_GRADE'), open();
+  };
   return (
     <>
       <_Footer onSubmit={onSubmit}>
@@ -51,16 +58,7 @@ const GradeFooter = ({
             다음
           </Button>
         ) : (
-          <Button
-            color="orange"
-            kind="contained"
-            onClick={() => {
-              setModalState('SUBMIT_GRADE'), open();
-              {
-                onClick;
-              }
-            }}
-          >
+          <Button color="orange" kind="contained" onClick={clickEvent}>
             완료
           </Button>
         )}

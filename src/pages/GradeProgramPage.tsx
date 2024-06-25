@@ -12,11 +12,11 @@ import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
 import { getAttendenceScore, getMaxScore, getSelectGradeScore, getVoluntterScore } from '@/utils/gradeCalculater';
-import { editScore, getScore } from '@/utils/api/score';
+import { editScore, getScore, editGedScore, getGedScore } from '@/utils/api/score';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
-  const { form: blackexam, onChange: changeBlackexam } = useInput({ score: 0 });
+  const { form: blackexam, onChange: changeBlackexam, setForm: setBlackexam } = useInput({ score: 0 });
   const [searchParams] = useSearchParams();
   const gradeStatus = searchParams.get('gradeStatus');
   const [score, setScore] = useState({
@@ -25,6 +25,27 @@ const GradeProgramPage = () => {
     volunteerScore: 0,
     maxScore: 0,
   });
+
+  const { data: getData } = getGedScore();
+  if (getData) {
+    setBlackexam({
+      score: getData.averageScore,
+    });
+  }
+
+  const { mutate: editGedScoreMutate } = editGedScore();
+  const handleBlackexamSubmit = () => {
+    const payload = { averageScore: blackexam.score };
+    editGedScoreMutate(payload, {
+      onSuccess: () => {
+        alert('점수 저장 성공.');
+      },
+      onError: () => {
+        console.log(payload);
+        alert('점수 저장 실패');
+      },
+    });
+  };
 
   const { data } = getScore();
 
@@ -69,10 +90,8 @@ const GradeProgramPage = () => {
         volunteer_time: data.volunteerTime,
       });
     }
-  }, [data, setSelectGradeElement]);
-
+  }, [data, setWriteGradeElement, setSelectGradeElement]);
   const { mutate: editScoreMutate } = editScore();
-
   const handleSubmit = () => {
     const payload = {
       koreanGrade: selectGradeElement.korean_grade.join(''),
@@ -88,7 +107,7 @@ const GradeProgramPage = () => {
       earlyLeaveCount: writeGradeElement.early_leave_count,
       volunteerTime: writeGradeElement.volunteer_time,
     };
-    console.log(payload);
+
     editScoreMutate(payload, {
       onSuccess: () => {
         alert('점수가 성공적으로 저장되었습니다.');
@@ -199,8 +218,8 @@ const GradeProgramPage = () => {
           setCurrent={setCurrent}
           maxScore={score.volunteerScore + score.attendenceScore}
           gradeScore={score.gradeScore}
-          onClick={handleSubmit}
-          onSubmit={handleSubmit}
+          onClick={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
+          onSubmit={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
           length={titles.length - 1}
         />
       </Wrapper>
