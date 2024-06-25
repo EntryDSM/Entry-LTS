@@ -12,9 +12,20 @@ interface IGradeFooterProps {
   maxScore: number;
   gradeScore: number;
   onSubmit?: () => void;
+  onClick?: () => void;
+  length?: number;
 }
 
-const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore, onSubmit }: IGradeFooterProps) => {
+const GradeFooter = ({
+  gradeStatus,
+  current,
+  setCurrent,
+  maxScore,
+  gradeScore,
+  onSubmit,
+  onClick,
+  length,
+}: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
   return (
     <>
@@ -29,7 +40,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore, o
         >
           이전
         </Button>
-        {current !== 4 ? (
+        {current !== length ? (
           <Button
             color="orange"
             kind="contained"
@@ -45,6 +56,9 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore, o
             kind="contained"
             onClick={() => {
               setModalState('SUBMIT_GRADE'), open();
+              {
+                onClick;
+              }
             }}
           >
             완료
