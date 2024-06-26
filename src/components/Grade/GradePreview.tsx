@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
-import { EditScore } from '@/utils/api/score';
+// import { EditScore } from '@/utils/api/score';
 
 interface IGradePreview {
   gradeScore: number;
