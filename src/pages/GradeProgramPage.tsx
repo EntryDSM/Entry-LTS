@@ -26,20 +26,20 @@ const GradeProgramPage = () => {
     maxScore: 0,
   });
 
-  const { data: getData } = getGedScore();
-  if (getData) {
-    setBlackexam({
-      score: getData.averageScore,
-    });
-  }
+  // const { data: getData } = getGedScore();
+  // if (getData) {
+  //   setBlackexam({
+  //     score: getData.averageScore,
+  //   });
+  // }
 
   const { mutate: editGedScoreMutate } = editGedScore();
   const handleBlackexamSubmit = () => {
-    const payload = { averageScore: blackexam.score };
-    editGedScoreMutate(payload, {
-      onSuccess: () => {},
-      onError: () => {},
-    });
+    // const payload = { averageScore: blackexam.score };
+    // editGedScoreMutate(payload, {
+    //   onSuccess: () => {},
+    //   onError: () => {},
+    // });
   };
 
   const { data } = getScore();
@@ -66,47 +66,46 @@ const GradeProgramPage = () => {
     volunteer_time: 0,
   });
 
-  useEffect(() => {
-    if (data) {
-      setSelectGradeElement({
-        korean_grade: data.koreanGrade.split(''),
-        social_grade: data.socialGrade.split(''),
-        history_grade: data.historyGrade.split(''),
-        math_grade: data.mathGrade.split(''),
-        science_grade: data.scienceGrade.split(''),
-        english_grade: data.englishGrade.split(''),
-        tech_and_home_grade: data.techAndHomeGrade.split(''),
-      });
-      setWriteGradeElement({
-        day_absence_count: data.absenceDayCount,
-        lecture_absence_count: data.lectureAbsenceCount,
-        lateness_count: data.latenessCount,
-        early_leave_count: data.earlyLeaveCount,
-        volunteer_time: data.volunteerTime,
-      });
-    }
-  }, [data, setWriteGradeElement, setSelectGradeElement]);
-  const { mutate: editScoreMutate } = editScore();
+  // useEffect(() => {
+  //   if (data) {
+  //     setSelectGradeElement({
+  //       korean_grade: data.koreanGrade.split(''),
+  //       social_grade: data.socialGrade.split(''),
+  //       history_grade: data.historyGrade.split(''),
+  //       math_grade: data.mathGrade.split(''),
+  //       science_grade: data.scienceGrade.split(''),
+  //       english_grade: data.englishGrade.split(''),
+  //       tech_and_home_grade: data.techAndHomeGrade.split(''),
+  //     });
+  //     setWriteGradeElement({
+  //       day_absence_count: data.absenceDayCount,
+  //       lecture_absence_count: data.lectureAbsenceCount,
+  //       lateness_count: data.latenessCount,
+  //       early_leave_count: data.earlyLeaveCount,
+  //       volunteer_time: data.volunteerTime,
+  //     });
+  //   }
+  // }, [data, setWriteGradeElement, setSelectGradeElement]);
+  // const { mutate: editScoreMutate } = editScore();
   const handleSubmit = () => {
-    const payload = {
-      koreanGrade: selectGradeElement.korean_grade.join(''),
-      socialGrade: selectGradeElement.social_grade.join(''),
-      historyGrade: selectGradeElement.history_grade.join(''),
-      mathGrade: selectGradeElement.math_grade.join(''),
-      scienceGrade: selectGradeElement.science_grade.join(''),
-      englishGrade: selectGradeElement.english_grade.join(''),
-      techAndHomeGrade: selectGradeElement.tech_and_home_grade.join(''),
-      absenceDayCount: writeGradeElement.day_absence_count,
-      lectureAbsenceCount: writeGradeElement.lecture_absence_count,
-      latenessCount: writeGradeElement.lateness_count,
-      earlyLeaveCount: writeGradeElement.early_leave_count,
-      volunteerTime: writeGradeElement.volunteer_time,
-    };
-
-    editScoreMutate(payload, {
-      onSuccess: () => {},
-      onError: () => {},
-    });
+    // const payload = {
+    //   koreanGrade: selectGradeElement.korean_grade.join(''),
+    //   socialGrade: selectGradeElement.social_grade.join(''),
+    //   historyGrade: selectGradeElement.history_grade.join(''),
+    //   mathGrade: selectGradeElement.math_grade.join(''),
+    //   scienceGrade: selectGradeElement.science_grade.join(''),
+    //   englishGrade: selectGradeElement.english_grade.join(''),
+    //   techAndHomeGrade: selectGradeElement.tech_and_home_grade.join(''),
+    //   absenceDayCount: writeGradeElement.day_absence_count,
+    //   lectureAbsenceCount: writeGradeElement.lecture_absence_count,
+    //   latenessCount: writeGradeElement.lateness_count,
+    //   earlyLeaveCount: writeGradeElement.early_leave_count,
+    //   volunteerTime: writeGradeElement.volunteer_time,
+    // };
+    // editScoreMutate(payload, {
+    //   onSuccess: () => {},
+    //   onError: () => {},
+    // });
   };
 
   const isGraduate = gradeStatus === 'graduate';
