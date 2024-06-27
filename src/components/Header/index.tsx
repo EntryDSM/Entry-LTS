@@ -48,6 +48,7 @@ const Header = () => {
   const [visibility, setVisibility] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isDropdownHover, setIsDropdownHover] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
@@ -223,8 +224,11 @@ const Header = () => {
                       className="downArrow"
                     />
                   </_._DropdownWrapper>
-                  {isDropdownOpen && (
-                    <_._DropdownMenus>
+                  {(isDropdownOpen || isDropdownHover) && (
+                    <_._DropdownMenus
+                      onMouseOver={() => setIsDropdownHover(true)}
+                      onMouseLeave={() => setIsDropdownHover(false)}
+                    >
                       <_._DropdownMenu>
                         <Link to="/about">
                           <Text size="body1" color="#494949" className="modalText">

@@ -139,8 +139,8 @@ export const _DropdownWrapper = styled.div`
 
 export const _DropdownMenus = styled.div`
   position: absolute;
-  top: 35px;
-  left: -8px;
+  top: 25px;
+  left: -16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
