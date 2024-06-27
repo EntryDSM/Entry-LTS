@@ -6,10 +6,10 @@ import { MAIN_URL } from '@/constant/env';
 
 const router = 'user';
 
-export const ReissueToken = async (refresh_token: string) => {
+export const ReissueToken = async (refreshToken: string) => {
   const response = await instance.put<IAuthorizationResponse>(`${router}/auth`, null, {
     headers: {
-      'X-Refresh-Token': `${refresh_token}`,
+      'X-Refresh-Token': `${refreshToken}`,
     },
   });
 
@@ -18,7 +18,7 @@ export const ReissueToken = async (refresh_token: string) => {
 
 export const ApplyInfoStatus = (isLogin?: boolean) => {
   const response = async () => {
-    const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/status`);
+    const { data } = await instance.get<IApplyInfoStatusResponse>(`${router}/info`);
     return data;
   };
   return useQuery(['applyInfoStatus'], response, {

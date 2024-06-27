@@ -3,19 +3,24 @@ export type FaqType = 'ADMISSION' | 'COURSE' | 'SCHOOL_LIFE' | 'OTHER' | '';
 export interface ICreateFaq {
   title: string;
   content: string;
-  faq_type: FaqType;
+  faqType: FaqType;
 }
+
+export type GetFaqType = {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+  faqType: FaqType;
+};
 
 export interface IGetFaq {
-  title: string;
-  content: string;
-  created_at: string;
-  faq_type: FaqType;
+  faqs: GetFaqType[];
 }
 
-export interface IQnaFaqDetail {
+export interface IFaqDetail {
   title: string;
   content: string;
-  created_at: string;
-  type: FaqType;
+  createdAt: string;
+  faqType: FaqType;
 }

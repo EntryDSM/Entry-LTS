@@ -11,13 +11,32 @@ interface IGradeFooterProps {
   setCurrent: Dispatch<SetStateAction<number>>;
   maxScore: number;
   gradeScore: number;
+  onSubmit?: () => void;
+  onClick?: () => void;
+  length?: number;
 }
 
-const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }: IGradeFooterProps) => {
+const GradeFooter = ({
+  gradeStatus,
+  current,
+  setCurrent,
+  maxScore,
+  gradeScore,
+  onSubmit,
+  onClick,
+  length,
+}: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
+
+  const clickEvent = () => {
+    if (onClick) {
+      onClick();
+    }
+    setModalState('SUBMIT_GRADE'), open();
+  };
   return (
     <>
-      <_Footer>
+      <_Footer onSubmit={onSubmit}>
         <Button
           color="black"
           kind="outlined"
@@ -28,7 +47,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
         >
           이전
         </Button>
-        {current !== 4 ? (
+        {current !== length ? (
           <Button
             color="orange"
             kind="contained"
@@ -39,13 +58,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
             다음
           </Button>
         ) : (
-          <Button
-            color="orange"
-            kind="contained"
-            onClick={() => {
-              setModalState('SUBMIT_GRADE'), open();
-            }}
-          >
+          <Button color="orange" kind="contained" onClick={clickEvent}>
             완료
           </Button>
         )}
@@ -61,7 +74,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
                 일반 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {(gradeScore * 175) / 100 + maxScore}
+                {((gradeScore * 175) / 100 + maxScore).toFixed(3)}
               </Text>
             </_DIV>
             <_DIV>

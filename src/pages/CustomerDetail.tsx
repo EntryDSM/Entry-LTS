@@ -22,7 +22,7 @@ const CustomerDetailPage = () => {
   const { mutate: deleteQna } = DeleteQna();
 
   const { data, isLoading } = GetQnaDetail(qnaId);
-  const accessToken = getCookies('access_token');
+  const accessToken = getCookies('accessToken');
 
   useEffect(() => {
     if (data) setForm({ title: data?.reply?.title, content: data?.reply?.content });

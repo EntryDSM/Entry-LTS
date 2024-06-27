@@ -15,4 +15,5 @@ export interface IBoard {
   isOpen?: boolean;
   content?: string;
   faq_type?: FaqType;
+  boardId?: string;
 }

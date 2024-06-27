@@ -12,11 +12,11 @@ import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
 import { getAttendenceScore, getMaxScore, getSelectGradeScore, getVoluntterScore } from '@/utils/gradeCalculater';
-import { MAIN_URL } from '@/constant/env';
+import { editScore, getScore, editGedScore, getGedScore } from '@/utils/api/score';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
-  const { form: blackexam, onChange: changeBlackexam } = useInput({ score: 0 });
+  const { form: blackexam, onChange: changeBlackexam, setForm: setBlackexam } = useInput({ score: 0 });
   const [searchParams] = useSearchParams();
   const gradeStatus = searchParams.get('gradeStatus');
   const [score, setScore] = useState({
@@ -25,6 +25,24 @@ const GradeProgramPage = () => {
     volunteerScore: 0,
     maxScore: 0,
   });
+
+  // const { data: getData } = getGedScore();
+  // if (getData) {
+  //   setBlackexam({
+  //     score: getData.averageScore,
+  //   });
+  // }
+
+  const { mutate: editGedScoreMutate } = editGedScore();
+  const handleBlackexamSubmit = () => {
+    // const payload = { averageScore: blackexam.score };
+    // editGedScoreMutate(payload, {
+    //   onSuccess: () => {},
+    //   onError: () => {},
+    // });
+  };
+
+  const { data } = getScore();
 
   const { form: selectGradeElement, setForm: setSelectGradeElement } = useInput<ISelectGradeElement>({
     korean_grade: ['X', 'X', 'X', 'X'],
@@ -36,13 +54,59 @@ const GradeProgramPage = () => {
     tech_and_home_grade: ['X', 'X', 'X', 'X'],
   });
 
-  const { form: writeGradeElement, onChange: changeWriteGradeElement } = useInput<IWriteGradeElement>({
+  const {
+    form: writeGradeElement,
+    onChange: changeWriteGradeElement,
+    setForm: setWriteGradeElement,
+  } = useInput<IWriteGradeElement>({
     day_absence_count: 0,
     lecture_absence_count: 0,
     lateness_count: 0,
     early_leave_count: 0,
     volunteer_time: 0,
   });
+
+  // useEffect(() => {
+  //   if (data) {
+  //     setSelectGradeElement({
+  //       korean_grade: data.koreanGrade.split(''),
+  //       social_grade: data.socialGrade.split(''),
+  //       history_grade: data.historyGrade.split(''),
+  //       math_grade: data.mathGrade.split(''),
+  //       science_grade: data.scienceGrade.split(''),
+  //       english_grade: data.englishGrade.split(''),
+  //       tech_and_home_grade: data.techAndHomeGrade.split(''),
+  //     });
+  //     setWriteGradeElement({
+  //       day_absence_count: data.absenceDayCount,
+  //       lecture_absence_count: data.lectureAbsenceCount,
+  //       lateness_count: data.latenessCount,
+  //       early_leave_count: data.earlyLeaveCount,
+  //       volunteer_time: data.volunteerTime,
+  //     });
+  //   }
+  // }, [data, setWriteGradeElement, setSelectGradeElement]);
+  // const { mutate: editScoreMutate } = editScore();
+  const handleSubmit = () => {
+    // const payload = {
+    //   koreanGrade: selectGradeElement.korean_grade.join(''),
+    //   socialGrade: selectGradeElement.social_grade.join(''),
+    //   historyGrade: selectGradeElement.history_grade.join(''),
+    //   mathGrade: selectGradeElement.math_grade.join(''),
+    //   scienceGrade: selectGradeElement.science_grade.join(''),
+    //   englishGrade: selectGradeElement.english_grade.join(''),
+    //   techAndHomeGrade: selectGradeElement.tech_and_home_grade.join(''),
+    //   absenceDayCount: writeGradeElement.day_absence_count,
+    //   lectureAbsenceCount: writeGradeElement.lecture_absence_count,
+    //   latenessCount: writeGradeElement.lateness_count,
+    //   earlyLeaveCount: writeGradeElement.early_leave_count,
+    //   volunteerTime: writeGradeElement.volunteer_time,
+    // };
+    // editScoreMutate(payload, {
+    //   onSuccess: () => {},
+    //   onError: () => {},
+    // });
+  };
 
   const isGraduate = gradeStatus === 'graduate';
   const titles = isGraduate
@@ -51,20 +115,20 @@ const GradeProgramPage = () => {
         { step: 2, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 3, title: '2학년 2학기(직전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 4, title: '2학년 1학기(직전 전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 5, title: '출석 점수 & 봉사 점수' },
+        { step: 5, title: '출석 점수 & 봉사 점수', subTitle: '' },
       ]
     : [
         { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
         { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 4, title: '출석 점수 & 봉사 점수' },
+        { step: 4, title: '출석 점수 & 봉사 점수', subTitle: '' },
       ];
 
   useEffect(() => {
     if (gradeStatus === 'prospectiveGraduate') setCurrent(0);
     else if (gradeStatus === 'graduate') setCurrent(0);
-    else if (gradeStatus === 'qualificationExam') setCurrent(4);
-    else window.location.replace(`${MAIN_URL}/grade`);
+    else if (gradeStatus === 'qualificationExam') setCurrent(titles.length - 1);
+    else window.location.replace('https://www.entrydsm.hs.kr/grade');
   }, [gradeStatus]);
 
   useEffect(() => {
@@ -77,7 +141,7 @@ const GradeProgramPage = () => {
         })
       : setScore({
           gradeScore: getSelectGradeScore(current, selectGradeElement),
-          attendenceScore: current === 4 ? getAttendenceScore(writeGradeElement) : 0,
+          attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
           volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
           maxScore: getMaxScore(),
         });
@@ -103,7 +167,7 @@ const GradeProgramPage = () => {
                 volunteerScore={score.volunteerScore}
                 maxScore={score.maxScore}
               />
-              {current < 4 && (
+              {current < titles.length - 1 && (
                 <AllSelect
                   selectGradeElement={selectGradeElement}
                   setSelectGradeElement={setSelectGradeElement}
@@ -114,7 +178,7 @@ const GradeProgramPage = () => {
           </Header>
           <ProgressBar step={titles[current].step} gradeStatus={gradeStatus as GradeStatusType} />
           <_Selects>
-            {current < 4 &&
+            {current < titles.length - 1 &&
               Object.entries(subject).map((item) => {
                 return (
                   <SelectGrade
@@ -127,7 +191,7 @@ const GradeProgramPage = () => {
                   />
                 );
               })}
-            {current === 4 && (
+            {current === titles.length - 1 && (
               <WriteAttendence
                 gradeStatus={gradeStatus as GradeStatusType}
                 blackexam={blackexam.score}
@@ -144,6 +208,9 @@ const GradeProgramPage = () => {
           setCurrent={setCurrent}
           maxScore={score.volunteerScore + score.attendenceScore}
           gradeScore={score.gradeScore}
+          onClick={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
+          onSubmit={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
+          length={titles.length - 1}
         />
       </Wrapper>
     </Container>

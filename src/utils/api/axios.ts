@@ -12,7 +12,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const accessToken = getCookies('access_token');
+    const accessToken = getCookies('accessToken');
     const returnConfig = {
       ...config,
     };
@@ -31,7 +31,7 @@ instance.interceptors.response.use(
   async (error: AxiosError<AxiosError>) => {
     if (axios.isAxiosError(error) && error.response) {
       const { config } = error;
-      const refreshToken = getCookies('refresh_token');
+      const refreshToken = getCookies('refreshToken');
       const authority = getCookies('authority');
 
       if (
@@ -44,9 +44,9 @@ instance.interceptors.response.use(
         if (refreshToken) {
           ReissueToken(refreshToken as string)
             .then((res) => {
-              setTokens(res.access_token, res.refresh_token);
+              setTokens(res.accessToken, res.refreshToken);
               setCookies('authority', authority === 'admin' ? 'admin' : 'user');
-              if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.access_token}`;
+              if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {

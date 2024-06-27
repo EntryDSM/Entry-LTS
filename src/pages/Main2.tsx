@@ -4,8 +4,12 @@ import MainBgImg from '@/assets/MainBgImg.png';
 import Schedule from '@/components/Main2/Schedule';
 import Faq from '@/components/Main/Faq';
 import ApplyandNotice from '@/components/Main/ApplyandNotice';
+import { getSchedule } from '@/utils/api/schedule';
+import { scheduleStatusCalculater } from '@/utils/scheduleCalculater';
 
 const Main2 = () => {
+  const { data } = getSchedule();
+
   return (
     <_Wrapper>
       <_TopContainerWrapper>
@@ -18,7 +22,7 @@ const Main2 = () => {
             </_Title>
             <_Line />
             <Text size={'header1'} color={'realWhite'}>
-              지금은 원서제출 기간입니다
+              {scheduleStatusCalculater(data?.currentStatus)}
             </Text>
             <Button
               color="orange"

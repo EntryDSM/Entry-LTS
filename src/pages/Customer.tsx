@@ -26,7 +26,7 @@ const CustomerPage = () => {
 
   const { data: getAllQna, isLoading: qnaLoading } = GetAllQna();
 
-  const { data: getAllFaq, isLoading: faqLoading } = GetAllFaq(category);
+  const { data: faqData, isLoading: faqLoading } = GetAllFaq(category);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [current, setCurrent] = useState(0);
@@ -48,7 +48,7 @@ const CustomerPage = () => {
           subTitle="입학 상담 문의: 042-866-8811, 042-866-8814"
           button1="Q&A"
           button2="자주 묻는 질문"
-          button3="질문 작성"
+          button3="FAQ 작성"
           isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
@@ -58,7 +58,7 @@ const CustomerPage = () => {
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
             {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
-                <Link to={`/customer/${qna.id}`}>
+                <Link to={`/customer/${qna.id}`} key={qna.id}>
                   <BoardElement
                     title={qna.title}
                     boardNumber={getAllQna.questions.length - (idx + current * 10)}
@@ -108,26 +108,31 @@ const CustomerPage = () => {
               })}
             </_Categories>
             <BoardHeader isNumber={false} isTopBorder={true} />
-            {getAllFaq?.slice(0 + current * 10, current * 10 + 10).map((faq) => (
-              <BoardElement
-                content={faq.content}
-                createdAt={faq.created_at}
-                title={faq.title}
-                faq_type={faq.faq_type}
-                isNumber={false}
-                isTopBorder={true}
-                isOpen={true}
-                isPublic
-              />
-            ))}
+            {faqData?.faqs.length > 0 &&
+              faqData.faqs
+                .slice(0 + current * 10, current * 10 + 10)
+                .map((faq, index) => (
+                  <BoardElement
+                    key={index}
+                    content={faq.content}
+                    createdAt={faq.createdAt}
+                    title={faq.title}
+                    faq_type={faq.faqType}
+                    isNumber={false}
+                    isTopBorder={true}
+                    isOpen={true}
+                    isPublic
+                    boardId={faq.id}
+                  />
+                ))}
           </>
         )}
         {((searchParams.get('type') == 'qna' && getAllQna?.questions?.length !== 0) ||
-          (searchParams.get('type') == 'faq' && getAllFaq?.length !== 0)) && (
+          (searchParams.get('type') == 'faq' && faqData?.faqs.length !== 0)) && (
           <PageNation
             pageNum={Math.floor(
               searchParams.get('type') == 'faq'
-                ? Math.ceil(getAllFaq?.length / 10) || 0
+                ? Math.ceil(faqData?.faqs.length / 10) || 0
                 : Math.ceil(getAllQna?.questions?.length / 10) || 0,
             )}
             current={current}

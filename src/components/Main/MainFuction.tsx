@@ -22,7 +22,7 @@ const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
+  const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
   // const { data } = ApplyInfoStatus(isLogin);
   const { mutate: reserve_addmission } = GetReserveLink();
   const { isOpen, modalState, Modal, setModalState, open, close } = useModal();

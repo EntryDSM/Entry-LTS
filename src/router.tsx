@@ -45,7 +45,13 @@ const Router = createBrowserRouter([
           { index: true, element: <CustomerPage /> },
           { path: ':id', element: <CustomerDetailPage /> },
           { path: 'write', element: <WriteCustomerPage /> },
-          { path: 'writeFAQ', element: <WriteFAQPage /> },
+          {
+            path: 'writeFAQ',
+            children: [
+              { index: true, element: <WriteFAQPage /> },
+              { path: ':id', element: <WriteFAQPage /> },
+            ],
+          },
         ],
       },
       {

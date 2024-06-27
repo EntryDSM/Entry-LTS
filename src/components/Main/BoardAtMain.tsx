@@ -39,12 +39,13 @@ const BoardsAtMain = () => {
             </Text>
           </Link>
         </BoardTitle>
-        {faqData?.slice(0, 5).map((item, i) => (
-          <BoardContent key={i} color="black900" size="body1">
-            <Link to="/customer?type=faq">{item.title}</Link>
-          </BoardContent>
-        ))}
-        {faqData?.length === 0 && (
+        {faqData?.faqs.length > 0 &&
+          faqData?.faqs.slice(0, 5).map((item, i) => (
+            <BoardContent key={i} color="black900" size="body1">
+              <Link to="/customer?type=faq">{item.title}</Link>
+            </BoardContent>
+          ))}
+        {faqData?.faqs.length === 0 && (
           <BoardContent color="black900" size="body1">
             등록된 질문이 없습니다.
           </BoardContent>

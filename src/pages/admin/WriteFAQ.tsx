@@ -1,25 +1,51 @@
-import { ChangeEvent, SetStateAction, useState } from 'react';
+import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Radio, Stack, Text, TextAreaProps, Textarea } from '@team-entry/design_system';
 import { Mobile, Pc } from '@/hooks/useResponsive';
 import { useInput } from '@/hooks/useInput';
 import { useTextArea } from '@/hooks/useTextArea';
-import { CreateFaq } from '@/utils/api/faq';
+import { CreateFaq, GetFaqDetail, UpdateFaq } from '@/utils/api/faq';
 import { ICreateFaq } from '@/utils/api/faq/types';
 import { useAuthority } from '@/hooks/useAuthority';
+import { useParams } from 'react-router-dom';
 
 const WriteFAQPage = () => {
-  const { form: inputValue, onChange: setInputValue } = useInput<Omit<ICreateFaq, 'content'>>({
+  const {
+    form: inputValue,
+    onChange: setInputValue,
+    setForm: setInputForm,
+  } = useInput<Omit<ICreateFaq, 'content'>>({
     title: '',
-    faq_type: 'ADMISSION',
+    faqType: 'ADMISSION',
   });
-  const { form: textAreaValue, onChange: setTextAreaValue } = useTextArea({ content: '' });
+  const { form: textAreaValue, onChange: setTextAreaValue, setForm: setTextAreaForm } = useTextArea({ content: '' });
+  const { id } = useParams();
   const { mutate: createFaq } = CreateFaq();
+  const { mutate: updateFaq } = UpdateFaq(id);
+  const { data: faqDetail } = GetFaqDetail(id);
   const { authorityColor } = useAuthority();
 
+  useEffect(() => {
+    if (!faqDetail) return;
+
+    setInputForm({
+      title: faqDetail.title,
+      faqType: faqDetail.faqType,
+    });
+
+    setTextAreaForm({
+      content: faqDetail.content,
+    });
+  }, [faqDetail]);
+
   const onClick = () => {
-    createFaq({ ...inputValue, ...textAreaValue });
+    if (id) {
+      updateFaq({ ...inputValue, ...textAreaValue });
+    } else {
+      createFaq({ ...inputValue, ...textAreaValue });
+    }
   };
+
   return (
     <_Container>
       <_Wrapper>
@@ -40,36 +66,36 @@ const WriteFAQPage = () => {
         </Text>
         <Stack gap={60} margin={['bottom', 20]}>
           <Radio
-            name="faq_type"
+            name="faqType"
             label="입학"
             value="ADMISSION"
             color={authorityColor}
             onClick={setInputValue}
-            checked={inputValue.faq_type === 'ADMISSION'}
+            checked={inputValue.faqType === 'ADMISSION'}
           />
           <Radio
-            name="faq_type"
+            name="faqType"
             label="진로"
             value="COURSE"
             color={authorityColor}
             onClick={setInputValue}
-            checked={inputValue.faq_type === 'COURSE'}
+            checked={inputValue.faqType === 'COURSE'}
           />
           <Radio
-            name="faq_type"
+            name="faqType"
             label="학교생활"
             value="SCHOOL_LIFE"
             color={authorityColor}
             onClick={setInputValue}
-            checked={inputValue.faq_type === 'SCHOOL_LIFE'}
+            checked={inputValue.faqType === 'SCHOOL_LIFE'}
           />
           <Radio
-            name="faq_type"
+            name="faqType"
             label="기타"
             value="OTHER"
             color={authorityColor}
             onClick={setInputValue}
-            checked={inputValue.faq_type === 'OTHER'}
+            checked={inputValue.faqType === 'OTHER'}
           />
         </Stack>
         <Input
@@ -93,7 +119,7 @@ const WriteFAQPage = () => {
         />
         <_ButtonBox>
           <Button color="green" onClick={onClick}>
-            게시
+            {id ? '수정' : '게시'}
           </Button>
         </_ButtonBox>
       </_Wrapper>
