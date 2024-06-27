@@ -1,4 +1,4 @@
-name: deploy-xquare-prod
+name: deploy-xquare-stag
 
 on:
   push:
