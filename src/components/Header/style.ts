@@ -133,13 +133,19 @@ export const _LogoButton = styled(Link)`
 export const _DropdownWrapper = styled.div`
   cursor: pointer;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 4px;
+
+  & > div {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
 `;
 
 export const _DropdownMenus = styled.div`
   position: absolute;
-  top: 25px;
+  top: 95%;
   left: -16px;
   display: flex;
   flex-direction: column;
