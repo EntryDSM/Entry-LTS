@@ -18,7 +18,7 @@ export const _Wrapper = styled.div<ScrollType>`
   top: 0;
   left: 0;
   border-bottom: 1px solid ${({ scroll }) => (scroll ? '#e6e6e6' : 'transparent')};
-  transition: background-color 0.5s;
+  transition: 0.5s;
   &:hover {
     background-color: white;
     border-bottom-color: #e6e6e6;
