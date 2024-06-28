@@ -8,7 +8,7 @@ import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
-import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
+import { ADMIN_URL, AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
 
 type THeader =
@@ -243,17 +243,27 @@ const Header = () => {
                       </_._DropdownMenu>
                     </_._DropdownMenus>
                   )}
-                  <Link to="/mypage">
-                    <Text
-                      size="body1"
-                      color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
-                    >
-                      마이페이지
-                    </Text>
-                  </Link>
-                  <Text size="body1" color="#494949" style={{ fontSize: '22px' }}>
-                    김이름
-                  </Text>
+                  {isAdmin ? (
+                    <Link to={ADMIN_URL}>
+                      <Button color={authorityColor} kind="contained" onClick={onClick}>
+                        입학전형 관리자 페이지로
+                      </Button>
+                    </Link>
+                  ) : (
+                    <>
+                      <Link to="/mypage">
+                        <Text
+                          size="body1"
+                          color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
+                        >
+                          마이페이지
+                        </Text>
+                      </Link>
+                      <Text size="body1" color="#494949" style={{ fontSize: '22px' }}>
+                        김이름
+                      </Text>
+                    </>
+                  )}
                 </div>
               </>
             ) : (
