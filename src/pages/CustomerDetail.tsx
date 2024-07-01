@@ -197,7 +197,7 @@ const _Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  width: 100vw;
+  width: 100%;
 `;
 
 const _Wrapper = styled.div`
