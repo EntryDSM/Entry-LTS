@@ -131,6 +131,7 @@ export const _LogoButton = styled(Link)`
 `;
 
 export const _DropdownWrapper = styled.div`
+  position: relative;
   cursor: pointer;
   display: flex;
   flex-direction: column;
