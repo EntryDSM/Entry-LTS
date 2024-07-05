@@ -1,4 +1,4 @@
-export type NoticeType = 'FRESHMAN' | 'ADMISSION' | '';
+export type NoticeType = 'GUIDE' | 'NOTICE' | '';
 
 export interface IAllNotice {
   notices: INotice[];
@@ -8,22 +8,33 @@ export interface INotice {
   id: string;
   title: string;
   type: NoticeType;
-  is_pinned: boolean;
-  created_at: string;
+  isPinned: boolean;
+  createdAt: string;
+}
+
+export interface IAttachFiles {
+  attachFileUrl: string;
+  attachFileName: string;
 }
 
 export interface INoticeDetail {
   title: string;
   content: string;
-  created_at: string;
+  createdAt: string;
   type: NoticeType;
-  image: string;
+  imageURL: string;
+  attachFiles: IAttachFiles[];
 }
 
 export interface ICreateNotice {
   title: string;
   content: string;
   type: NoticeType;
-  is_pinned: boolean;
-  file: string;
+  isPinned: boolean;
+  fileName?: string;
+  attachFileName?: string[];
+}
+
+export interface IUploadNoticeImage {
+  photo: File;
 }
