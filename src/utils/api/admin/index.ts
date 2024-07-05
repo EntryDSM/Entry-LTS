@@ -5,6 +5,7 @@ import { ICreateReply } from './type';
 
 const router = 'admin';
 
+// 답변 생성
 export const WriteReply = (body: ICreateReply) => {
   const response = async (qnaId: string) => {
     return instance.post(`${router}/${qnaId}`, body);
@@ -21,6 +22,7 @@ export const WriteReply = (body: ICreateReply) => {
   });
 };
 
+// 답변 수정
 export const EditReply = (body: ICreateReply) => {
   const response = async (qnaId: string) => {
     return instance.patch(`${router}/${qnaId}`, body);
@@ -37,6 +39,7 @@ export const EditReply = (body: ICreateReply) => {
   });
 };
 
+// 답변 삭제
 export const DeleteReply = () => {
   const response = (qnaId: string) => {
     return instance.delete(`${router}/${qnaId}`);
@@ -53,6 +56,7 @@ export const DeleteReply = () => {
   });
 };
 
+// 질문 삭제
 export const DeleteQna = () => {
   const response = async (qnaId: string) => {
     return instance.delete(`${router}/${qnaId}`);
@@ -65,4 +69,14 @@ export const DeleteQna = () => {
       Toast('Qna 삭제에 실패하였습니다.', { type: 'error' });
     },
   });
+};
+
+// 질문 상세조회
+export const GetQuestionDetail = (qnaId: string) => {
+  const response = async () => {
+    const { data } = await instance.get<ICreateReply>(`${router}/${qnaId}`);
+    return data;
+  };
+
+  return useQuery(['qna', qnaId], response);
 };

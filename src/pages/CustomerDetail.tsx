@@ -7,7 +7,7 @@ import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
 import QnaAnswer from '@/components/Answer/QnaAnswer';
 import { useInput } from '@/hooks/useInput';
-import { DeleteQna, DeleteReply, EditReply, WriteReply } from '@/utils/api/admin';
+import { DeleteQna, DeleteReply, EditReply, WriteReply, GetQuestionDetail } from '@/utils/api/admin';
 import { getCookies } from '@/utils/cookies';
 
 const CustomerDetailPage = () => {
@@ -21,11 +21,16 @@ const CustomerDetailPage = () => {
   const { mutate: deleteReply } = DeleteReply();
   const { mutate: deleteQna } = DeleteQna();
 
+  const { data: qnaData, isLoading: qnaIsLoading } = GetQuestionDetail(qnaId);
   const { data, isLoading } = GetQnaDetail(qnaId);
   const accessToken = getCookies('accessToken');
 
   useEffect(() => {
     if (data) setForm({ title: data?.reply?.title, content: data?.reply?.content });
+  }, [data]);
+
+  useEffect(() => {
+    if (qnaData) setForm({ title: qnaData?.title, content: qnaData?.content });
   }, [data]);
 
   useEffect(() => {
@@ -56,11 +61,11 @@ const CustomerDetailPage = () => {
               Q.
             </Text>
             <Text color="black900" size="title1" margin={['top', 4]}>
-              {data?.title}
+              {isAdmin ? qnaData?.title : data?.title}
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            {data?.content}
+            {isAdmin ? qnaData?.content : data?.content}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
