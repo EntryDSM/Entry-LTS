@@ -1,6 +1,7 @@
 import { Input } from '@team-entry/design_system';
 import GradeWraper from '../GradeWraper';
 import { GradeStatusType, IWriteGradeElement } from '@/interfaces/grade';
+import CheckButton from './CheckButton';
 
 interface IWriteGrade {
   gradeStatus: GradeStatusType;
@@ -85,6 +86,12 @@ const WriteAttendence = ({
           onChange={changeWriteGradeElement}
           unit="시간"
         />
+      </GradeWraper>
+      <GradeWraper title="DSM 알고리즘 대회 입상여부">
+        <CheckButton value={writeGradeElement.dsm_algorithm_award} />
+      </GradeWraper>
+      <GradeWraper title="정보처리기능사 자격증 취득여부">
+        <CheckButton value={writeGradeElement.craftsman_information_processing} />
       </GradeWraper>
     </>
   );
