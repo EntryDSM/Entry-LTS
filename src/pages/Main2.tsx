@@ -30,6 +30,7 @@ const Main2 = () => {
               onClick={() => {
                 console.log('click!!');
               }}
+              disabled={true}
             >
               지원하기
             </Button>
