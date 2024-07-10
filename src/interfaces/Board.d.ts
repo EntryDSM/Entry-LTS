@@ -16,4 +16,5 @@ export interface IBoard {
   content?: string;
   faq_type?: FaqType;
   boardId?: string;
+  isPinned?: boolean;
 }

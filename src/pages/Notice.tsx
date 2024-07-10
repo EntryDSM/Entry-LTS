@@ -50,6 +50,7 @@ const NoticePage = () => {
                 isWriteDay={true}
                 isWriter={false}
                 isPublic
+                isPinned={notice.isPinned}
               />
             </Link>
           );

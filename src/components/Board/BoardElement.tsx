@@ -8,6 +8,7 @@ import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { faqTypeToKorean } from '@/utils/translate';
 import { DeleteFaq } from '@/utils/api/faq';
+import Pin from '@/assets/pin';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -25,6 +26,7 @@ const BoardElement = (props: IBoard) => {
     userName,
     faq_type,
     createdAt,
+    isPinned,
   } = props;
   const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
@@ -49,8 +51,14 @@ const BoardElement = (props: IBoard) => {
                 whiteSpace="nowrap"
                 style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
                 width={400}
+                display="flex"
               >
                 {title}
+                {isPinned && (
+                  <Div style={{ marginLeft: '4px' }}>
+                    <Pin size={14} color={theme.color.orange500} />
+                  </Div>
+                )}
               </Text>
             </Div>
           </Pc>
