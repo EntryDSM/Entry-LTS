@@ -37,9 +37,9 @@ export default NewAdmissionPage;
 const _Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 99vw;
+  width: 100%;
   height: 100vh;
-  margin-top: 8rem;
+  padding: 8rem 40px 0 40px;
 `;
 
 const _Wrapper = styled.div`
