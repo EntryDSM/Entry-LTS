@@ -16,7 +16,7 @@ const First = () => {
           <_Title>
             꿈을 이루는 학교,
             <br />
-            대덕소프트웨어 마이스터고
+            대덕소프트웨어마이스터고
           </_Title>
           <Link to="/main">
             <_Button>원서접수</_Button>
