@@ -21,6 +21,8 @@ type THeader =
   | '로그아웃'
   | '원서접수'
   | 'About'
+  | '전형요강'
+  | '자주묻는질문'
   | '';
 
 interface IHeaderList {
@@ -30,16 +32,16 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '원서접수', url: '/admission' },
+  { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: '문의사항', url: '/customer' },
+  { name: '자주묻는질문', url: '/customer' },
   { name: '성적산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '원서접수', url: '/admission' },
+  { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: '문의사항', url: '/customer' },
+  { name: '자주묻는질문', url: '/customer' },
   { name: '성적산출', url: '/grade' },
 ];
 
