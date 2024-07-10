@@ -5,14 +5,20 @@ import Download2 from '../../assets/Download2.svg';
 import ArrowRight from '../../assets/ArrowRight.svg';
 import New from '../../assets/New.svg';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { GetAllNotice } from '@/utils/api/notice';
+import { INotice, NoticeType } from '@/utils/api/notice/types';
 
 const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명회', '4차 입학설명회'];
 
 const ApplyandNotice = () => {
+  const { data } = GetAllNotice('NOTICE');
+
   const [nowDate, setNowDate] = useState(new Date());
   const [currentLoca, setCurrentLoca] = useState(0);
   const [latestNoticeIndex, setLatestNoticeIndex] = useState(0);
+
+  const navigate = useNavigate();
 
   const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
   const urls = ['https://www.youtube.com/watch?v=A_4smim8b6Y'];
@@ -67,15 +73,19 @@ const ApplyandNotice = () => {
       </_DateBox>
     );
   };
-  const NoticeBox = () => {
+  const NoticeBox = ({ title, createdAt, id }: Omit<INotice, 'type' | 'isPinned'>) => {
     return (
-      <_Notice>
+      <_Notice
+        onClick={() => {
+          navigate(`/notice/${id}`);
+        }}
+      >
         <_NoticeTextBox>
           <_TitleBox>
-            기숙사 탈출하면 벌점 몇 점인지에 대해
-            <_Img src={New} />
+            {title}
+            {/* <_Img src={New} /> */}
           </_TitleBox>
-          <_NoticeDate>2024.03.21</_NoticeDate>
+          <_NoticeDate>{createdAt.split('T')[0]}</_NoticeDate>
         </_NoticeTextBox>
         <_Img2 src={ArrowRight} />
       </_Notice>
@@ -116,10 +126,12 @@ const ApplyandNotice = () => {
             <_MainNotificationText>신입생 전형 요강 PDF 파일 다운로드</_MainNotificationText>
             <_Img src={Download2} />
           </_MainNoticeBox>
-          <NoticeBox />
-          <NoticeBox />
-          <NoticeBox />
-          <NoticeBox />
+          {data?.notices.length > 0 &&
+            data.notices.map((notice, index) => {
+              if (index >= 4) return;
+
+              return <NoticeBox title={notice.title} createdAt={notice.createdAt} id={notice.id} />;
+            })}
         </_NoticeBox>
       </_NoticeContainer>
     </_Wrapper>
