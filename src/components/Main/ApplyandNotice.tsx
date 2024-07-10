@@ -44,19 +44,26 @@ const ApplyandNotice = () => {
           <_SessionName>{sessionName}</_SessionName>
           <_Date style={{ color: `${latestNoticeIndex + 1 == current ? '#FF9154' : '#969696'}` }}>{date}</_Date>
         </_TextBox>
-        {latestNoticeIndex + 1 == current ? (
-          <_ApplyButton>신청하기</_ApplyButton>
-        ) : latestNoticeIndex + 1 > current ? (
-          <_VideoButton
-            onClick={() => {
-              if (urls[current]) window.open(urls[current]);
-            }}
-          >
-            <_Img src={Youtube} />
-          </_VideoButton>
-        ) : (
-          <></>
-        )}
+        {
+          // latestNoticeIndex + 1 == current
+          false ? (
+            <_ApplyButton>신청하기</_ApplyButton>
+          ) : latestNoticeIndex + 1 > current ? (
+            <>
+              {urls[current] && (
+                <_VideoButton
+                  onClick={() => {
+                    if (urls[current]) window.open(urls[current]);
+                  }}
+                >
+                  <_Img src={Youtube} />
+                </_VideoButton>
+              )}
+            </>
+          ) : (
+            <></>
+          )
+        }
       </_DateBox>
     );
   };
