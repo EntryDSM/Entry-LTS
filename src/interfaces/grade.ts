@@ -33,4 +33,6 @@ export interface IWriteGradeElement {
   lecture_absence_count: number;
   lateness_count: number;
   early_leave_count: number;
+  dsm_algorithm_award: number;
+  craftsman_information_processing: number;
 }

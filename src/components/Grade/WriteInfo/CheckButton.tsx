@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function CheckButton({ value }) {
   const [checked, setChecked] = useState<boolean>(value);
+
   return (
     <_ButtonBox>
       <_Button onClick={() => setChecked(true)} isClick={checked}>
@@ -15,8 +16,7 @@ function CheckButton({ value }) {
     </_ButtonBox>
   );
 }
-// value={writeGradeElement.lateness_count}
-// onChange={changeWriteGradeElement}
+
 export default CheckButton;
 
 const _ButtonBox = styled.div`

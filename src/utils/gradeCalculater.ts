@@ -1,6 +1,21 @@
 import { gradeToScore } from '../constant/grade';
 import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
 
+/* 가산점 계산 */
+export const getBonusScore = (writeGradeElement) => {
+  let bonusScore = 0;
+
+  if (writeGradeElement.craftsman_information_processing) {
+    bonusScore += 6;
+  }
+
+  if (writeGradeElement.dsm_algorithm_award) {
+    bonusScore += 3;
+  }
+
+  return bonusScore;
+};
+
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
   return 110;

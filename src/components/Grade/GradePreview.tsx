@@ -6,13 +6,14 @@ interface IGradePreview {
   attendenceScore: number;
   volunteerScore: number;
   maxScore: number;
+  bonusScore: number;
 }
 
-const GradePreview = ({ gradeScore, attendenceScore, volunteerScore, maxScore }: IGradePreview) => {
+const GradePreview = ({ gradeScore, attendenceScore, volunteerScore, maxScore, bonusScore }: IGradePreview) => {
   return (
     <CurrentGrades>
       <Text size="title3" color="black" style={{ fontWeight: 700 }}>
-        총: {gradeScore + attendenceScore + volunteerScore}/{maxScore}
+        총: {gradeScore + attendenceScore + volunteerScore + bonusScore}/{maxScore}
       </Text>
       <Text size="title3" color="black" style={{ fontWeight: 500 }}>
         성적 점수: {gradeScore}/{maxScore - 30}

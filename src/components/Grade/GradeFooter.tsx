@@ -14,6 +14,7 @@ interface IGradeFooterProps {
   onSubmit?: () => void;
   onClick?: () => void;
   length?: number;
+  bonusScore?: number;
 }
 
 const GradeFooter = ({
@@ -25,6 +26,7 @@ const GradeFooter = ({
   onSubmit,
   onClick,
   length,
+  bonusScore,
 }: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
 
@@ -74,7 +76,7 @@ const GradeFooter = ({
                 일반 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {((gradeScore * 175) / 100 + maxScore).toFixed(3)}
+                {((gradeScore * 175) / 100 + maxScore + bonusScore).toFixed(3)}
               </Text>
             </_DIV>
             <_DIV>
