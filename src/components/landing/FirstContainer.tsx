@@ -19,7 +19,7 @@ const First = () => {
             대덕소프트웨어마이스터고
           </_Title>
           <Link to="/main">
-            <_Button>원서접수</_Button>
+            <_Button>함꼐하기</_Button>
           </Link>
         </_TitleBox>
         <Scroll src={ArrowDoubleDown} />
