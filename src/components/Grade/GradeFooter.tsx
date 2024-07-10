@@ -76,7 +76,7 @@ const GradeFooter = ({
                 일반 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {((gradeScore * 175) / 100 + maxScore + bonusScore).toFixed(3)}
+                {((gradeScore * 175) / 100 + maxScore).toFixed(3)}
               </Text>
             </_DIV>
             <_DIV>
@@ -84,7 +84,7 @@ const GradeFooter = ({
                 사회통합 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
+                {gradeScore + maxScore + bonusScore}
               </Text>
             </_DIV>
             <_DIV>
@@ -92,7 +92,7 @@ const GradeFooter = ({
                 마이스터 인재:
               </Text>
               <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
+                {gradeScore + maxScore + bonusScore}
               </Text>
             </_DIV>
             <_DIV>
