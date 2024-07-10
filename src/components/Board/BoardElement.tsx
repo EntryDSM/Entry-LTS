@@ -35,7 +35,7 @@ const BoardElement = (props: IBoard) => {
   return (
     <>
       <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div style={{ maxWidth: 500, width: isMobile && searchParams.get('type') != 'faq' && '50%' }}>
+        <Div style={{ maxWidth: 600, width: isMobile && searchParams.get('type') != 'faq' && '70%' }}>
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
@@ -48,7 +48,7 @@ const BoardElement = (props: IBoard) => {
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
                 style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
-                width={285}
+                width={400}
               >
                 {title}
               </Text>
