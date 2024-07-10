@@ -9,15 +9,23 @@ import projectImg from '../../assets/projectImg.png';
 import projectImg2 from '../../assets/projectImg2.png';
 import projectImg3 from '../../assets/projectImg3.png';
 import projectImg4 from '../../assets/projectImg4.png';
+import projectImg5 from '../../assets/projectImg5.png';
 
-const images = [projectImg, projectImg2, projectImg3, projectImg4, projectImg3];
-const titles = ['스퀘어', '먹젠', '뭐넣지', '어쩌고', '저쩌고'];
+import projectLogo from '../../assets/projectLogo.png';
+import projectLogo2 from '../../assets/projectLogo2.png';
+import projectLogo3 from '../../assets/projectLogo3.png';
+import projectLogo4 from '../../assets/projectLogo4.png';
+import projectLogo5 from '../../assets/projectLogo5.png';
+
+const logos = [projectLogo, projectLogo2, projectLogo3, projectLogo4, projectLogo5];
+const images = [projectImg, projectImg2, projectImg3, projectImg4, projectImg5];
+const titles = ['자비스', 'DMS', 'PiCK', 'Removal', '마음가짐'];
 const details = [
-  '스퀘어어쩌고저쩌고',
-  '먹젠대충설명글',
-  '뭐넣지뭐넣어야하지',
-  '어쩌고지후야얼른정해줘',
-  '저쩌고더미값더미값',
+  'JOBIS는 교내 산학협력부와 함께 진행\n중인 취업 관리 시스템입니다',
+  '학생을 위한 단 하나의 기숙사 관리 서비스입니다',
+  'PiCK은 대덕소프트웨어마이스터고등학교\n온라인 출결관리 서비스입니다',
+  '자동자막, 욕설검열, 자동번역 기능을 제공하는\n온라인 동영상 편집 서비스입니다',
+  '마음가짐은 헬스인들을 위해 편리한 서비스를\n제공하는 서비스 입니다.',
 ];
 
 const Second = () => {
@@ -51,14 +59,15 @@ const Second = () => {
     height: 320px;
     width: 580px;
     animation: ${slideAnimation} 0.5s ease-in-out;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
   `;
 
   const ImageCard = ({ arrNum }) => {
     return (
-      <_ImgCard style={{ backgroundImage: `url(${images[arrNum]})` }}>
+      <_ImgCard style={{ backgroundImage: `url(${images[arrNum]})`, backgroundSize: '580px 320px' }}>
         <_ImageBox>
           <_ImgTitleBox>
-            <_Logo src={images[arrNum]} />
+            <_Logo src={logos[arrNum]} />
             {titles[arrNum]}
           </_ImgTitleBox>
           <Text color="realWhite" size="title1">
@@ -102,11 +111,12 @@ const Second = () => {
 };
 
 const ImageSlider = styled.div`
-  height: 320px;
+  height: 340px;
   width: 100vw;
   display: flex;
   position: relative;
   justify-content: center;
+  align-items: center;
   gap: 24px;
   overflow: hidden;
 `;
@@ -116,7 +126,7 @@ const _Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 40px;
   justify-content: center;
   align-items: center;
   overflow: hidden;
@@ -147,15 +157,6 @@ const _LeftArrowBox = styled.div`
   position: absolute;
   left: 60px;
   align-self: center;
-  &:hover {
-    & > * {
-      transform: scale(150%) translateX(-20%);
-      transition: ease-in-out 0.5s;
-    }
-  }
-  & > * {
-    transition: ease-in-out 0.5s;
-  }
 `;
 
 const _RightArrowBox = styled.div`
@@ -170,15 +171,6 @@ const _RightArrowBox = styled.div`
   position: absolute;
   right: 60px;
   align-self: center;
-  &:hover {
-    & > * {
-      transform: scale(150%) translateX(20%);
-      transition: ease-in-out 0.5s;
-    }
-  }
-  & > * {
-    transition: ease-in-out 0.5s;
-  }
 `;
 
 const _Arrow = styled.img`
@@ -190,7 +182,7 @@ const _ImgTitleBox = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 700;
   color: white;
 `;
