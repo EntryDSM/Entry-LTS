@@ -5,6 +5,15 @@ import { CustomToastContainer, StyledProvider } from '@team-entry/design_system'
 import { Global } from '@emotion/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import * as ChannelService from '@channel.io/channel-web-sdk-loader';
+
+console.log(process.env.CHANNEL_TALK_PLUGIN_KEY);
+
+ChannelService.loadScript();
+
+ChannelService.boot({
+  pluginKey: `${process.env.CHANNEL_TALK_PLUGIN_KEY}`, // fill your plugin key
+});
 
 const root = CreateDOM.createRoot(document.getElementById('root') as HTMLElement);
 

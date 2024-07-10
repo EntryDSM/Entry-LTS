@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/EntryDSM/Entry-LTS#readme",
   "dependencies": {
+    "@channel.io/channel-web-sdk-loader": "^1.1.7",
     "@emotion/core": "^11.0.0",
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.11.0",
