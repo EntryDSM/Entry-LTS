@@ -15,6 +15,7 @@ const ApplyandNotice = () => {
   const [latestNoticeIndex, setLatestNoticeIndex] = useState(0);
 
   const dates = ['2024.05.11', '2024.07.13', '2024.08.24', '2024.09.28'];
+  const urls = ['https://www.youtube.com/watch?v=A_4smim8b6Y'];
 
   useEffect(() => {
     let latestIndex = null;
@@ -46,7 +47,11 @@ const ApplyandNotice = () => {
         {latestNoticeIndex + 1 == current ? (
           <_ApplyButton>신청하기</_ApplyButton>
         ) : latestNoticeIndex + 1 > current ? (
-          <_VideoButton>
+          <_VideoButton
+            onClick={() => {
+              if (urls[current]) window.open(urls[current]);
+            }}
+          >
             <_Img src={Youtube} />
           </_VideoButton>
         ) : (
