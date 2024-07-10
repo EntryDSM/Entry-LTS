@@ -24,7 +24,7 @@ const CustomerPage = () => {
 
   const { isAdmin, authorityColor } = useAuthority();
 
-  const { data: getAllQna, isLoading: qnaLoading } = GetAllQna();
+  // const { data: getAllQna, isLoading: qnaLoading } = GetAllQna();
 
   const { data: faqData, isLoading: faqLoading } = GetAllFaq(category);
 
@@ -42,21 +42,21 @@ const CustomerPage = () => {
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={searchParams.get('type') === 'faq'}
-          setClick={setType}
-          title="문의사항"
+          // click={searchParams.get('type') === 'faq'}
+          // setClick={setType}
+          title="자주묻는 질문"
           subTitle="입학 상담 문의: 042-866-8811, 042-866-8814"
-          button1="Q&A"
-          button2="자주 묻는 질문"
-          button3="FAQ 작성"
+          // button1="Q&A"
+          // button2="자주 묻는 질문"
+          // button3="FAQ 작성"
           isCustomer
           link={isAdmin ? 'writeFAQ' : 'write'}
         />
 
-        {searchParams.get('type') !== 'faq' ? (
+        {searchParams.get('type') === 'faq' ? (
           <>
             <BoardHeader isNumber isTopBorder={false} isComment isWriteDay isWriter />
-            {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
+            {/* {getAllQna?.questions?.slice(0 + current * 10, current * 10 + 10).map((qna, idx) => {
               return (
                 <Link to={`/customer/${qna.id}`} key={qna.id}>
                   <BoardElement
@@ -74,7 +74,7 @@ const CustomerPage = () => {
                   />
                 </Link>
               );
-            })}
+            })} */}
           </>
         ) : (
           <>
@@ -87,7 +87,10 @@ const CustomerPage = () => {
                         color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="title2"
                         cursor="pointer"
-                        onClick={() => setCategory(res[1])}
+                        onClick={() => {
+                          setCategory(res[1]);
+                          setCurrent(0);
+                        }}
                       >
                         {res[0]}
                       </Text>
@@ -97,7 +100,10 @@ const CustomerPage = () => {
                         color={res[1] === category ? `${authorityColor}500` : `${authorityColor}100`}
                         size="body3"
                         cursor="pointer"
-                        onClick={() => setCategory(res[1])}
+                        onClick={() => {
+                          setCategory(res[1]);
+                          setCurrent(0);
+                        }}
                       >
                         {res[0]}
                       </Text>
@@ -127,18 +133,21 @@ const CustomerPage = () => {
                 ))}
           </>
         )}
-        {((searchParams.get('type') == 'qna' && getAllQna?.questions?.length !== 0) ||
-          (searchParams.get('type') == 'faq' && faqData?.faqs.length !== 0)) && (
-          <PageNation
-            pageNum={Math.floor(
-              searchParams.get('type') == 'faq'
-                ? Math.ceil(faqData?.faqs.length / 10) || 0
-                : Math.ceil(getAllQna?.questions?.length / 10) || 0,
-            )}
-            current={current}
-            setCurrent={setCurrent}
-          />
-        )}
+        {
+          // (searchParams.get('type') == 'qna' && getAllQna?.questions?.length !== 0) ||
+          searchParams.get('type') != 'faq' && faqData?.faqs.length !== 0 && (
+            <PageNation
+              pageNum={Math.floor(
+                Math.ceil(faqData?.faqs.length / 10) || 0,
+                // searchParams.get('type') == 'faq'
+                //   ? Math.ceil(faqData?.faqs.length / 10) || 0
+                //   : Math.ceil(getAllQna?.questions?.length / 10) || 0,
+              )}
+              current={current}
+              setCurrent={setCurrent}
+            />
+          )
+        }
       </_Wrapper>
     </_Container>
   );
@@ -149,7 +158,7 @@ export default CustomerPage;
 const _Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 100vw;
+  width: 100%;
   margin-bottom: 80px;
 `;
 
