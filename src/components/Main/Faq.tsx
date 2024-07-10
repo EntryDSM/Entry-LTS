@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import Arrow from '../../assets/GrayArrow.svg';
 import SummaryBox from './SummaryBox';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Faq = () => {
   const questions: Array<string> = [
@@ -38,10 +39,12 @@ const Faq = () => {
         <span>궁금한 점이 있다면?</span>
         <div>
           <h2>자주 묻는 질문</h2>
-          <_MoveContainer>
-            <span>이동하기</span>
-            <img src={Arrow} alt="" />
-          </_MoveContainer>
+          <Link to="/customer">
+            <_MoveContainer>
+              <span>이동하기</span>
+              <img src={Arrow} alt="" />
+            </_MoveContainer>
+          </Link>
         </div>
       </_TitleBox>
       <_FAQBox>
@@ -95,6 +98,7 @@ const _TitleBox = styled.div`
 
 const _MoveContainer = styled.div`
   display: flex;
+  cursor: pointer;
 
   & > span {
     font-size: 20px;

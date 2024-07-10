@@ -5,6 +5,7 @@ import Download2 from '../../assets/Download2.svg';
 import ArrowRight from '../../assets/ArrowRight.svg';
 import New from '../../assets/New.svg';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명회', '4차 입학설명회'];
 
@@ -91,7 +92,9 @@ const ApplyandNotice = () => {
       <_NoticeContainer>
         <_Title2>
           입학 공지사항
-          <_PageMoveButton>이동하기</_PageMoveButton>
+          <Link to="/notice">
+            <_PageMoveButton>이동하기</_PageMoveButton>
+          </Link>
         </_Title2>
         <_NoticeBox>
           <_MainNoticeBox>
