@@ -240,9 +240,11 @@ const Header = () => {
                           </Link>
                         </_._DropdownMenu>
                         <_._DropdownMenu>
-                          <Text size="body1" color="#494949" className="modalText">
-                            학교 소개
-                          </Text>
+                          <Link to="/">
+                            <Text size="body1" color="#494949" className="modalText">
+                              학교 소개
+                            </Text>
+                          </Link>
                         </_._DropdownMenu>
                       </_._DropdownMenus>
                     )}
@@ -271,9 +273,65 @@ const Header = () => {
                 </div>
               </>
             ) : (
-              <Button color={authorityColor} kind="contained" onClick={onClick}>
-                로그인
-              </Button>
+              <>
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '2vw',
+                  }}
+                >
+                  <_._DropdownWrapper
+                    onMouseOver={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    <div>
+                      <Text
+                        size="body1"
+                        color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
+                      >
+                        About
+                      </Text>
+                      <Icon
+                        cursor="pointer"
+                        icon="DownArrow"
+                        color={
+                          (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                            ? 'realBlack'
+                            : 'realWhite'
+                        }
+                        className="downArrow"
+                      />
+                    </div>
+                    {(isDropdownOpen || isDropdownHover) && (
+                      <_._DropdownMenus
+                        onMouseOver={() => setIsDropdownHover(true)}
+                        onMouseLeave={() => setIsDropdownHover(false)}
+                      >
+                        <_._DropdownMenu>
+                          <Link to="/about">
+                            <Text size="body1" color="#494949" className="modalText">
+                              팀 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                        <_._DropdownMenu>
+                          <Link to="/">
+                            <Text size="body1" color="#494949" className="modalText">
+                              학교 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                      </_._DropdownMenus>
+                    )}
+                  </_._DropdownWrapper>
+                  <Button color={authorityColor} kind="contained" onClick={onClick}>
+                    로그인
+                  </Button>
+                </div>
+              </>
             )}
           </Pc>
         </_._HeaderContainer>
