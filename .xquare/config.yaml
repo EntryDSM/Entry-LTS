@@ -3,5 +3,5 @@ config:
   service_type: fe
   port: 3002
   domain:
-    prod: entry-lts.xquare.app
+    prod: entrydsm.hs.kr
     stag: entry-lts-stag.xquare.app
