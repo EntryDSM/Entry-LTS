@@ -55,7 +55,7 @@ const WriteAttendence = ({
       />
     </GradeWraper>
   ) : (
-    <>
+    <_ReferenceBox>
       <GradeWraper title="미인정 결석">
         <Input
           type="number"
@@ -132,7 +132,8 @@ const WriteAttendence = ({
           </_Button>
         </_ButtonBox>
       </GradeWraper>
-    </>
+      <_ReferenceText>* 정보처리기능사 자격증 취득여부 가산점은 일반전형일 경우 들어가지 않습니다.</_ReferenceText>
+    </_ReferenceBox>
   );
 };
 
@@ -155,4 +156,18 @@ const _Button = styled.div<{ isClick?: boolean }>`
   color: ${({ isClick }) => (isClick ? theme.color.realWhite : theme.color.orange500)};
   background-color: ${({ isClick }) => (isClick ? theme.color.orange500 : theme.color.realWhite)};
   cursor: pointer;
+`;
+
+const _ReferenceBox = styled.div`
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+`;
+
+const _ReferenceText = styled.p`
+  font-size: 12px;
+  color: #868686;
+  font-weight: 400;
+  position: absolute;
+  right: 0;
+  margin-top: 6px;
 `;
