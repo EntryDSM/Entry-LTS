@@ -7,8 +7,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 
-console.log(process.env.CHANNEL_TALK_PLUGIN_KEY);
-
 ChannelService.loadScript();
 
 ChannelService.boot({
