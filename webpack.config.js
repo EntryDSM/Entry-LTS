@@ -67,6 +67,7 @@ module.exports = {
       'process.env.REACT_APP_AUTH_URL': JSON.stringify(process.env.REACT_APP_AUTH_URL),
       'process.env.REACT_APP_APPLY_URL': JSON.stringify(process.env.REACT_APP_APPLY_URL),
       'process.env.REACT_APP_ADMIN_URL': JSON.stringify(process.env.REACT_APP_ADMIN_URL),
+      'process.env.CHANNEL_TALK_PLUGIN_KEY': JSON.stringify(process.env.CHANNEL_TALK_PLUGIN_KEY),
     }),
     new webpack.ProvidePlugin({
       process: 'process/browser.js',
