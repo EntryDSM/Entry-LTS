@@ -10,7 +10,8 @@ import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 ChannelService.loadScript();
 
 ChannelService.boot({
-  pluginKey: `${process.env.CHANNEL_TALK_PLUGIN_KEY}`, // fill your plugin key
+  // pluginKey: `${process.env.CHANNEL_TALK_PLUGIN_KEY}`, fill your plugin key
+  pluginKey: '75c47112-e42a-440f-92de-5485a1fc5477',
 });
 
 const root = CreateDOM.createRoot(document.getElementById('root') as HTMLElement);
