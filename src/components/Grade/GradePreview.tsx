@@ -21,7 +21,7 @@ const GradePreview = ({
   return (
     <CurrentGrades>
       <Text size="title3" color="black" style={{ fontWeight: 700 }}>
-        총: {gradeScore + attendenceScore + volunteerScore + dsmAlgorithmScore + certificateScore}/{maxScore}
+        총: {gradeScore + attendenceScore + volunteerScore}/{maxScore}
       </Text>
       <Text size="title3" color="black" style={{ fontWeight: 500 }}>
         성적 점수: {gradeScore}/{maxScore - 30}
@@ -32,6 +32,9 @@ const GradePreview = ({
       <Text size="title3" color="black" style={{ fontWeight: 500 }}>
         봉사 점수: {volunteerScore}/15
       </Text>
+      {/* <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+        가산점: {dsmAlgorithmScore + certificateScore}/9
+      </Text> */}
     </CurrentGrades>
   );
 };

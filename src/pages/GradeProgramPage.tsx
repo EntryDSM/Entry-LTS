@@ -97,7 +97,7 @@ const GradeProgramPage = () => {
             dsmAlgorithmScore: dsmAlgorithmScore,
           }
         : {
-            gradeScore: getSelectGradeScore(current, selectGradeElement),
+            gradeScore: getSelectGradeScore(current, selectGradeElement, isGraduate),
             attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
             volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
             maxScore: getMaxScore(),

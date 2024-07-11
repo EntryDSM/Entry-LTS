@@ -34,7 +34,11 @@ export const getVoluntterScore = (volunterrTime: number) => {
 };
 
 /**각 학기별 점수 계산 */
-const getSelectSemesterGradeScore = (gradeCurrent: number, selectGradeElement: ISelectGradeElement) => {
+const getSelectSemesterGradeScore = (
+  gradeCurrent: number,
+  selectGradeElement: ISelectGradeElement,
+  isGraduate: boolean,
+) => {
   let result: number;
   let gradeScoreArray: string[] = [];
 
@@ -51,11 +55,15 @@ const getSelectSemesterGradeScore = (gradeCurrent: number, selectGradeElement: I
 };
 
 /**총 학기별 점수 계산 */
-export const getSelectGradeScore = (gradeCurrent: number, selectGradeElement: ISelectGradeElement) => {
+export const getSelectGradeScore = (
+  gradeCurrent: number,
+  selectGradeElement: ISelectGradeElement,
+  isGraduate: boolean,
+) => {
   const allSubjectsGrade: number[] = [0, 0, 0, 0];
   let result = 0;
   for (let i = 0; i < gradeCurrent; i++) {
-    allSubjectsGrade[i] = getSelectSemesterGradeScore(i, selectGradeElement);
+    allSubjectsGrade[i] = getSelectSemesterGradeScore(i, selectGradeElement, isGraduate);
   }
 
   if (!allSubjectsGrade[0] && !!allSubjectsGrade[1]) allSubjectsGrade[1] *= 2;
@@ -71,6 +79,10 @@ export const getSelectGradeScore = (gradeCurrent: number, selectGradeElement: IS
 
   for (let i = 0; i < gradeCurrent; i++) {
     result += allSubjectsGrade[i];
+  }
+
+  if (!isGraduate && gradeCurrent > 0) {
+    result += allSubjectsGrade[0];
   }
 
   return Math.round(result * 10) / 10;
