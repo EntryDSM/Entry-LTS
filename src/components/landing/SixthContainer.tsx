@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { theme, Button } from '@team-entry/design_system';
+import * as ChannelService from '@channel.io/channel-web-sdk-loader';
 
 const Sixth = () => {
   return (
@@ -27,7 +28,7 @@ const Sixth = () => {
           kind="contained"
           isBig={true}
           onClick={() => {
-            window.open('https://medium.com/entrydsm');
+            ChannelService.openChat();
           }}
         >
           채팅 시작하기
