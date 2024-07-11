@@ -21,10 +21,10 @@ const WriteAttendence = ({
   changeWriteGradeElement,
   setWriteGradeElement,
 }: WriteAttendenceProps) => {
-  const { dsm_algorithm_award, craftsman_information_processing } = writeGradeElement;
+  const { dsm_algorithm_award, certificate } = writeGradeElement;
 
   const [checked, setChecked] = useState(dsm_algorithm_award);
-  const [checked2, setChecked2] = useState(craftsman_information_processing);
+  const [checked2, setChecked2] = useState(certificate);
 
   useEffect(() => {
     setWriteGradeElement((prev) => ({
@@ -37,9 +37,9 @@ const WriteAttendence = ({
   useEffect(() => {
     setWriteGradeElement((prev) => ({
       ...prev,
-      craftsman_information_processing: checked2,
+      certificate: checked2,
     }));
-    console.log(writeGradeElement.craftsman_information_processing);
+    console.log(writeGradeElement.certificate);
   }, [checked2, setWriteGradeElement]);
 
   return gradeStatus === 'qualificationExam' ? (
@@ -112,7 +112,7 @@ const WriteAttendence = ({
         />
       </GradeWraper>
 
-      <GradeWraper title="DSM 알고리즘 상">
+      <GradeWraper title="DSM 알고리즘 대회 입상">
         <_ButtonBox>
           <_Button onClick={() => setChecked(1)} isClick={checked === 1}>
             O
@@ -122,7 +122,7 @@ const WriteAttendence = ({
           </_Button>
         </_ButtonBox>
       </GradeWraper>
-      <GradeWraper title="정보처리기능사 자격증 취득여부">
+      <GradeWraper title="정보처리기능사 자격증 취득">
         <_ButtonBox>
           <_Button onClick={() => setChecked2(1)} isClick={checked2 === 1}>
             O

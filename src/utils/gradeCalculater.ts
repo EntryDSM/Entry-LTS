@@ -3,17 +3,15 @@ import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
 
 /* 가산점 계산 */
 export const getBonusScore = (writeGradeElement) => {
-  let bonusScore = 0;
-
-  if (writeGradeElement.craftsman_information_processing) {
-    bonusScore += 6;
+  let certificateScore = 0;
+  let dsmAlgorithmScore = 0;
+  if (writeGradeElement.certificate) {
+    certificateScore += 6;
   }
-
   if (writeGradeElement.dsm_algorithm_award) {
-    bonusScore += 3;
+    dsmAlgorithmScore += 3;
   }
-
-  return bonusScore;
+  return { certificateScore, dsmAlgorithmScore };
 };
 
 /**성적산출 최고 점수 */

@@ -34,5 +34,5 @@ export interface IWriteGradeElement {
   lateness_count: number;
   early_leave_count: number;
   dsm_algorithm_award: number;
-  craftsman_information_processing: number;
+  certificate: number;
 }

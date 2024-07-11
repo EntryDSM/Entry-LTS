@@ -29,7 +29,8 @@ const GradeProgramPage = () => {
     attendenceScore: 0,
     volunteerScore: 0,
     maxScore: 0,
-    bonusScore: 0,
+    certificateScore: 0,
+    dsmAlgorithmScore: 0,
   });
 
   const handleBlackexamSubmit = () => {};
@@ -55,7 +56,7 @@ const GradeProgramPage = () => {
     early_leave_count: 0,
     volunteer_time: 0,
     dsm_algorithm_award: 0,
-    craftsman_information_processing: 0,
+    certificate: 0,
   });
 
   const handleSubmit = () => {};
@@ -84,6 +85,7 @@ const GradeProgramPage = () => {
   }, [gradeStatus]);
 
   useEffect(() => {
+    const { dsmAlgorithmScore, certificateScore } = getBonusScore(writeGradeElement);
     const newScore =
       gradeStatus === 'qualificationExam'
         ? {
@@ -91,14 +93,16 @@ const GradeProgramPage = () => {
             attendenceScore: 15,
             volunteerScore: Math.min(15, Math.max(0, Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10)),
             maxScore: getMaxScore(),
-            bonusScore: getBonusScore(writeGradeElement),
+            certificateScore: certificateScore,
+            dsmAlgorithmScore: dsmAlgorithmScore,
           }
         : {
             gradeScore: getSelectGradeScore(current, selectGradeElement),
             attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
             volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
             maxScore: getMaxScore(),
-            bonusScore: getBonusScore(writeGradeElement),
+            certificateScore: certificateScore,
+            dsmAlgorithmScore: dsmAlgorithmScore,
           };
 
     setScore(newScore);
@@ -123,7 +127,8 @@ const GradeProgramPage = () => {
                 attendenceScore={score.attendenceScore}
                 volunteerScore={score.volunteerScore}
                 maxScore={score.maxScore}
-                bonusScore={score.bonusScore}
+                certificateScore={score.certificateScore}
+                dsmAlgorithmScore={score.dsmAlgorithmScore}
               />
               {current < titles.length - 1 && (
                 <AllSelect
@@ -170,7 +175,8 @@ const GradeProgramPage = () => {
           onClick={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
           onSubmit={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
           length={titles.length - 1}
-          bonusScore={score.bonusScore}
+          certificateScore={score.certificateScore}
+          dsmAlgorithmScore={score.dsmAlgorithmScore}
         />
       </Wrapper>
     </Container>
