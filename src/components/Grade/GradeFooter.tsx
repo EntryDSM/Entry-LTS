@@ -14,6 +14,8 @@ interface IGradeFooterProps {
   onSubmit?: () => void;
   onClick?: () => void;
   length?: number;
+  certificateScore: number;
+  dsmAlgorithmScore: number;
 }
 
 const GradeFooter = ({
@@ -25,6 +27,8 @@ const GradeFooter = ({
   onSubmit,
   onClick,
   length,
+  certificateScore,
+  dsmAlgorithmScore,
 }: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
 
@@ -74,7 +78,7 @@ const GradeFooter = ({
                 일반 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {((gradeScore * 175) / 100 + maxScore).toFixed(3)}
+                {((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
               </Text>
             </_DIV>
             <_DIV>
@@ -82,7 +86,7 @@ const GradeFooter = ({
                 사회통합 전형:
               </Text>
               <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
+                {gradeScore + maxScore + dsmAlgorithmScore + certificateScore}
               </Text>
             </_DIV>
             <_DIV>
@@ -90,7 +94,7 @@ const GradeFooter = ({
                 마이스터 인재:
               </Text>
               <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
+                {gradeScore + maxScore + dsmAlgorithmScore + certificateScore}
               </Text>
             </_DIV>
             <_DIV>

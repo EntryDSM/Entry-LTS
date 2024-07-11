@@ -1,6 +1,19 @@
 import { gradeToScore } from '../constant/grade';
 import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
 
+/* 가산점 계산 */
+export const getBonusScore = (writeGradeElement) => {
+  let certificateScore = 0;
+  let dsmAlgorithmScore = 0;
+  if (writeGradeElement.certificate) {
+    certificateScore += 6;
+  }
+  if (writeGradeElement.dsm_algorithm_award) {
+    dsmAlgorithmScore += 3;
+  }
+  return { certificateScore, dsmAlgorithmScore };
+};
+
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
   return 110;

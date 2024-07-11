@@ -11,8 +11,13 @@ import { GradeStatusType, ISelectGradeElement, IWriteGradeElement } from '@/inte
 import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
-import { getAttendenceScore, getMaxScore, getSelectGradeScore, getVoluntterScore } from '@/utils/gradeCalculater';
-import { editScore, getScore, editGedScore, getGedScore } from '@/utils/api/score';
+import {
+  getAttendenceScore,
+  getBonusScore,
+  getMaxScore,
+  getSelectGradeScore,
+  getVoluntterScore,
+} from '@/utils/gradeCalculater';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
@@ -24,25 +29,11 @@ const GradeProgramPage = () => {
     attendenceScore: 0,
     volunteerScore: 0,
     maxScore: 0,
+    certificateScore: 0,
+    dsmAlgorithmScore: 0,
   });
 
-  // const { data: getData } = getGedScore();
-  // if (getData) {
-  //   setBlackexam({
-  //     score: getData.averageScore,
-  //   });
-  // }
-
-  const { mutate: editGedScoreMutate } = editGedScore();
-  const handleBlackexamSubmit = () => {
-    // const payload = { averageScore: blackexam.score };
-    // editGedScoreMutate(payload, {
-    //   onSuccess: () => {},
-    //   onError: () => {},
-    // });
-  };
-
-  const { data } = getScore();
+  const handleBlackexamSubmit = () => {};
 
   const { form: selectGradeElement, setForm: setSelectGradeElement } = useInput<ISelectGradeElement>({
     korean_grade: ['X', 'X', 'X', 'X'],
@@ -64,49 +55,11 @@ const GradeProgramPage = () => {
     lateness_count: 0,
     early_leave_count: 0,
     volunteer_time: 0,
+    dsm_algorithm_award: 0,
+    certificate: 0,
   });
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setSelectGradeElement({
-  //       korean_grade: data.koreanGrade.split(''),
-  //       social_grade: data.socialGrade.split(''),
-  //       history_grade: data.historyGrade.split(''),
-  //       math_grade: data.mathGrade.split(''),
-  //       science_grade: data.scienceGrade.split(''),
-  //       english_grade: data.englishGrade.split(''),
-  //       tech_and_home_grade: data.techAndHomeGrade.split(''),
-  //     });
-  //     setWriteGradeElement({
-  //       day_absence_count: data.absenceDayCount,
-  //       lecture_absence_count: data.lectureAbsenceCount,
-  //       lateness_count: data.latenessCount,
-  //       early_leave_count: data.earlyLeaveCount,
-  //       volunteer_time: data.volunteerTime,
-  //     });
-  //   }
-  // }, [data, setWriteGradeElement, setSelectGradeElement]);
-  // const { mutate: editScoreMutate } = editScore();
-  const handleSubmit = () => {
-    // const payload = {
-    //   koreanGrade: selectGradeElement.korean_grade.join(''),
-    //   socialGrade: selectGradeElement.social_grade.join(''),
-    //   historyGrade: selectGradeElement.history_grade.join(''),
-    //   mathGrade: selectGradeElement.math_grade.join(''),
-    //   scienceGrade: selectGradeElement.science_grade.join(''),
-    //   englishGrade: selectGradeElement.english_grade.join(''),
-    //   techAndHomeGrade: selectGradeElement.tech_and_home_grade.join(''),
-    //   absenceDayCount: writeGradeElement.day_absence_count,
-    //   lectureAbsenceCount: writeGradeElement.lecture_absence_count,
-    //   latenessCount: writeGradeElement.lateness_count,
-    //   earlyLeaveCount: writeGradeElement.early_leave_count,
-    //   volunteerTime: writeGradeElement.volunteer_time,
-    // };
-    // editScoreMutate(payload, {
-    //   onSuccess: () => {},
-    //   onError: () => {},
-    // });
-  };
+  const handleSubmit = () => {};
 
   const isGraduate = gradeStatus === 'graduate';
   const titles = isGraduate
@@ -132,20 +85,28 @@ const GradeProgramPage = () => {
   }, [gradeStatus]);
 
   useEffect(() => {
-    gradeStatus === 'qualificationExam'
-      ? setScore({
-          gradeScore: Math.min(140, Math.max(0, Math.round(((blackexam.score - 50) / 50) * 80 * 10) / 10)),
-          attendenceScore: 15,
-          volunteerScore: Math.min(15, Math.max(0, Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10)),
-          maxScore: getMaxScore(),
-        })
-      : setScore({
-          gradeScore: getSelectGradeScore(current, selectGradeElement),
-          attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
-          volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
-          maxScore: getMaxScore(),
-        });
-  }, [current, writeGradeElement, blackexam]);
+    const { dsmAlgorithmScore, certificateScore } = getBonusScore(writeGradeElement);
+    const newScore =
+      gradeStatus === 'qualificationExam'
+        ? {
+            gradeScore: Math.min(140, Math.max(0, Math.round(((blackexam.score - 50) / 50) * 80 * 10) / 10)),
+            attendenceScore: 15,
+            volunteerScore: Math.min(15, Math.max(0, Math.round(((blackexam.score - 40) / 60) * 15 * 10) / 10)),
+            maxScore: getMaxScore(),
+            certificateScore: certificateScore,
+            dsmAlgorithmScore: dsmAlgorithmScore,
+          }
+        : {
+            gradeScore: getSelectGradeScore(current, selectGradeElement),
+            attendenceScore: current === titles.length - 1 ? getAttendenceScore(writeGradeElement) : 0,
+            volunteerScore: getVoluntterScore(writeGradeElement.volunteer_time),
+            maxScore: getMaxScore(),
+            certificateScore: certificateScore,
+            dsmAlgorithmScore: dsmAlgorithmScore,
+          };
+
+    setScore(newScore);
+  }, [current, writeGradeElement, blackexam, gradeStatus, selectGradeElement]);
 
   return (
     <Container>
@@ -166,6 +127,8 @@ const GradeProgramPage = () => {
                 attendenceScore={score.attendenceScore}
                 volunteerScore={score.volunteerScore}
                 maxScore={score.maxScore}
+                certificateScore={score.certificateScore}
+                dsmAlgorithmScore={score.dsmAlgorithmScore}
               />
               {current < titles.length - 1 && (
                 <AllSelect
@@ -198,6 +161,7 @@ const GradeProgramPage = () => {
                 changeBlackexam={changeBlackexam}
                 writeGradeElement={writeGradeElement}
                 changeWriteGradeElement={changeWriteGradeElement}
+                setWriteGradeElement={setWriteGradeElement}
               />
             )}
           </_Selects>
@@ -211,12 +175,13 @@ const GradeProgramPage = () => {
           onClick={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
           onSubmit={() => (gradeStatus === 'qualificationExam' ? handleBlackexamSubmit() : handleSubmit())}
           length={titles.length - 1}
+          certificateScore={score.certificateScore}
+          dsmAlgorithmScore={score.dsmAlgorithmScore}
         />
       </Wrapper>
     </Container>
   );
 };
-
 export default GradeProgramPage;
 
 const Container = styled.div`
