@@ -13,7 +13,7 @@ const WhatIsEntry = () => {
           </p>
         </h1>
         <Text size={'body1'} color={'black50'}>
-          EntryDSM은 개발하는 것을 좋아하는 사람들이 자발적으로 모여
+          EntryDSM은 개발하는 것을 좋아하는 학생들이 자발적으로 모여
           <br />
           대덕소프트웨어마이스터고등학교의 입학전형(1, 2차 모두)을 위한 온라인 시스템, Entry 를 개발하는 팀입니다.
         </Text>

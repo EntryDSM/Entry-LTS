@@ -10,9 +10,9 @@ const AboutEntry = () => {
       <div>
         <DeveloperIntroduce />
       </div>
-      <div>
+      {/* <div>
         <MediumBlog />
-      </div>
+      </div> */}
     </Main>
   );
 };
@@ -27,7 +27,7 @@ const Main = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0px 60px;
+    padding: 0px 60px 100px 60px;
   }
 `;
 
