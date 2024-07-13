@@ -77,45 +77,51 @@ const GradeFooter = ({
               <Text size="header3" color="black900">
                 일반 전형:
               </Text>
-              <Text size="header3" color="orange900">
-                {((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /170
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
               <Text size="header3" color="black900">
                 사회통합 전형:
               </Text>
-              <Text size="header3" color="orange900">
-                {gradeScore + maxScore + dsmAlgorithmScore + certificateScore}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /110
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
               <Text size="header3" color="black900">
                 마이스터 인재:
               </Text>
-              <Text size="header3" color="orange900">
-                {gradeScore + maxScore + dsmAlgorithmScore + certificateScore}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /110
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
-              <Button
-                kind="outlined"
-                color="black"
+              <_Button
                 onClick={() => {
                   (window.location.href = `${MAIN_URL}/grade`), close();
                 }}
               >
-                다시 입력
-              </Button>
-              <Button
-                kind="contained"
-                color="orange"
-                onClick={() => {
-                  (window.location.href = `${MAIN_URL}`), close();
-                }}
-              >
-                닫기
-              </Button>
+                <Text color="realWhite" size="body3">
+                  닫기
+                </Text>
+              </_Button>
             </_DIV>
           </_Container>
         </Modal>
@@ -146,5 +152,23 @@ const _Container = styled.div`
 const _DIV = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 220px;
+  gap: 6px;
+  width: 100%;
+  width: 320px;
+`;
+
+const _Button = styled.button`
+  border-radius: 5px;
+  background-color: ${theme.color.orange500};
+  &:hover {
+    background-color: ${theme.color.orange600};
+  }
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+`;
+
+const _ScoreBox = styled.div`
+  display: flex;
+  align-items: center;
 `;

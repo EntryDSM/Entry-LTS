@@ -97,7 +97,7 @@ const WriteAttendence = ({
           placeholder="결과 횟수"
           value={writeGradeElement.lecture_absence_count}
           onChange={changeWriteGradeElement}
-          unit="일"
+          unit="회"
         />
       </GradeWraper>
       <GradeWraper title="봉사활동 시간">

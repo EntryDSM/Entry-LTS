@@ -21,21 +21,21 @@ const GradePreview = ({
 }: IGradePreview) => {
   return (
     <CurrentGrades>
-      <Text size="title3" color="black" style={{ fontWeight: 700 }}>
+      <Text size="body1" color="black" style={{ fontWeight: 700 }}>
         총: {gradeScore + attendenceScore + volunteerScore}/{maxScore}
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
         성적 점수: {gradeScore}/{maxScore - 30}
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
         출석 점수: {attendenceScore}/15
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
         봉사 점수: {volunteerScore}/15
       </Text>
-      {/* <Text size="title3" color="black" style={{ fontWeight: 500 }}>
-        가산점: {dsmAlgorithmScore + certificateScore}/9
-      </Text> */}
+      <Text size="body2" color="black" style={{ fontWeight: 500 }}>
+        가산점: +{dsmAlgorithmScore + certificateScore}
+      </Text>
     </CurrentGrades>
   );
 };
