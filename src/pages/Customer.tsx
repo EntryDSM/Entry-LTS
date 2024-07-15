@@ -17,8 +17,9 @@ const CustomerPage = () => {
   const categories: Record<string, FaqType> = {
     전체: '',
     '입학 문의': 'ADMISSION',
-    '진학 문의': 'COURSE',
+    진로: 'COURSE',
     '학교 생활': 'SCHOOL_LIFE',
+    기숙사: 'DORMITORY',
     기타: 'OTHER',
   };
 

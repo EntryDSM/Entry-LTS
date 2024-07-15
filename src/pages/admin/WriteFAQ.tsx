@@ -91,6 +91,14 @@ const WriteFAQPage = () => {
           />
           <Radio
             name="faqType"
+            label="기숙사"
+            value="DORMITORY"
+            color={authorityColor}
+            onClick={setInputValue}
+            checked={inputValue.faqType === 'DORMITORY'}
+          />
+          <Radio
+            name="faqType"
             label="기타"
             value="OTHER"
             color={authorityColor}
