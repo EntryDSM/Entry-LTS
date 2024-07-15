@@ -8,7 +8,7 @@ const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
   const DownLoad = () => {
-    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=6f74d1d723f2461fe90d9c6a5f2cc761';
+    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=9587a60deb3b32b48b7342b0ea9112aa';
     window.open(pdfUrl);
   };
 
@@ -23,7 +23,7 @@ const NewAdmissionPage = () => {
             <Icon icon="Download" size={18} />
           </_Icon>
           <Text color="black900" size="body1" cursor="default">
-            2024전형요강.pdf
+            2025전형요강.pdf
           </Text>
         </_Download>
         {/* <_Image /> */}
