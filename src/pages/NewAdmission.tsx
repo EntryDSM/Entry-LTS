@@ -8,7 +8,7 @@ const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
   const DownLoad = () => {
-    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=9587a60deb3b32b48b7342b0ea9112aa';
+    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
     window.open(pdfUrl);
   };
 
