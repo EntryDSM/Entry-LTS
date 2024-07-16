@@ -9,6 +9,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { faqTypeToKorean } from '@/utils/translate';
 import { DeleteFaq } from '@/utils/api/faq';
 import Pin from '@/assets/pin';
+import Megaphone from '@/assets/Megaphone';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -36,8 +37,13 @@ const BoardElement = (props: IBoard) => {
 
   return (
     <>
-      <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div style={{ maxWidth: 600, width: isMobile && searchParams.get('type') != 'faq' && '70%' }}>
+      <_ElementContainer onClick={() => isOpen && setClicked(!clicked)} isPinned={isPinned}>
+        <Div
+          style={{
+            maxWidth: 600,
+            width: isMobile && searchParams.get('type') != 'faq' && '70%',
+          }}
+        >
           <Pc>
             <Text align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
@@ -53,12 +59,12 @@ const BoardElement = (props: IBoard) => {
                 width={400}
                 display="flex"
               >
-                {title}
                 {isPinned && (
-                  <Div style={{ marginLeft: '4px' }}>
-                    <Pin size={14} color={theme.color.orange500} />
+                  <Div style={{ marginRight: '5px' }}>
+                    <Megaphone size={18} color={theme.color.orange500} />
                   </Div>
                 )}
+                {title}
               </Text>
             </Div>
           </Pc>
@@ -191,7 +197,10 @@ const BoardElement = (props: IBoard) => {
 
 export default BoardElement;
 
-const _ElementContainer = styled.div`
+interface Container {
+  isPinned: boolean;
+}
+const _ElementContainer = styled.div<Container>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -199,6 +208,7 @@ const _ElementContainer = styled.div`
   min-height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
+  background-color: ${(props) => (props.isPinned ? '#FBFBFB' : 'transparent')};
   @media screen and (max-width: 769px) {
     padding: 20px;
   }
