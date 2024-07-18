@@ -16,7 +16,7 @@ export const getBonusScore = (writeGradeElement) => {
 
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
-  return 110;
+  return 170;
 };
 
 /**출석 점수 계산하는 함수 */
