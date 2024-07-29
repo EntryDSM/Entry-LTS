@@ -85,6 +85,12 @@ const _Title = styled.div`
   font-size: 48px;
   font-weight: 700;
   color: white;
+  @media screen and (max-width: 900px) {
+    font-size: 40px;
+  }
+  @media screen and (max-width: 760px) {
+    font-size: 36px;
+  }
 `;
 
 const _Line = styled.div`
