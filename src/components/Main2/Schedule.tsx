@@ -54,6 +54,11 @@ const Schedule = () => {
           );
         })}
       </_TextProvider>
+      <_MobileText>
+        원서제출 기간은
+        <br />
+        10/14 ~ 10/17입니다.
+      </_MobileText>
     </_Wrapper>
   );
 };
@@ -74,6 +79,10 @@ const _ProgressProvider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _TextProvider = styled.div`
@@ -94,6 +103,10 @@ const _TextProvider = styled.div`
       color: ${theme.color.black300};
     }
   }
+
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _ScheduleCircle = styled.div`
@@ -108,4 +121,15 @@ const _ScheduleLine = styled.div`
   height: 1px;
   background-color: ${theme.color.orange800};
   margin: 0 20px;
+`;
+
+const _MobileText = styled.div`
+  display: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+
+  @media (max-width: 699px) {
+    display: block;
+  }
 `;
