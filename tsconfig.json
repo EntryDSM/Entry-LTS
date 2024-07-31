@@ -1,15 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noResolve": false,
-    "noImplicitAny": false,
-    "removeComments": false,
-    "sourceMap": true,
-    "allowJs": true,
-    "jsx": "react-jsx",
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vite/client", "node"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    // "noResolve": false,
+    // "noImplicitAny": false,
+    // "removeComments": false,
+    // "sourceMap": true,
+
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
@@ -19,3 +31,26 @@
   "exclude": ["node_modules", "build", "scripts", "config/webpack", "src/setupTests.ts", "./node_modules/**/*"],
   "include": ["./src/**/*", "@types", "__tests__"]
 }
+
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",                     // 최신 ESNext 타겟으로 변경
+//     "module": "ESNext",                     // Vite는 ESNext 모듈을 사용
+//     "moduleResolution": "node",
+//     "strict": true,                         // 타입 검사 강화 (옵션)
+//     "esModuleInterop": true,                // ES 모듈 호환성 활성화
+//     "skipLibCheck": true,                   // 라이브러리 체크 생략
+//     "forceConsistentCasingInFileNames": true,
+//     "resolveJsonModule": true,              // JSON 모듈 가져오기 지원
+//     "isolatedModules": true,                // 개별 모듈 파일 처리
+//     "jsx": "react-jsx",                     // 최신 JSX 변환기 설정
+//     "allowSyntheticDefaultImports": true,
+//     "baseUrl": ".",                         // 기본 URL 설정
+//     "paths": {
+//       "@/*": ["./src/*"]                    // 경로 별칭 유지
+//     }
+//   },
+//   "typeRoots": ["node_modules/@types", "src/@types"],
+//   "exclude": ["node_modules", "dist", "scripts", "config/webpack", "src/setupTests.ts", "./node_modules/**/*"],  // Vite에서는 `dist` 폴더로 빌드됨
+//   "include": ["./src/**/*", "@types", "__tests__"]
+// }

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Download from '../assets/Download.svg';
+import Download from '@/assets/Download.svg';
 import { Icon, Text, theme } from '@team-entry/design_system';
 import { useAuthority } from '@/hooks/useAuthority';
 

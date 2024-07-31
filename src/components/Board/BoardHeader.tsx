@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
-import { IBoard } from '@/interfaces/Board';
+import { IBoard } from '../interfaces/Board';
 import { Mobile, Pc } from '../../hooks/useResponsive';
 
 const BoardHeader = (props: IBoard) => {

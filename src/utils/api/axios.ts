@@ -4,9 +4,10 @@ import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '
 import { AUTH_URL } from '@/constant/env';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '@team-entry/design_system';
+import process from 'process';
 
 export const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: process.env.VITE_BASE_URL,
   timeout: 10000,
 });
 
@@ -46,7 +47,7 @@ instance.interceptors.response.use(
             .then((res) => {
               setTokens(res.accessToken, res.refreshToken);
               setCookies('authority', authority === 'admin' ? 'admin' : 'user');
-              if (originalRequest.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
+              if (originalRequest?.headers) originalRequest.headers['Authorization'] = `Bearer ${res.accessToken}`;
               return axios(originalRequest);
             })
             .catch((res: AxiosError<AxiosError>) => {

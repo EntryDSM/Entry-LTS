@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
-import { GradeStatusType } from '@/interfaces/grade';
+import { GradeStatusType } from '../interfaces/grade';
 import { useModal } from '@/hooks/useModal';
 import { MAIN_URL } from '@/constant/env';
 

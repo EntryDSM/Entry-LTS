@@ -1,8 +1,8 @@
-import BoardHeader from '../components/Board/BoardHeader';
+import BoardHeader from '@/components/Board/BoardHeader';
 import styled from '@emotion/styled';
-import BoardElement from '../components/Board/BoardElement';
+import BoardElement from '@/components/Board/BoardElement';
 import { useState } from 'react';
-import BoardTitle from '../components/Board/BoardTitle';
+import BoardTitle from '@/components/Board/BoardTitle';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuthority } from '@/hooks/useAuthority';
 import { GetAllNotice } from '@/utils/api/notice';

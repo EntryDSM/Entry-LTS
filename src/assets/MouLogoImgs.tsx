@@ -271,7 +271,7 @@ const MouLogoImgs = [
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <g clip-path="url(#clip0_24_18)">
+    <g clipPath="url(#clip0_24_18)">
       <rect width="320" height="175" fill="white" />
       <rect x="60" y="-12.5" width="200" height="200" fill="url(#pattern0_24_18)" />
     </g>
@@ -386,7 +386,7 @@ const MouLogoImgs = [
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
-    <g clip-path="url(#clip0_24_28)">
+    <g clipPath="url(#clip0_24_28)">
       <rect width="320" height="175" fill="white" />
       <rect x="46" y="-26.5" width="228" height="228" fill="url(#pattern0_24_28)" />
     </g>

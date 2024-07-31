@@ -7,7 +7,7 @@ import { subject } from '@/constant/grade';
 import AllSelect from '@/components/Grade/SelectGrade/AllSelect';
 import GradePreview from '@/components/Grade/GradePreview';
 import ProgressBar from '@/components/Grade/ProgressBar';
-import { GradeStatusType, ISelectGradeElement, IWriteGradeElement } from '@/interfaces/grade';
+import { GradeStatusType, ISelectGradeElement, IWriteGradeElement } from '../interfaces/grade';
 import SelectGrade from '@/components/Grade/SelectGrade/SelectGrade';
 import WriteAttendence from '@/components/Grade/WriteInfo/WriteAttendence';
 import GradeFooter from '@/components/Grade/GradeFooter';
