@@ -74,7 +74,7 @@ const DeveloperIntroduce = () => {
       </TextWrapper>
       <CardContainer>
         {developers.map((developer, index) => (
-          <Card developer={developer} />
+          <Card key={index} developer={developer} />
         ))}
       </CardContainer>
     </Section>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from '@emotion/styled';
-import { IBoard } from '../interfaces/Board';
+import { IBoard } from '@/interfaces/Board';
 import { Button, Icon, Stack, Text, theme } from '@team-entry/design_system';
 import { Mobile, Pc, isMobile } from '../../hooks/useResponsive';
 import { keyframes } from '@emotion/react';
@@ -41,7 +41,7 @@ const BoardElement = (props: IBoard) => {
         <Div
           style={{
             maxWidth: 600,
-            width: isMobile && searchParams.get('type') != 'faq' && '70%',
+            width: isMobile() && searchParams.get('type') != 'faq' ? '70%' : '0%',
           }}
         >
           <Pc>
@@ -55,7 +55,7 @@ const BoardElement = (props: IBoard) => {
                 size="body3"
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
-                style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+                style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
                 width={400}
                 display="flex"
               >
@@ -79,7 +79,7 @@ const BoardElement = (props: IBoard) => {
               size="body5"
               textOverflow="ellipsis"
               whiteSpace="pre-line"
-              style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+              style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
             >
               {title}
             </Text>
