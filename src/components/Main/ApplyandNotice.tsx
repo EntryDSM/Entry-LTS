@@ -126,7 +126,7 @@ const ApplyandNotice = () => {
             <_MainNotificationText>신입생 전형 요강 PDF 파일 다운로드</_MainNotificationText>
             <_Img src={Download2} />
           </_MainNoticeBox>
-          {data.notices.length > 0 &&
+          {data?.notices.length > 0 &&
             data?.notices.map((notice: { title: string; createdAt: string; id: string }, index: number) => {
               if (index >= 4) return;
 
