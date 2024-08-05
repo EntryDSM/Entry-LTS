@@ -45,7 +45,7 @@ const BoardElement = (props: IBoard) => {
           }}
         >
           <Pc>
-            <Text align="center" color="black700" size="body1" width={100}>
+            <Text style={{ whiteSpace: 'nowrap' }} align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
