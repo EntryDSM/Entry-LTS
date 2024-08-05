@@ -53,7 +53,7 @@ const CustomerDetailPage = () => {
     <_Container>
       <_Wrapper>
         {writeAnswer && (
-          <Text size="header1" color="black" margin={[0, 0, 30, 0]}>
+          <Text size="header1" color="realBlack" margin={[0, 0, 30, 0]}>
             Q&A 답변작성
           </Text>
         )}

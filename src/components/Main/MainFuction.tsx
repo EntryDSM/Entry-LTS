@@ -127,7 +127,7 @@ const MainFunction = () => {
       {/* 원서접수 기간 중 사용할 모달 */}
       {modalState === 'START_NOTICE' && (
         <Modal>
-          <Text size="title2" color="gray50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
+          <Text size="title2" color="black50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
             합격자 확인은 로그인 후 마이페이지를 확인해주세요!
           </Text>
           <Button
