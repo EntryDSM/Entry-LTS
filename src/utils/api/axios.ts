@@ -7,7 +7,7 @@ import { Toast } from '@team-entry/design_system';
 import process from 'process';
 
 export const instance = axios.create({
-  baseURL: process.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 10000,
 });
 
