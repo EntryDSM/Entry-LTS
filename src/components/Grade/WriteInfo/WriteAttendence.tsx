@@ -1,6 +1,6 @@
 import { Input, theme } from '@team-entry/design_system';
 import GradeWraper from '../GradeWraper';
-import { GradeStatusType, IWriteGradeElement } from '../interfaces/grade';
+import { GradeStatusType, IWriteGradeElement } from '@/interfaces/grade';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
 

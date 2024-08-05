@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
-import { GradeStatusType } from '../interfaces/grade';
+import { GradeStatusType } from '@/interfaces/grade';
 
 interface IProgressBarProps {
   step: number;

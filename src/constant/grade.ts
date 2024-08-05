@@ -1,4 +1,4 @@
-import { GradeType } from '../interfaces/grade';
+import { GradeType } from '@/interfaces/grade';
 
 export const gradeArr: GradeType[] = ['A', 'B', 'C', 'D', 'E', 'X'];
 

@@ -1,5 +1,5 @@
 import { gradeToScore } from '@/constant/grade';
-import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
+import { IWriteGradeElement, ISelectGradeElement } from '@/interfaces/grade';
 
 /* 가산점 계산 */
 export const getBonusScore = (writeGradeElement) => {
