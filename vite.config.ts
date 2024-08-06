@@ -30,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(process.cwd(), './src'), // process.cwd()를 사용하여 절대 경로를 설정
+      '@': path.resolve(process.cwd(), './src'),
     },
   },
   build: {
