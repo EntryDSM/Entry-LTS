@@ -1,7 +1,19 @@
 import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 import fs from 'fs';
+
+function ignoreUseClientPlugin() {
+  return {
+    name: 'ignore-use-client',
+    transform(code, id) {
+      if (id.includes('node_modules/@tanstack/react-query-devtools')) {
+        return code.replace(/'use client';?/g, '');
+      }
+    },
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -42,5 +54,5 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  plugins: [reactRefresh()],
+  plugins: [react(), reactRefresh(), ignoreUseClientPlugin()],
 });
