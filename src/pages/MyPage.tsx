@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../hooks/useResponsive';
-import BoardElement from '../components/Board/BoardElement';
-import { useModal } from '../hooks/useModal';
+import { Mobile, Pc } from '@/hooks/useResponsive';
+import BoardElement from '@/components/Board/BoardElement';
+import { useModal } from '@/hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
 import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';

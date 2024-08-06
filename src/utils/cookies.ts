@@ -1,5 +1,5 @@
 import Cookies, { CookieSetOptions } from 'universal-cookie';
-import { COOKIE_DOMAIN } from '../constant/env';
+import { COOKIE_DOMAIN } from '@/constant/env';
 
 const cookies = new Cookies();
 

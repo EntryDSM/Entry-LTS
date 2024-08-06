@@ -41,11 +41,11 @@ const BoardElement = (props: IBoard) => {
         <Div
           style={{
             maxWidth: 600,
-            width: isMobile && searchParams.get('type') != 'faq' && '70%',
+            width: isMobile() && searchParams.get('type') != 'faq' ? '70%' : '0%',
           }}
         >
           <Pc>
-            <Text align="center" color="black700" size="body1" width={100}>
+            <Text style={{ whiteSpace: 'nowrap' }} align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
@@ -55,7 +55,7 @@ const BoardElement = (props: IBoard) => {
                 size="body3"
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
-                style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+                style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
                 width={400}
                 display="flex"
               >
@@ -79,7 +79,7 @@ const BoardElement = (props: IBoard) => {
               size="body5"
               textOverflow="ellipsis"
               whiteSpace="pre-line"
-              style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+              style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
             >
               {title}
             </Text>

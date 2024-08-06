@@ -184,7 +184,7 @@ const Header = () => {
                   const { name, url } = res;
                   return (
                     <Link key={index} to={url}>
-                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
+                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : 'inherit'}>
                         {name}
                       </Text>
                     </Link>
@@ -212,7 +212,7 @@ const Header = () => {
                     <div>
                       <Text
                         size="body1"
-                        color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
+                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
                       >
                         About
                       </Text>
@@ -234,14 +234,14 @@ const Header = () => {
                       >
                         <_._DropdownMenu>
                           <Link to="/about">
-                            <Text size="body1" color="#494949" className="modalText">
+                            <Text size="body1" color="inherit" className="modalText">
                               팀 소개
                             </Text>
                           </Link>
                         </_._DropdownMenu>
                         <_._DropdownMenu>
                           <Link to="/">
-                            <Text size="body1" color="#494949" className="modalText">
+                            <Text size="body1" color="inherit" className="modalText">
                               학교 소개
                             </Text>
                           </Link>
@@ -265,7 +265,7 @@ const Header = () => {
                           마이페이지
                         </Text>
                       </Link>
-                      <Text size="body1" color="#494949" style={{ fontSize: '22px' }}>
+                      <Text size="body1" color="inherit" style={{ fontSize: '22px' }}>
                         김이름
                       </Text>
                     </>
@@ -290,7 +290,7 @@ const Header = () => {
                     <div>
                       <Text
                         size="body1"
-                        color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
+                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
                       >
                         About
                       </Text>
@@ -312,14 +312,14 @@ const Header = () => {
                       >
                         <_._DropdownMenu>
                           <Link to="/about">
-                            <Text size="body1" color="#494949" className="modalText">
+                            <Text size="body1" color="inherit" className="modalText">
                               팀 소개
                             </Text>
                           </Link>
                         </_._DropdownMenu>
                         <_._DropdownMenu>
                           <Link to="/">
-                            <Text size="body1" color="#494949" className="modalText">
+                            <Text size="body1" color="inherit" className="modalText">
                               학교 소개
                             </Text>
                           </Link>

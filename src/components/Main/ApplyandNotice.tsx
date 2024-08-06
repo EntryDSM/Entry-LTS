@@ -12,7 +12,7 @@ import { INotice, NoticeType } from '@/utils/api/notice/types';
 const name = ['1차 입학설명회', '2차 입학설명회', '3차 입학설명회', '4차 입학설명회'];
 
 const ApplyandNotice = () => {
-  const { data } = GetAllNotice('NOTICE');
+  const { data }: { data: any } = GetAllNotice('NOTICE');
 
   const [nowDate, setNowDate] = useState(new Date());
   const [currentLoca, setCurrentLoca] = useState(0);
@@ -24,7 +24,7 @@ const ApplyandNotice = () => {
   const urls = ['https://www.youtube.com/watch?v=A_4smim8b6Y'];
 
   useEffect(() => {
-    let latestIndex = null;
+    let latestIndex: number = 0;
     const today = new Date();
     for (let i = 0; i < dates.length; i++) {
       const noticeDate = new Date(dates[i]);
@@ -127,7 +127,7 @@ const ApplyandNotice = () => {
             <_Img src={Download2} />
           </_MainNoticeBox>
           {data?.notices.length > 0 &&
-            data.notices.map((notice, index) => {
+            data?.notices.map((notice: { title: string; createdAt: string; id: string }, index: number) => {
               if (index >= 4) return;
 
               return <NoticeBox title={notice.title} createdAt={notice.createdAt} id={notice.id} />;

@@ -19,19 +19,21 @@ const Sixth = () => {
       <_BottomContainer>
         <_Title>아직, 고민중인 당신을 위해</_Title>
         <_Description>
-          아래 버튼을 클릭해 채팅으로 간단한 상담을 진행해보는 건 어때요?
+          {/* 아래 버튼을 클릭해 채팅으로 간단한 상담을 진행해보는 건 어때요?
           <br />
-          부담 가지지 마시고 언제든지 편하게 이용해 주세요!
+          부담 가지지 마시고 언제든지 편하게 이용해 주세요! */}
+          아래 버튼을 클릭해 학교 홈페이지로 이동하여 입학 상담을 진행해보세요!
         </_Description>
         <Button
           color="orange"
           kind="contained"
           isBig={true}
           onClick={() => {
-            ChannelService.openChat();
+            // ChannelService.openChat();
+            window.open('https://dsmhs.djsch.kr/boardCnts/list.do?boardID=76196&m=0605&s=dsmhs#contents', '_blank');
           }}
         >
-          채팅 시작하기
+          학교 홈페이지로 이동하기
         </Button>
       </_BottomContainer>
     </_Wrapper>

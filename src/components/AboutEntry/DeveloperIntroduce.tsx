@@ -73,15 +73,15 @@ const DeveloperIntroduce = () => {
         <span>사진에 마우스를 올려 더 자세한 정보를 확인해보세요</span>
       </TextWrapper>
       <CardContainer>
-        {developers.map((developer) => (
-          <Card key={developer.id} developer={developer} />
+        {developers.map((developer, index) => (
+          <Card key={index} developer={developer} />
         ))}
       </CardContainer>
     </Section>
   );
 };
 
-const Card = ({ developer }) => {
+const Card = ({ developer }: { developer: any }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <CardWrapper onMouseOver={() => setIsOpen(true)} onMouseLeave={() => setIsOpen(false)}>

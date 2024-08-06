@@ -4,7 +4,13 @@ import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
 import React from 'react';
 
-const QnaAnswer = ({ title, content, created_at }) => {
+interface PropsType {
+  title?: string;
+  content?: string;
+  created_at?: string;
+}
+
+const QnaAnswer = ({ title, content, created_at }: PropsType) => {
   const { authorityColor } = useAuthority();
 
   return (

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Button, Icon, Text, VStack, theme } from '@team-entry/design_system';
-import Noticeimg from '../assets/ReplaceNotice.svg';
+import Noticeimg from '@/assets/ReplaceNotice.svg';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Mobile, Pc } from '..//hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';

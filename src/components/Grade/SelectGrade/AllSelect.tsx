@@ -1,7 +1,7 @@
 import { SetStateAction, useEffect, useState } from 'react';
 import { Text, theme } from '@team-entry/design_system';
 import styled from '@emotion/styled';
-import { gradeArr } from '../../../constant/grade';
+import { gradeArr } from '@/constant/grade';
 import { GradeType, ISelectGradeElement } from '@/interfaces/grade';
 
 interface IAllSelect {

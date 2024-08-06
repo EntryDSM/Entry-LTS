@@ -1,7 +1,7 @@
 import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Input, Switch, Text, Textarea } from '@team-entry/design_system';
-import { Mobile, Pc } from '../hooks/useResponsive';
+import { Mobile, Pc } from '@/hooks/useResponsive';
 import { CreateQna } from '@/utils/api/qna';
 import { useInput } from '@/hooks/useInput';
 

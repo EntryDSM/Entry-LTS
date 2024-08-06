@@ -12,7 +12,7 @@ const Fourth = () => {
             대덕 SW마이스터고등학교와 함께하는
           </Text>
           <_Text>든든한 MOU 기업들</_Text>
-          <Text color size="title2" align="center">
+          <Text size="title2" align="center" color={'orange600'}>
             350여개에 달하는 기업이 본교에 취업을 의뢰했으며,
             <br />
             매년 학생들의 취업으로 이어지고 있습니다
@@ -22,21 +22,21 @@ const Fourth = () => {
           <AnimationBox rotate="left">
             {MouLogoImgs.map((item, idx) => {
               if (idx < 6) {
-                return <_MOULogo>{item}</_MOULogo>;
+                return <_MOULogo key={idx}>{item}</_MOULogo>;
               }
             })}
           </AnimationBox>
           <AnimationBox rotate="right">
             {MouLogoImgs.map((item, idx) => {
               if (idx >= 6 && idx < 12) {
-                return <_MOULogo>{item}</_MOULogo>;
+                return <_MOULogo key={idx}>{item}</_MOULogo>;
               }
             })}
           </AnimationBox>
           <AnimationBox rotate="left">
             {MouLogoImgs.map((item, idx) => {
               if (idx >= 12) {
-                return <_MOULogo>{item}</_MOULogo>;
+                return <_MOULogo key={idx}>{item}</_MOULogo>;
               }
             })}
           </AnimationBox>

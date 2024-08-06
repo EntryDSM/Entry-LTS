@@ -51,6 +51,7 @@ const Faq = () => {
         {questions.map((question, idx) => {
           return (
             <SummaryBox
+              key={idx}
               title={question}
               content={answers[idx]}
               idx={idx}

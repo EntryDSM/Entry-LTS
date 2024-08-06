@@ -25,7 +25,7 @@ export const _Wrapper = styled.div<ScrollType>`
     color: black;
   }
   background-color: ${({ scroll }) => (scroll >= 1 ? '#fff' : 'transparent')};
-  color: ${({ scroll }) => (scroll ? '#000' : '#fff')};
+  color: ${({ scroll }) => (scroll ? '#494949' : '#fff')};
   &:hover .logoText {
     color: black;
   }

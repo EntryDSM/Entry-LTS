@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 import { Text, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../hooks/useResponsive';
-import BoardHeader from '../components/Board/BoardHeader';
-import BoardElement from '../components/Board/BoardElement';
-import BoardTitle from '../components/Board/BoardTitle';
+import { Mobile, Pc } from '@/hooks/useResponsive';
+import BoardHeader from '@/components/Board/BoardHeader';
+import BoardElement from '@/components/Board/BoardElement';
+import BoardTitle from '@/components/Board/BoardTitle';
 import { GetAllQna } from '@/utils/api/qna';
 import { AuthorityColorType, useAuthority } from '@/hooks/useAuthority';
 import { GetAllFaq } from '@/utils/api/faq';
@@ -46,7 +46,7 @@ const CustomerPage = () => {
           // click={searchParams.get('type') === 'faq'}
           // setClick={setType}
           title="자주묻는 질문"
-          subTitle="입학 상담 문의: 042-866-8811, 042-866-8822, 042-866-8814"
+          subTitle="입학 상담 문의: 042-866-8811, 8822, 8814"
           // button1="Q&A"
           // button2="자주 묻는 질문"
           // button3="FAQ 작성"

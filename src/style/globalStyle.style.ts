@@ -19,7 +19,7 @@ export const GlobalStyle = css`
   @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
-    font-style: regular;
+    font-style: normal;
     src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Regular.woff2')
       format('woff2');
   }
