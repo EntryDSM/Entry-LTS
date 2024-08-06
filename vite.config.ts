@@ -1,11 +1,30 @@
 import reactRefresh from '@vitejs/plugin-react-refresh';
+import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 
+function removeUseClientPlugin() {
+  return {
+    name: 'remove-use-client',
+    transform(code, id) {
+      if (id.includes('@tanstack/react-query') || id.includes('@tanstack/react-query-devtools')) {
+        return {
+          code: code.replace(/^['"]use client['"];?\s*$/m, ''),
+          map: null,
+        };
+      }
+    },
+  };
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  // This changes the out put dir from dist to build
-  // comment this out if that isn't relevant for your project
+  optimizeDeps: {
+    include: ['@tanstack/react-query', '@tanstack/react-query-devtools'],
+  },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' },
+  },
   server: {
     port: 3002,
   },
@@ -16,10 +35,6 @@ export default defineConfig({
   },
   build: {
     outDir: 'build',
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true,
-    },
   },
-  plugins: [reactRefresh()],
+  plugins: [react(), reactRefresh(), removeUseClientPlugin()],
 });
