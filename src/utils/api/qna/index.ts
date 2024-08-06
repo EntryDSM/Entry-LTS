@@ -8,6 +8,7 @@ import { Toast } from '@team-entry/design_system';
 
 const router = 'question';
 
+// 질문 전체조회
 export const GetAllQna = () => {
   const response = async () => {
     const { data } = await instance.get<IQnaListResponse>(`${router}/all`);
@@ -16,6 +17,7 @@ export const GetAllQna = () => {
   return useQuery(['qna'], response);
 };
 
+// 질문 상세조회
 export const GetQnaDetail = (qnaId: string) => {
   const response = async () => {
     const { data } = await instance.get<IQnaDetailResponse>(`${router}/${qnaId}`);
@@ -39,6 +41,7 @@ export const GetQnaDetail = (qnaId: string) => {
   });
 };
 
+// 내 질문 목록 조회
 export const GetMyQna = () => {
   const response = async () => {
     const { data } = await instance.get<IGetMyQnaList>(`${router}`);
@@ -50,6 +53,7 @@ export const GetMyQna = () => {
   });
 };
 
+// 질문 생성
 export const CreateQna = (body: ICreateQna) => {
   const navigate = useNavigate();
   const response = async () => {
@@ -77,6 +81,7 @@ export const CreateQna = (body: ICreateQna) => {
   });
 };
 
+// 질문 수정
 export const EditQna = (qnaId: string) => {
   const response = async () => {
     return instance.patch(`${router}/${qnaId}`);
@@ -86,6 +91,7 @@ export const EditQna = (qnaId: string) => {
   });
 };
 
+// 질문 삭제
 export const DeleteQna = (qnaId: string) => {
   const response = async () => {
     return instance.delete(`${router}/${qnaId}`);
@@ -95,6 +101,7 @@ export const DeleteQna = (qnaId: string) => {
   });
 };
 
+//
 export const GetReplyDetail = (qnaId: string) => {
   const response = async () => {
     return instance.get(`${router}/${qnaId}`);

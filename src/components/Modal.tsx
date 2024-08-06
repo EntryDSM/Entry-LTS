@@ -2,17 +2,19 @@ import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { Icon, theme } from '@team-entry/design_system';
 
-const Modal = ({ children, onClose }: { children: ReactNode; onClose: () => void }) => {
+const Modal = ({ children, onClose, close = true }: { children: ReactNode; onClose: () => void; close?: boolean }) => {
   return (
     <Background onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <_CloseIcon
-          cursor={!!onClose ? 'pointer' : 'not-allowed'}
-          onClick={onClose}
-          size={24}
-          icon="Close"
-          color="black900"
-        />
+        {close && (
+          <_CloseIcon
+            cursor={!!onClose ? 'pointer' : 'not-allowed'}
+            onClick={onClose}
+            size={24}
+            icon="Close"
+            color="black900"
+          />
+        )}
         {children}
       </ModalContainer>
     </Background>

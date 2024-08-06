@@ -1,9 +1,22 @@
-import { gradeToScore } from '../constant/grade';
-import { IWriteGradeElement, ISelectGradeElement } from '../interfaces/grade';
+import { gradeToScore } from '@/constant/grade';
+import { IWriteGradeElement, ISelectGradeElement } from '@/interfaces/grade';
+
+/* 가산점 계산 */
+export const getBonusScore = (writeGradeElement) => {
+  let certificateScore = 0;
+  let dsmAlgorithmScore = 0;
+  if (writeGradeElement.certificate) {
+    certificateScore += 6;
+  }
+  if (writeGradeElement.dsm_algorithm_award) {
+    dsmAlgorithmScore += 3;
+  }
+  return { certificateScore, dsmAlgorithmScore };
+};
 
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
-  return 110;
+  return 170;
 };
 
 /**출석 점수 계산하는 함수 */
@@ -21,7 +34,11 @@ export const getVoluntterScore = (volunterrTime: number) => {
 };
 
 /**각 학기별 점수 계산 */
-const getSelectSemesterGradeScore = (gradeCurrent: number, selectGradeElement: ISelectGradeElement) => {
+const getSelectSemesterGradeScore = (
+  gradeCurrent: number,
+  selectGradeElement: ISelectGradeElement,
+  isGraduate: boolean,
+) => {
   let result: number;
   let gradeScoreArray: string[] = [];
 
@@ -38,11 +55,15 @@ const getSelectSemesterGradeScore = (gradeCurrent: number, selectGradeElement: I
 };
 
 /**총 학기별 점수 계산 */
-export const getSelectGradeScore = (gradeCurrent: number, selectGradeElement: ISelectGradeElement) => {
+export const getSelectGradeScore = (
+  gradeCurrent: number,
+  selectGradeElement: ISelectGradeElement,
+  isGraduate: boolean,
+) => {
   const allSubjectsGrade: number[] = [0, 0, 0, 0];
   let result = 0;
   for (let i = 0; i < gradeCurrent; i++) {
-    allSubjectsGrade[i] = getSelectSemesterGradeScore(i, selectGradeElement);
+    allSubjectsGrade[i] = getSelectSemesterGradeScore(i, selectGradeElement, isGraduate);
   }
 
   if (!allSubjectsGrade[0] && !!allSubjectsGrade[1]) allSubjectsGrade[1] *= 2;
@@ -58,6 +79,10 @@ export const getSelectGradeScore = (gradeCurrent: number, selectGradeElement: IS
 
   for (let i = 0; i < gradeCurrent; i++) {
     result += allSubjectsGrade[i];
+  }
+
+  if (!isGraduate && gradeCurrent > 0) {
+    result += allSubjectsGrade[0];
   }
 
   return Math.round(result * 10) / 10;

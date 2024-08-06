@@ -1,8 +1,8 @@
-import BoardHeader from '../components/Board/BoardHeader';
+import BoardHeader from '@/components/Board/BoardHeader';
 import styled from '@emotion/styled';
-import BoardElement from '../components/Board/BoardElement';
+import BoardElement from '@/components/Board/BoardElement';
 import { useState } from 'react';
-import BoardTitle from '../components/Board/BoardTitle';
+import BoardTitle from '@/components/Board/BoardTitle';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useAuthority } from '@/hooks/useAuthority';
 import { GetAllNotice } from '@/utils/api/notice';
@@ -14,19 +14,19 @@ const NoticePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const setType = (current: boolean) => {
-    current ? searchParams.set('type', 'FRESHMAN') : searchParams.set('type', 'ADMISSION');
+    current ? searchParams.set('type', 'GUIDE') : searchParams.set('type', 'NOTICE');
     setCurrent(0);
 
     setSearchParams(searchParams);
   };
 
-  const { data } = GetAllNotice(searchParams.get('type') === 'FRESHMAN' ? 'FRESHMAN' : 'ADMISSION');
+  const { data } = GetAllNotice(searchParams.get('type') === 'GUIDE' ? 'GUIDE' : 'NOTICE');
 
   return (
     <_Container>
       <_Wrapper>
         <BoardTitle
-          click={searchParams.get('type') === 'FRESHMAN'}
+          click={searchParams.get('type') === 'GUIDE'}
           setClick={setType}
           title="공지사항"
           subTitle="학교에서 게시한 입학 공지사항을 확인하세요"
@@ -42,7 +42,7 @@ const NoticePage = () => {
             <Link to={`/notice/${notice.id}`}>
               <BoardElement
                 boardNumber={idx + 1}
-                createdAt={notice.created_at}
+                createdAt={notice.createdAt}
                 title={notice.title}
                 isNumber={true}
                 isTopBorder={false}
@@ -50,6 +50,7 @@ const NoticePage = () => {
                 isWriteDay={true}
                 isWriter={false}
                 isPublic
+                isPinned={notice.isPinned}
               />
             </Link>
           );

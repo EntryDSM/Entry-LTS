@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../hooks/useResponsive';
-import BoardElement from '../components/Board/BoardElement';
-import { useModal } from '../hooks/useModal';
+import { Mobile, Pc } from '@/hooks/useResponsive';
+import BoardElement from '@/components/Board/BoardElement';
+import { useModal } from '@/hooks/useModal';
 import CancelModal from '@/components/Modal/CancelModal';
 import { ApplyInfoStatus, DeleteUserInfo, DeleteUserPdf } from '@/utils/api/user';
 import { AUTH_URL } from '@/constant/env';
@@ -45,7 +45,7 @@ const MyPage = () => {
                 {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body1">
-                {data?.phone_number.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
+                {data?.phoneNumber.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
               </Text>
             </Pc>
             <Mobile>
@@ -53,7 +53,7 @@ const MyPage = () => {
                 {data?.name} 지원자님
               </Text>
               <Text color="black500" size="body3">
-                {data?.phone_number.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
+                {data?.phoneNumber.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
               </Text>
             </Mobile>
           </_UserInfo>

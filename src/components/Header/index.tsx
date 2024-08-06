@@ -8,7 +8,7 @@ import { Mobile, Pc } from '../../hooks/useResponsive';
 import Menu from '@/assets/Menu.svg';
 import { useAuthority } from '@/hooks/useAuthority';
 import { getCookies, removeCookies, removeTokens } from '@/utils/cookies';
-import { AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
+import { ADMIN_URL, AUTH_URL, COOKIE_DOMAIN } from '@/constant/env';
 import { getUserInfo } from '@/utils/api/application';
 
 type THeader =
@@ -21,6 +21,8 @@ type THeader =
   | '로그아웃'
   | '원서접수'
   | 'About'
+  | '전형요강'
+  | '자주묻는질문'
   | '';
 
 interface IHeaderList {
@@ -30,16 +32,16 @@ interface IHeaderList {
 }
 
 const headerList: IHeaderList[] = [
-  { name: '원서접수', url: '/admission' },
+  { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: '문의사항', url: '/customer' },
+  { name: '자주묻는질문', url: '/customer' },
   { name: '성적산출', url: '/grade' },
 ];
 
 const menuList: IHeaderList[] = [
-  { name: '원서접수', url: '/admission' },
+  { name: '전형요강', url: '/admission' },
   { name: '공지사항', url: '/notice' },
-  { name: '문의사항', url: '/customer' },
+  { name: '자주묻는질문', url: '/customer' },
   { name: '성적산출', url: '/grade' },
 ];
 
@@ -48,6 +50,7 @@ const Header = () => {
   const [visibility, setVisibility] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [isDropdownHover, setIsDropdownHover] = useState<boolean>(false);
   const [throttle, setThrottle] = useState(false);
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
@@ -177,11 +180,11 @@ const Header = () => {
             </_._LogoButton>
             <Pc>
               <_._Texts>
-                {headerList.map((res) => {
+                {headerList.map((res, index) => {
                   const { name, url } = res;
                   return (
-                    <Link to={url}>
-                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : '#494949'}>
+                    <Link key={index} to={url}>
+                      <Text size="body1" color={location.pathname.includes(url) ? `${authorityColor}500` : 'inherit'}>
                         {name}
                       </Text>
                     </Link>
@@ -202,57 +205,133 @@ const Header = () => {
                     gap: '2vw',
                   }}
                 >
-                  <_._DropdownWrapper onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                    <Text
-                      size="body1"
-                      color={location.pathname.includes('/about') ? `${authorityColor}500` : '#494949'}
-                    >
-                      About
-                    </Text>
-                    <Icon
-                      cursor="pointer"
-                      icon="DownArrow"
-                      color={
-                        (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
-                          ? 'realBlack'
-                          : 'realWhite'
-                      }
-                      className="downArrow"
-                    />
+                  <_._DropdownWrapper
+                    onMouseOver={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    <div>
+                      <Text
+                        size="body1"
+                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
+                      >
+                        About
+                      </Text>
+                      <Icon
+                        cursor="pointer"
+                        icon="DownArrow"
+                        color={
+                          (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                            ? 'realBlack'
+                            : 'realWhite'
+                        }
+                        className="downArrow"
+                      />
+                    </div>
+                    {(isDropdownOpen || isDropdownHover) && (
+                      <_._DropdownMenus
+                        onMouseOver={() => setIsDropdownHover(true)}
+                        onMouseLeave={() => setIsDropdownHover(false)}
+                      >
+                        <_._DropdownMenu>
+                          <Link to="/about">
+                            <Text size="body1" color="inherit" className="modalText">
+                              팀 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                        <_._DropdownMenu>
+                          <Link to="/">
+                            <Text size="body1" color="inherit" className="modalText">
+                              학교 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                      </_._DropdownMenus>
+                    )}
                   </_._DropdownWrapper>
-                  {isDropdownOpen && (
-                    <_._DropdownMenus>
-                      <_._DropdownMenu>
-                        <Link to="/about">
-                          <Text size="body1" color="#494949" className="modalText">
-                            팀 소개
-                          </Text>
-                        </Link>
-                      </_._DropdownMenu>
-                      <_._DropdownMenu>
-                        <Text size="body1" color="#494949" className="modalText">
-                          학교 소개
+                  {isAdmin ? (
+                    <Link to={ADMIN_URL}>
+                      <Button color={authorityColor} kind="contained" onClick={onClick}>
+                        입학전형 관리자 페이지로
+                      </Button>
+                    </Link>
+                  ) : (
+                    <>
+                      <Link to="/mypage">
+                        <Text
+                          size="body1"
+                          color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
+                        >
+                          마이페이지
                         </Text>
-                      </_._DropdownMenu>
-                    </_._DropdownMenus>
+                      </Link>
+                      <Text size="body1" color="inherit" style={{ fontSize: '22px' }}>
+                        김이름
+                      </Text>
+                    </>
                   )}
-                  <Link to="/mypage">
-                    <Text
-                      size="body1"
-                      color={location.pathname.includes('/mypage') ? `${authorityColor}500` : '#494949'}
-                    >
-                      마이페이지
-                    </Text>
-                  </Link>
-                  <Text size="body1" color="#494949" style={{ fontSize: '22px' }}>
-                    김이름
-                  </Text>
                 </div>
               </>
             ) : (
-              <Button color={authorityColor} kind="contained" onClick={onClick}>
-                로그인
-              </Button>
+              <>
+                <div
+                  style={{
+                    position: 'relative',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '2vw',
+                  }}
+                >
+                  <_._DropdownWrapper
+                    onMouseOver={() => setIsDropdownOpen(true)}
+                    onMouseLeave={() => setIsDropdownOpen(false)}
+                  >
+                    <div>
+                      <Text
+                        size="body1"
+                        color={location.pathname.includes('/about') ? `${authorityColor}500` : 'inherit'}
+                      >
+                        About
+                      </Text>
+                      <Icon
+                        cursor="pointer"
+                        icon="DownArrow"
+                        color={
+                          (location.pathname !== '/main' && location.pathname !== '/') || scrollY >= 1
+                            ? 'realBlack'
+                            : 'realWhite'
+                        }
+                        className="downArrow"
+                      />
+                    </div>
+                    {(isDropdownOpen || isDropdownHover) && (
+                      <_._DropdownMenus
+                        onMouseOver={() => setIsDropdownHover(true)}
+                        onMouseLeave={() => setIsDropdownHover(false)}
+                      >
+                        <_._DropdownMenu>
+                          <Link to="/about">
+                            <Text size="body1" color="inherit" className="modalText">
+                              팀 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                        <_._DropdownMenu>
+                          <Link to="/">
+                            <Text size="body1" color="inherit" className="modalText">
+                              학교 소개
+                            </Text>
+                          </Link>
+                        </_._DropdownMenu>
+                      </_._DropdownMenus>
+                    )}
+                  </_._DropdownWrapper>
+                  <Button color={authorityColor} kind="contained" onClick={onClick}>
+                    로그인
+                  </Button>
+                </div>
+              </>
             )}
           </Pc>
         </_._HeaderContainer>

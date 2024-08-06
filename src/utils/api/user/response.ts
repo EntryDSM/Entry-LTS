@@ -1,12 +1,12 @@
 export interface IAuthorizationResponse {
-  access_token: string;
-  refresh_token: string;
+  accessToken: string;
+  refreshToken: string;
 }
 
 type ApplicationType = 'COMMON' | 'MEISTER' | 'SOCIAL';
 
 export interface IApplyInfoStatusResponse {
-  phone_number: string;
+  phoneNumber: string;
   name: string;
   submitted: boolean;
   printed_arrived: boolean;

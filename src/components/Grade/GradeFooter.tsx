@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { Button, Text, theme } from '@team-entry/design_system';
 import { GradeStatusType } from '@/interfaces/grade';
 import { useModal } from '@/hooks/useModal';
+import { MAIN_URL } from '@/constant/env';
 
 interface IGradeFooterProps {
   gradeStatus: GradeStatusType;
@@ -10,13 +11,36 @@ interface IGradeFooterProps {
   setCurrent: Dispatch<SetStateAction<number>>;
   maxScore: number;
   gradeScore: number;
+  onSubmit?: () => void;
+  onClick?: () => void;
+  length?: number;
+  certificateScore: number;
+  dsmAlgorithmScore: number;
 }
 
-const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }: IGradeFooterProps) => {
+const GradeFooter = ({
+  gradeStatus,
+  current,
+  setCurrent,
+  maxScore,
+  gradeScore,
+  onSubmit,
+  onClick,
+  length,
+  certificateScore,
+  dsmAlgorithmScore,
+}: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
+
+  const clickEvent = () => {
+    if (onClick) {
+      onClick();
+    }
+    setModalState('SUBMIT_GRADE'), open();
+  };
   return (
     <>
-      <_Footer>
+      <_Footer onSubmit={onSubmit}>
         <Button
           color="black"
           kind="outlined"
@@ -27,7 +51,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
         >
           이전
         </Button>
-        {current !== 4 ? (
+        {current !== length ? (
           <Button
             color="orange"
             kind="contained"
@@ -38,13 +62,7 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
             다음
           </Button>
         ) : (
-          <Button
-            color="orange"
-            kind="contained"
-            onClick={() => {
-              setModalState('SUBMIT_GRADE'), open();
-            }}
-          >
+          <Button color="orange" kind="contained" onClick={clickEvent}>
             완료
           </Button>
         )}
@@ -59,45 +77,51 @@ const GradeFooter = ({ gradeStatus, current, setCurrent, maxScore, gradeScore }:
               <Text size="header3" color="black900">
                 일반 전형:
               </Text>
-              <Text size="header3" color="orange900">
-                {(gradeScore * 175) / 100 + maxScore}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /170
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
               <Text size="header3" color="black900">
                 사회통합 전형:
               </Text>
-              <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /110
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
               <Text size="header3" color="black900">
                 마이스터 인재:
               </Text>
-              <Text size="header3" color="orange900">
-                {gradeScore + maxScore}
-              </Text>
+              <_ScoreBox>
+                <Text size="header3" color="orange900">
+                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                </Text>
+                <Text color="black400" size="title3">
+                  /110
+                </Text>
+              </_ScoreBox>
             </_DIV>
             <_DIV>
-              <Button
-                kind="outlined"
-                color="black"
+              <_Button
                 onClick={() => {
-                  (window.location.href = 'https://www.entrydsm.hs.kr/grade'), close();
+                  (window.location.href = `${MAIN_URL}/grade`), close();
                 }}
               >
-                다시 입력
-              </Button>
-              <Button
-                kind="contained"
-                color="orange"
-                onClick={() => {
-                  (window.location.href = 'https://www.entrydsm.hs.kr/'), close();
-                }}
-              >
-                닫기
-              </Button>
+                <Text color="realWhite" size="body3">
+                  닫기
+                </Text>
+              </_Button>
             </_DIV>
           </_Container>
         </Modal>
@@ -128,5 +152,23 @@ const _Container = styled.div`
 const _DIV = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 220px;
+  gap: 6px;
+  width: 100%;
+  width: 320px;
+`;
+
+const _Button = styled.button`
+  border-radius: 5px;
+  background-color: ${theme.color.orange500};
+  &:hover {
+    background-color: ${theme.color.orange600};
+  }
+  padding: 12px;
+  width: 100%;
+  cursor: pointer;
+`;
+
+const _ScoreBox = styled.div`
+  display: flex;
+  align-items: center;
 `;

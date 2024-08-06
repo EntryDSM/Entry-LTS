@@ -18,14 +18,14 @@ export const _Wrapper = styled.div<ScrollType>`
   top: 0;
   left: 0;
   border-bottom: 1px solid ${({ scroll }) => (scroll ? '#e6e6e6' : 'transparent')};
-  transition: background-color 0.5s;
+  transition: 0.5s;
   &:hover {
     background-color: white;
     border-bottom-color: #e6e6e6;
     color: black;
   }
   background-color: ${({ scroll }) => (scroll >= 1 ? '#fff' : 'transparent')};
-  color: ${({ scroll }) => (scroll ? '#000' : '#fff')};
+  color: ${({ scroll }) => (scroll ? '#494949' : '#fff')};
   &:hover .logoText {
     color: black;
   }
@@ -131,16 +131,23 @@ export const _LogoButton = styled(Link)`
 `;
 
 export const _DropdownWrapper = styled.div`
+  position: relative;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 4px;
+
+  & > div {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
 `;
 
 export const _DropdownMenus = styled.div`
   position: absolute;
-  top: 35px;
-  left: -8px;
+  top: 95%;
+  left: -16px;
   display: flex;
   flex-direction: column;
   justify-content: center;

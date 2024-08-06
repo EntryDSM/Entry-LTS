@@ -1,7 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import Modal from '@/components/Modal';
 
-export type ModalType = '' | 'CANCEL_SUBMIT' | 'SIGN_OUT' | 'SUBMIT_GRADE' | 'START_NOTICE' | 'PASSED_ROUND' | 'NOT_PASSED_ROUND';
+export type ModalType =
+  | ''
+  | 'CANCEL_SUBMIT'
+  | 'SIGN_OUT'
+  | 'SUBMIT_GRADE'
+  | 'START_NOTICE'
+  | 'PASSED_ROUND'
+  | 'NOT_PASSED_ROUND';
 
 // `useBlur` props로 모달 외부를 클릭하면 모달을 닫을지 선택
 export const useModal = ({ useBlur = true } = {}) => {
@@ -18,7 +25,13 @@ export const useModal = ({ useBlur = true } = {}) => {
   }, []);
 
   return {
-    Modal: isOpen ? ({ children }) => <Modal onClose={useBlur ? close : undefined}>{children}</Modal> : () => null,
+    Modal: isOpen
+      ? ({ children }) => (
+          <Modal close={false} onClose={useBlur ? close : undefined}>
+            {children}
+          </Modal>
+        )
+      : () => null,
     open,
     close,
     isOpen,

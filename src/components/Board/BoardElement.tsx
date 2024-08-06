@@ -7,6 +7,9 @@ import { keyframes } from '@emotion/react';
 import { useAuthority } from '@/hooks/useAuthority';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { faqTypeToKorean } from '@/utils/translate';
+import { DeleteFaq } from '@/utils/api/faq';
+import Pin from '@/assets/pin';
+import Megaphone from '@/assets/Megaphone';
 
 const BoardElement = (props: IBoard) => {
   const {
@@ -16,6 +19,7 @@ const BoardElement = (props: IBoard) => {
     isWriter,
     isPublic,
     isOpen = false,
+    boardId,
     boardNumber,
     title,
     content,
@@ -23,18 +27,25 @@ const BoardElement = (props: IBoard) => {
     userName,
     faq_type,
     createdAt,
+    isPinned,
   } = props;
   const [clicked, setClicked] = useState(false);
   const { isAdmin, authorityColor } = useAuthority();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { mutate: deleteFaq } = DeleteFaq(boardId ?? '');
 
   return (
     <>
-      <_ElementContainer onClick={() => isOpen && setClicked(!clicked)}>
-        <Div style={{ maxWidth: 500, width: isMobile && searchParams.get('type') != 'faq' && '50%' }}>
+      <_ElementContainer onClick={() => isOpen && setClicked(!clicked)} isPinned={isPinned}>
+        <Div
+          style={{
+            maxWidth: 600,
+            width: isMobile() && searchParams.get('type') != 'faq' ? '70%' : '0%',
+          }}
+        >
           <Pc>
-            <Text align="center" color="black700" size="body1" width={100}>
+            <Text style={{ whiteSpace: 'nowrap' }} align="center" color="black700" size="body1" width={100}>
               {isNumber ? boardNumber : faqTypeToKorean[faq_type]}
             </Text>
             <Div style={{ marginLeft: 20 }}>
@@ -44,9 +55,15 @@ const BoardElement = (props: IBoard) => {
                 size="body3"
                 textOverflow="ellipsis"
                 whiteSpace="nowrap"
-                style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
-                width={285}
+                style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
+                width={400}
+                display="flex"
               >
+                {isPinned && (
+                  <Div style={{ marginRight: '5px' }}>
+                    <Megaphone size={18} color={theme.color.orange500} />
+                  </Div>
+                )}
                 {title}
               </Text>
             </Div>
@@ -62,7 +79,7 @@ const BoardElement = (props: IBoard) => {
               size="body5"
               textOverflow="ellipsis"
               whiteSpace="pre-line"
-              style={{ overflow: searchParams.get('type') != 'faq' && 'hidden' }}
+              style={{ overflow: searchParams.get('type') != 'faq' ? 'hidden' : 'visible' }}
             >
               {title}
             </Text>
@@ -135,10 +152,16 @@ const BoardElement = (props: IBoard) => {
               </_Answer>
               {isAdmin && (
                 <_EditAnswerButtons>
-                  <Button color="delete" kind="delete" onClick={() => console.log('삭제')}>
+                  <Button
+                    color="delete"
+                    kind="delete"
+                    onClick={() => {
+                      deleteFaq();
+                    }}
+                  >
                     삭제
                   </Button>
-                  <Button onClick={() => navigate('/customer/writeFAQ')}>수정</Button>
+                  <Button onClick={() => navigate(`/customer/writeFAQ/${boardId}`)}>수정</Button>
                 </_EditAnswerButtons>
               )}
             </_AnswerPart>
@@ -174,7 +197,10 @@ const BoardElement = (props: IBoard) => {
 
 export default BoardElement;
 
-const _ElementContainer = styled.div`
+interface Container {
+  isPinned: boolean;
+}
+const _ElementContainer = styled.div<Container>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -182,6 +208,7 @@ const _ElementContainer = styled.div`
   min-height: 3rem;
   border-bottom: 1px solid ${theme.color.black100};
   cursor: pointer;
+  background-color: ${(props) => (props.isPinned ? '#FBFBFB' : 'transparent')};
   @media screen and (max-width: 769px) {
     padding: 20px;
   }

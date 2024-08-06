@@ -2,25 +2,26 @@ import styled from '@emotion/styled';
 import Arrow from '../../assets/GrayArrow.svg';
 import SummaryBox from './SummaryBox';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Faq = () => {
   const questions: Array<string> = [
-    '다른 고등학교에서 전학 갈 수 있나요?',
-    '기숙사 탈출하면 벌점 몇 점인가요?',
-    '내신 몇 %여야 합격할 수 있나요?',
-    '으이잉 어차피 멘티생기는데 디자인 해야하나요?',
-    '공평하게 모두가 함께 디자인하는 거 어떻게 생각하시나요?',
+    '현재 다른 고등학교에 재학중인데 전학이 되나요?',
+    '일반전형과 특별전형에 둘다 지원할 수 있나요?',
+    '남 여 선발 비율이 정해져 있나요?',
+    '전공동아리가 무엇인가요?',
+    '평일 저녁에 외출이 가능한가요?',
   ];
   const answers: Array<string> = [
-    '본교는 전입학을 허용하지 않습니다. \
-    즉, 일반계 고등학교 뿐만 아니라 다른 마이스터 고등학교 재학생이라도 전학을 받아주지 않습니다. \
-    따라서 본교에는 신입생으로만 입학할 수 있습니다.',
-    '10점입니다 이후 행보에 따라 추가적인 벌점이 부가될 수 있으며 기숙사 퇴거조치를 받을 수 있습니다',
-    '상위 5% 이내로 만들어서 오시면 면접을 갖다 박아도 들어오실 수 있을 수 있습니다.',
-    '디자인 하셔야합니다',
-    '모두가 같은 디자인을 하도록 하더라도 누군가는 좋은 결과물을 내놓고 \
-    누군가는 차마 눈을 뜨지 못할 충격적인 디자인을 해냅니다. 쌈@뽕한 디자인을 위해 \
-    한 몸 희생하신 당신께 감사를.',
+    '본교는 전입학을 허용하지 않습니다.\
+    오직 신입생으로만 입학할 수 있습니다.',
+    '아닙니다.\
+    일반전형, 마이스터인재전형, 사회통합전형 중 한 가지 전형에만 지원 가능합니다.',
+    '남녀 비율은 정해져 있지 않습니다.\
+    성별에 관계없이 성적순으로 선발합니다.',
+    '학생들이 활동 목표를 정하고 계획을 세워 조직하고 구성하는 자율동아리입니다.\
+    프로젝트나 공부하고 싶은 분야를 단위로 구성합니다.',
+    '병원 진료, 노트북 수리 등 특별한 사유가 있을 경우 방과후수업이나 동아리활동에 빠지고 외출할 수 있습니다.',
   ];
   const [nowOpen, setNowOpen] = useState<number>(-1);
 
@@ -38,16 +39,19 @@ const Faq = () => {
         <span>궁금한 점이 있다면?</span>
         <div>
           <h2>자주 묻는 질문</h2>
-          <_MoveContainer>
-            <span>이동하기</span>
-            <img src={Arrow} alt="" />
-          </_MoveContainer>
+          <Link to="/customer">
+            <_MoveContainer>
+              <span>이동하기</span>
+              <img src={Arrow} alt="" />
+            </_MoveContainer>
+          </Link>
         </div>
       </_TitleBox>
       <_FAQBox>
         {questions.map((question, idx) => {
           return (
             <SummaryBox
+              key={idx}
               title={question}
               content={answers[idx]}
               idx={idx}
@@ -95,6 +99,7 @@ const _TitleBox = styled.div`
 
 const _MoveContainer = styled.div`
   display: flex;
+  cursor: pointer;
 
   & > span {
     font-size: 20px;

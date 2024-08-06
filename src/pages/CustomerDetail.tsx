@@ -1,39 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, Input, Spinner, Stack, Text, Textarea, Toast, theme } from '@team-entry/design_system';
-import { Mobile, Pc } from '../hooks/useResponsive';
+import { Mobile, Pc } from '@/hooks/useResponsive';
 import { GetQnaDetail } from '@/utils/api/qna';
 import { useAuthority } from '@/hooks/useAuthority';
 import QnaAnswer from '@/components/Answer/QnaAnswer';
 import { useInput } from '@/hooks/useInput';
-import { DeleteQna, DeleteReply, EditReply, WriteReply } from '@/utils/api/admin';
+import { DeleteQna, DeleteReply, EditReply, WriteReply, GetQuestionDetail } from '@/utils/api/admin';
 import { getCookies } from '@/utils/cookies';
 
 const CustomerDetailPage = () => {
   const navigate = useNavigate();
-  const { id: qnaId } = useParams();
+  const { id: qnaId } = useParams<{ id: string }>();
   const [writeAnswer, setWriteAnswer] = useState(false);
   const { authorityColor, isAdmin } = useAuthority();
   const { form, setForm, onChange } = useInput({ title: '', content: '' });
-  const { mutate: writeReply } = WriteReply(form);
-  const { mutate: editReply } = EditReply(form);
-  const { mutate: deleteReply } = DeleteReply();
-  const { mutate: deleteQna } = DeleteQna();
+  const writeReply = WriteReply(form).mutate;
+  const editReply = EditReply(form).mutate;
+  const deleteReply = DeleteReply().mutate;
+  const deleteQna = DeleteQna().mutate;
 
-  const { data, isLoading } = GetQnaDetail(qnaId);
-  const accessToken = getCookies('access_token');
+  const qnaData = GetQuestionDetail(qnaId ?? '').data;
+  const qnaIsLoading = GetQuestionDetail(qnaId ?? '').isLoading;
+  const data = GetQnaDetail(qnaId ?? '').data;
+  const isLoading = GetQnaDetail(qnaId ?? '').isLoading;
+  const accessToken = getCookies('accessToken');
 
   useEffect(() => {
     if (data) setForm({ title: data?.reply?.title, content: data?.reply?.content });
   }, [data]);
 
   useEffect(() => {
+    if (qnaData) setForm({ title: qnaData?.title, content: qnaData?.content });
+  }, [qnaData]);
+
+  useEffect(() => {
     if (!accessToken) {
       Toast('로그인이 필요합니다.', { type: 'error' });
       navigate('/customer');
     }
-  }, []);
+  }, [accessToken, navigate]);
 
   if (isLoading)
     return (
@@ -41,11 +48,12 @@ const CustomerDetailPage = () => {
         <Spinner margin={[0, 'auto']} size={40} color={authorityColor} />
       </_Loading>
     );
+
   return (
     <_Container>
       <_Wrapper>
         {writeAnswer && (
-          <Text size="header1" color="black" margin={[0, 0, 30, 0]}>
+          <Text size="header1" color="realBlack" margin={[0, 0, 30, 0]}>
             Q&A 답변작성
           </Text>
         )}
@@ -56,11 +64,11 @@ const CustomerDetailPage = () => {
               Q.
             </Text>
             <Text color="black900" size="title1" margin={['top', 4]}>
-              {data?.title}
+              {isAdmin ? qnaData?.title : data?.title}
             </Text>
           </_Title>
           <Text color="black600" size="body2">
-            {data?.content}
+            {isAdmin ? qnaData?.content : data?.content}
           </Text>
           <_QuestionBottom>
             <Text color="black400" size="body1">
@@ -73,7 +81,7 @@ const CustomerDetailPage = () => {
                     <Button color="black" kind="contained" onClick={() => setWriteAnswer(true)}>
                       수정
                     </Button>
-                    <Button color="delete" kind="delete" onClick={() => deleteReply(qnaId)}>
+                    <Button color="delete" kind="delete" onClick={() => deleteReply(qnaId ?? '')}>
                       답변 삭제
                     </Button>
                   </>
@@ -82,7 +90,7 @@ const CustomerDetailPage = () => {
                     <Button color="green" kind="contained" onClick={() => setWriteAnswer(true)}>
                       답변 작성
                     </Button>
-                    <Button color="delete" kind="delete" onClick={() => deleteQna(qnaId)}>
+                    <Button color="delete" kind="delete" onClick={() => deleteQna(qnaId ?? '')}>
                       질문 삭제
                     </Button>
                   </>
@@ -138,7 +146,7 @@ const CustomerDetailPage = () => {
                   color="black"
                   kind="contained"
                   onClick={async () => {
-                    editReply(qnaId);
+                    editReply(qnaId ?? '');
                     setWriteAnswer(false);
                   }}
                 >
@@ -149,7 +157,7 @@ const CustomerDetailPage = () => {
                   color="green"
                   kind="contained"
                   onClick={async () => {
-                    writeReply(qnaId);
+                    writeReply(qnaId ?? '');
                     setWriteAnswer(false);
                   }}
                 >
@@ -197,7 +205,7 @@ const _Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  width: 100vw;
+  width: 100%;
 `;
 
 const _Wrapper = styled.div`

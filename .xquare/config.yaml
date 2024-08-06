@@ -4,4 +4,4 @@ config:
   port: 3002
   domain:
     prod: www.entrydsm.hs.kr
-    stag: entry-lts-stag.xquare.app
+    stag: stag.entrydsm.hs.kr

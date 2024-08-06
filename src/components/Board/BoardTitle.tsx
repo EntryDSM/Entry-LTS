@@ -6,12 +6,12 @@ import { Mobile, Pc } from '../../hooks/useResponsive';
 import { useAuthority } from '@/hooks/useAuthority';
 
 interface IBoardTitle {
-  click: boolean;
-  setClick: React.Dispatch<SetStateAction<boolean>>;
+  click?: boolean;
+  setClick?: React.Dispatch<SetStateAction<boolean>>;
   title: string;
   subTitle: string;
-  button1: string;
-  button2: string;
+  button1?: string;
+  button2?: string;
   button3?: string;
   isCustomer?: boolean;
   link?: string;
@@ -49,15 +49,19 @@ const BoardTitle = (props: IBoardTitle) => {
       </Mobile>
       <_Buttons>
         <_ButtonWrapper>
-          <Button onClick={() => setClick(false)} color={authorityColor} kind={click ? 'outlined' : 'contained'}>
-            {button1}
-          </Button>
-          <Button onClick={() => setClick(true)} color={authorityColor} kind={click ? 'contained' : 'outlined'}>
-            {button2}
-          </Button>
+          {button1 && (
+            <Button onClick={() => setClick(false)} color={authorityColor} kind={click ? 'outlined' : 'contained'}>
+              {button1}
+            </Button>
+          )}
+          {button2 && (
+            <Button onClick={() => setClick(true)} color={authorityColor} kind={click ? 'contained' : 'outlined'}>
+              {button2}
+            </Button>
+          )}
         </_ButtonWrapper>
         <div>
-          {(isQna || isFaq || isNotice) && (
+          {(isQna || isFaq || isNotice) && button3 && (
             <Link to={link}>
               <Button color={authorityColor} onClick={onClick}>
                 {button3}

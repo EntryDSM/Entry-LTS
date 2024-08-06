@@ -13,7 +13,7 @@ const WhatIsEntry = () => {
           </p>
         </h1>
         <Text size={'body1'} color={'black50'}>
-          EntryDSM은 개발하는 것을 좋아하는 사람들이 자발적으로 모여
+          EntryDSM은 개발하는 것을 좋아하는 학생들이 자발적으로 모여
           <br />
           대덕소프트웨어마이스터고등학교의 입학전형(1, 2차 모두)을 위한 온라인 시스템, Entry 를 개발하는 팀입니다.
         </Text>
@@ -78,19 +78,19 @@ const WailContainer = styled.div`
   & .parallax > use {
     animation: ${waveAnimation} 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
   }
-  & .parallax > use:nth-child(1) {
+  & .parallax > use:nth-of-type(1) {
     animation-delay: -2s;
     animation-duration: 7s;
   }
-  & .parallax > use:nth-child(2) {
+  & .parallax > use:nth-of-type(2) {
     animation-delay: -3s;
     animation-duration: 10s;
   }
-  & .parallax > use:nth-child(3) {
+  & .parallax > use:nth-of-type(3) {
     animation-delay: -4s;
     animation-duration: 13s;
   }
-  & .parallax > use:nth-child(4) {
+  & .parallax > use:nth-of-type(4) {
     animation-delay: -5s;
     animation-duration: 20s;
   }

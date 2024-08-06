@@ -1,5 +1,5 @@
 import Cookies, { CookieSetOptions } from 'universal-cookie';
-import { COOKIE_DOMAIN } from '../constant/env';
+import { COOKIE_DOMAIN } from '@/constant/env';
 
 const cookies = new Cookies();
 
@@ -25,7 +25,7 @@ export const removeCookies = (key: string | string[], options?: CookieSetOptions
 };
 
 export const removeTokens = () => {
-  removeCookies(['access_token', 'refresh_token'], {
+  removeCookies(['accessToken', 'refreshToken'], {
     path: '/',
     secure: true,
     sameSite: 'none',
@@ -34,7 +34,7 @@ export const removeTokens = () => {
 };
 
 export const setTokens = (accessToken: string, refreshToken: string) =>
-  setCookies(['access_token', 'refresh_token'], [accessToken, refreshToken], {
+  setCookies(['accessToken', 'refreshToken'], [accessToken, refreshToken], {
     path: '/',
     secure: true,
     sameSite: 'none',

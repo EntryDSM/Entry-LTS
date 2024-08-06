@@ -16,12 +16,13 @@ import { getCookies } from '@/utils/cookies';
 import { GetReserveLink } from '@/utils/api/reserve';
 import { useModal } from '@/hooks/useModal';
 import Modal from '../Modal';
+import { APPLY_URL } from '@/constant/env';
 
 const MainFunction = () => {
   const { isAdmin, authorityColor } = useAuthority();
   const isTablet = useMediaQuery({ query: '(max-width: 1136px) and (min-width: 769px)' });
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(!!getCookies('access_token'));
+  const [isLogin, setIsLogin] = useState(!!getCookies('accessToken'));
   // const { data } = ApplyInfoStatus(isLogin);
   const { mutate: reserve_addmission } = GetReserveLink();
   const { isOpen, modalState, Modal, setModalState, open, close } = useModal();
@@ -49,7 +50,7 @@ const MainFunction = () => {
             </PhoneNumber>
             <Button
               color={authorityColor}
-              onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+              onClick={() => (window.location.href = `${APPLY_URL}`)}
               margin={[10, 0, 20, 0]}
               isBig
               disabled
@@ -67,7 +68,7 @@ const MainFunction = () => {
             <div>
               <Button
                 color={authorityColor}
-                onClick={() => (window.location.href = 'https://apply.entrydsm.hs.kr')}
+                onClick={() => (window.location.href = `${APPLY_URL}`)}
                 margin={[20, 0, 20, 0]}
                 disabled
               >
@@ -126,7 +127,7 @@ const MainFunction = () => {
       {/* 원서접수 기간 중 사용할 모달 */}
       {modalState === 'START_NOTICE' && (
         <Modal>
-          <Text size="title2" color="gray50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
+          <Text size="title2" color="black50" whiteSpace="pre-line" margin={[0, 0, 20, 0]}>
             합격자 확인은 로그인 후 마이페이지를 확인해주세요!
           </Text>
           <Button

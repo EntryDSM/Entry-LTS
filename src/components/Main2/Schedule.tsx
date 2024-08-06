@@ -1,24 +1,41 @@
+import { getSchedule } from '@/utils/api/schedule';
+import { scheduleCalculater } from '@/utils/scheduleCalculater';
+import { timeformatter } from '@/utils/timeFormatter';
 import styled from '@emotion/styled';
 import { theme } from '@team-entry/design_system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type ScheduleType = {
   scheduleName: string;
   scheduleTime: string;
 };
 
-const schedules: ScheduleType[] = [
-  { scheduleName: '원서 제출', scheduleTime: '10/17~10/20' },
-  { scheduleName: '1차 발표', scheduleTime: '10/24 18:00' },
-  { scheduleName: '심층면접', scheduleTime: '10/28 9:00' },
-  { scheduleName: '최종발표', scheduleTime: '11/03 10:00' },
-];
-
 const Schedule = () => {
+  const [schedules, setSchedulesData] = useState<ScheduleType[]>();
+  const { data } = getSchedule();
+
+  useEffect(() => {
+    if (data?.schedules) {
+      const formatData = {
+        scheduleName: scheduleCalculater(data?.schedules[0].type),
+        scheduleTime: timeformatter(data.schedules[0].date, data.schedules[4].date),
+      };
+      const formatDatas = data?.schedules
+        ?.filter((_, i) => i !== 4 && i !== 0)
+        .map((schedule) => {
+          return {
+            scheduleName: scheduleCalculater(schedule.type),
+            scheduleTime: timeformatter(schedule.date),
+          };
+        });
+      setSchedulesData([formatData, ...formatDatas]);
+    }
+  }, [data]);
+
   return (
     <_Wrapper>
       <_ProgressProvider>
-        {schedules.map((_, index) => {
+        {schedules?.map((_, index) => {
           return (
             <React.Fragment key={index}>
               <_ScheduleCircle />
@@ -28,7 +45,7 @@ const Schedule = () => {
         })}
       </_ProgressProvider>
       <_TextProvider>
-        {schedules.map((schedule) => {
+        {schedules?.map((schedule) => {
           return (
             <div>
               {schedule.scheduleName}
@@ -37,6 +54,11 @@ const Schedule = () => {
           );
         })}
       </_TextProvider>
+      <_MobileText>
+        원서제출 기간은
+        <br />
+        10/14 ~ 10/17입니다.
+      </_MobileText>
     </_Wrapper>
   );
 };
@@ -57,6 +79,10 @@ const _ProgressProvider = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _TextProvider = styled.div`
@@ -77,6 +103,10 @@ const _TextProvider = styled.div`
       color: ${theme.color.black300};
     }
   }
+
+  @media (max-width: 699px) {
+    display: none;
+  }
 `;
 
 const _ScheduleCircle = styled.div`
@@ -91,4 +121,15 @@ const _ScheduleLine = styled.div`
   height: 1px;
   background-color: ${theme.color.orange800};
   margin: 0 20px;
+`;
+
+const _MobileText = styled.div`
+  display: none;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+
+  @media (max-width: 699px) {
+    display: block;
+  }
 `;

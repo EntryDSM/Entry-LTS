@@ -1,27 +1,40 @@
 import styled from '@emotion/styled';
 import { Text } from '@team-entry/design_system';
+// import { EditScore } from '@/utils/api/score';
 
 interface IGradePreview {
   gradeScore: number;
   attendenceScore: number;
   volunteerScore: number;
   maxScore: number;
+  dsmAlgorithmScore: number;
+  certificateScore: number;
 }
 
-const GradePreview = ({ gradeScore, attendenceScore, volunteerScore, maxScore }: IGradePreview) => {
+const GradePreview = ({
+  gradeScore,
+  attendenceScore,
+  volunteerScore,
+  maxScore,
+  dsmAlgorithmScore,
+  certificateScore,
+}: IGradePreview) => {
   return (
     <CurrentGrades>
-      <Text size="title3" color="black" style={{ fontWeight: 700 }}>
-        총: {gradeScore + attendenceScore + volunteerScore}/{maxScore}
+      <Text size="body1" color="realBlack" style={{ fontWeight: 700 }}>
+        총: {gradeScore * 1.75 + attendenceScore + volunteerScore}/{maxScore}
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
-        성적 점수: {gradeScore}/{maxScore - 30}
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
+        성적 점수: {gradeScore * 1.75}/{maxScore - 30}
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         출석 점수: {attendenceScore}/15
       </Text>
-      <Text size="title3" color="black" style={{ fontWeight: 500 }}>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         봉사 점수: {volunteerScore}/15
+      </Text>
+      <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
+        가산점: +{dsmAlgorithmScore + certificateScore}
       </Text>
     </CurrentGrades>
   );

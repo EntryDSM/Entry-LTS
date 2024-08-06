@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Download from '../assets/Download.svg';
+import Download from '@/assets/Download.svg';
 import { Icon, Text, theme } from '@team-entry/design_system';
 import { useAuthority } from '@/hooks/useAuthority';
 
@@ -8,7 +8,7 @@ const NewAdmissionPage = () => {
   const { isAdmin } = useAuthority();
 
   const DownLoad = () => {
-    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=6f74d1d723f2461fe90d9c6a5f2cc761';
+    const pdfUrl = 'https://dsmhs.djsch.kr/boardCnts/fileDown.do?fileSeq=7cc282c62941f5b4e314530b378dc812';
     window.open(pdfUrl);
   };
 
@@ -23,7 +23,7 @@ const NewAdmissionPage = () => {
             <Icon icon="Download" size={18} />
           </_Icon>
           <Text color="black900" size="body1" cursor="default">
-            2024전형요강.pdf
+            2025전형요강.pdf
           </Text>
         </_Download>
         {/* <_Image /> */}
@@ -37,9 +37,9 @@ export default NewAdmissionPage;
 const _Container = styled.div`
   display: flex;
   justify-content: center;
-  width: 99vw;
+  width: 100%;
   height: 100vh;
-  margin-top: 8rem;
+  padding: 8rem 40px 0 40px;
 `;
 
 const _Wrapper = styled.div`
