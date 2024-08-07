@@ -9,6 +9,7 @@
     "build": "tsc && vite build",
     "analyze": "webpack-bundle-analyzer ./dist/bundle-report.json --default-sizes gzip"
   },
+  "type": "module",
   "repository": "git+https://github.com/EntryDSM/Entry-LTS.git",
   "author": "jikwan <jikwan0327@gmail.com>",
   "license": "ISC",
