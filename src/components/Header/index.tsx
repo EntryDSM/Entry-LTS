@@ -327,7 +327,7 @@ const Header = () => {
                       </_._DropdownMenus>
                     )}
                   </_._DropdownWrapper>
-                  <Button color={authorityColor} kind="contained" onClick={onClick}>
+                  <Button color={authorityColor} kind="contained" onClick={onClick} disabled>
                     로그인
                   </Button>
                 </div>
