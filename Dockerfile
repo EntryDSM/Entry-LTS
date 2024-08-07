@@ -27,6 +27,5 @@ COPY --from=builder /app/build /usr/share/nginx/html
 
 # 3000포트 열기
 EXPOSE 3002
-
-# Nginx 시작 전 env.sh 실행
-CMD ["/bin/sh", "-c", "/app/env.sh && nginx -g 'daemon off;'"]
+# Nginx 시작
+CMD ["nginx", "-g", "daemon off;"]
