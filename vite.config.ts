@@ -1,5 +1,4 @@
 import reactRefresh from '@vitejs/plugin-react-refresh';
-import react from '@vitejs/plugin-react';
 import path from 'path';
 import { defineConfig } from 'vite';
 
@@ -46,5 +45,5 @@ export default defineConfig({
     //   },
     // },
   },
-  plugins: [react(), reactRefresh(), removeUseClientPlugin()],
+  plugins: [reactRefresh(), removeUseClientPlugin()],
 });
