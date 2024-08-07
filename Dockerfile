@@ -1,3 +1,4 @@
+# Build stage
 FROM node:18.19-alpine AS builder
 
 WORKDIR /app
@@ -9,10 +10,10 @@ COPY . ./
 RUN yarn install --immutable
 RUN yarn build
 
-# 실행 단계
+# Execution stage
 FROM nginx:alpine AS runner
 
-# Nginx 설정
+# Nginx configuration
 RUN echo "\
 server {\
     listen 3002;\
@@ -25,12 +26,11 @@ server {\
 
 COPY --from=builder /app/build /usr/share/nginx/html
 
-# env.sh 스크립트 복사
 COPY env.sh /app/env.sh
 RUN chmod +x /app/env.sh
 
-# 3000포트 열기
+# Open port 3002
 EXPOSE 3002
 
-# Nginx 시작 전 env.sh 실행
+# Run Nginx with env.sh script
 CMD ["/bin/sh", "-c", "/app/env.sh && nginx -g 'daemon off;'"]
