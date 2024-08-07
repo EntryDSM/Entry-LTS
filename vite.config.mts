@@ -46,7 +46,7 @@ export default defineConfig({
     //   },
     // },
   },
-  plugins: [reactRefresh(), removeUseClientPlugin(), envCompatible({prefix: 'REACT_APP'})],
+  plugins: [reactRefresh(), removeUseClientPlugin(), envCompatible()],
   define: {
     'process.env': process.env,
   },
