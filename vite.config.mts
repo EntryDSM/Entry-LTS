@@ -47,7 +47,4 @@ export default defineConfig({
     // },
   },
   plugins: [reactRefresh(), removeUseClientPlugin(), envCompatible()],
-  define: {
-    'process.env': process.env,
-  },
 });
