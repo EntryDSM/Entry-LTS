@@ -1,7 +1,7 @@
 import reactRefresh from '@vitejs/plugin-react-refresh';
 import path from 'path';
 import { defineConfig } from 'vite';
-import envCompatiblePlugin from 'vite-plugin-env-compatible';
+import envCompatible from 'vite-plugin-env-compatible';
 
 function removeUseClientPlugin() {
   return {
@@ -46,7 +46,7 @@ export default defineConfig({
     //   },
     // },
   },
-  plugins: [reactRefresh(), removeUseClientPlugin(), envCompatiblePlugin()],
+  plugins: [reactRefresh(), removeUseClientPlugin(), envCompatible({prefix: 'REACT_APP'})],
   define: {
     'process.env': process.env,
   },
