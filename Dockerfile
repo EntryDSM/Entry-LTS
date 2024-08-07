@@ -15,7 +15,7 @@ FROM nginx:alpine AS runner
 # Nginx 설정
 RUN echo "\
 server {\
-    listen 3000;\
+    listen 3002;\
     location / {\
         root   /usr/share/nginx/html;\
         index  index.html index.html;\
