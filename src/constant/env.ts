@@ -1,6 +1,6 @@
 import process from 'process';
 
-export const COOKIE_DOMAIN = import.meta.env.NODE_ENV === 'development' ? 'localhost' : 'entrydsm.hs.kr';
+export const COOKIE_DOMAIN = process.env.NODE_ENV === 'development' ? 'localhost' : 'entrydsm.hs.kr';
 
 export const MAIN_URL = import.meta.env.VITE_MAIN_URL;
 

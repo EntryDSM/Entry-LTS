@@ -21,3 +21,9 @@ jobs:
           environment: prod
           access_key: ${{ secrets.ACCESS_KEY }}
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          buildargs: |
+            VITE_MAIN_URL=${{ secrets.VITE_MAIN_URL }}
+            VITE_AUTH_URL=${{ secrets.VITE_AUTH_URL }}
+            VITE_APPLY_URL=${{ secrets.VITE_APPLY_URL }}
+            VITE_ADMIN_URL=${{ secrets.VITE_ADMIN_URL }}
+            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
