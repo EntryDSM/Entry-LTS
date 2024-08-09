@@ -24,6 +24,12 @@ const list: IGradeListProps[] = [
     text: '이미 중학교를 졸업한 \n지원자를 칭합니다.',
     type: 'graduate',
   },
+  {
+    icon: 'Reader',
+    title: '검정고시',
+    text: '(중학교 졸업학력)',
+    type: 'qualificationExam',
+  },
 ];
 
 const GradePage = () => {

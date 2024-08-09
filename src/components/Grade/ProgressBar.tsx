@@ -37,6 +37,13 @@ const ProgressBar = ({ step, gradeStatus }: IProgressBarProps) => {
       ];
       title = ['3학년 1학기', '직전 학기', '직전전 학기', '출석 및 봉사'];
       break;
+    case 'qualificationExam':
+      progress = [
+        { element: <_Circle key={1} isNow={1 <= step} /> },
+        { element: <_Line style={{ width: '100%' }} key={2} isNow={2 <= step} gradeStatus={gradeStatus} /> },
+        { element: <_Circle key={3} isNow={2 <= step} /> },
+      ];
+      title = ['검정고시 점수', '자격증 및 수상'];
   }
 
   return (
