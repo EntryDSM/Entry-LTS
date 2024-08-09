@@ -16,6 +16,7 @@ interface IGradeFooterProps {
   length?: number;
   certificateScore: number;
   dsmAlgorithmScore: number;
+  qualificationExamScore: number;
 }
 
 const GradeFooter = ({
@@ -29,6 +30,7 @@ const GradeFooter = ({
   length,
   certificateScore,
   dsmAlgorithmScore,
+  qualificationExamScore,
 }: IGradeFooterProps) => {
   const { Modal, modalState, setModalState, open } = useModal({ useBlur: false });
 
@@ -44,7 +46,7 @@ const GradeFooter = ({
         <Button
           color="black"
           kind="outlined"
-          disabled={current === 0 || gradeStatus === 'qualificationExam'}
+          disabled={current === 0}
           onClick={() => {
             setCurrent(current - 1);
           }}
@@ -79,7 +81,9 @@ const GradeFooter = ({
               </Text>
               <_ScoreBox>
                 <Text size="header3" color="orange900">
-                  {((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
+                  {gradeStatus === 'qualificationExam'
+                    ? qualificationExamScore * 34 + dsmAlgorithmScore
+                    : ((gradeScore * 175) / 100 + maxScore + dsmAlgorithmScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
                   /170
@@ -92,7 +96,9 @@ const GradeFooter = ({
               </Text>
               <_ScoreBox>
                 <Text size="header3" color="orange900">
-                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                  {gradeStatus === 'qualificationExam'
+                    ? qualificationExamScore * 22 + dsmAlgorithmScore + certificateScore
+                    : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
                   /110
@@ -105,7 +111,9 @@ const GradeFooter = ({
               </Text>
               <_ScoreBox>
                 <Text size="header3" color="orange900">
-                  {(gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
+                  {gradeStatus === 'qualificationExam'
+                    ? qualificationExamScore * 22 + dsmAlgorithmScore + certificateScore
+                    : (gradeScore + maxScore + dsmAlgorithmScore + certificateScore).toFixed(3)}
                 </Text>
                 <Text color="black400" size="title3">
                   /110
