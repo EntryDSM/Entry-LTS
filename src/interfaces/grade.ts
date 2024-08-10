@@ -35,4 +35,11 @@ export interface IWriteGradeElement {
   early_leave_count: number;
   dsm_algorithm_award: number;
   certificate: number;
+
+  korean_grade: number;
+  english_grade: number;
+  math_grade: number;
+  social_grade: number;
+  science_grade: number;
+  optional_grade: number;
 }

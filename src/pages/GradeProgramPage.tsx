@@ -17,7 +17,9 @@ import {
   getMaxScore,
   getSelectGradeScore,
   getVoluntterScore,
+  getQualificationExamScore,
 } from '@/utils/gradeCalculater';
+import { MAIN_URL } from '@/constant/env';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
@@ -31,6 +33,7 @@ const GradeProgramPage = () => {
     maxScore: 0,
     certificateScore: 0,
     dsmAlgorithmScore: 0,
+    qualificationExamScore: 0,
   });
 
   const handleBlackexamSubmit = () => {};
@@ -57,31 +60,44 @@ const GradeProgramPage = () => {
     volunteer_time: 0,
     dsm_algorithm_award: 0,
     certificate: 0,
+
+    korean_grade: 0,
+    english_grade: 0,
+    math_grade: 0,
+    social_grade: 0,
+    science_grade: 0,
+    optional_grade: 0,
   });
 
   const handleSubmit = () => {};
 
   const isGraduate = gradeStatus === 'graduate';
-  const titles = isGraduate
-    ? [
-        { step: 1, title: '3학년 2학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 2, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 3, title: '2학년 2학기(직전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 4, title: '2학년 1학기(직전 전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 5, title: '출석 점수 & 봉사 점수', subTitle: '' },
-      ]
-    : [
-        { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
-        { step: 4, title: '출석 점수 & 봉사 점수', subTitle: '' },
-      ];
+  const titles =
+    gradeStatus === 'graduate'
+      ? [
+          { step: 1, title: '3학년 2학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 2, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 3, title: '2학년 2학기(직전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 4, title: '2학년 1학기(직전 전학기)', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 5, title: '출석 점수 & 봉사 점수', subTitle: '' },
+        ]
+      : gradeStatus === 'prospectiveGraduate'
+      ? [
+          { step: 1, title: '3학년 1학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 2, title: '직전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 3, title: '직전전 학기', subTitle: '과목이 없는 경우 X로 기입하세요' },
+          { step: 4, title: '출석 점수 & 봉사 점수', subTitle: '' },
+        ]
+      : [
+          { step: 1, title: '검정고시 점수', subTitle: '' },
+          { step: 2, title: '자격증 및 수상', subTitle: '' },
+        ];
 
   useEffect(() => {
     if (gradeStatus === 'prospectiveGraduate') setCurrent(0);
     else if (gradeStatus === 'graduate') setCurrent(0);
-    else if (gradeStatus === 'qualificationExam') setCurrent(titles.length - 1);
-    else window.location.replace('https://www.entrydsm.hs.kr/grade');
+    else if (gradeStatus === 'qualificationExam') setCurrent(0);
+    else window.location.replace(`${MAIN_URL}/grade`);
   }, [gradeStatus]);
 
   useEffect(() => {
@@ -95,6 +111,7 @@ const GradeProgramPage = () => {
             maxScore: getMaxScore(),
             certificateScore: certificateScore,
             dsmAlgorithmScore: dsmAlgorithmScore,
+            qualificationExamScore: getQualificationExamScore(writeGradeElement),
           }
         : {
             gradeScore: getSelectGradeScore(current, selectGradeElement, isGraduate),
@@ -103,6 +120,7 @@ const GradeProgramPage = () => {
             maxScore: getMaxScore(),
             certificateScore: certificateScore,
             dsmAlgorithmScore: dsmAlgorithmScore,
+            qualificationExamScore: getQualificationExamScore(writeGradeElement),
           };
 
     setScore(newScore);
@@ -115,45 +133,63 @@ const GradeProgramPage = () => {
           <Header>
             <Title>
               <Text color="black900" size="header1">
-                {gradeStatus === 'qualificationExam' ? '검정고시 점수' : titles[current].title}
+                {titles[current].title}
               </Text>
               <Text color="black500" size="body3">
                 {titles[current].subTitle && titles[current].subTitle}
               </Text>
             </Title>
-            <GradeWrapper>
-              <GradePreview
-                gradeScore={score.gradeScore}
-                attendenceScore={score.attendenceScore}
-                volunteerScore={score.volunteerScore}
-                maxScore={score.maxScore}
-                certificateScore={score.certificateScore}
-                dsmAlgorithmScore={score.dsmAlgorithmScore}
-              />
-              {current < titles.length - 1 && (
-                <AllSelect
-                  selectGradeElement={selectGradeElement}
-                  setSelectGradeElement={setSelectGradeElement}
-                  current={current}
+            {gradeStatus !== 'qualificationExam' && (
+              <GradeWrapper>
+                <GradePreview
+                  gradeScore={score.gradeScore}
+                  attendenceScore={score.attendenceScore}
+                  volunteerScore={score.volunteerScore}
+                  maxScore={score.maxScore}
+                  certificateScore={score.certificateScore}
+                  dsmAlgorithmScore={score.dsmAlgorithmScore}
                 />
-              )}
-            </GradeWrapper>
-          </Header>
-          <ProgressBar step={titles[current].step} gradeStatus={gradeStatus as GradeStatusType} />
-          <_Selects>
-            {current < titles.length - 1 &&
-              Object.entries(subject).map((item) => {
-                return (
-                  <SelectGrade
-                    key={item[0]}
-                    title={item[0]}
-                    gradesKey={item[1] as keyof ISelectGradeElement}
+                {current < titles.length - 1 && (
+                  <AllSelect
                     selectGradeElement={selectGradeElement}
                     setSelectGradeElement={setSelectGradeElement}
                     current={current}
                   />
-                );
-              })}
+                )}
+              </GradeWrapper>
+            )}
+          </Header>
+          <ProgressBar step={titles[current].step} gradeStatus={gradeStatus as GradeStatusType} />
+          <_Selects>
+            {current < titles.length - 1 && (
+              <>
+                {gradeStatus === 'qualificationExam' ? (
+                  <WriteAttendence
+                    qualificationExamPage={current < titles.length - 1}
+                    gradeStatus={gradeStatus as GradeStatusType}
+                    blackexam={blackexam.score}
+                    changeBlackexam={changeBlackexam}
+                    writeGradeElement={writeGradeElement}
+                    changeWriteGradeElement={changeWriteGradeElement}
+                    setWriteGradeElement={setWriteGradeElement}
+                  />
+                ) : (
+                  Object.entries(subject).map((item) => {
+                    return (
+                      <SelectGrade
+                        key={item[0]}
+                        title={item[0]}
+                        gradesKey={item[1] as keyof ISelectGradeElement}
+                        selectGradeElement={selectGradeElement}
+                        setSelectGradeElement={setSelectGradeElement}
+                        current={current}
+                      />
+                    );
+                  })
+                )}
+              </>
+            )}
+
             {current === titles.length - 1 && (
               <WriteAttendence
                 gradeStatus={gradeStatus as GradeStatusType}
@@ -177,6 +213,7 @@ const GradeProgramPage = () => {
           length={titles.length - 1}
           certificateScore={score.certificateScore}
           dsmAlgorithmScore={score.dsmAlgorithmScore}
+          qualificationExamScore={score.qualificationExamScore}
         />
       </Wrapper>
     </Container>

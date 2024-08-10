@@ -14,6 +14,27 @@ export const getBonusScore = (writeGradeElement) => {
   return { certificateScore, dsmAlgorithmScore };
 };
 
+/* 검정고시 점수 계산 */
+export const getQualificationExamScore = (writeGradeElement: IWriteGradeElement) => {
+  const { korean_grade, english_grade, math_grade, social_grade, science_grade, optional_grade } = writeGradeElement;
+
+  const scores = [korean_grade, english_grade, math_grade, social_grade, science_grade, optional_grade];
+
+  const convertToScore = (grade: number): number => {
+    if (grade >= 98) return 5;
+    if (grade >= 94) return 4;
+    if (grade >= 90) return 3;
+    if (grade >= 86) return 2;
+    return 1;
+  };
+
+  const totalScore = scores.reduce((acc, grade) => acc + convertToScore(grade), 0);
+
+  const averageScore = totalScore / scores.length;
+
+  return Math.round(averageScore * 10) / 10;
+};
+
 /**성적산출 최고 점수 */
 export const getMaxScore = () => {
   return 170;

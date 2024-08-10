@@ -45,5 +45,5 @@ export default defineConfig({
     //   },
     // },
   },
-  plugins: [reactRefresh(), removeUseClientPlugin(), ],
+  plugins: [reactRefresh(), removeUseClientPlugin()],
 });
