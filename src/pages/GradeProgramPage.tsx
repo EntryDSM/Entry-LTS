@@ -19,6 +19,7 @@ import {
   getVoluntterScore,
   getQualificationExamScore,
 } from '@/utils/gradeCalculater';
+import { MAIN_URL } from '@/constant/env';
 
 const GradeProgramPage = () => {
   const [current, setCurrent] = useState(0);
@@ -96,7 +97,7 @@ const GradeProgramPage = () => {
     if (gradeStatus === 'prospectiveGraduate') setCurrent(0);
     else if (gradeStatus === 'graduate') setCurrent(0);
     else if (gradeStatus === 'qualificationExam') setCurrent(0);
-    else window.location.replace('https://www.entrydsm.hs.kr/grade');
+    else window.location.replace(`${MAIN_URL}/grade`);
   }, [gradeStatus]);
 
   useEffect(() => {
