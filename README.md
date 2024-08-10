@@ -61,4 +61,5 @@ FAQ는 관리자가 자주 묻는 질문들을 등록하여 사용자가 유형�
 > 마이페이지
 
 ![마이페이지](https://github.com/EntryDSM/Entry-LTS/assets/102665117/bd419857-eef7-4fc8-a7cf-e1d220aa4ce4)
+
  
