@@ -75,11 +75,11 @@ const GradePage = () => {
               );
             })}
           </_Cards>
-          <Text color="black500" size="body3" style={{ marginTop: '10%', maxWidth: 750, width: '100%' }}>
+          {/* <Text color="black500" size="body3" style={{ marginTop: '10%', maxWidth: 750, width: '100%' }}>
             * 상급학교조기입학대상자, 중학교 졸업학력 검정고시 합격자 등 3학년 1학기의 교과성적이 없는 경우 2025년도
             대전광역시 고등학교 입학전형 기본계획에 의거 입학전형위원회에서 결정하여 반영할 예정이므로 성적을 산출할 수
             없습니다.
-          </Text>
+          </Text> */}
         </_Wrapper>
       </Pc>
     </_Container>
