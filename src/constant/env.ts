@@ -15,6 +15,3 @@ export const ADMIN_URL = isLocalhost || isStag ? import.meta.env.VITE_ADMIN_URL 
 
 export const SERVER_URL =
   isLocalhost || isStag ? import.meta.env.VITE_SERVER_URL : import.meta.env.VITE_PROD_SERVER_URL;
-
-// window.location.href.includes('localhost');
-// window.location.href.includes('stag');
