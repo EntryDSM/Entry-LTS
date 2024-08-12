@@ -1,13 +1,13 @@
 import axios, { AxiosError } from 'axios';
 import { ReissueToken } from './user';
 import { getCookies, removeCookies, removeTokens, setCookies, setTokens } from '@/utils/cookies';
-import { AUTH_URL } from '@/constant/env';
+import { AUTH_URL, SERVER_URL } from '@/constant/env';
 import { useNavigate } from 'react-router-dom';
 import { Toast } from '@team-entry/design_system';
 import process from 'process';
 
 export const instance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: SERVER_URL,
   timeout: 10000,
 });
 
