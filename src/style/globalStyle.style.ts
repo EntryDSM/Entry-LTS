@@ -5,23 +5,21 @@ export const GlobalStyle = css`
     font-family: 'Pretendard';
     font-weight: 700;
     font-style: bold;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Bold.woff2') format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff2');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-weight: 500;
     font-style: medium;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Medium.woff2')
-      format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff') format('woff2');
   }
 
   @font-face {
     font-family: 'Pretendard';
     font-weight: 400;
     font-style: normal;
-    src: url('https://s3.ap-northeast-2.amazonaws.com/rolls-image.entry.com/font/Pretendard-Regular.woff2')
-      format('woff2');
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff2');
   }
 
   html,
