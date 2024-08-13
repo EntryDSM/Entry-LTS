@@ -5,12 +5,13 @@ import LandingBgImg from '../../assets/LandingBgImg.png';
 import ArrowDoubleDown from '@/assets/ArrowDoubleDown.svg';
 import { color } from '@team-entry/design_system/build/style/color';
 import { Link } from 'react-router-dom';
+import { SERVER_URL } from '@/constant/env';
 // import { useNavigate } from 'react-router-dom';
 
 // const navigate = useNavigate();
 const First = () => {
   console.log(import.meta.env.VITE_PROD_SERVER_URL);
-  console.log(import.meta.env.VITE_SERVER_URL);
+  console.log(SERVER_URL);
 
   return (
     <WrapperWithBackground>
@@ -18,7 +19,7 @@ const First = () => {
         <_TitleBox>
           <_Title>
             {/* 꿈을 이루는 학교, */}
-            배포 확인용3
+            배포 확인용4
             <br />
             대덕소프트웨어마이스터고
           </_Title>
