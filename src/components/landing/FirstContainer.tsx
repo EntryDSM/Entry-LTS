@@ -9,12 +9,16 @@ import { Link } from 'react-router-dom';
 
 // const navigate = useNavigate();
 const First = () => {
+  console.log(import.meta.env.VITE_PROD_SERVER_URL);
+  console.log(import.meta.env.VITE_SERVER_URL);
+
   return (
     <WrapperWithBackground>
       <_Wrapper>
         <_TitleBox>
           <_Title>
-            꿈을 이루는 학교,
+            {/* 꿈을 이루는 학교, */}
+            배포 확인용
             <br />
             대덕소프트웨어마이스터고
           </_Title>
