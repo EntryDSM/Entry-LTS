@@ -26,4 +26,9 @@ jobs:
             VITE_AUTH_URL=${{ secrets.VITE_AUTH_URL }}
             VITE_APPLY_URL=${{ secrets.VITE_APPLY_URL }}
             VITE_ADMIN_URL=${{ secrets.VITE_ADMIN_URL }}
-            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
+            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}            
+            VITE_PROD_MAIN_URL=${ secrets.VITE_PROD_MAIN_URL }
+            VITE_PROD_AUTH_URL=${ secrets.VITE_PROD_AUTH_URL }
+            VITE_PROD_APPLY_URL=${ secrets.VITE_PROD_APPLY_URL }
+            VITE_PROD_ADMIN_URL=${ secrets.VITE_PROD_ADMIN_URL }
+            VITE_PROD_BASE_URL=${ secrets.VITE_PROD_BASE_URL }
