@@ -22,10 +22,10 @@ const GradePreview = ({
   return (
     <CurrentGrades>
       <Text size="body1" color="realBlack" style={{ fontWeight: 700 }}>
-        총: {gradeScore * 1.75 + attendenceScore + volunteerScore}/{maxScore}
+        총: {Math.floor(gradeScore * 1.75 + attendenceScore + volunteerScore)}/{maxScore}
       </Text>
       <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
-        성적 점수: {gradeScore * 1.75}/{maxScore - 30}
+        성적 점수: {Math.floor(gradeScore * 1.75)}/{maxScore - 30}
       </Text>
       <Text size="body2" color="realBlack" style={{ fontWeight: 500 }}>
         출석 점수: {attendenceScore}/15
